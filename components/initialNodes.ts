@@ -3,7 +3,7 @@ const scalar = {
   position: { x: 100, y: 100 },
   data: {
     computer: 'Scalar',
-    label: "Scalar (1)",
+    label: "HubSpot Contacts",
     inputs: [],
     outputs: [
       {
@@ -20,7 +20,7 @@ const multiply = {
   position: { x: 300, y: 100 },
   data: {
     computer: 'Multiply',    
-    label: "Multiply (* 2)",
+    label: "Georeference",
     inputs: [
       {
         id: "Multiply.1.input",
@@ -42,7 +42,7 @@ const log = {
   position: { x: 500, y: 100 },
   data: {
     computer: 'Log',
-    label: "Log",
+    label: "UpdateUser",
     inputs: [
       {
         id: "Log.1.input",

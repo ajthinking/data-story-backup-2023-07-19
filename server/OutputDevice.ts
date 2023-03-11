@@ -1,15 +1,24 @@
+import { LinkId } from "./computers/Link"
+import { Item } from "./Item"
+import { PortId } from "./Port"
+
+type LinkItems = Record<LinkId, Item[]>
+
+export type OutputTree = Record<PortId, LinkItems>
+
 export class OutputDevice {
-  haveItemsAtInput(name: string) {}
-
-  haveAllItemsAtInput(name: string) {}
-
-  haveNoItemsAtInput(name: string) {}
+  constructor(private outputTree: OutputTree = {}) {}
 
   push(items: any[]) {
     return this.pushTo('output', items)
   }
 
   pushTo(name: string, items: any[]) {
-    // ...
+    const connectedLinks = this.outputTree[name]
+    const outgoingItemLists = Object.values(connectedLinks)
+
+    for(const itemList of outgoingItemLists) {
+      itemList.push(...items)
+    }
   }
 }

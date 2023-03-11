@@ -1,6 +1,6 @@
-import { RunArgs } from "./RunArgs"
+import { Computer, RunArgs } from "../Computer"
 
-export const Multiply = {
+export const Multiply: Computer = {
   async *run({ input, output }: RunArgs) {
     const FACTOR = 2
 
