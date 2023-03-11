@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "tinker": "npx ts-node ./tinker.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -18,6 +19,16 @@
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.9.5"
+    "reactflow": "^11.5.6",
+    "typescript": "4.9.5",
+    "ws": "^8.12.1"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.4",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "prisma": "^4.11.0",
+    "tailwindcss": "^3.2.7",
+    "ts-node": "^10.9.1"
   }
 }
