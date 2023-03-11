@@ -40,10 +40,13 @@ describe('execute', () => {
     const executor = new Executor(diagram, computers)
 
     const updates = executor.execute()
-    const result = await updates.next()
+    const update1 = await updates.next()
 
-    expect(result.done).toBe(true)
+    expect(update1.done).toBe(false)
     expect(proof).toBe('dummy-rocks')
+
+    const update2 = await updates.next()
+    expect(update2.done).toBe(true)
   })
 
   it('can execute a diagram with non connected input node', async () => {
@@ -97,9 +100,12 @@ describe('execute', () => {
     const executor = new Executor(diagram, computers)
 
     const updates = executor.execute()
-    const result = await updates.next()
 
-    expect(result.done).toBe(true)
+    const update1 = await updates.next()
+    expect(update1.done).toBe(false)
+
+    const update2 = await updates.next()
+    expect(update2.done).toBe(true)
   })
 
   it('can execute a diagram with item flowing between two nodes', async () => {
