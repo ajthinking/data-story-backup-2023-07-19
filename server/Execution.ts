@@ -50,7 +50,8 @@ export class Execution {
         return promise
       })
 
-      // await only the first state change since that can open up for more nodes to run
+      // await only the first state change since
+      // it can open up for more nodes to run proceed immediately
       await Promise.race(promises)
     }
 

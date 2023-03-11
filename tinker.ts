@@ -11,6 +11,8 @@ const computers = new Map<string, any>
 type RunArgs = {
   input: InputDevice,
   output: OutputDevice,
+  params: [],
+  config: {},
 }
 
 computers.set('CreateUser', {

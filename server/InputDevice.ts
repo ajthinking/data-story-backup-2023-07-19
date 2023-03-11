@@ -1,6 +1,10 @@
 type InputStatus = 'AWAITING' | 'COMPLETE' | 'EXHAUSTED'
 
 export class InputDevice {
+  constructor() {
+
+  }
+  
   // haveItemsAtInput(name: string): boolean {}
 
   // haveAllItemsAtInput(name: string): boolean {}

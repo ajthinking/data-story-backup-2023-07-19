@@ -6,12 +6,4 @@ export class Diagram {
     public nodes: any[],
     public edges: any[],
   ) {}
-
-  async *execute() {
-    yield 1
-    yield 2
-    yield 3
-
-    return 100
-  }
 }
