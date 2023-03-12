@@ -10,6 +10,7 @@ import { Param } from "./Param"
 export type RunArgs = {
   input: InputDeviceInterface,
   output: OutputDeviceInterface,
+  params: Record<string, Param>
 }
 
 export interface Computer {

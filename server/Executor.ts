@@ -25,7 +25,7 @@ export class Executor {
     while(!this.isComplete()) {
       // Start execution of all nodes that can run
       const runnables = this.getRunnableNodes()
-      
+
       const promises = runnables.map(node => {
         // Put node in busy state
         this.nodeStatuses.set(node.id, 'BUSY')
@@ -84,6 +84,11 @@ export class Executor {
         computer.run({
           input: this.makeInputDevice(node),
           output: this.makeOutputDevice(node),
+          // TODO: WHO OWNS THE PARAMS??
+          // I think, while they originating from React Flow NODES configuration,
+          // they should be considered as settings given to the computer.
+          // The computer is initialized/hydrated with the params
+          params: {},
         })
       )
     }
