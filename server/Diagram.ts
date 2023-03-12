@@ -1,4 +1,4 @@
-import { Link } from "./computers/Link"
+import { Link } from "./Link"
 import { Node } from "./Node"
 import { Port, PortId } from "./Port"
 

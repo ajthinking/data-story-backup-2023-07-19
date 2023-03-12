@@ -1,4 +1,4 @@
-import { LinkId } from "./computers/Link"
+import { LinkId } from "./Link"
 import { Item } from "./Item"
 import { PortId } from "./Port"
 
@@ -6,7 +6,12 @@ type LinkItems = Record<LinkId, Item[]>
 
 export type OutputTree = Record<PortId, LinkItems>
 
-export class OutputDevice {
+export interface OutputDeviceInterface {
+  push(items: any[]): void
+  pushTo(name: string, items: any[]): void
+}
+
+export class OutputDevice implements OutputDeviceInterface {
   constructor(private outputTree: OutputTree = {}) {}
 
   push(items: any[]) {

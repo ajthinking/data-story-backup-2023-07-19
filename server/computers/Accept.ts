@@ -1,19 +1,16 @@
 import { Computer, RunArgs } from "../Computer";
 import { DefaultParams, LabelParam, NameParam } from "../Param";
 
-export const Pass: Computer = {
-  name: 'Pass',
+export const Accept: Computer = {
+  name: 'Accept',
   inputs: ['input'],
-  outputs: ['output'],
   params: [
     ...DefaultParams,
   ],
-  
-  async *run({ input, output }: RunArgs) {
-    while(true) {
-      const incoming = input!.pull()
-      output.push(incoming)
 
+  async *run({ input }: RunArgs) {
+    while(true) {
+      const incoming = input.pull()
       yield;
     }
   },

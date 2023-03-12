@@ -3,7 +3,7 @@ import { Node } from "./Node";
 import { Diagram } from "./Diagram";
 import { Executor } from "./Executor";
 import { Computer, RunArgs } from "./Computer";
-import { Link } from "./computers/Link";
+import { Link } from "./Link";
 
 describe('execute', () => {
   it('can execute an empty diagram', async () => {
@@ -35,7 +35,7 @@ describe('execute', () => {
       async *run({}) {
         proof = 'dummy-rocks'
       },
-    })
+    } as Computer)
 
     const executor = new Executor(diagram, computers)
 
@@ -66,7 +66,7 @@ describe('execute', () => {
       async *run({ output }) {
         // do nothing
       },
-    })
+    } as Computer)
 
     const executor = new Executor(diagram, computers)
 
@@ -95,7 +95,7 @@ describe('execute', () => {
       async *run({ output }) {
         output.push([{ type: 'Zergling' }])
       },
-    })
+    } as Computer)
 
     const executor = new Executor(diagram, computers)
 
@@ -137,6 +137,7 @@ describe('execute', () => {
     const order: string[] = []
 
     const createComputer = {
+      name: 'Create',
       async *run({ output }: RunArgs) {
         order.push('running create')
         output.push([1])
@@ -144,6 +145,7 @@ describe('execute', () => {
     }
 
     const logComputer = {
+      name: 'Log',
       async *run({ input }: RunArgs) {
         // console.log ... or something
         
@@ -153,8 +155,8 @@ describe('execute', () => {
     }
 
     const computers = new Map<string, Computer>()
-      .set('Create', createComputer)
-      .set('Log', logComputer)
+      .set(createComputer.name, createComputer)
+      .set(logComputer.name, logComputer)
     
     const executor = new Executor(diagram, computers)
 

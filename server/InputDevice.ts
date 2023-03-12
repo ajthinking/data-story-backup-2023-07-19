@@ -1,4 +1,4 @@
-import { LinkId } from "./computers/Link"
+import { LinkId } from "./Link"
 import { Item } from "./Item"
 import { PortId } from "./Port"
 
@@ -20,10 +20,13 @@ type LinkItems = Record<LinkId, Item[]>
  */
 export type InputTree = Record<PortId, LinkItems>
 
-export class InputDevice {
-  constructor(private inputTree: InputTree = {}) {
+export interface InputDeviceInterface {
+  pull: () => Item[]
+  pullFrom: (name: string) => Item[]
+}
 
-  }
+export class InputDevice implements InputDeviceInterface {
+  constructor(private inputTree: InputTree = {}) {}
 
   // haveItemsAtInput(name: string): boolean {}
 
@@ -53,10 +56,4 @@ export class InputDevice {
 
     return pulled
   }
-
-  statusAt(input: string) {
-
-  }
-
-  // ...
 }

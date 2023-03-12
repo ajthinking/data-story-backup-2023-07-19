@@ -1,6 +1,10 @@
 import { Computer, RunArgs } from "../Computer"
 
 export const Multiply: Computer = {
+  name: 'Multiply',  
+  inputs: ['input'],
+  outputs: ['output'],
+  
   async *run({ input, output }: RunArgs) {
     const FACTOR = 2
 

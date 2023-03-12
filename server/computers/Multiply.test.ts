@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import { RunArgs } from "../Computer";
 import { Multiply } from "./Multiply";
 
 it('outputs the incoming numbers multiplied by two', async () => {
@@ -15,7 +16,7 @@ it('outputs the incoming numbers multiplied by two', async () => {
         output.push(...items)
       }
     }
-  })
+  } as RunArgs)
 
   await generator.next();
   expect(output).toMatchObject([2,4,6])
@@ -35,7 +36,7 @@ it('can be called forever', async () => {
         output.push(...items)
       }
     }
-  })
+  } as RunArgs)
 
   await generator.next();
   expect(output).toMatchObject([2])

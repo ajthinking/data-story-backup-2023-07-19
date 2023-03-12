@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Link } from "./computers/Link";
+import { Link } from "./Link";
 import { Diagram } from "./Diagram";
 import { Port } from "./Port";
 
