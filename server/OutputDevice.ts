@@ -12,7 +12,10 @@ export interface OutputDeviceInterface {
 }
 
 export class OutputDevice implements OutputDeviceInterface {
-  constructor(private outputTree: OutputTree = {}) {}
+  constructor(
+    private outputTree: OutputTree = {},
+    private linkCounts: Map<LinkId, number>,
+  ) {}
 
   push(items: any[]) {
     return this.pushTo('output', items)
@@ -22,8 +25,15 @@ export class OutputDevice implements OutputDeviceInterface {
     const connectedLinks = this.outputTree[name]
     const outgoingItemLists = Object.values(connectedLinks)
 
+    // Update items on link
     for(const itemList of outgoingItemLists) {
       itemList.push(...items)
+    }
+
+    // Update link counts
+    for(const linkId of Object.keys(connectedLinks)) {
+      const count = this.linkCounts.get(linkId)!
+      this.linkCounts.set(linkId, count + items.length)
     }
   }
 }

@@ -3,7 +3,10 @@ import { Node } from "./Node";
 import { Diagram } from "./Diagram";
 import { Executor } from "./Executor";
 import { Computer, RunArgs } from "./Computer";
-import { Link } from "./Link";
+import { Link, LinkId } from "./Link";
+import { DiagramBuilder } from "./DiagramBuilder";
+import { CreateJson } from "./computers";
+import { ExecutionResult } from "./ExecutionResult";
 
 describe('execute', () => {
   it('can execute an empty diagram', async () => {
@@ -18,6 +21,20 @@ describe('execute', () => {
 
     expect(result.done).toBe(true)
   })
+
+  it('returns an execution result with link counts', async () => {
+    const diagram = new Diagram([], [])
+    const computers = new Map<string, Computer>()
+
+    const executor = new Executor(diagram, computers)
+
+    const updates = executor.execute()
+
+    const result = await updates.next()
+
+    expect(result.value).toBeInstanceOf(ExecutionResult)
+    expect(result.value.linkCounts).toBeInstanceOf(Map<LinkId, number>)
+  })  
 
   it('can execute a diagram with a single no-input no-output node', async () => {
     const node = new Node({

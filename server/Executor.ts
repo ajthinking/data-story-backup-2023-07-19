@@ -1,25 +1,28 @@
-import { Node } from "./Node";
+import { Node, NodeId } from "./Node";
 import { Diagram } from "./Diagram";
 import { InputDevice, InputTree } from "./InputDevice";
 import { OutputDevice, OutputTree } from "./OutputDevice";
 import { PortId } from "./Port";
 import { Computer } from "./Computer";
 import { Item } from "./Item";
+import { LinkId } from "./Link";
+import { ExecutionUpdate } from "./ExecutionUpdate";
+import { ExecutionResult } from "./ExecutionResult";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
 export class Executor {
-  nodeStatuses = new Map<string, NodeStatus>();
-  nodeRunners = new Map<string, AsyncGenerator<undefined, void, void>>();  
-  linkItems = new Map<string, Item[]>();
-  linkCounts = new Map<string, number>();
+  nodeStatuses = new Map<NodeId, NodeStatus>();
+  nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();  
+  linkItems = new Map<LinkId, Item[]>();
+  linkCounts = new Map<LinkId, number>();
 
   constructor(
     public diagram: Diagram,
     public computers: Map<string, Computer>,
   ) {}
 
-  async *execute() {
+  async *execute(): AsyncGenerator<ExecutionUpdate, ExecutionResult, void> {
     this.initState()
     
     while(!this.isComplete()) {
@@ -61,9 +64,11 @@ export class Executor {
       // it can open up for more nodes to proceed immediately
       if(promises.length > 0) {
         await Promise.race(promises);
-        yield;
+        yield new ExecutionUpdate(this.linkCounts)
       }
     }
+
+    return new ExecutionResult(this.linkCounts)
   }
 
   protected initState() {
@@ -188,6 +193,6 @@ export class Executor {
       }
     }
 
-    return new OutputDevice(tree)
+    return new OutputDevice(tree, this.linkCounts)
   }
 }
