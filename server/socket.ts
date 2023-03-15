@@ -12,4 +12,14 @@ wsServer.on("connection", function(ws) {
             }
         })
     })
+
+    ws.on("close", function() {
+        console.log("Client disconnected 😢")
+    })
+
+    ws.on("error", function(error) {
+        console.log("Error 😱", error)
+    })
+
+    console.log("Client connected 💓")
 })

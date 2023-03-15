@@ -38,6 +38,19 @@ describe('pull', () => {
     expect(atLink1).toMatchObject([])
     expect(atLink2).toMatchObject([])
   })
+
+  it('may pull a specified number of items', () => {
+    const input = new InputDevice({
+      input: {
+        'Source.1.output-->Target.1.input': [1, 2],
+        'Source.2.output-->Target.1.input': [3, 4],
+      },
+    })
+
+    expect(input.pull(1)).toMatchObject([1])
+    expect(input.pull(2)).toMatchObject([2,3])
+    expect(input.pull(3)).toMatchObject([4])
+  })
 })
 
 describe('pullFrom', () => {

@@ -2,6 +2,7 @@ export const sourceFileContent = (name: string) => `import { Computer, RunArgs }
 import { DefaultParams, LabelParam, NameParam } from "../Param";
 
 export const ${name}: Computer = {
+  name: '${name}',
   inputs: ['input'],
   outputs: ['output'],
   params: [

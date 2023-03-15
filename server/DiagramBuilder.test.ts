@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from "vitest";
-import { Accept, CreateJson, Pass } from "./computers";
+import { Ignore, CreateJson, Pass } from "./computers";
 import { Diagram } from "./Diagram";
 import { DiagramBuilder } from "./DiagramBuilder";
 
@@ -18,7 +18,7 @@ describe('add', () => {
       .add(CreateJson)
       .add(Pass)
       .add(Pass)
-      .add(Accept)
+      .add(Ignore)
       .get()
     
     const nodeIds = diagram.nodes.map(node => node.id)
@@ -30,21 +30,21 @@ describe('add', () => {
       'CreateJson.1',
       'Pass.1',
       'Pass.2',
-      'Accept.1'
+      'Ignore.1'
     ])
 
     expect(nodeTypes).toMatchObject([
       'CreateJson',
       'Pass',
       'Pass',
-      'Accept'
+      'Ignore'
     ])
 
     expect(nodeInputs).toMatchObject([
       [],
       [{id: 'Pass.1.input', name: 'input'}],
       [{id: 'Pass.2.input', name: 'input'}],
-      [{id: 'Accept.1.input', name: 'input'}]
+      [{id: 'Ignore.1.input', name: 'input'}]
     ])
 
     expect(nodeOutputs).toMatchObject([

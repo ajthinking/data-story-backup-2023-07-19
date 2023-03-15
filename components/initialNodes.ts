@@ -42,7 +42,7 @@ const log = {
   position: { x: 500, y: 100 },
   data: {
     computer: 'Log',
-    label: "UpdateUser",
+    label: "Inspect",
     inputs: [
       {
         id: "Log.1.input",

@@ -1,0 +1,7 @@
+export { expectCanRun } from './expectCanRun'
+export { expectCantRun } from './expectCantRun'
+export { expectOutput } from './expectOutput'
+export { expectOutputs } from './expectOutputs'
+export { doRun } from './doRun'
+export { getsInput } from './getsInput'
+export { getsInputs } from './getsInputs'

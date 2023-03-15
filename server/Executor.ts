@@ -133,6 +133,7 @@ export class Executor {
     })
   }
 
+  // TODO: this should be renamed to SHOULD_RUN_NODE_DEFAULT ?!
   protected canRunNodeDefault(node: Node) {
     // Must be available
     if(this.nodeStatuses.get(node.id) !== 'AVAILABLE') return false;

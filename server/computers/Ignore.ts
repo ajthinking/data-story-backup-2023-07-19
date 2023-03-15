@@ -1,8 +1,8 @@
 import { Computer, RunArgs } from "../Computer";
 import { DefaultParams, LabelParam, NameParam } from "../Param";
 
-export const Accept: Computer = {
-  name: 'Accept',
+export const Ignore: Computer = {
+  name: 'Ignore',
   inputs: ['input'],
   params: [
     ...DefaultParams,

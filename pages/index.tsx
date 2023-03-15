@@ -3,37 +3,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import Workbench from '../components/Workbench'
+import Workbench from '../components/Workbench/Workbench'
 import { Server } from '../components/server'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-
-  // const isBrowser = typeof window !== "undefined";
-  // const wsInstance = isBrowser ? new WebSocket("ws://localhost:3100") : null;
-
-  // if (isBrowser) {
-  //   wsInstance!.onopen = () => {
-  //     console.log("Connected to server");
-
-  //     wsInstance!.send("Hello from client");
-  //   };
-
-  //   wsInstance!.onmessage = (message) => {
-  //     console.log("Received message from server", message);
-  //   };
-
-  //   wsInstance!.onclose = () => {
-  //     console.log("Disconnected from server");
-  //   };
-
-  //   wsInstance!.onerror = (error) => {
-  //     console.log("Error", error);
-  //   };
-  // }
-
-
   return (
     <>
       <Head>
@@ -47,7 +22,7 @@ export default function Home() {
         <div className="w-full h-5/6">
           <Workbench />
         </div>
-        <Server />
+        {/* <Server /> */}
       </div>
     </>
   )
