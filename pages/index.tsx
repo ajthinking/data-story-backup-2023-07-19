@@ -24,7 +24,7 @@ export default function Home() {
           <Workbench />
         </div>
         {/* <Server /> */}
-        <NodePicker />
+        {/* <NodePicker /> */}
       </div>
     </>
   )
