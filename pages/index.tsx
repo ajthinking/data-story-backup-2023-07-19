@@ -5,6 +5,7 @@ import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import Workbench from '../components/Workbench/Workbench'
 import { Server } from '../components/server'
+import { NodePicker } from '../components/NodePicker';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default function Home() {
           <Workbench />
         </div>
         {/* <Server /> */}
+        <NodePicker />
       </div>
     </>
   )
