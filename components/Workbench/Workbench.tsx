@@ -20,12 +20,13 @@ export default function Workbench() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [rfInstance, setRfInstance] = useState<any>(null);
+  const [availableNodes, setAvailableNodes] = useState<any>([]);
 
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
 
-  const [server, setServer] = useDataStoryServer(null);
+  const [server, setServer] = useDataStoryServer(null, setAvailableNodes);
 
   const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
@@ -49,7 +50,7 @@ export default function Workbench() {
 
     {/* Modals */}
     {showRunModal && <RunModal setShowModal={setShowRunModal}/>}    
-    {showAddNodeModal && <AddNodeModal setShowModal={setShowAddNodeModal}/>}    
+    {showAddNodeModal && <AddNodeModal availableNodes={availableNodes} setShowModal={setShowAddNodeModal}/>}    
     {showConfigModal && <ConfigModal setShowModal={setShowConfigModal}/>}
     </>
   );

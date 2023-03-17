@@ -5,8 +5,8 @@ export class ServerClient {
     this.socket.send("ping");
   }
 
-  availableNodes() {
-    this.socket.send("availableNodes");
+  describe() {
+    this.socket.send("describe");
   }
 
   run() {

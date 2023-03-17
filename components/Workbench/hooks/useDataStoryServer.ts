@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ServerClient } from "../ServerClient";
 
-export const useDataStoryServer = (initialState: any) => {
+export const useDataStoryServer = (initialState: any, setAvailableNodes: any) => {
   const [server, setServer] = useState(initialState);
   const [showError, setShowError] = useState(false);
 
@@ -16,7 +16,8 @@ export const useDataStoryServer = (initialState: any) => {
         console.log("Connected to server!");
 
         const server = new ServerClient(socket)
-        setServer(server)        
+        setServer(server)
+        server.describe()
       };
 
       socket.onerror = (error) => {
@@ -25,7 +26,8 @@ export const useDataStoryServer = (initialState: any) => {
       };
 
       socket.onmessage = (event) => {
-        console.log("Received message from server: ", event.data);
+        const data = JSON.parse(event.data)
+        setAvailableNodes(data.availableNodes)
       };
     };
 
