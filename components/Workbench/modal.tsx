@@ -1,9 +1,12 @@
 import React from "react";
+import { useEscapeKey } from "./hooks/useEscapeKey";
 export function Modal({
   setShowModal,
   title,
   content,
 }: any) {
+  useEscapeKey(() => setShowModal(false));
+
   return <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto px-8">
@@ -36,7 +39,7 @@ export function Modal({
             /*footer*/
           }
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => setShowModal(false)}>
+                  <button className="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => setShowModal(false)}>
                     Close
                   </button>
                   <button className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={() => setShowModal(false)}>

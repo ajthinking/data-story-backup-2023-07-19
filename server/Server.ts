@@ -1,12 +1,11 @@
-import { Diagram } from "./Diagram";
-
 export class Server {
-  async runDiagram(diagram: Diagram) {
+  ping() {}
 
-    console.log("YEAH Baby running the diagram!")
-
-    // for await (const step of diagram.execute()) {
-    //   console.log({ step });
-    // }
+  describe() {
+    return {
+      availableNodes: {}
+    }
   }
+  
+  run() {}
 }

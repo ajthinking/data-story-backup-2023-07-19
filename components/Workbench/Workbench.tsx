@@ -7,7 +7,7 @@ import "reactflow/dist/style.css";
 import { initialEdges } from "../initialEdges";
 import { initialNodes } from "../initialNodes";
 import Transformer from "../Node/Transformer";
-import { useDataStoryServerState } from "./hooks/useDataStoryServerState";
+import { useDataStoryServer } from "./hooks/useDataStoryServer";
 import { ConfigModal } from './modals/configModal'
 import { RunModal } from './modals/runModal';
 import { AddNodeModal } from './modals/addNodeModal';
@@ -25,7 +25,7 @@ export default function Workbench() {
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
 
-  const [server, setServer, showSpinner, showError] = useDataStoryServerState(null);
+  const [server, setServer] = useDataStoryServer(null);
 
   const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
@@ -39,6 +39,7 @@ export default function Workbench() {
       onInit={setRfInstance}
     >     
       <DataStoryControls
+        server={server}
         setShowRunModal={setShowRunModal}
         setShowAddNodeModal={setShowAddNodeModal}
         setShowConfigModal={setShowConfigModal}

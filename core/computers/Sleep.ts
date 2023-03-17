@@ -13,7 +13,7 @@ export const Sleep: Computer = {
   async *run({ input, output, params }: RunArgs) {
     while(true) {
       const incoming = input.pull(1)
-      // await sleep(1000)
+      await sleep(1)
       output.push(incoming)
 
       yield;

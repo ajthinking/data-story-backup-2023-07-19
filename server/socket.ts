@@ -5,21 +5,18 @@ const wsServer = new WebSocket.Server({
 })
 
 wsServer.on("connection", function(ws) {
-    ws.on("message", function(msg) {
-        wsServer.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) {
-              client.send(msg.toString() + " from server");
-            }
-        })
-    })
+  ws.on("message", function(msg) {
+    ws.send("Hello, you sent -> " + msg)
+    console.log("GOT A MESSAGE", msg)
+  })
 
-    ws.on("close", function() {
-        console.log("Client disconnected 😢")
-    })
+  ws.on("close", function() {
+      console.log("Client disconnected 😢")
+  })
 
-    ws.on("error", function(error) {
-        console.log("Error 😱", error)
-    })
+  ws.on("error", function(error) {
+      console.log("Error 😱", error)
+  })
 
-    console.log("Client connected 💓")
+  console.log("Client connected 💓")
 })
