@@ -8,6 +8,7 @@ const Transformer = ({ data, isConnectable }: any) => {
       <div
         className="text-xs"
       >
+        <div className="w-32" />
         <div className="flex py-1 text-xs font-bold font-mono uppercase border rounded bg-blue-500 text-white px-2">
           { data.label }
         </div>

@@ -5,7 +5,6 @@ import ReactFlow, { Background, useNodesState, useEdgesState, addEdge, Backgroun
 
 import "reactflow/dist/style.css";
 import Transformer from "../Node/Transformer";
-import { useDataStoryServer } from "./hooks/useDataStoryServer";
 import { ConfigModal } from './modals/configModal'
 import { RunModal } from './modals/runModal';
 import { AddNodeModal } from './modals/addNodeModal';
@@ -18,7 +17,6 @@ const nodeTypes = {
 
 export default function Workbench() {
   const [rfInstance, setRfInstance] = useState<any>(null);
-  const [availableNodes, setAvailableNodes] = useState<any>([]);
 
   const selector = (state: any) => ({
     nodes: state.nodes,
@@ -26,15 +24,14 @@ export default function Workbench() {
     onNodesChange: state.onNodesChange,
     onEdgesChange: state.onEdgesChange,
     onConnect: state.onConnect,
+    onInit: state.onInit,
   });
 
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore(selector, shallow);  
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, onInit } = useStore(selector, shallow);  
 
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
-
-  const [server, setServer] = useDataStoryServer(null, setAvailableNodes);
 
   return (
     <>
@@ -45,10 +42,9 @@ export default function Workbench() {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      onInit={setRfInstance}
+      onInit={onInit}
     >     
       <DataStoryControls
-        server={server}
         setShowRunModal={setShowRunModal}
         setShowAddNodeModal={setShowAddNodeModal}
         setShowConfigModal={setShowConfigModal}
@@ -58,7 +54,7 @@ export default function Workbench() {
 
     {/* Modals */}
     {showRunModal && <RunModal setShowModal={setShowRunModal}/>}    
-    {showAddNodeModal && <AddNodeModal availableNodes={availableNodes} setShowModal={setShowAddNodeModal}/>}    
+    {showAddNodeModal && <AddNodeModal setShowModal={setShowAddNodeModal}/>}    
     {showConfigModal && <ConfigModal setShowModal={setShowConfigModal}/>}
     </>
   );

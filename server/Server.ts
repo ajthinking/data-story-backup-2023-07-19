@@ -11,7 +11,8 @@ type NodeDescription = {
 const nodeDescriptions: NodeDescription[] = [
   computers.CreateJson,
   computers.Pass,
-  computers.Ignore
+  computers.Ignore,
+  computers.Contacts,
 ].map((computer) => { 
   return {
     name: computer.name,
@@ -27,6 +28,7 @@ export class Server {
 
   describe() {
     return {
+      type: 'describeResponse',
       availableNodes: nodeDescriptions,
     }
   }

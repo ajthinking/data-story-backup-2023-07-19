@@ -13,7 +13,7 @@ export function DataStoryControls({
   setShowAddNodeModal,
 }: any) {
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
-        <ControlButton onClick={() => server.run()}>
+        <ControlButton onClick={() => setShowRunModal(true)}>
           <RunIcon />          
         </ControlButton> 
         <ControlButton onClick={() => setShowAddNodeModal(true)}>
