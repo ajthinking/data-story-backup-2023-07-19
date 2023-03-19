@@ -49,8 +49,14 @@ export const useStore = create<RFState>((set, get) => ({
     });
   },
   onConnect: (connection: Connection) => {
+    const fromHandleId = connection.sourceHandle;
+    const toHandleId = connection.targetHandle;
+
     set({
-      edges: addEdge(connection, get().edges),
+      edges: addEdge({
+        ...connection,
+        id: `${fromHandleId}-->${toHandleId}`,
+      }, get().edges),
     });
   },
   onAddNode: (node: any) => {

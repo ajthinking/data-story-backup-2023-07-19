@@ -14,7 +14,7 @@ export const run = async (ws: WebSocket, data: any) => {
 
   for await(const update of execution) {
     ws.send(update.stringify())
-    console.log("Sent update...")
+    console.log("Sent update...", update)
   }
 
   console.log("Wont be reached now...")

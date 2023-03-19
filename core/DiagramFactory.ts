@@ -87,10 +87,12 @@ export class DiagramFactory {
         id: flowNode.id,
         type: flowNode.data.computer,
         inputs: flowNode.data.inputs.map((input: any) => {
-          return new Port(input.id, input.id)
+          // This should be passed in a property
+          return new Port(input.id, input.id.split(".").pop())
         }),
         outputs: flowNode.data.outputs.map((output: any) => {
-          return new Port(output.id, output.id)
+          // This should be passed in a property
+          return new Port(output.id, output.id.split(".").pop())
         }),     
       })
     })
@@ -98,11 +100,6 @@ export class DiagramFactory {
     const links = flow.edges.map((edge: any) => {
       return new Link(edge.id, edge.sourceHandle, edge.targetHandle)
     })
-
-    console.log(JSON.stringify(flow, null, 2))
-    console.log(JSON.stringify({
-      nodes, links
-    }, null, 2))
 
     return new Diagram(nodes, links)
   }
@@ -117,8 +114,8 @@ export class DiagramFactory {
       "height": 52,
       "id": "Signal.1",
       "position": {
-        "x": 67.5560748737305,
-        "y": 248.93504056462456
+        "x": 355.29217094488496,
+        "y": 226.10303220463445
       },
       "data": {
         "computer": "Signal",
@@ -132,20 +129,18 @@ export class DiagramFactory {
         ]
       },
       "type": "transformer",
-      "selected": false,
       "positionAbsolute": {
-        "x": 67.5560748737305,
-        "y": 248.93504056462456
-      },
-      "dragging": false
+        "x": 355.29217094488496,
+        "y": 226.10303220463445
+      }
     },
     {
       "width": 128,
       "height": 78,
       "id": "Pass.1",
       "position": {
-        "x": 384.1340435091612,
-        "y": 302.8164684536807
+        "x": 603.8344401401514,
+        "y": 250.84269792454666
       },
       "data": {
         "computer": "Pass",
@@ -166,8 +161,8 @@ export class DiagramFactory {
       "type": "transformer",
       "selected": true,
       "positionAbsolute": {
-        "x": 384.1340435091612,
-        "y": 302.8164684536807
+        "x": 603.8344401401514,
+        "y": 250.84269792454666
       },
       "dragging": false
     }
@@ -178,11 +173,11 @@ export class DiagramFactory {
       "sourceHandle": "Signal.1.output",
       "target": "Pass.1",
       "targetHandle": "Pass.1.input",
-      "id": "reactflow__edge-Signal.1Signal.1.output-Pass.1Pass.1.input"
+      "id": "Signal.1.output-->Pass.1.input"
     }
   ],
   "viewport": {
-    "x": 0,
+    "x": -8.799999999999999,
     "y": 0,
     "zoom": 1
   }
@@ -219,7 +214,7 @@ export class DiagramFactory {
   ],
   "links": [
     {
-      "id": "reactflow__edge-Signal.1Signal.1.output-Pass.1Pass.1.input",
+      "id": "Signal.1.output-->Pass.1.input",
       "sourcePortId": "Signal.1.output",
       "targetPortId": "Pass.1.input"
     }

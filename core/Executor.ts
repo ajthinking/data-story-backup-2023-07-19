@@ -23,13 +23,17 @@ export class Executor {
   ) {}
 
   async *execute(): AsyncGenerator<ExecutionUpdate, ExecutionResult, void> {
+    console.log("OOOOBOY! lets start!")
     this.initState()
     
     while(!this.isComplete()) {
+      console.log("Its not complete! - LOOP STARTS")
       // Start execution of all nodes that can run
       const runnables = this.getRunnableNodes()
+      console.log("Runnable count: ", runnables.length)
 
       const promises = runnables.map(node => {
+        console.log("Running node ", node.id)
         // Put node in busy state
         this.nodeStatuses.set(node.id, 'BUSY')
 
@@ -40,11 +44,13 @@ export class Executor {
         // Handle run result
         promise.then((result: IteratorResult<undefined, void>) => {
           if(result.done) {
+            console.log("A node is done!", node.id)
             this.nodeStatuses.set(node.id, 'COMPLETE');
             return;
           }
 
           // not done, so node is available again!
+          console.log("not done, so node is available again!", node.id)
           this.nodeStatuses.set(node.id, 'AVAILABLE')
         })
 
@@ -53,7 +59,10 @@ export class Executor {
 
       // If no promises, then we are stuck??? TODO ensure this works!
       if(promises.length === 0) {
+        console.log(this.nodeRunners.get('Signal.1'))
+      }
 
+      if(promises.length === 0 && this.noBusyNodes()) {
         // Mark all nodes as complete
         for(const node of this.diagram.nodes) {
           this.nodeStatuses.set(node.id, 'COMPLETE')
@@ -167,6 +176,10 @@ export class Executor {
   
   protected inputsHaveAllItems(inputs: any[]) {
     return inputs.every(this.inputHaveAllItems)
+  }
+
+  protected noBusyNodes() {
+    return Array.from(this.nodeStatuses.values()).every(status => status !== 'BUSY')
   }
 
   protected makeInputDevice(node: Node) {
