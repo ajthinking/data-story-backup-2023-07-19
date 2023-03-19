@@ -25,6 +25,26 @@ export default function Home() {
         </div>
         {/* <Server /> */}
         {/* <NodePicker /> */}
+
+        {/* <div className="m-12 max-w-sm p-8 bg-gray-200">
+          <div className=" mb-4">Hubspot Contacts</div>
+          <div className="flex justify-between bg-gray-200 text-xs">
+            <div className="flex px-2 rounded-t-lg border-t border-b border-gray-400 py-1 items-center space-x-2 bg-gray-50">
+                          in
+
+
+            </div>
+            <div className="flex grow px-4 rounded-t-lg border-t border-l border-r border-gray-400 py-1 items-center space-x-2 bg-gray-50">
+              config
+            </div>
+            <div className="flex px-4 rounded-t-lg border-t border-b border-gray-400 py-1 items-center space-x-2 bg-gray-50">
+                        out
+
+            </div>                        
+          </div>
+          <div className="bg-gray-50 text-red-500 p-12">OKej</div>
+        </div> */}
+        
       </div>
     </>
   )

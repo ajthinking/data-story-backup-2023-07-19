@@ -1,6 +1,5 @@
 import WebSocket from 'ws'
 import { onMessage } from './onMessage'
-import { Server } from './Server'
 
 const wsServer = new WebSocket.Server({
     port: 3100,
