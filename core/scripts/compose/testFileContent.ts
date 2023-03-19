@@ -1,24 +1,17 @@
 export const testFileContent = (name: string) => `import { expect, it } from "vitest";
 import { RunArgs } from "../Computer";
+import { when } from "../computerTester/ComputerTester";
 import { ${name} } from "./${name}";
 
-it('outputs X when passed Y', async () => {
-  // Outputted items stored here
-  const output: any[] = [];
-
-  // Mock input/output devices
-  const generator = ${name}.run({
-    input: {
-      pull: () => [1, 2, 3]
-    },
-    output: {
-      push: (items: any[]) => {
-        output.push(...items)
-      }
-    }
-  } as RunArgs)
-
-  await generator.next();
-  expect(output).toMatchObject([1, 2, 3])
+it('does something', async () => {
+  await when(${name})
+    .hasDefaultParams()
+    .getsInput([1, 2])
+    .doRun()
+    .expectOutput([1, 2])
+    .getsInput([3, 4])
+    .doRun()
+    .expectOutput([1, 2, 3, 4])
+    .ok()
 })
 `;

@@ -2,7 +2,7 @@ import fs from 'fs';
 import { sourceFileContent } from './sourceFileContent';
 import { testFileContent } from './testFileContent';
 
-const NODE_ROOT = 'server/computers';
+const NODE_ROOT = 'core/computers';
 
 const name = process.argv[2];
 if (!name) {

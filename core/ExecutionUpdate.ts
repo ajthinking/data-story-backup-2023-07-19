@@ -4,4 +4,8 @@ export class ExecutionUpdate {
   constructor(
     public linkCounts: Map<LinkId, number>,
   ) {}
+
+  stringify() {
+    return JSON.stringify(this)
+  }
 }

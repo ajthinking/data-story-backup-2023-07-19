@@ -67,10 +67,10 @@ export class ServerClient {
     this.socket.send(message);
   }
 
-  run(diagram: any) {
+  run(reactFlow: any) {
     const message = JSON.stringify({
       type: "run",
-      diagram,
+      reactFlow: reactFlow,
     })
 
     this.socket.send(message);

@@ -1,4 +1,3 @@
-import { Computer } from '../core/Computer';
 import * as computers from '../core/computers';
 
 type NodeDescription = {
@@ -12,7 +11,7 @@ const nodeDescriptions: NodeDescription[] = [
   computers.CreateJson,
   computers.Pass,
   computers.Ignore,
-  computers.Contacts,
+  computers.Signal,
 ].map((computer) => { 
   return {
     name: computer.name,

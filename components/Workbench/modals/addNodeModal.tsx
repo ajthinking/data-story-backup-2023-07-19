@@ -13,7 +13,19 @@ export const AddNodeModal = ({ setShowModal }: any) => {
   const { nodes, edges, onAddNode, availableNodes } = useStore(selector, shallow);
 
   const doAddNode = (nodeDescription: any) => {
-    const id = nodeDescription.name + Math.random();
+    const scopedId = (name: string) => {
+      const max = nodes
+        .filter((node: any) => node.data.computer === name)
+        .map((node: any) => node.id)
+        .map((id: string) => id.split('.')[1])
+        .map((id: string) => parseInt(id))
+        .reduce((max: any, id: any) => Math.max(max, id), 0)
+  
+      return max + 1      
+    }
+
+    const counter = scopedId(nodeDescription.name)
+    const id = `${nodeDescription.name}.${counter}`;
 
     const node = {
       id,
@@ -23,14 +35,14 @@ export const AddNodeModal = ({ setShowModal }: any) => {
         label: nodeDescription.name,
         inputs: nodeDescription.inputs.map((input: any) => {
           return {
-            id: `${id}-${input.name}`,
-            name: input.name
+            id: `${id}.${input}`,
+            name: input
           }
         }),
         outputs: nodeDescription.outputs.map((input: any) => {
           return {
-            id: `${id}-${input.name}`,
-            name: input.name
+            id: `${id}.${input}`,
+            name: input
           }
         }),
       },
