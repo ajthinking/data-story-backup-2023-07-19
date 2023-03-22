@@ -3,7 +3,8 @@ export type Param = {
   name: string
   type: string
   value?: any
-  placeholder?: string,  
+  placeholder?: string,
+  selectOptions?: string[],
 }
 
 export const NameParam = {

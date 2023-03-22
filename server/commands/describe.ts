@@ -9,12 +9,7 @@ export type NodeDescription = {
 }
 
 export const describe = () => {
-  const nodeDescriptions: NodeDescription[] = [
-    computers.CreateJson,
-    computers.Pass,
-    computers.Ignore,
-    computers.Signal,
-  ].map((computer) => { 
+  const nodeDescriptions: NodeDescription[] = Object.values(computers).map((computer) => { 
     const instance = computer()
     
     return {

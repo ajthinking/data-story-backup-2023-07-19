@@ -9,8 +9,8 @@ export function Modal({
   useEscapeKey(() => setShowModal(false));
 
   return <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-8 mx-auto px-8">
+          <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-full max-w-4xl my-8 mx-auto px-8">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between px-8 py-2 uppercase border-solid border-slate-200 rounded-t">
                   <div className="mt-4 flex flex-col align-center justify-middleitems-center justify-center text-base text-gray-400 font-bold tracking widest">
@@ -25,7 +25,7 @@ export function Modal({
                 {
             /*body*/
           }
-                <div className="relative pb-6 pt-4 px-6 flex-auto space-y-1">
+                <div className="max-h-96 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1">
                   <p className="my-4 text-slate-500 text-sm leading-relaxed">
                     {content || null}
                   </p>

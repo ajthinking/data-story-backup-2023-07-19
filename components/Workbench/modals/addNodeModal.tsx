@@ -60,14 +60,88 @@ export const AddNodeModal = ({ setShowModal }: any) => {
     title={"Add Node"}
     setShowModal={setShowModal}
   >
-    {availableNodes.map((nodeDescription: NodeDescription) => {
-      return (<div
-        className="cursor-pointer hover:bg-gray-50 text-gray-600 flex items-center justify-center w-full px-4 py-1 border border-gray-300 text-xs"
-        key={nodeDescription.name}
-        onClick={() => doAddNode(nodeDescription)}
-        >
-        {nodeDescription.name}
-      </div>)
-    })}
+    <div className="grid grid-cols-3 gap-2">
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}
+      {availableNodes.map((nodeDescription: NodeDescription) => {
+        return (<div
+          className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-600 flex items-center px-4 py-2 border border-gray-300 text-xs shadow"
+          key={nodeDescription.name}
+          onClick={() => doAddNode(nodeDescription)}
+          >
+          {nodeDescription.name}
+        </div>)
+      })}                                                
+    </div>
   </Modal>)
 }

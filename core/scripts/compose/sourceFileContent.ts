@@ -1,5 +1,5 @@
-export const sourceFileContent = (name: string) => `import { Computer, RunArgs } from "../Computer";
-import { DefaultParams, LabelParam, NameParam } from "../Param";
+export const sourceFileContent = (name: string) => `import { Computer, ComputerFactory, RunArgs } from "../Computer";
+import { DefaultParams } from "../Param";
 
 export const ${name}: ComputerFactory = (): Computer => ({
   name: '${name}',
