@@ -1,7 +1,7 @@
-import { Computer, RunArgs } from "../Computer";
+import { Computer, ComputerFactory, RunArgs } from "../Computer";
 import { DefaultParams, LabelParam, NameParam } from "../Param";
 
-export const Ignore: Computer = {
+export const Ignore: ComputerFactory = () => ({
   name: 'Ignore',
   inputs: ['input'],
   params: [
@@ -14,4 +14,4 @@ export const Ignore: Computer = {
       yield;
     }
   },
-};
+});

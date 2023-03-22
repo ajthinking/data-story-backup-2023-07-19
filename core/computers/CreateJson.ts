@@ -1,6 +1,6 @@
-import { Computer, RunArgs } from "../Computer";
+import { Computer, ComputerFactory, RunArgs } from "../Computer";
 
-export const CreateJson: Computer = {
+export const CreateJson: ComputerFactory = () => ({
   name: 'CreateJson',  
   outputs: ['output'],
 
@@ -12,4 +12,4 @@ export const CreateJson: Computer = {
       yield;
     }
   },
-};
+});

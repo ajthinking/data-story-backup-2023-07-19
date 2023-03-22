@@ -6,11 +6,12 @@ import { InputDeviceInterface } from "./InputDevice"
 import { Item } from "./Item"
 import { OutputDeviceInterface } from "./OutputDevice"
 import { Param } from "./Param"
+import { ParamsDevice } from "./ParamsDevice"
 
 export type RunArgs = {
   input: InputDeviceInterface,
   output: OutputDeviceInterface,
-  params: Record<string, Param>
+  params: ParamsDevice
 }
 
 export interface Computer {
@@ -22,3 +23,5 @@ export interface Computer {
   run: (args: RunArgs) => AsyncGenerator<NextResult, ReturnResult, NextArgument>
   canRun?: (options: any) => boolean
 }
+
+export type ComputerFactory = (options?: any) => Computer

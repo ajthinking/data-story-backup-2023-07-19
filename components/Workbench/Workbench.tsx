@@ -10,6 +10,7 @@ import { RunModal } from './modals/runModal';
 import { AddNodeModal } from './modals/addNodeModal';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow'
+import { NodeModal } from './modals/nodeModal';
 
 const nodeTypes = {
   transformer: Transformer,
@@ -25,13 +26,16 @@ export default function Workbench() {
     onEdgesChange: state.onEdgesChange,
     onConnect: state.onConnect,
     onInit: state.onInit,
+    openNodeModalId: state.openNodeModalId,
+    setOpenNodeModalId: state.setOpenNodeModalId,
   });
 
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, onInit } = useStore(selector, shallow);  
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, onInit, openNodeModalId, setOpenNodeModalId } = useStore(selector, shallow);  
 
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
+  const [showNodeModal, setShowNodeModal] = useState(false);
 
   return (
     <>
@@ -56,6 +60,7 @@ export default function Workbench() {
     {showRunModal && <RunModal setShowModal={setShowRunModal}/>}    
     {showAddNodeModal && <AddNodeModal setShowModal={setShowAddNodeModal}/>}    
     {showConfigModal && <ConfigModal setShowModal={setShowConfigModal}/>}
+    {openNodeModalId && <NodeModal/>}
     </>
   );
 }

@@ -1,19 +1,27 @@
-import { Computer, RunArgs } from "../Computer"
+import { Computer, ComputerFactory, RunArgs } from "../Computer"
+import { DefaultParams } from "../Param"
 
-export const Multiply: Computer = {
+export const Multiply: ComputerFactory = () => ({
   name: 'Multiply',  
   inputs: ['input'],
   outputs: ['output'],
+  params: [
+    ...DefaultParams,
+    {
+      id: 'factor',
+      name: 'factor',
+      type: 'number',
+      value: 2,
+    }
+  ],
   
-  async *run({ input, output }: RunArgs) {
-    const FACTOR = 2
-
+  async *run({ input, output, params }: RunArgs) {
     while(true) {
       const incoming = input.pull() as number[]
-      const products = incoming.map(n => n * FACTOR)
+      const products = incoming.map(n => n * params.factor)
 
       output.push(products)
       yield;
     }
   }
-}
+})

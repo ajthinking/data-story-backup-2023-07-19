@@ -1,12 +1,24 @@
 import React, { memo } from 'react';
 import { Handle, Position } from 'reactflow';
+import { useStore } from '../Workbench/store';
+import { shallow } from 'zustand/shallow';
 import CustomHandle from './CustomHandle';
 
-const Transformer = ({ data, isConnectable }: any) => {
+const Transformer = ({ id, data, isConnectable }: any) => {
+  const selector = (state: any) => ({
+    setOpenNodeModalId: state.setOpenNodeModalId,
+  });
+
+  const { setOpenNodeModalId } = useStore(selector, shallow);
+
   return (
     (
       <div
         className="text-xs"
+        onDoubleClick={() => {
+          console.log("Setting open node modal id to: ", data.id)
+          setOpenNodeModalId(id)
+        }}
       >
         <div className="w-32" />
         <div className="flex py-1 text-xs font-bold font-mono uppercase border rounded bg-blue-500 text-white px-2">

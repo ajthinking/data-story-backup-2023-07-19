@@ -1,7 +1,7 @@
-import { Computer, RunArgs } from "../Computer";
+import { Computer, ComputerFactory, RunArgs } from "../Computer";
 import { DefaultParams, LabelParam, NameParam } from "../Param";
 
-export const Pass: Computer = {
+export const Pass: ComputerFactory = () => ({
   name: 'Pass',
   inputs: ['input'],
   outputs: ['output'],
@@ -17,4 +17,4 @@ export const Pass: Computer = {
       yield;
     }
   },
-};
+});

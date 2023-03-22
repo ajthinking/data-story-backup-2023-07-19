@@ -2,7 +2,8 @@ export type Param = {
   id: string
   name: string
   type: string
-  value: any
+  value?: any
+  placeholder?: string,  
 }
 
 export const NameParam = {

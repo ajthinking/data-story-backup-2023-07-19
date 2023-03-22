@@ -31,6 +31,7 @@ export const AddNodeModal = ({ setShowModal }: any) => {
       id,
       position: { x: Math.random()*800, y: Math.random()*500 },
       data: {
+        params: nodeDescription.params,
         computer: nodeDescription.name,
         label: nodeDescription.name,
         inputs: nodeDescription.inputs.map((input: any) => {

@@ -8,6 +8,9 @@ import { Item } from "./Item";
 import { LinkId } from "./Link";
 import { ExecutionUpdate } from "./ExecutionUpdate";
 import { ExecutionResult } from "./ExecutionResult";
+import { isFinished } from "./utils/isFinished";
+import { Param } from "./Param";
+import { ParamsDevice } from "./ParamsDevice";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -27,10 +30,19 @@ export class Executor {
 
   async *execute(): AsyncGenerator<ExecutionUpdate, ExecutionResult, void> {
     console.log("OOOOBOY! lets start!")
+    let startTime = new Date().getTime();
     this.initState()
+
+    let pendingPromises: Promise<any>[] = []
     
     while(!this.isComplete()) {
-      console.log("Its not complete! - LOOP STARTS")
+      console.log("TIME *********** ", new Date().getTime() - startTime)
+      // cleanup old promises that are done
+      console.log("Pending before: ", pendingPromises.length,pendingPromises)
+      pendingPromises = await this.clearFinishedPromises(pendingPromises)
+
+      console.log("Pending after: ", pendingPromises.length, pendingPromises)
+
       // Start execution of all nodes that can run
       const runnables = this.getRunnableNodes()
       console.log("Runnable count: ", runnables.length)
@@ -60,12 +72,11 @@ export class Executor {
         return promise
       })
 
-      // If no promises, then we are stuck??? TODO ensure this works!
-      if(promises.length === 0) {
-        console.log(this.nodeRunners.get('Signal.1'))
-      }
+      // Add this batch of promises to the pending list
+      pendingPromises.push(...promises)
 
-      if(promises.length === 0 && this.noBusyNodes()) {
+      // If no promises, then we are stuck??? TODO ensure this works!
+      if(pendingPromises.length === 0) {
         // Mark all nodes as complete
         for(const node of this.diagram.nodes) {
           this.nodeStatuses.set(node.id, 'COMPLETE')
@@ -74,8 +85,8 @@ export class Executor {
 
       // await only the first state change since
       // it can open up for more nodes to proceed immediately
-      if(promises.length > 0) {
-        await Promise.race(promises);
+      if(pendingPromises.length > 0) {
+        await Promise.race(pendingPromises);
         yield new ExecutionUpdate(this.linkCounts)
       }
     }
@@ -96,16 +107,13 @@ export class Executor {
 
       // Initialize runner generators
       const computer = this.computers.get(node.type)!
+
       this.nodeRunners.set(
         node.id,
         computer.run({
           input: this.makeInputDevice(node),
           output: this.makeOutputDevice(node),
-          // TODO: WHO OWNS THE PARAMS??
-          // I think, while they originating from React Flow NODES configuration,
-          // they should be considered as settings given to the computer.
-          // The computer is initialized/hydrated with the params
-          params: {},
+          params: this.makeParamsDevice(computer),
         })
       )
     }
@@ -117,7 +125,17 @@ export class Executor {
     }
 
     return true
-  }  
+  }
+
+  protected async clearFinishedPromises(promises: Promise<any>[]) {
+    const passed = []
+    for(const promise of promises) {
+      if(await isFinished(promise)) continue;
+      passed.push(promise)
+    }
+
+    return passed
+  }
 
   protected async runBootHooks() {
     // For all nodes see if they have boot, if so run them
@@ -211,5 +229,16 @@ export class Executor {
     }
 
     return new OutputDevice(tree, this.linkCounts)
+  }
+
+  protected makeParamsDevice(computer: Computer): ParamsDevice {
+    const device = computer.params?.reduce((acc: Partial<ParamsDevice>, param: Param) => {
+      acc[param.name] = param.value
+      return acc
+    }, {} as Partial<ParamsDevice>) || {}
+
+    device.__raw = computer.params || []
+
+    return device as ParamsDevice;
   }
 }

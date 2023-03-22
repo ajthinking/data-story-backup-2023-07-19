@@ -7,7 +7,7 @@ import { Sleep } from "./Sleep";
 
 it('outputs items incrementally', async () => {
   await when(Sleep)
-    .hasDefaultParams()
+    .hasParams({ duration: 1 })
     .getsInput([1, 2])
     .doRun()
     .expectOutput([1])

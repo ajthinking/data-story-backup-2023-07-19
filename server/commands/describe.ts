@@ -15,11 +15,20 @@ export const describe = () => {
     computers.Ignore,
     computers.Signal,
   ].map((computer) => { 
+    const instance = computer()
+
+    console.log({
+      name: instance.name,
+      inputs: instance.inputs || [],
+      outputs: instance.outputs ||  [],
+      params: instance.params || [],
+    })
+    
     return {
-      name: computer.name,
-      inputs: computer.inputs || [],
-      outputs: computer.outputs ||  [],
-      params: computer.params || [],
+      name: instance.name,
+      inputs: instance.inputs || [],
+      outputs: instance.outputs ||  [],
+      params: instance.params || [],
     }
   })
 

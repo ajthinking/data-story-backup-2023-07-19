@@ -4,7 +4,11 @@ import { useStore } from './store';
 export class ServerClient {
   private socket: WebSocket;
 
-  constructor(socket: WebSocket, setAvailableNodes: any) {
+  constructor(
+    socket: WebSocket,
+    setAvailableNodes: any,
+    updateEdgeCounts: any,
+  ) {
     // Register the socket
     this.socket = socket
 
@@ -30,12 +34,14 @@ export class ServerClient {
         return;
       }
 
-      if (parsed.type === "runUpdate") {
-        console.log("Received runUpdate from server: ", parsed)
+      if (parsed.type === "executionUpdate") {
+        console.log("Received executionUpdate from server: ", parsed)
+
+        updateEdgeCounts(parsed.counts)
         return;
       }
 
-      console.log("Received unknown message from server: ", parsed)
+      console.log(parsed)
     })    
 
     // // Register on message

@@ -1,5 +1,5 @@
 import { expect } from "vitest";
-import { Computer } from "../Computer";
+import { Computer, ComputerFactory } from "../Computer";
 import { Diagram } from "../Diagram";
 import { Executor } from "../Executor";
 import { InputDevice } from "../InputDevice";
@@ -10,31 +10,14 @@ import { Node } from "../Node";
 import { OutputDevice } from "../OutputDevice";
 import { OutputDeviceFactory } from "../OutputDeviceFactory";
 import { Param } from "../Param";
+import { ParamsDevice } from "../ParamsDevice";
 import { Port } from "../Port";
 import { TestStep } from "./TestStep";
 
 import { doRun, expectCanRun, expectCantRun, expectOutput, expectOutputs, getsInput, getsInputs } from "./testSteps";
 
-/*
-when(Sleep)
-  .hasDefaultParams()
-  .hasParams({ time: 1 })
-  .expectCantRun()
-  .getsInput([1])
-  .expectCanRun()
-  .doRun()
-  .expectOutput([1])
-  .expectCantRun()
-  .getsInput([2])
-  .expectCanRun()
-  .doRun()
-  .expectOutput([1, 2])
-  .expectCantRun()
-  .ok()
-*/
-
-export const when = (computer: Computer) => {
-  return new ComputerTester(computer)
+export const when = (factory: ComputerFactory) => {
+  return new ComputerTester(factory())
 }
 
 type TestStepArgs = any[]
@@ -44,7 +27,8 @@ export class ComputerTester {
   diagram: Diagram | null = null
   node: Node | null = null
 
-  params: Param[] = []
+  explicitParams: Record<string, any> = {}
+
   steps: [TestStep, TestStepArgs][] = []
   
   inputs: {
@@ -69,7 +53,9 @@ export class ComputerTester {
     
     this.inputDevice = this.makeInputDevice()
     this.outputDevice = this.makeOutputDevice()
-    const params = this.makeParameterRecord()
+    const params: ParamsDevice = this.makeParamsDevice()
+
+
 
     this.runner = this.computer.run({
       input: this.inputDevice,
@@ -89,12 +75,11 @@ export class ComputerTester {
   }
 
   hasDefaultParams() {
-    // this is already true
-    return this;
+    return this; // this is already true
   }
 
   hasParams(params: Record<string, any>) {
-    // this.params.push(Param)
+    this.explicitParams = params
 
     return this
   }
@@ -186,11 +171,24 @@ export class ComputerTester {
     )
   }
 
-  protected makeParameterRecord() {
-    return this.params.reduce((acc, param) => {
-      acc[param.name] = param.value
-      return acc
-    }, {} as Record<string, any>)
+  protected makeParamsDevice(): ParamsDevice {
+    const device: Partial<ParamsDevice> = {}
+    const params = this.computer.params || []
+
+    for(const param of params) {
+      const hasExplicitValue = this.explicitParams.hasOwnProperty(param.name)
+
+      if(hasExplicitValue) {
+        device[param.name] = this.explicitParams[param.name]
+        continue
+      }
+      
+      device[param.name] = param.value
+    }
+
+    device.__raw = this.computer.params || []
+
+    return device as ParamsDevice;
   }
 }
 

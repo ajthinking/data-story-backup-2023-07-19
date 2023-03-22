@@ -1,4 +1,4 @@
-import { Computer } from "./Computer";
+import { Computer, ComputerFactory } from "./Computer";
 import { Diagram } from "./Diagram";
 import { Link } from "./Link";
 import { Node } from "./Node";
@@ -12,7 +12,9 @@ export class DiagramBuilder {
     this.diagram = new Diagram([], [])
   }
 
-  add(computer: Computer) {
+  add(addable: ComputerFactory | Computer) {
+    const computer = typeof addable === 'function' ? addable() : addable
+
     const nodeId = `${computer.name}.${this.getScopedId(computer.name)}`
 
     const node = new Node({

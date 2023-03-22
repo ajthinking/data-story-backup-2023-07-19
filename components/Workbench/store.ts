@@ -29,6 +29,10 @@ type RFState = {
   onInit: any;
   onRun: any;
   onInitServer: any;
+  updateEdgeCounts: any;
+  setEdges: any;
+  openNodeModalId: string | null;
+  setOpenNodeModalId: any;
 };
 
 import { ServerClient } from "./ServerClient";
@@ -64,6 +68,9 @@ export const useStore = create<RFState>((set, get) => ({
       nodes: [...get().nodes, node],
     })
   },
+  setEdges(edges: Edge[]) {
+    set({ edges })
+  },
   onInit: (rfInstance: any) => {
     set({ rfInstance })
     get().onInitServer()
@@ -78,6 +85,7 @@ export const useStore = create<RFState>((set, get) => ({
     const server = new ServerClient(
       new WebSocket("ws://localhost:3100"),
       get().setAvailableNodes,
+      get().updateEdgeCounts,
     )
 
     set({ server })
@@ -87,4 +95,28 @@ export const useStore = create<RFState>((set, get) => ({
   setAvailableNodes: (availableNodes: any[]) => {
     set({ availableNodes })
   },
+  updateEdgeCounts: (edgeCounts: any) => {
+    for(const [id, count] of Object.entries(edgeCounts)) {
+      const edge = get().edges.find(edge => edge.id === id)
+      if (edge) edge.label = count as string
+
+      console.log({ edge })
+    }
+
+    const newEdges = get().edges.map((edge: Edge) => {
+      Object.entries(edgeCounts).forEach(([id, count]) => {
+        if (edge.id === id) {
+          edge.label = count as string
+        }
+      })
+
+      return edge
+    })
+
+    get().setEdges(newEdges);
+  },
+  openNodeModalId: null,
+  setOpenNodeModalId: (id: string | null) => {
+    set({ openNodeModalId: id })
+  }
 }));
