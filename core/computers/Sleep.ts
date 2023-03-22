@@ -1,28 +1,22 @@
-import { Computer, RunArgs } from "../Computer";
-import { DefaultParams, LabelParam, NameParam } from "../Param";
+import { Computer, ComputerFactory, RunArgs } from "../Computer";
+import { DefaultParams } from "../Param";
+import { number } from "../ParamBuilder";
 import { sleep } from "../utils/sleep";
 
-const DurationParam = {
-  id: 'duration',
-  name: 'duration',
-  type: 'number',
-  value: 1000,      
-}
-
-export const Sleep = () => ({
+export const Sleep: ComputerFactory = (): Computer => ({
   name: 'Sleep',
   inputs: ['input'],
   outputs: ['output'],
   params: [
     ...DefaultParams,
-    DurationParam,
+    number('duration').value(1000).get()
   ],
 
-  async *run({ input, output, params }: RunArgs) {
-    
+  async *run({ input, output, params: { duration } }: RunArgs) {
+
     while(true) {
       const incoming = input.pull(1)
-      await sleep(params.duration.value)
+      await sleep(duration)
       output.push(incoming)
 
       yield;

@@ -1,15 +1,22 @@
 import { Computer, ComputerFactory, RunArgs } from "../Computer";
+import { DefaultParams } from "../Param";
+import { json } from "../ParamBuilder";
 
-export const CreateJson: ComputerFactory = () => ({
+export const CreateJson: ComputerFactory = (): Computer => ({
   name: 'CreateJson',  
   outputs: ['output'],
+  params: [
+    ...DefaultParams,
+    json('json').value("[{ name: 'John'}]").get(),
+  ],
 
-  async *run({ output, params }: RunArgs) {
-    while(true) {
-      const json = '[{"id": 1}, {"id": 2}, {"id": 3}]'
-      // const json = params.json.value // TODO return to this
-      output.push(JSON.parse(json))
-      yield;
-    }
+  async *run({ output, params: { json } }: RunArgs) {
+    const parsed = JSON.parse(json)
+
+    output.push(
+      // wraps the parsed json in an array if it's not already an array
+      [parsed].flat()
+    )
+    yield;
   },
 });

@@ -15,6 +15,5 @@ export const run = async (ws: WebSocket, data: RunMessage) => {
 
   for await(const update of execution) {
     ws.send(update.stringify())
-    console.log("Sent update...", update)
   }
 }

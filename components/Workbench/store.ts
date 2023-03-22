@@ -100,8 +100,6 @@ export const useStore = create<RFState>((set, get) => ({
     for(const [id, count] of Object.entries(edgeCounts)) {
       const edge = get().edges.find(edge => edge.id === id)
       if (edge) edge.label = count
-
-      console.log({ edge })
     }
 
     const newEdges = get().edges.map((edge: Edge) => {

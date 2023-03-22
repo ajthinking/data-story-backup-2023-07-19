@@ -35,13 +35,16 @@ export class ServerClient {
       }
 
       if (parsed.type === "executionUpdate") {
-        console.log("Received executionUpdate from server: ", parsed)
-
         updateEdgeCounts(parsed.counts)
         return;
       }
 
-      console.log(parsed)
+      if(parsed.type === "executionResult") {
+        alert("Execution complete 💫")
+        return
+      }
+
+      throw("Unknown message type: " + parsed.type)
     })    
 
     // // Register on message

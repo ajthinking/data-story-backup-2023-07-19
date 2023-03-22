@@ -16,13 +16,6 @@ export const describe = () => {
     computers.Signal,
   ].map((computer) => { 
     const instance = computer()
-
-    console.log({
-      name: instance.name,
-      inputs: instance.inputs || [],
-      outputs: instance.outputs ||  [],
-      params: instance.params || [],
-    })
     
     return {
       name: instance.name,

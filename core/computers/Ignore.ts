@@ -1,7 +1,7 @@
 import { Computer, ComputerFactory, RunArgs } from "../Computer";
 import { DefaultParams, LabelParam, NameParam } from "../Param";
 
-export const Ignore: ComputerFactory = () => ({
+export const Ignore: ComputerFactory = (): Computer => ({
   name: 'Ignore',
   inputs: ['input'],
   params: [
@@ -10,7 +10,7 @@ export const Ignore: ComputerFactory = () => ({
 
   async *run({ input }: RunArgs) {
     while(true) {
-      const incoming = input.pull()
+      input.pull()
       yield;
     }
   },

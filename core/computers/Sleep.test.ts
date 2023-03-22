@@ -1,8 +1,5 @@
-import { expect, it } from "vitest";
-import { RunArgs } from "../Computer";
+import { it } from "vitest";
 import { when } from "../computerTester/ComputerTester";
-import { InputDevice } from "../InputDevice";
-import { OutputDevice } from "../OutputDevice";
 import { Sleep } from "./Sleep";
 
 it('outputs items incrementally', async () => {
@@ -13,5 +10,5 @@ it('outputs items incrementally', async () => {
     .expectOutput([1])
     .doRun()
     .expectOutput([1, 2])
-    .ok() 
+    .ok()
 })

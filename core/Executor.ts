@@ -28,27 +28,20 @@ export class Executor {
     public computers: Map<string, Computer>,
   ) {}
 
-  async *execute(): AsyncGenerator<ExecutionUpdate, ExecutionResult, void> {
-    console.log("OOOOBOY! lets start!")
+  async *execute(): AsyncGenerator<ExecutionUpdate | ExecutionResult, void, void> {
     let startTime = new Date().getTime();
     this.initState()
 
     let pendingPromises: Promise<any>[] = []
     
     while(!this.isComplete()) {
-      console.log("TIME *********** ", new Date().getTime() - startTime)
       // cleanup old promises that are done
-      console.log("Pending before: ", pendingPromises.length,pendingPromises)
       pendingPromises = await this.clearFinishedPromises(pendingPromises)
-
-      console.log("Pending after: ", pendingPromises.length, pendingPromises)
 
       // Start execution of all nodes that can run
       const runnables = this.getRunnableNodes()
-      console.log("Runnable count: ", runnables.length)
 
       const promises = runnables.map(node => {
-        console.log("Running node ", node.id)
         // Put node in busy state
         this.nodeStatuses.set(node.id, 'BUSY')
 
@@ -59,13 +52,11 @@ export class Executor {
         // Handle run result
         promise.then((result: IteratorResult<undefined, void>) => {
           if(result.done) {
-            console.log("A node is done!", node.id)
             this.nodeStatuses.set(node.id, 'COMPLETE');
             return;
           }
 
           // not done, so node is available again!
-          console.log("not done, so node is available again!", node.id)
           this.nodeStatuses.set(node.id, 'AVAILABLE')
         })
 
@@ -91,7 +82,7 @@ export class Executor {
       }
     }
 
-    return new ExecutionResult(this.linkCounts)
+    yield new ExecutionResult()
   }
 
   protected initState() {

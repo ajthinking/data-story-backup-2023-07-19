@@ -9,7 +9,7 @@ import { CreateJson } from "./computers";
 import { ExecutionResult } from "./ExecutionResult";
 
 describe('execute', () => {
-  it('can execute an empty diagram', async () => {
+  it('can execute an empty diagram and return an execution result', async () => {
     const diagram = new Diagram([], [])
     const computers = new Map<string, Computer>()
 
@@ -17,24 +17,13 @@ describe('execute', () => {
 
     const updates = executor.execute()
 
+    const update = await updates.next()
+    expect(update.value).toBeInstanceOf(ExecutionResult)
+    expect(update.done).toBe(false)
+    
     const result = await updates.next()
-
     expect(result.done).toBe(true)
   })
-
-  it('returns an execution result with link counts', async () => {
-    const diagram = new Diagram([], [])
-    const computers = new Map<string, Computer>()
-
-    const executor = new Executor(diagram, computers)
-
-    const updates = executor.execute()
-
-    const result = await updates.next()
-
-    expect(result.value).toBeInstanceOf(ExecutionResult)
-    expect(result.value.linkCounts).toBeInstanceOf(Map<LinkId, number>)
-  })  
 
   it('can execute a diagram with a single no-input no-output node', async () => {
     const node = new Node({
@@ -63,7 +52,10 @@ describe('execute', () => {
     expect(proof).toBe('dummy-rocks')
 
     const update2 = await updates.next()
-    expect(update2.done).toBe(true)
+    expect(update2.done).toBe(false)
+
+    const update3 = await updates.next()
+    expect(update3.done).toBe(true)    
   })
 
   it('can execute a diagram with non connected input node', async () => {
@@ -88,9 +80,11 @@ describe('execute', () => {
     const executor = new Executor(diagram, computers)
 
     const updates = executor.execute()
-    const result = await updates.next()
+    const update = await updates.next()
+    expect(update.done).toBe(false)
 
-    expect(result.done).toBe(true)
+    const result = await updates.next()
+    expect(result.done).toBe(true)    
   })    
 
   it('can execute a diagram with a node outputting items', async () => {
@@ -122,7 +116,10 @@ describe('execute', () => {
     expect(update1.done).toBe(false)
 
     const update2 = await updates.next()
-    expect(update2.done).toBe(true)
+    expect(update2.done).toBe(false)
+
+    const result = await updates.next()
+    expect(result.done).toBe(true)        
   })
 
   it('can execute a diagram with item flowing between two nodes', async () => {
@@ -188,7 +185,10 @@ describe('execute', () => {
     expect(order).toMatchObject(['running create', 'running log',])
 
     const update3 = await updates.next()
-    expect(update3.done).toBe(true)
+    expect(update3.done).toBe(false)
     expect(order).toMatchObject(['running create', 'running log',])
+
+    const result = await updates.next()
+    expect(result.done).toBe(true)    
   })
 })

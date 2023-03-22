@@ -1,7 +1,10 @@
+import { ExecutionUpdate } from "./ExecutionUpdate";
 import { LinkId } from "./Link";
 
 export class ExecutionResult {
-  constructor(
-    public linkCounts: Map<LinkId, number>,
-  ) {}
+  type = "executionResult"
+
+  stringify() {    
+    return JSON.stringify(this)
+  }
 }

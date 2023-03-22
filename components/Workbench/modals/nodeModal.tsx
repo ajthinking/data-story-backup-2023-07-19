@@ -13,10 +13,6 @@ export const NodeModal = () => {
 
   const node = nodes.find((node: any) => node.id === openNodeModalId)
 
-  console.log({
-    here: node
-  })
-
   return (<Modal
     title={node.data.computer}
     setShowModal={(_: any) => setOpenNodeModalId(null)}

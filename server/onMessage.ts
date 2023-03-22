@@ -6,18 +6,23 @@ export type RunMessage = {
   reactFlow: any
 }
 
+export type DescribeMessage = {
+  type: "describe"
+}
+
 const isRun = (parsed: Object): parsed is RunMessage => {
   return (parsed as RunMessage).type === "run"
 }
 
-export const onMessage = async (ws: WebSocket, msg: string) => {
-  console.log("Got a message")
-  const parsed = JSON.parse(msg.toString())
-  const { type } = parsed
+const isDescribe = (parsed: Object): parsed is DescribeMessage => {
+  return (parsed as DescribeMessage).type === "describe"
+}
 
-  if (type === "describe") return ws.send(describe().stringify());
+export const onMessage = async (ws: WebSocket, msg: string) => {
+  const parsed = JSON.parse(msg.toString())
+
+  if (isDescribe(parsed)) return ws.send(describe().stringify());
   if (isRun(parsed)) return await run(ws, parsed);
 
-  console.log(parsed)
-  throw("Unknown message type: " + type)
+  throw("Unknown message type: " + parsed.type)
 }

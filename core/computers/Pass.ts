@@ -1,7 +1,7 @@
 import { Computer, ComputerFactory, RunArgs } from "../Computer";
-import { DefaultParams, LabelParam, NameParam } from "../Param";
+import { DefaultParams } from "../Param";
 
-export const Pass: ComputerFactory = () => ({
+export const Pass: ComputerFactory = (): Computer => ({
   name: 'Pass',
   inputs: ['input'],
   outputs: ['output'],

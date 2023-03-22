@@ -16,7 +16,6 @@ const Transformer = ({ id, data }: any) => {
       <div
         className="text-xs"
         onDoubleClick={() => {
-          console.log("Setting open node modal id to: ", data.id)
           setOpenNodeModalId(id)
         }}
       >
