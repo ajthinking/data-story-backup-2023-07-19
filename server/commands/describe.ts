@@ -1,14 +1,14 @@
 import * as computers from '../../core/computers';
+import { Param } from '../../core/Param';
+
+export type NodeDescription = {
+  name: string,
+  inputs: string[],
+  outputs: string[],
+  params: Param[],
+}
 
 export const describe = () => {
-
-  type NodeDescription = {
-    name: string,
-    inputs: string[],
-    outputs: string[],
-    params: any[],
-  }
-  
   const nodeDescriptions: NodeDescription[] = [
     computers.CreateJson,
     computers.Pass,

@@ -2,7 +2,7 @@ import { Node, NodeId } from "./Node";
 import { Diagram } from "./Diagram";
 import { InputDevice, InputTree } from "./InputDevice";
 import { OutputDevice, OutputTree } from "./OutputDevice";
-import { PortId } from "./Port";
+import { Port, PortId } from "./Port";
 import { Computer } from "./Computer";
 import { Item } from "./Item";
 import { LinkId } from "./Link";
@@ -145,7 +145,7 @@ export class Executor {
     // For all nodes see if they have shutdown, if so run them
   }
 
-  protected getRunnableNodes(): any[] {
+  protected getRunnableNodes(): Node[] {
     return this.diagram.nodes.filter(node => {
       // If the computer implements a custom hook
       const computer = this.computers.get(node.type)!
@@ -188,14 +188,14 @@ export class Executor {
     return Boolean(linkWithItems)
   }
 
-  protected inputHaveAllItems(id: PortId): boolean {
-    const links = this.diagram.linksConnectedToPortId(id)
+  protected inputHaveAllItems(port: Port): boolean {
+    const links = this.diagram.linksConnectedToPortId(port.id)
     const nodeIds = links.map(link => link.sourcePortId)
     
     return nodeIds.every(nodeId => this.nodeStatuses.get(nodeId) === 'COMPLETE')
   }
   
-  protected inputsHaveAllItems(inputs: any[]) {
+  protected inputsHaveAllItems(inputs: Port[]) {
     return inputs.every(this.inputHaveAllItems)
   }
 

@@ -1,4 +1,5 @@
 import { shallow } from "zustand/shallow";
+import { NodeDescription } from "../../../server/commands/describe";
 import { Modal } from "../modal"
 import { useStore } from '../store';
 
@@ -10,16 +11,16 @@ export const AddNodeModal = ({ setShowModal }: any) => {
       availableNodes: state.availableNodes,
   });
 
-  const { nodes, edges, onAddNode, availableNodes } = useStore(selector, shallow);
+  const { nodes, onAddNode, availableNodes } = useStore(selector, shallow);
 
-  const doAddNode = (nodeDescription: any) => {
+  const doAddNode = (nodeDescription: NodeDescription) => {
     const scopedId = (name: string) => {
       const max = nodes
         .filter((node: any) => node.data.computer === name)
         .map((node: any) => node.id)
         .map((id: string) => id.split('.')[1])
         .map((id: string) => parseInt(id))
-        .reduce((max: any, id: any) => Math.max(max, id), 0)
+        .reduce((max: number, id: number) => Math.max(max, id), 0)
   
       return max + 1      
     }
@@ -34,13 +35,13 @@ export const AddNodeModal = ({ setShowModal }: any) => {
         params: nodeDescription.params,
         computer: nodeDescription.name,
         label: nodeDescription.name,
-        inputs: nodeDescription.inputs.map((input: any) => {
+        inputs: nodeDescription.inputs.map((input: string) => {
           return {
             id: `${id}.${input}`,
             name: input
           }
         }),
-        outputs: nodeDescription.outputs.map((input: any) => {
+        outputs: nodeDescription.outputs.map((input: string) => {
           return {
             id: `${id}.${input}`,
             name: input
@@ -59,7 +60,7 @@ export const AddNodeModal = ({ setShowModal }: any) => {
     title={"Add Node"}
     setShowModal={setShowModal}
   >
-    {availableNodes.map((nodeDescription: any) => {
+    {availableNodes.map((nodeDescription: NodeDescription) => {
       return (<div
         className="cursor-pointer hover:bg-gray-50 text-gray-600 flex items-center justify-center w-full px-4 py-1 border border-gray-300 text-xs"
         key={nodeDescription.name}

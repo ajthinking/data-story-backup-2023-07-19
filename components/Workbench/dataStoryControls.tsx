@@ -7,7 +7,6 @@ import { AddNodeIcon } from "./icons/addNodeIcon";
 import { ConfigIcon } from "./icons/configIcon";
 import { HelpIcon } from "./icons/helpIcon";
 export function DataStoryControls({
-  server,
   setShowConfigModal,
   setShowRunModal,
   setShowAddNodeModal,

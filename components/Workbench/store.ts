@@ -36,6 +36,7 @@ type RFState = {
 };
 
 import { ServerClient } from "./ServerClient";
+import { NodeDescription } from '../../server/commands/describe';
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
 export const useStore = create<RFState>((set, get) => ({
@@ -92,13 +93,13 @@ export const useStore = create<RFState>((set, get) => ({
   },
   server: null,
   availableNodes: [],
-  setAvailableNodes: (availableNodes: any[]) => {
+  setAvailableNodes: (availableNodes: NodeDescription[]) => {
     set({ availableNodes })
   },
-  updateEdgeCounts: (edgeCounts: any) => {
+  updateEdgeCounts: (edgeCounts: Record<string, number>) => {
     for(const [id, count] of Object.entries(edgeCounts)) {
       const edge = get().edges.find(edge => edge.id === id)
-      if (edge) edge.label = count as string
+      if (edge) edge.label = count
 
       console.log({ edge })
     }
@@ -106,7 +107,7 @@ export const useStore = create<RFState>((set, get) => ({
     const newEdges = get().edges.map((edge: Edge) => {
       Object.entries(edgeCounts).forEach(([id, count]) => {
         if (edge.id === id) {
-          edge.label = count as string
+          edge.label = count
         }
       })
 

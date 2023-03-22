@@ -4,7 +4,7 @@ import { useStore } from '../Workbench/store';
 import { shallow } from 'zustand/shallow';
 import CustomHandle from './CustomHandle';
 
-const Transformer = ({ id, data, isConnectable }: any) => {
+const Transformer = ({ id, data }: any) => {
   const selector = (state: any) => ({
     setOpenNodeModalId: state.setOpenNodeModalId,
   });
@@ -25,7 +25,7 @@ const Transformer = ({ id, data, isConnectable }: any) => {
           { data.label }
         </div>
         <div className="flex flex-col mx-2">
-          {data.inputs.map((input: any, i: number) => (<div
+          {data.inputs.map((input: any) => (<div
             className="flex pl-3 border rounded px-2 py-1 bg-gray-50"
             key={input.id}
           >
@@ -33,7 +33,7 @@ const Transformer = ({ id, data, isConnectable }: any) => {
             <div className="w-full">input</div>
           </div>))}
         
-          {data.outputs.map((output: any, i: number) => (<div
+          {data.outputs.map((output: any) => (<div
             className="flex pl-3 border rounded px-2 py-1 bg-gray-50"
             key={output.id}
           >

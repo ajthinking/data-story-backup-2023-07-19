@@ -108,13 +108,13 @@ export class ComputerTester {
     return this
   }  
 
-  expectOutput(output: any) {
+  expectOutput(output: Item[]) {
     this.steps.push([expectOutput, [output]])
 
     return this
   }
 
-  expectOutputs(outputs: any) {
+  expectOutputs(outputs: Record<string, Item[]>) {
     this.steps.push([expectOutputs, [outputs]])
 
     return this
@@ -182,7 +182,7 @@ export class ComputerTester {
         device[param.name] = this.explicitParams[param.name]
         continue
       }
-      
+
       device[param.name] = param.value
     }
 

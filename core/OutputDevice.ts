@@ -7,7 +7,7 @@ type LinkItems = Record<LinkId, Item[]>
 export type OutputTree = Record<PortId, LinkItems>
 
 export interface OutputDeviceInterface {
-  push(items: any[]): void
+  push(items: Item[]): void
   pushTo(name: string, items: Item[]): void
   itemsAt?(name: string): Item[]
 }
@@ -18,11 +18,11 @@ export class OutputDevice implements OutputDeviceInterface {
     private linkCounts: Map<LinkId, number>,
   ) {}
 
-  push(items: any[]) {
+  push(items: Item[]) {
     return this.pushTo('output', items)
   }
 
-  pushTo(name: string, items: any[]) {
+  pushTo(name: string, items: Item[]) {
     const connectedLinks = this.outputTree[name]
     const outgoingItemLists = Object.values(connectedLinks)
 

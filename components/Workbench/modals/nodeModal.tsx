@@ -2,7 +2,7 @@ import { shallow } from "zustand/shallow";
 import { Modal } from "../modal"
 import { useStore } from '../store';
 
-export const NodeModal = ({ setShowModal }: any) => {
+export const NodeModal = () => {
   const selector = (state: any) => ({
       nodes: state.nodes,
       openNodeModalId: state.openNodeModalId,

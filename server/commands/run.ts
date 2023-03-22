@@ -2,8 +2,9 @@ import WebSocket from 'ws';
 import { DiagramFactory } from "../../core/DiagramFactory"
 import { Executor } from "../../core/Executor"
 import { computerRegistry } from "../computerRegistry"
+import { RunMessage } from '../onMessage';
 
-export const run = async (ws: WebSocket, data: any) => {
+export const run = async (ws: WebSocket, data: RunMessage) => {
   const diagram = new DiagramFactory().fromReactFlow(
     data.reactFlow
   )

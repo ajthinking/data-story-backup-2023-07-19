@@ -17,8 +17,6 @@ const nodeTypes = {
 };
 
 export default function Workbench() {
-  const [rfInstance, setRfInstance] = useState<any>(null);
-
   const selector = (state: any) => ({
     nodes: state.nodes,
     edges: state.edges,
@@ -35,7 +33,6 @@ export default function Workbench() {
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
-  const [showNodeModal, setShowNodeModal] = useState(false);
 
   return (
     <>
