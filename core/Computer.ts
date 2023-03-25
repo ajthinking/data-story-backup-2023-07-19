@@ -11,7 +11,8 @@ import { ParamsDevice } from "./ParamsDevice"
 export type RunArgs = {
   input: InputDeviceInterface,
   output: OutputDeviceInterface,
-  params: ParamsDevice
+  params: ParamsDevice,
+  storage?: any,
 }
 
 export interface Computer {

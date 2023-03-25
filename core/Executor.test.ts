@@ -7,13 +7,17 @@ import { Link, LinkId } from "./Link";
 import { DiagramBuilder } from "./DiagramBuilder";
 import { CreateJson } from "./computers";
 import { ExecutionResult } from "./ExecutionResult";
+import { Item } from "./Item";
+import { NullStorage } from "./NullStorage";
 
 describe('execute', () => {
   it('can execute an empty diagram and return an execution result', async () => {
     const diagram = new Diagram([], [])
     const computers = new Map<string, Computer>()
 
-    const executor = new Executor(diagram, computers)
+    const storage = new NullStorage()    
+
+    const executor = new Executor(diagram, computers, storage)
 
     const updates = executor.execute()
 
@@ -43,7 +47,9 @@ describe('execute', () => {
       },
     } as Computer)
 
-    const executor = new Executor(diagram, computers)
+    const storage = new NullStorage()    
+
+    const executor = new Executor(diagram, computers, storage)
 
     const updates = executor.execute()
     const update1 = await updates.next()
@@ -77,7 +83,9 @@ describe('execute', () => {
       },
     } as Computer)
 
-    const executor = new Executor(diagram, computers)
+    const storage = new NullStorage()
+
+    const executor = new Executor(diagram, computers, storage)
 
     const updates = executor.execute()
     const update = await updates.next()
@@ -108,7 +116,9 @@ describe('execute', () => {
       },
     } as Computer)
 
-    const executor = new Executor(diagram, computers)
+    const storage = new NullStorage()    
+
+    const executor = new Executor(diagram, computers, storage)
 
     const updates = executor.execute()
 
@@ -171,8 +181,13 @@ describe('execute', () => {
     const computers = new Map<string, Computer>()
       .set(createComputer.name, createComputer)
       .set(logComputer.name, logComputer)
+
+    const storage = {
+      init: async () => {},
+      put: async (key: string, items: Item[]) => {},
+    }
     
-    const executor = new Executor(diagram, computers)
+    const executor = new Executor(diagram, computers, storage)
 
     const updates = executor.execute()
 

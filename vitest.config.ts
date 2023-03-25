@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     coverage: {
+      all: true,
       exclude: [
         '**/*.test.ts',
         'core/support/computerTester/**'

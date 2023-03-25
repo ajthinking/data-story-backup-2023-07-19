@@ -11,11 +11,12 @@ import { ExecutionResult } from "./ExecutionResult";
 import { isFinished } from "./utils/isFinished";
 import { Param } from "./Param";
 import { ParamsDevice } from "./ParamsDevice";
+import { Storage } from "./Storage";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
 export class Executor {
-  // consider refactoring all of these...
+  // consider refactoring all of these... maybe into a Memory class?
   nodeStatuses = new Map<NodeId, NodeStatus>();
   nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();  
   linkItems = new Map<LinkId, Item[]>();
@@ -26,6 +27,7 @@ export class Executor {
   constructor(
     public diagram: Diagram,
     public computers: Map<string, Computer>,
+    public storage: Storage
   ) {}
 
   async *execute(): AsyncGenerator<ExecutionUpdate | ExecutionResult, void, void> {

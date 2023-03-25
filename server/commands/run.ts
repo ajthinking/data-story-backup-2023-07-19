@@ -4,6 +4,8 @@ import { DiagramFactory } from "../../core/DiagramFactory"
 import { Executor } from "../../core/Executor"
 import { RunMessage } from '../onMessage';
 import * as computers from '../../core/computers'
+import { FileStorage } from '../../core/FileStorage';
+import { NullStorage } from '../../core/NullStorage';
 
 export const run = async (ws: WebSocket, data: RunMessage) => {
   const diagram = new DiagramFactory().fromReactFlow(
@@ -17,9 +19,12 @@ export const run = async (ws: WebSocket, data: RunMessage) => {
     computerRegistry.set(instance.name, instance)
   }
 
+  const storage = new NullStorage()
+
   const executor = new Executor(
     diagram, 
-    computerRegistry
+    computerRegistry,
+    storage
   )
   
   const execution = executor.execute()
