@@ -1,16 +1,16 @@
-import { expect, it } from "vitest";
-import { RunArgs } from "../Computer";
-import { when } from "../computerTester/ComputerTester";
+import { expect, it, vi } from "vitest";
+import { when } from "../support/computerTester/ComputerTester";
 import { Log } from "./Log";
 
-it.todo('does something', async () => {
+it('does something', async () => {
+
+  const warn = vi.spyOn(console, "log").mockImplementation(() => {});
+
   await when(Log)
     .hasDefaultParams()
     .getsInput([1, 2])
     .doRun()
-    .expectOutput([1, 2])
-    .getsInput([3, 4])
-    .doRun()
-    .expectOutput([1, 2, 3, 4])
     .ok()
+  
+  expect(warn).toHaveBeenCalledWith(JSON.stringify([1, 2], null, 2))
 })

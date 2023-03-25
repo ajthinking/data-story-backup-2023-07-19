@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { RunArgs } from "../Computer";
-import { when } from "../computerTester/ComputerTester";
+import { when } from "../support/computerTester/ComputerTester";
 import { Pass } from "./Pass";
 
 it('outputs the input ontouched', async () => {

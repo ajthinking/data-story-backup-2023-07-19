@@ -5,7 +5,20 @@ content: [
 "./components/**/*.{js,ts,jsx,tsx}",
 ],
 theme: {
-extend: {},
+extend: {
+  // make a super small font size
+  fontSize: {
+    "xxs": ".5rem",
+  },
+  spacing: {
+    '128': '32rem',
+  }  
+},
 },
 plugins: [],
+variants: {
+  extend: {
+      display: ["group-hover"],
+  },
+},
 }

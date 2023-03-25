@@ -2,6 +2,7 @@ import { DataStoryControls } from './dataStoryControls';
 import { Modal } from './modal';
 import { useCallback, useEffect, useState } from "react";
 import ReactFlow, { Background, useNodesState, useEdgesState, addEdge, BackgroundVariant } from "reactflow";
+import { usePlusKey } from "./hooks/usePlusKey";
 
 import "reactflow/dist/style.css";
 import Transformer from "../Node/Transformer";
@@ -33,6 +34,8 @@ export default function Workbench() {
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
+
+  // usePlusKey(() => setShowAddNodeModal(true));
 
   return (
     <>

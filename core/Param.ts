@@ -1,8 +1,10 @@
+export type ParamValue = any
+
 export type Param = {
   id: string
   name: string
   type: string
-  value?: any
+  value?: ParamValue
   placeholder?: string,
   selectOptions?: string[],
 }

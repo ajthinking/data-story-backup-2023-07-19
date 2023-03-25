@@ -1,5 +1,5 @@
 import { it } from "vitest";
-import { when } from "../computerTester/ComputerTester";
+import { when } from "../support/computerTester/ComputerTester";
 import { Multiply } from "./Multiply";
 
 it('outputs the incoming numbers multiplied by two by default', async () => {

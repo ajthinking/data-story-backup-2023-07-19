@@ -6,6 +6,7 @@ export type NodeDescription = {
   inputs: string[],
   outputs: string[],
   params: Record<string, Param>,
+  tags: string[],
 }
 
 export const describe = () => {
@@ -17,8 +18,13 @@ export const describe = () => {
       inputs: instance.inputs || [],
       outputs: instance.outputs ||  [],
       params: instance.params || {},
+      tags: instance.tags || [],
     }
   })
+
+  console.log(
+    JSON.stringify(nodeDescriptions, null, 2)
+  )
 
   return {
     type: 'describeResponse',

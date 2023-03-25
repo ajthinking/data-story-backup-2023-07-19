@@ -1,6 +1,6 @@
 export const testFileContent = (name: string) => `import { expect, it } from "vitest";
 import { RunArgs } from "../Computer";
-import { when } from "../computerTester/ComputerTester";
+import { when } from "../support/computerTester/ComputerTester";
 import { ${name} } from "./${name}";
 
 it('does something', async () => {

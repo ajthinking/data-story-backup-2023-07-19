@@ -120,20 +120,13 @@ export class Executor {
 
   protected async clearFinishedPromises(promises: Promise<any>[]) {
     const passed = []
+
     for(const promise of promises) {
       if(await isFinished(promise)) continue;
       passed.push(promise)
     }
 
     return passed
-  }
-
-  protected async runBootHooks() {
-    // For all nodes see if they have boot, if so run them
-  }
-
-  protected async runShutDownHooks() {
-    // For all nodes see if they have shutdown, if so run them
   }
 
   protected getRunnableNodes(): Node[] {

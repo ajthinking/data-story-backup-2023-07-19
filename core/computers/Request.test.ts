@@ -1,12 +1,49 @@
-import { expect, it } from "vitest";
-import { RunArgs } from "../Computer";
-import { when } from "../computerTester/ComputerTester";
+import axios from "axios";
+import { vi, it } from "vitest";
+import { when } from "../support/computerTester/ComputerTester";
 import { Request } from "./Request";
+vi.mock('axios')
 
-it.todo('does something', async () => {
+it('outputs items at data by default when using GET', async () => {
+  (axios.get as any).mockResolvedValue({
+    data: [1, 2, 3]
+  })
+
   await when(Request)
     .hasDefaultParams()
     .doRun()
-    .expectOutput([1, 2])
+    .expectOutputs({
+      items: [1, 2, 3]
+    })
     .ok()
 })
+
+it('outputs items at data by default when using POST', async () => {
+  (axios.post as any).mockResolvedValue({
+    data: [1, 2, 3]
+  })
+
+  await when(Request)
+    .hasParams({ method: 'POST' })
+    .doRun()
+    .expectOutputs({
+      items: [1, 2, 3]
+    })
+    .ok()
+})
+
+// it.todo('can exhaust itself to a complete state', async () => {
+//   (axios.get as any).mockResolvedValue({
+//     data: [1, 2, 3]
+//   })
+
+//   await when(Request)
+//     .hasDefaultParams()
+//     .doRun()
+//     .expectOutputs({
+//       items: [1, 2, 3]
+//     })
+//     .doRun()
+//     .expectDone()
+//     .ok()
+// })

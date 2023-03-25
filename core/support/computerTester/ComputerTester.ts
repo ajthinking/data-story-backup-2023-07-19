@@ -1,20 +1,21 @@
 import { expect } from "vitest";
-import { Computer, ComputerFactory } from "../Computer";
-import { Diagram } from "../Diagram";
-import { Executor } from "../Executor";
-import { InputDevice } from "../InputDevice";
-import { InputDeviceFactory } from "../InputDeviceFactory";
-import { Item } from "../Item";
-import { Link } from "../Link";
-import { Node } from "../Node";
-import { OutputDevice } from "../OutputDevice";
-import { OutputDeviceFactory } from "../OutputDeviceFactory";
-import { Param } from "../Param";
-import { ParamsDevice } from "../ParamsDevice";
-import { Port } from "../Port";
+import { Computer, ComputerFactory } from "../../Computer";
+import { Diagram } from "../../Diagram";
+import { Executor } from "../../Executor";
+import { InputDevice } from "../../InputDevice";
+import { InputDeviceFactory } from "../../InputDeviceFactory";
+import { Item } from "../../Item";
+import { Link } from "../../Link";
+import { Node } from "../../Node";
+import { OutputDevice } from "../../OutputDevice";
+import { OutputDeviceFactory } from "../../OutputDeviceFactory";
+import { Param } from "../../Param";
+import { ParamsDevice } from "../../ParamsDevice";
+import { Port } from "../../Port";
 import { TestStep } from "./TestStep";
 
 import { doRun, expectCanRun, expectCantRun, expectOutput, expectOutputs, getsInput, getsInputs } from "./testSteps";
+import { expectDone } from "./testSteps/expectDone";
 
 export const when = (factory: ComputerFactory) => {
   return new ComputerTester(factory())
@@ -106,7 +107,13 @@ export class ComputerTester {
     this.steps.push([expectCantRun, []])
 
     return this
-  }  
+  }
+
+  expectDone() {
+    this.steps.push([expectDone, []])
+
+    return this
+  }
 
   expectOutput(output: Item[]) {
     this.steps.push([expectOutput, [output]])

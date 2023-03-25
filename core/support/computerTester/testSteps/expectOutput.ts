@@ -1,5 +1,5 @@
 import { expect } from "vitest";
-import { Item } from "../../Item";
+import { Item } from "../../../Item";
 import { ComputerTester } from "../ComputerTester";
 import { TestStep } from "../TestStep";
 

@@ -13,7 +13,6 @@ export const Sleep: ComputerFactory = (): Computer => ({
   },
 
   async *run({ input, output, params: { duration } }: RunArgs) {
-
     while(true) {
       const incoming = input.pull(1)
       await sleep(duration)
@@ -23,5 +22,3 @@ export const Sleep: ComputerFactory = (): Computer => ({
     }
   },
 });
-
-
