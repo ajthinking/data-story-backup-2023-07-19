@@ -2,20 +2,35 @@ import { Sleep } from "./core/computers/Sleep"
 
 export {}
 
-async function * g () {
-  yield 1
-  yield 2
-  yield 3
-  return 4
-}
-
-const generator = g();
-
 (async () => {
-  for await(const n of generator) {
-    console.log(n) // why no 4 here??
+  function toJsSyntax(obj: any, indent = ''): any {
+    if (Array.isArray(obj)) {
+      return '[' + obj.map(val => toJsSyntax(val)).join(', ') + ']';
+    } else if (typeof obj === 'object' && obj !== null) {
+      let result = '{\n';
+      const keys = Object.keys(obj);
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = toJsSyntax(obj[key], indent + '  ');
+        result += `${indent}${key}: ${value}`;
+        if (i < keys.length - 1) {
+          result += ',';
+        }
+        result += '\n';
+      }
+      result += `${indent.slice(0, -2)}}`;
+      return result;
+    } else if (typeof obj === 'string') {
+      return `'${obj}'`;
+    } else {
+      return obj;
+    }
   }
-
-  console.log(generator.next())
-  console.log(generator.next())
+  
+  const json = `{"name": {
+    "first": "Johnny", "second": "Appleseed"}}`;
+  const parsed = JSON.parse(json);
+  
+  const jsSyntax = toJsSyntax(parsed);
+  console.log(jsSyntax);
 })()

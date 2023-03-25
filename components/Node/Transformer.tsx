@@ -36,6 +36,7 @@ const Transformer = ({ id, data }: any) => {
             className="flex pl-3 border rounded px-2 py-1 bg-gray-50"
             key={output.id}
           >
+            {data.inputs.length > 0 && <div className="w-2"></div>}
             <div className="w-full">{output.name}</div>
             <CustomHandle id={output.id} isConnectable={true} isInput={false} />           
           </div>))}

@@ -7,6 +7,7 @@ import Workbench from '../components/Workbench/Workbench'
 import { Server } from '../components/server'
 import { NodePicker } from '../components/NodePicker';
 import { Table } from '../components/Table';
+import { Editor } from '../components/Editor';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,7 +25,7 @@ export default function Home() {
         <div className="w-full h-5/6">
           <Workbench />
         </div>
-        {/* <Table /> TODO */}
+        <Editor />
       </div>
     </>
   )
