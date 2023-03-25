@@ -8,10 +8,11 @@ export const AddNodeModal = ({ setShowModal }: any) => {
       nodes: state.nodes,
       edges: state.edges,
       onAddNode: state.onAddNode,
+      onConnect: state.onConnect,
       availableNodes: state.availableNodes,
   });
 
-  const { nodes, onAddNode, availableNodes } = useStore(selector, shallow);
+  const { nodes, onAddNode, onConnect, availableNodes } = useStore(selector, shallow);
 
   const doAddNode = (nodeDescription: NodeDescription) => {
     const scopedId = (name: string) => {
@@ -25,12 +26,14 @@ export const AddNodeModal = ({ setShowModal }: any) => {
       return max + 1      
     }
 
+    const maxX = nodes.map((node: any) => node.position.x).reduce((max: number, x: number) => Math.max(max, x), -100)
+
     const counter = scopedId(nodeDescription.name)
     const id = `${nodeDescription.name}.${counter}`;
 
     const node = {
       id,
-      position: { x: Math.random()*800, y: Math.random()*500 },
+      position: { x: maxX + 200, y: 50 },
       data: {
         params: nodeDescription.params,
         computer: nodeDescription.name,
@@ -51,7 +54,35 @@ export const AddNodeModal = ({ setShowModal }: any) => {
       type: "transformer"
     }
 
+    const getConnection = () => {
+      const previousNode = nodes.at(-1)
+      if(!previousNode) return null;
+
+      console.log("Previous existed!")
+
+      const firstOutput = previousNode.data.outputs[0]
+      if(!firstOutput) return null;
+
+      console.log("Previous had output!")
+
+      const firstInput = node.data.inputs[0]
+      if(!firstInput) return null;
+
+      console.log("Node had output, returning!")
+
+      return {
+        id: `${previousNode.id}.${firstOutput.name}-->${node.id}.${firstInput.name}`,
+        sourceHandle: firstOutput.id,
+        targetHandle: firstInput.id,
+        source: previousNode.id,
+        target: node.id,
+      }
+    }
+
+    const connection = getConnection()
+
     onAddNode(node)
+    if(connection) onConnect(connection);
 
     setShowModal(false)
   }
