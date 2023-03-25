@@ -1,6 +1,4 @@
-import { InputDeviceFactory } from "../../InputDeviceFactory";
-import { Item } from "../../Item";
-import { Link } from "../../Link";
+import { Item } from "../../../Item";
 import { ComputerTester } from "../ComputerTester";
 import { TestStep } from "../TestStep";
 
