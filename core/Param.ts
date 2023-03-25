@@ -7,18 +7,18 @@ export type Param = {
   selectOptions?: string[],
 }
 
-export const NameParam = {
+export const name = {
   id: 'name',
   name: 'name',
   type: 'string',
   value: '',
 }
 
-export const LabelParam = {
+export const label = {
   id: 'label',
   name: 'label',
   type: 'string',
   value: '',
 }
 
-export const DefaultParams = [NameParam, LabelParam]
+export const DefaultParams = { name, label }

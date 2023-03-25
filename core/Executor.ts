@@ -104,7 +104,7 @@ export class Executor {
         computer.run({
           input: this.makeInputDevice(node),
           output: this.makeOutputDevice(node),
-          params: this.makeParamsDevice(computer),
+          params: this.makeParamsDevice(computer, node),
         })
       )
     }
@@ -222,13 +222,12 @@ export class Executor {
     return new OutputDevice(tree, this.linkCounts)
   }
 
-  protected makeParamsDevice(computer: Computer): ParamsDevice {
-    const device = computer.params?.reduce((acc: Partial<ParamsDevice>, param: Param) => {
-      acc[param.name] = param.value
-      return acc
-    }, {} as Partial<ParamsDevice>) || {}
+  protected makeParamsDevice(computer: Computer, node: Node): ParamsDevice {
+    const device: Partial<ParamsDevice> = {}
 
-    device.__raw = computer.params || []
+    for(const param of Object.values(node.params)) {
+      device[param.name] = param.value
+    }
 
     return device as ParamsDevice;
   }

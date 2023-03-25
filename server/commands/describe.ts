@@ -5,7 +5,7 @@ export type NodeDescription = {
   name: string,
   inputs: string[],
   outputs: string[],
-  params: Param[],
+  params: Record<string, Param>,
 }
 
 export const describe = () => {
@@ -16,7 +16,7 @@ export const describe = () => {
       name: instance.name,
       inputs: instance.inputs || [],
       outputs: instance.outputs ||  [],
-      params: instance.params || [],
+      params: instance.params || {},
     }
   })
 

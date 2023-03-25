@@ -5,12 +5,14 @@ import { json } from "../ParamBuilder";
 export const CreateJson: ComputerFactory = (): Computer => ({
   name: 'CreateJson',  
   outputs: ['output'],
-  params: [
+  params: {
     ...DefaultParams,
-    json('json').value("[{ name: 'John'}]").get(),
-  ],
+    json: json('json').value(`[{ "name": "John"}]`).get(),
+  },
 
   async *run({ output, params: { json } }: RunArgs) {
+    console.log('attempting parsing', typeof json)
+
     const parsed = JSON.parse(json)
 
     output.push(

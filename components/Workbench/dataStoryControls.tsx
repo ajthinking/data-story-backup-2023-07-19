@@ -6,24 +6,40 @@ import { RunIcon } from "./icons/runIcon";
 import { AddNodeIcon } from "./icons/addNodeIcon";
 import { ConfigIcon } from "./icons/configIcon";
 import { HelpIcon } from "./icons/helpIcon";
+import { TableIcon } from "./icons/tableIcon";
 export function DataStoryControls({
   setShowConfigModal,
   setShowRunModal,
   setShowAddNodeModal,
 }: any) {
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
-        <ControlButton onClick={() => setShowRunModal(true)}>
-          <RunIcon />          
+        <ControlButton
+          title="Run"
+          aria-label="Run"        
+          onClick={() => setShowRunModal(true)}
+        >
+          <RunIcon />
         </ControlButton> 
-        <ControlButton onClick={() => setShowAddNodeModal(true)}>
+        <ControlButton
+          onClick={() => setShowAddNodeModal(true)}
+          title="Add Node"
+          aria-label="Add Node"
+        >
           <AddNodeIcon />
         </ControlButton>                
-        <ControlButton onClick={() => setShowConfigModal(true)}>
+        <ControlButton
+          onClick={() => setShowConfigModal(true)}
+          title="Config"
+          aria-label="Config"
+        >
           <ConfigIcon />
-        </ControlButton>   
-        <ControlButton onClick={onClickHelp}>
-          <HelpIcon />
-        </ControlButton>                                
+        </ControlButton>
+        <ControlButton
+            title="Table"
+            aria-label="Table"
+          >
+          <TableIcon />          
+        </ControlButton>                             
       </Controls>;
 }
   

@@ -4,9 +4,9 @@ import { DefaultParams } from "../Param";
 export const Ignore: ComputerFactory = (): Computer => ({
   name: 'Ignore',
   inputs: ['input'],
-  params: [
+  params: {
     ...DefaultParams,
-  ],
+  },
 
   async *run({ input }: RunArgs) {
     while(true) {

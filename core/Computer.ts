@@ -18,7 +18,7 @@ export interface Computer {
   name: string
   inputs?: string[]
   outputs?: string[]
-  params?: Param[]
+  params?: Record<string, Param>
 
   run: (args: RunArgs) => AsyncGenerator<NextResult, ReturnResult, NextArgument>
   canRun?: (options: any) => boolean

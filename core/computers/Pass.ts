@@ -5,9 +5,9 @@ export const Pass: ComputerFactory = (): Computer => ({
   name: 'Pass',
   inputs: ['input'],
   outputs: ['output'],
-  params: [
+  params: {
     ...DefaultParams,
-  ],
+  },
   
   async *run({ input, output }: RunArgs) {
     while(true) {

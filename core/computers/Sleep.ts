@@ -7,10 +7,10 @@ export const Sleep: ComputerFactory = (): Computer => ({
   name: 'Sleep',
   inputs: ['input'],
   outputs: ['output'],
-  params: [
+  params: {
     ...DefaultParams,
-    number('duration').value(1000).get()
-  ],
+    duration: number('duration').value(100).get()
+  },
 
   async *run({ input, output, params: { duration } }: RunArgs) {
 

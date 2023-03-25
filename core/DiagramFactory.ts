@@ -94,7 +94,8 @@ export class DiagramFactory {
           // This should be passed in a property
           return new Port(output.id, output.id.split(".").pop())
         }),
-        // continue with PARAMS here!    
+        // continue with PARAMS here!
+        params: flowNode.data.params || {},   
       })
     })
 

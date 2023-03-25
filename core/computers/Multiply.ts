@@ -6,10 +6,10 @@ export const Multiply: ComputerFactory = (): Computer => ({
   name: 'Multiply',  
   inputs: ['input'],
   outputs: ['output'],
-  params: [
+  params: {
     ...DefaultParams,
-    number('factor').value(2).get(),
-  ],
+    factor: number('factor').value(2).get(),
+  },
   
   async *run({ input, output, params: { factor} }: RunArgs) {
     while(true) {

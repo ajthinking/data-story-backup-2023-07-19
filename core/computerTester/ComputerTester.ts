@@ -173,9 +173,9 @@ export class ComputerTester {
 
   protected makeParamsDevice(): ParamsDevice {
     const device: Partial<ParamsDevice> = {}
-    const params = this.computer.params || []
+    const params = this.computer.params || {}
 
-    for(const param of params) {
+    for(const param of Object.values(params)) {
       const hasExplicitValue = this.explicitParams.hasOwnProperty(param.name)
 
       if(hasExplicitValue) {
@@ -185,8 +185,6 @@ export class ComputerTester {
 
       device[param.name] = param.value
     }
-
-    device.__raw = this.computer.params || []
 
     return device as ParamsDevice;
   }

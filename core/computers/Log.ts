@@ -5,9 +5,9 @@ export const Log: ComputerFactory = (): Computer => ({
   name: 'Log',
   inputs: ['input'],
   outputs: ['output'],
-  params: [
+  params: {
     ...DefaultParams,
-  ],
+  },
 
   async *run({ input, output }: RunArgs) {
     while(true) {

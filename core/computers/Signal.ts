@@ -7,11 +7,11 @@ export const Signal: ComputerFactory = (): Computer => ({
   name: 'Signal',
   inputs: [],
   outputs: ['output'],
-  params: [
+  params: {
     ...DefaultParams,
-    number('period').value(100).get(),
-    number('count').value(10).get(),
-  ],
+    period: number('period').value(100).get(),
+    count: number('count').value(10).get(),
+  },
 
   async *run({
     output,
