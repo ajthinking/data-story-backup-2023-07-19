@@ -55,8 +55,7 @@ export default function Workbench({setMode}: any) {
         setShowConfigModal={setShowConfigModal}
         setMode={setMode}
       />
-      {/* <Background variant={BackgroundVariant.Lines} className="bg-gray-800 text-gray-400" /> */}
-      {/* <Background variant={null} className="bg-gray-800 text-slate-700" /> */}
+      <Background color="#374151" variant={BackgroundVariant.Lines} />
     </ReactFlow>
 
     {/* Modals */}

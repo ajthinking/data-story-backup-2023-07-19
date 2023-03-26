@@ -20,7 +20,7 @@ const Transformer = ({ id, data }: any) => {
         }}
       >
         <div className="w-32" />
-        <div className="flex py-1 text-xs font-bold font-mono uppercase border rounded bg-blue-500 text-white px-2">
+        <div className="flex py-1 text-xs font-bold font-mono uppercase border border-gray-400 rounded bg-blue-600 text-gray-100 px-2">
           { data.label }
         </div>
         <div className="flex flex-col mx-2">
