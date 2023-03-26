@@ -107,7 +107,7 @@ export const AddNodeModal = ({ setShowModal }: any) => {
           key={nodeDescription.name}
           onClick={() => doAddNode(nodeDescription)}
           >
-            <div className="text-gray-500">{nodeDescription.name}</div>
+            <div className="text-gray-500 text-sm"><span className="text-indigo-500 font-mono">Core::</span>{nodeDescription.name}</div>
             <div className="flex space-x-1">
               {nodeDescription.tags.map((tag: string) => {
                 let style = "bg-blue-300 border px-2 rounded tracking-wide text-xxs text-white"

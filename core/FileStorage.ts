@@ -25,7 +25,12 @@ export class FileStorage implements Storage {
     
     const ids = folders.map(folder => parseInt(folder))
 
-    const maxId = Math.max(...ids)
+    let maxId = Math.max(...ids)
+
+    // check for infinity, NaN, negative values etc
+    if(!Number.isFinite(maxId)) maxId = 0;
+    if(maxId < 0) maxId = 0;
+    if(isNaN(maxId)) maxId = 0;
 
     const newId = maxId + 1
 

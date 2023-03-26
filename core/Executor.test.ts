@@ -183,6 +183,7 @@ describe('execute', () => {
       .set(logComputer.name, logComputer)
 
     const storage = {
+      currentExecutionId: '1',
       init: async () => {},
       createExecution: async () => {},
       putExecutionItems: async (key: string, items: Item[]) => {},

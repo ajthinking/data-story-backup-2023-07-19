@@ -40,7 +40,7 @@ export default function Workbench({setMode}: any) {
   return (
     <>
     <ReactFlow
-      className="bg-vsCodeWarmGray-900"
+      className="bg-gray-50"
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
@@ -55,7 +55,7 @@ export default function Workbench({setMode}: any) {
         setShowConfigModal={setShowConfigModal}
         setMode={setMode}
       />
-      <Background color="#374151" variant={BackgroundVariant.Lines} />
+      <Background color="lightGray" variant={BackgroundVariant.Lines} />
     </ReactFlow>
 
     {/* Modals */}
