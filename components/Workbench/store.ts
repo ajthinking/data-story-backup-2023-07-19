@@ -33,6 +33,8 @@ type RFState = {
   setEdges: any;
   openNodeModalId: string | null;
   setOpenNodeModalId: any;
+  dumps: {};
+  setDumps: any;
 };
 
 import { ServerClient } from "./ServerClient";
@@ -87,6 +89,7 @@ export const useStore = create<RFState>((set, get) => ({
       new WebSocket("ws://localhost:3100"),
       get().setAvailableNodes,
       get().updateEdgeCounts,
+      get().setDumps
     )
 
     set({ server })
@@ -117,5 +120,9 @@ export const useStore = create<RFState>((set, get) => ({
   openNodeModalId: null,
   setOpenNodeModalId: (id: string | null) => {
     set({ openNodeModalId: id })
-  }
+  },
+  dumps: {},
+  setDumps: (dumps: any[]) => {
+    set({ dumps })
+  },
 }));

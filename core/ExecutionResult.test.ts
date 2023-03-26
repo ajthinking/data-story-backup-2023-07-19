@@ -3,7 +3,7 @@ import { ExecutionResult } from "./ExecutionResult"
 
 describe('stringify', () => {
   it('should stringify', () => {
-    const result = new ExecutionResult()
-    expect(result.stringify()).toEqual('{"type":"executionResult"}')
+    const result = new ExecutionResult('id', { 'key': [] })
+    expect(result.stringify()).toEqual('{"type":"executionResult","id":"id","items":{"key":[]}}')
   })
 })

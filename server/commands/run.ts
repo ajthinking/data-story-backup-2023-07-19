@@ -6,6 +6,8 @@ import { RunMessage } from '../onMessage';
 import * as computers from '../../core/computers'
 import { FileStorage } from '../../core/FileStorage';
 import { NullStorage } from '../../core/NullStorage';
+import { ExecutionUpdate } from '../../core/ExecutionUpdate';
+import { ExecutionResult } from '../../core/ExecutionResult';
 
 export const run = async (ws: WebSocket, data: RunMessage) => {
   const diagram = new DiagramFactory().fromReactFlow(
@@ -19,7 +21,8 @@ export const run = async (ws: WebSocket, data: RunMessage) => {
     computerRegistry.set(instance.name, instance)
   }
 
-  const storage = new NullStorage()
+  const storage = new FileStorage('.datastory')
+  await storage.createExecution()
 
   const executor = new Executor(
     diagram, 
@@ -32,4 +35,9 @@ export const run = async (ws: WebSocket, data: RunMessage) => {
   for await(const update of execution) {
     ws.send(update.stringify())
   }
+
+  ws.send(new ExecutionResult(
+    storage.currentExecutionId!,
+    (await storage.serialize()).items,
+  ).stringify())
 }

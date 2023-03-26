@@ -6,14 +6,25 @@ import { ControlButton } from 'reactflow';
 import { TableIcon } from './Workbench/icons/tableIcon';
 import { DiagramIcon } from './Workbench/icons/diagramIcon';
 import { BackIcon } from './Workbench/icons/backIcon';
+import { useStore } from './Workbench/store';
+import { shallow } from 'zustand/shallow';
 
 export const Editor = ({setMode}: any) => {
-  const extremelyLongJson = Array.from({ length: 100000 }).reduce((acc: any, _, i) => {
-    acc.push({
-      v: Math.random() * i
-    })
-    return acc;
-  }, [] as any);
+  const selector = (state: any) => ({
+    dumps: state.dumps,
+  });
+
+  const { dumps } = useStore(selector, shallow);
+
+  let mocked = ''
+
+  console.log({dumps})
+
+  for (const [key, items] of Object.entries(dumps)) {
+    console.log({key, items})
+    mocked = JSON.stringify(items, null, 2);
+    break;
+  }
 
   return (
     <div className="flex w-full bg-vsCodeWarmGray-900">
@@ -46,7 +57,7 @@ export const Editor = ({setMode}: any) => {
       <div className="w-full pt-4">
         <CodeMirror
               className="w-full"
-              value={JSON.stringify(extremelyLongJson, null, 2)}
+              value={mocked}
               height="800px"
               extensions={[json()]}
               theme={vscodeDark}

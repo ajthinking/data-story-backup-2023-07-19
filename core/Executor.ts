@@ -30,7 +30,7 @@ export class Executor {
     public storage: Storage
   ) {}
 
-  async *execute(): AsyncGenerator<ExecutionUpdate | ExecutionResult, void, void> {
+  async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
     let startTime = new Date().getTime();
     this.initState()
 
@@ -84,7 +84,7 @@ export class Executor {
       }
     }
 
-    yield new ExecutionResult()
+    yield new ExecutionUpdate(this.linkCounts)
   }
 
   protected initState() {
@@ -107,6 +107,7 @@ export class Executor {
           input: this.makeInputDevice(node),
           output: this.makeOutputDevice(node),
           params: this.makeParamsDevice(computer, node),
+          storage: this.storage
         })
       )
     }

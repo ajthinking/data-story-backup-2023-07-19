@@ -22,10 +22,6 @@ export const describe = () => {
     }
   })
 
-  console.log(
-    JSON.stringify(nodeDescriptions, null, 2)
-  )
-
   return {
     type: 'describeResponse',
     availableNodes: nodeDescriptions,

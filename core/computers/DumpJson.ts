@@ -8,11 +8,18 @@ export const DumpJson: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  canRun({ input }) {
-    return input.hasAllItems()
-  },
+  // canRun({ input }) {
+  //   return input.hasAllItems()
+  // },
 
   async *run({ input, storage }: RunArgs) {
-    storage.putExecutionItems(input.pull())
+    const id = (Math.random() + 1).toString(36).substring(7);
+    const key = `${this.name}-${id}`
+
+    console.log({
+      storage
+    })
+
+    storage.putExecutionItems(key, input.pull())
   },
 });

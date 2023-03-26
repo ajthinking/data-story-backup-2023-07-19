@@ -184,7 +184,8 @@ describe('execute', () => {
 
     const storage = {
       init: async () => {},
-      put: async (key: string, items: Item[]) => {},
+      createExecution: async () => {},
+      putExecutionItems: async (key: string, items: Item[]) => {},
     }
     
     const executor = new Executor(diagram, computers, storage)
