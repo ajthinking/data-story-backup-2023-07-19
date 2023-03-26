@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
 import { RunArgs } from "../Computer";
 import { when } from "../support/computerTester/ComputerTester";
-import { View } from "./View";
+import { DumpJson } from "./DumpJson";
 
 it.todo('does something', async () => {
-  await when(View)
+  await when(DumpJson)
     .hasDefaultParams()
     .getsInput([1, 2])
     .doRun()

@@ -8,10 +8,12 @@ import { Server } from '../components/server'
 import { NodePicker } from '../components/NodePicker';
 import { Table } from '../components/Table';
 import { Editor } from '../components/Editor';
+import { useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [mode, setMode] = useState('workbench')
   return (
     <>
       <Head>
@@ -20,12 +22,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-screen bg-gray-200">
+      <div className="w-full h-screen bg-vsCodeWarmGray-900">
         <Header />
         <div className="w-full h-5/6">
-          <Workbench />
+          {mode === 'workbench' && <Workbench setMode={setMode} />}
+          {mode === 'dump' && <Editor setMode={setMode} />}
         </div>
-        <Editor />
       </div>
     </>
   )

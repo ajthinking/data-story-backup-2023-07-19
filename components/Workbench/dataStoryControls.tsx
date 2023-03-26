@@ -11,6 +11,7 @@ export function DataStoryControls({
   setShowConfigModal,
   setShowRunModal,
   setShowAddNodeModal,
+  setMode
 }: any) {
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
         <ControlButton
@@ -37,6 +38,7 @@ export function DataStoryControls({
         <ControlButton
             title="Table"
             aria-label="Table"
+            onClick={() => setMode('dump')}
           >
           <TableIcon />          
         </ControlButton>                             

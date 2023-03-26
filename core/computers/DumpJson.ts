@@ -1,8 +1,8 @@
 import { Computer, ComputerFactory, RunArgs } from "../Computer";
 import { DefaultParams } from "../Param";
 
-export const View: ComputerFactory = (): Computer => ({
-  name: 'View',
+export const DumpJson: ComputerFactory = (): Computer => ({
+  name: 'DumpJson',
   inputs: ['input'],
   params: {
     ...DefaultParams,
@@ -13,6 +13,6 @@ export const View: ComputerFactory = (): Computer => ({
   },
 
   async *run({ input, storage }: RunArgs) {
-    storage.put(input.pull())
+    storage.putExecutionItems(input.pull())
   },
 });

@@ -17,7 +17,7 @@ const nodeTypes = {
   transformer: Transformer,
 };
 
-export default function Workbench() {
+export default function Workbench({setMode}: any) {
   const selector = (state: any) => ({
     nodes: state.nodes,
     edges: state.edges,
@@ -40,6 +40,7 @@ export default function Workbench() {
   return (
     <>
     <ReactFlow
+      className="bg-vsCodeWarmGray-900"
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
@@ -52,8 +53,10 @@ export default function Workbench() {
         setShowRunModal={setShowRunModal}
         setShowAddNodeModal={setShowAddNodeModal}
         setShowConfigModal={setShowConfigModal}
+        setMode={setMode}
       />
-      <Background variant={BackgroundVariant.Lines} className="bg-white" />
+      {/* <Background variant={BackgroundVariant.Lines} className="bg-gray-800 text-gray-400" /> */}
+      {/* <Background variant={null} className="bg-gray-800 text-slate-700" /> */}
     </ReactFlow>
 
     {/* Modals */}

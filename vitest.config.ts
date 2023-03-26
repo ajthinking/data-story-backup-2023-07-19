@@ -6,6 +6,7 @@ export default defineConfig({
     coverage: {
       all: true,
       exclude: [
+        '.next/**',
         '**/*.test.ts',
         'core/support/computerTester/**'
       ]
