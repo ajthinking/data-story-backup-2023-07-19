@@ -9,9 +9,10 @@ import { CreateJson } from "./computers";
 import { ExecutionResult } from "./ExecutionResult";
 import { Item } from "./Item";
 import { NullStorage } from "./NullStorage";
+import { ExecutionUpdate } from "./ExecutionUpdate";
 
 describe('execute', () => {
-  it('can execute an empty diagram and return an execution result', async () => {
+  it('can execute an empty diagram and return an execution update', async () => {
     const diagram = new Diagram([], [])
     const computers = new Map<string, Computer>()
 
@@ -22,7 +23,7 @@ describe('execute', () => {
     const updates = executor.execute()
 
     const update = await updates.next()
-    expect(update.value).toBeInstanceOf(ExecutionResult)
+    expect(update.value).toBeInstanceOf(ExecutionUpdate)
     expect(update.done).toBe(false)
     
     const result = await updates.next()
