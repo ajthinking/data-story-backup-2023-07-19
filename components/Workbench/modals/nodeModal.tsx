@@ -62,6 +62,7 @@ export const NodeModal = () => {
           {param.type === 'select' && <Select register={register} param={param} />}
         </div>)
       })}
+      {nonDefaultParams.length === 0 && <div className="text-xs text-gray-400">No parameters</div>}
     </form>
   </Modal>)
 }

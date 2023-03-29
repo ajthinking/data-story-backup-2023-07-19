@@ -1,26 +1,75 @@
 import { deriveFrom } from "../../deriveFrom";
-import { Request } from "../Request";
+import { HubSpotEntity } from "./HubSpotEntity";
+import { UpdateEntity } from "./UpdateEntity";
 
-export const Contacts = deriveFrom(Request, {
+export { HubSpotEntity } from './HubSpotEntity';
+export { UpdateEntity } from './UpdateEntity';
+
+/**
+ * GET ALL ************************************************************
+ */
+export const Contacts = deriveFrom(HubSpotEntity, {
   name: 'Contacts',
   params: {
-    url: 'https://jsonplaceholder.typicode.com/users',
+    entity: 'contacts',
+    properties: '["firstname"]'
   },
   tags: ['HubSpot']
 })
 
-export const Companies = deriveFrom(Request, {
+export const Companies = deriveFrom(HubSpotEntity, {
   name: 'Companies',
   params: {
-    url: 'https://jsonplaceholder.typicode.com/todos',
+    entity: 'companies',
+    properties: '["name"]'
   },
-  tags: ['HubSpot']  
+  tags: ['HubSpot']
 })
 
-export const Deals = deriveFrom(Request, {
+export const Deals = deriveFrom(HubSpotEntity, {
   name: 'Deals',
   params: {
-    url: 'https://jsonplaceholder.typicode.com/posts',
+    entity: 'deals',
+    properties: '["dealname"]'
   },
-  tags: ['HubSpot']  
-})   
+  tags: ['HubSpot']
+})
+
+export const Tickets = deriveFrom(HubSpotEntity, {
+  name: 'Tickets',
+  params: {
+    entity: 'tickets',
+    properties: '[]'
+  },
+  tags: ['HubSpot']
+})
+
+export const LineItems = deriveFrom(HubSpotEntity, {
+  name: 'LineItems',
+  params: {
+    entity: 'lineItems',
+    properties: '[]'
+  },
+  tags: ['HubSpot']
+})
+
+export const Products = deriveFrom(HubSpotEntity, {
+  name: 'Products',
+  params: {
+    entity: 'products',
+    properties: '[]'
+  },
+  tags: ['HubSpot']
+})
+
+/**
+ * BATCH UPDATE ************************************************************
+ */
+export const UpdateContacts = deriveFrom(UpdateEntity, {
+  name: 'UpdateContacts',
+  params: {
+    entity: 'contacts',
+    properties: '["firstname"]'
+  },
+  tags: ['HubSpot']
+})

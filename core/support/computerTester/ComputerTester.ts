@@ -21,6 +21,18 @@ export const when = (factory: ComputerFactory) => {
   return new ComputerTester(factory())
 }
 
+export type ExpectedOutputItems = {
+  [key: string]: Item[]
+}
+
+export type InputValues = {
+  [key: string]: Item[]
+}
+
+export type ExplicitParamValues = {
+  [key: string]: any
+}
+
 type TestStepArgs = any[]
 
 export class ComputerTester {
@@ -28,7 +40,7 @@ export class ComputerTester {
   diagram: Diagram | null = null
   node: Node | null = null
 
-  explicitParams: Record<string, any> = {}
+  explicitParams: ExplicitParamValues = {}
 
   steps: [TestStep, TestStepArgs][] = []
   
@@ -79,7 +91,7 @@ export class ComputerTester {
     return this; // this is already true
   }
 
-  hasParams(params: Record<string, any>) {
+  hasParams(params: ExplicitParamValues) {
     this.explicitParams = params
 
     return this
@@ -91,7 +103,7 @@ export class ComputerTester {
     return this
   }
 
-  getsInputs(inputs: Record<string, any>) {
+  getsInputs(inputs: InputValues) {
     this.steps.push([getsInputs, [inputs]])
 
     return this
@@ -121,7 +133,7 @@ export class ComputerTester {
     return this
   }
 
-  expectOutputs(outputs: Record<string, Item[]>) {
+  expectOutputs(outputs: ExpectedOutputItems) {
     this.steps.push([expectOutputs, [outputs]])
 
     return this

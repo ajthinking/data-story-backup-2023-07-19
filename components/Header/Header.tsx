@@ -1,4 +1,5 @@
 import React from "react";
+import { PortIcon } from "../Workbench/icons/portIcon";
 
 export function Header({}) {
   return <div className="flex justify-between items-center px-4 py-2 text-blue-500 bg-gray-800 font-bold font-mono">

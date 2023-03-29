@@ -5,7 +5,7 @@ import ReactFlow, { Background, useNodesState, useEdgesState, addEdge, Backgroun
 import { usePlusKey } from "./hooks/usePlusKey";
 
 import "reactflow/dist/style.css";
-import Transformer from "../Node/Transformer";
+import DataStoryNode from "../Node/DataStoryNode";
 import { ConfigModal } from './modals/configModal'
 import { RunModal } from './modals/runModal';
 import { AddNodeModal } from './modals/addNodeModal';
@@ -14,7 +14,7 @@ import { shallow } from 'zustand/shallow'
 import { NodeModal } from './modals/nodeModal';
 
 const nodeTypes = {
-  transformer: Transformer,
+  dataStoryNode: DataStoryNode,
 };
 
 export default function Workbench({setMode}: any) {
@@ -55,7 +55,7 @@ export default function Workbench({setMode}: any) {
         setShowConfigModal={setShowConfigModal}
         setMode={setMode}
       />
-      <Background color="lightGray" variant={BackgroundVariant.Lines} />
+      <Background color="#E7E7E7" variant={BackgroundVariant.Lines} />
     </ReactFlow>
 
     {/* Modals */}

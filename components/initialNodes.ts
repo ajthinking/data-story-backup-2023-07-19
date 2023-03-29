@@ -12,7 +12,7 @@ const scalar = {
       },
     ],
   },
-  type: "transformer"
+  type: "dataStoryNode"
 }
 
 const multiply = {
@@ -34,7 +34,7 @@ const multiply = {
       },
     ],
   },
-  type: "transformer"  
+  type: "dataStoryNode"  
 }
 
 const log = {
@@ -51,7 +51,7 @@ const log = {
     ],
     outputs: [],
   },
-  type: "transformer"  
+  type: "dataStoryNode"  
 }
 
 export const initialNodes = [

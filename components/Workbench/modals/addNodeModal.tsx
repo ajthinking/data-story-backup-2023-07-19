@@ -55,7 +55,7 @@ export const AddNodeModal = ({ setShowModal }: any) => {
           }
         }),
       },
-      type: "transformer"
+      type: "dataStoryNode"
     }
 
     const getConnection = () => {

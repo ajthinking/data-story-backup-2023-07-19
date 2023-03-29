@@ -19,7 +19,7 @@ export const sampleDiagram = `{
           }
         ]
       },
-      "type": "transformer",
+      "type": "dataStoryNode",
       "positionAbsolute": {
         "x": 100,
         "y": 100
@@ -49,7 +49,7 @@ export const sampleDiagram = `{
           }
         ]
       },
-      "type": "transformer",
+      "type": "dataStoryNode",
       "positionAbsolute": {
         "x": 300,
         "y": 100
@@ -74,7 +74,7 @@ export const sampleDiagram = `{
         ],
         "outputs": []
       },
-      "type": "transformer",
+      "type": "dataStoryNode",
       "positionAbsolute": {
         "x": 500,
         "y": 100

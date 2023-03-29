@@ -110,7 +110,7 @@ export const useStore = create<RFState>((set, get) => ({
         if (edge.id === id) {
           edge.label = count
           edge.labelBgStyle = {
-            opacity: 0.5,
+            opacity: 0.6,
           }
         }
       })

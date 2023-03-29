@@ -24,7 +24,7 @@ import { Port } from "./Port"
           }
         ]
       },
-      "type": "transformer",
+      "type": "dataStoryNode",
       "selected": false,
       "positionAbsolute": {
         "x": 101.2618246308146,
@@ -54,7 +54,7 @@ import { Port } from "./Port"
           }
         ]
       },
-      "type": "transformer",
+      "type": "dataStoryNode",
       "selected": true,
       "positionAbsolute": {
         "x": 373.1397321248163,
@@ -130,7 +130,7 @@ export class DiagramFactory {
           }
         ]
       },
-      "type": "transformer",
+      "type": "dataStoryNode",
       "positionAbsolute": {
         "x": 355.29217094488496,
         "y": 226.10303220463445
@@ -160,7 +160,7 @@ export class DiagramFactory {
           }
         ]
       },
-      "type": "transformer",
+      "type": "dataStoryNode",
       "selected": true,
       "positionAbsolute": {
         "x": 603.8344401401514,

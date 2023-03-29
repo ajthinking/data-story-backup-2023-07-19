@@ -4,7 +4,6 @@ import { DefaultParams } from "../Param";
 export const Log: ComputerFactory = (): Computer => ({
   name: 'Log',
   inputs: ['input'],
-  outputs: ['output'],
   params: {
     ...DefaultParams,
   },
