@@ -16,8 +16,6 @@ export const Log: ComputerFactory = (): Computer => ({
       console.log(JSON.stringify(incoming, null, 2))
       console.groupEnd()
 
-      output.push(incoming)
-
       yield;
     }
   },
