@@ -4,7 +4,7 @@ import { Request } from "../Request";
 export const Todos = deriveFrom(Request, {
   name: 'Todos',
   params: {
-    url: 'https://jsonplaceholder.typicode.com/users',
+    url: 'https://jsonplaceholder.typicode.com/todos',
   },
   tags: ['JSON', 'Placeholder'],
   category: 'API',
@@ -13,7 +13,7 @@ export const Todos = deriveFrom(Request, {
 export const Users = deriveFrom(Request, {
   name: 'Users',
   params: {
-    url: 'https://jsonplaceholder.typicode.com/todos',
+    url: 'https://jsonplaceholder.typicode.com/users',
   },
   tags: ['JSON', 'Placeholder'], 
   category: 'API',  

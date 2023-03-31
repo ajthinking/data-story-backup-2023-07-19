@@ -10,7 +10,7 @@ export const Signal: ComputerFactory = (): Computer => ({
   params: {
     ...DefaultParams,
     period: number('period').value(100).get(),
-    count: number('count').value(100).get(),
+    count: number('count').value(500).get(),
   },
 
   async *run({
