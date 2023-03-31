@@ -9,7 +9,7 @@ export const Signal: ComputerFactory = (): Computer => ({
   outputs: ['output'],
   params: {
     ...DefaultParams,
-    period: number('period').value(100).get(),
+    period: number('period').value(50).get(),
     count: number('count').value(500).get(),
   },
 
