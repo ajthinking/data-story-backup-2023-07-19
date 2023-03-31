@@ -10,11 +10,11 @@ export { UpdateEntity } from './UpdateEntity';
  */
 export const Contacts = deriveFrom(HubSpotEntity, {
   name: 'Contacts',
+  label: 'Contacts.all',  
   params: {
     entity: 'contacts',
     properties: '["firstname"]'
   },
-  tags: ['HubSpot']
 })
 
 export const Companies = deriveFrom(HubSpotEntity, {
@@ -23,7 +23,6 @@ export const Companies = deriveFrom(HubSpotEntity, {
     entity: 'companies',
     properties: '["name"]'
   },
-  tags: ['HubSpot']
 })
 
 export const Deals = deriveFrom(HubSpotEntity, {
@@ -32,7 +31,6 @@ export const Deals = deriveFrom(HubSpotEntity, {
     entity: 'deals',
     properties: '["dealname"]'
   },
-  tags: ['HubSpot']
 })
 
 export const Tickets = deriveFrom(HubSpotEntity, {
@@ -41,7 +39,6 @@ export const Tickets = deriveFrom(HubSpotEntity, {
     entity: 'tickets',
     properties: '[]'
   },
-  tags: ['HubSpot']
 })
 
 export const LineItems = deriveFrom(HubSpotEntity, {
@@ -50,7 +47,6 @@ export const LineItems = deriveFrom(HubSpotEntity, {
     entity: 'lineItems',
     properties: '[]'
   },
-  tags: ['HubSpot']
 })
 
 export const Products = deriveFrom(HubSpotEntity, {
@@ -59,17 +55,50 @@ export const Products = deriveFrom(HubSpotEntity, {
     entity: 'products',
     properties: '[]'
   },
-  tags: ['HubSpot']
 })
 
 /**
- * BATCH UPDATE ************************************************************
+ * UPDATE ************************************************************
  */
-export const UpdateContacts = deriveFrom(UpdateEntity, {
-  name: 'UpdateContacts',
+export const UpdateContact = deriveFrom(UpdateEntity, {
+  name: 'UpdateContact',
+  label: 'Contacts.update',
   params: {
     entity: 'contacts',
-    properties: '["firstname"]'
   },
-  tags: ['HubSpot']
+})
+
+export const UpdateCompany = deriveFrom(UpdateEntity, {
+  name: 'UpdateCompany',
+  params: {
+    entity: 'companies',
+  },
+})
+
+export const UpdateDeal = deriveFrom(UpdateEntity, {
+  name: 'UpdateDeal',
+  params: {
+    entity: 'deals',
+  },
+})
+
+export const UpdateTicket = deriveFrom(UpdateEntity, {
+  name: 'UpdateTicket',
+  params: {
+    entity: 'tickets',
+  },
+})
+
+export const UpdateLineItem = deriveFrom(UpdateEntity, {
+  name: 'UpdateLineItem',
+  params: {
+    entity: 'lineItems',
+  },
+})
+
+export const UpdateProduct = deriveFrom(UpdateEntity, {
+  name: 'UpdateProduct',
+  params: {
+    entity: 'products',
+  },
 })

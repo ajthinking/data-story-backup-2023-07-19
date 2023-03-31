@@ -17,6 +17,8 @@ export type RunArgs = {
 
 export interface Computer {
   name: string
+  label?: string
+  category?: string
   inputs?: string[]
   outputs?: string[]
   params?: Record<string, Param>

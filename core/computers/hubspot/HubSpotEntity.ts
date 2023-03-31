@@ -45,6 +45,8 @@ export const HubSpotEntity: ComputerFactory = (): Computer => ({
     entity: string('entity').value('companies').get(),
     properties: json('properties').value('["name"]').get(),
   },
+  tags: ['Abstract'],
+  category: 'HubSpot',
 
   async *run({ output, params }: RunArgs) {
     const entity = params.entity as string    

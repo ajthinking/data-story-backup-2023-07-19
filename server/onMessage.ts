@@ -20,12 +20,9 @@ const isDescribe = (parsed: Object): parsed is DescribeMessage => {
 
 export const onMessage = async (ws: WebSocket, msg: string) => {
   const parsed = JSON.parse(msg.toString())
-  console.log(parsed)
 
   if (isDescribe(parsed)) return ws.send(describe().stringify());
   if (isRun(parsed)) return await run(ws, parsed);
-
-  
 
   throw("Unknown message type: " + parsed.type)
 }

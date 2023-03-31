@@ -3,6 +3,8 @@ import { Param } from '../../core/Param';
 
 export type NodeDescription = {
   name: string,
+  label?: string,
+  category?: string,
   inputs: string[],
   outputs: string[],
   params: Record<string, Param>,
@@ -15,6 +17,8 @@ export const describe = () => {
     
     return {
       name: instance.name,
+      label: instance.label,
+      category: instance.category,
       inputs: instance.inputs || [],
       outputs: instance.outputs ||  [],
       params: instance.params || {},

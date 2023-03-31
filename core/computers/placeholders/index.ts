@@ -6,7 +6,8 @@ export const Todos = deriveFrom(Request, {
   params: {
     url: 'https://jsonplaceholder.typicode.com/users',
   },
-  tags: ['JSON', 'Placeholder']
+  tags: ['JSON', 'Placeholder'],
+  category: 'API',
 })
 
 export const Users = deriveFrom(Request, {
@@ -14,7 +15,8 @@ export const Users = deriveFrom(Request, {
   params: {
     url: 'https://jsonplaceholder.typicode.com/todos',
   },
-  tags: ['JSON', 'Placeholder']  
+  tags: ['JSON', 'Placeholder'], 
+  category: 'API',  
 })
 
 export const Posts = deriveFrom(Request, {
@@ -22,5 +24,6 @@ export const Posts = deriveFrom(Request, {
   params: {
     url: 'https://jsonplaceholder.typicode.com/posts',
   },
-  tags: ['JSON', 'Placeholder']  
+  tags: ['JSON', 'Placeholder'],
+  category: 'API',  
 })  

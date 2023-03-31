@@ -3,6 +3,8 @@ import { ParamValue } from "./Param";
 
 export type DeriveFromOptions = {
   name: string,
+  label?: string,
+  category?: string,
   params: Record<string, ParamValue>,
   tags?: string[],
 }
@@ -19,6 +21,9 @@ export const deriveFrom = (
       ...(template.tags || []),
       ...(options.tags || []),
     ]
+
+    template.category = options.category || template.category
+    template.label = options.label || template.label
 
     // TODO is this nasty?
     if(!template.params) template.params = {}

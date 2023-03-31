@@ -35,13 +35,15 @@ export const AddNodeModal = ({ setShowModal }: any) => {
     const counter = scopedId(nodeDescription.name)
     const id = `${nodeDescription.name}.${counter}`;
 
+    console.log({nodeDescription})
+
     const node = {
       id,
       position: { x: maxX + 200, y: 50 },
       data: {
         params: nodeDescription.params,
         computer: nodeDescription.name,
-        label: nodeDescription.name,
+        label: nodeDescription.label ?? nodeDescription.name,
         inputs: nodeDescription.inputs.map((input: string) => {
           return {
             id: `${id}.${input}`,
@@ -85,7 +87,13 @@ export const AddNodeModal = ({ setShowModal }: any) => {
     setShowModal(false)
   }
 
-  const matchingNodes = availableNodes.filter((nodeDescription: NodeDescription) => {
+  const matchingNodes = availableNodes
+    .sort((a: NodeDescription, b: NodeDescription) => {
+      if((a.category || '') < (b.category || '')) return -1;
+      if((a.category || '') > (b.category || '')) return 1;
+      return 0;
+    })
+    .filter((nodeDescription: NodeDescription) => {
     return JSON.stringify(nodeDescription).toLowerCase().includes(search.toLowerCase())
   })
 
@@ -107,7 +115,7 @@ export const AddNodeModal = ({ setShowModal }: any) => {
           key={nodeDescription.name}
           onClick={() => doAddNode(nodeDescription)}
           >
-            <div className="text-gray-500 text-sm"><span className="text-indigo-500 font-mono">Core::</span>{nodeDescription.name}</div>
+            <div className="text-gray-500 text-sm"><span className="text-indigo-500 font-mono">{nodeDescription.category || 'Core'}::</span>{nodeDescription.label || nodeDescription.name}</div>
             <div className="flex space-x-1">
               {nodeDescription.tags.map((tag: string) => {
                 let style = "bg-blue-300 border px-2 rounded tracking-wide text-xxs text-white"
