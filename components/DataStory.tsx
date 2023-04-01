@@ -16,8 +16,8 @@ export function DataStory() {
       <div className="w-full h-screen bg-vsCodeWarmGray-900">
         <Header />
         <div className="w-full h-5/6">
-          {mode === 'workbench' && <Workbench setMode={setMode} />}
-          {mode === 'dump' && <Editor setMode={setMode} />}
+          {mode === 'workbench' && <Workbench />}
+          {mode === 'dump' && <Editor />}
         </div>
       </div>
     </>;

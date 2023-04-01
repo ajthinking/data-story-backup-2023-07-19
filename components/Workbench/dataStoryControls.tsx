@@ -1,17 +1,14 @@
-import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge, BackgroundVariant, Edge, ControlButton, useReactFlow, Panel } from "reactflow";
+import { Controls, ControlButton } from "reactflow";
 
 import React from "react";
-import { onClickHelp } from "./hooks/onClickHelp";
 import { RunIcon } from "./icons/runIcon";
 import { AddNodeIcon } from "./icons/addNodeIcon";
 import { ConfigIcon } from "./icons/configIcon";
-import { HelpIcon } from "./icons/helpIcon";
-import { TableIcon } from "./icons/tableIcon";
+
 export function DataStoryControls({
   setShowConfigModal,
   setShowRunModal,
   setShowAddNodeModal,
-  setMode
 }: any) {
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
         <ControlButton

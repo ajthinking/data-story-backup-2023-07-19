@@ -1,10 +1,6 @@
 import { DataStoryControls } from './dataStoryControls';
-import { Modal } from './modal';
-import { useCallback, useEffect, useState } from "react";
-import ReactFlow, { Background, useNodesState, useEdgesState, addEdge, BackgroundVariant } from "reactflow";
-import { usePlusKey } from "./hooks/usePlusKey";
-
-import "reactflow/dist/style.css";
+import { useState } from "react";
+import ReactFlow, { Background, BackgroundVariant } from "reactflow";
 import DataStoryNode from "../Node/DataStoryNode";
 import { ConfigModal } from './modals/configModal'
 import { RunModal } from './modals/runModal';
@@ -12,12 +8,13 @@ import { AddNodeModal } from './modals/addNodeModal';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow'
 import { NodeModal } from './modals/nodeModal';
+import "reactflow/dist/style.css";
 
 const nodeTypes = {
   dataStoryNode: DataStoryNode,
 };
 
-export default function Workbench({setMode}: any) {
+export default function Workbench() {
   const selector = (state: any) => ({
     nodes: state.nodes,
     edges: state.edges,
@@ -35,8 +32,6 @@ export default function Workbench({setMode}: any) {
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
 
-  // usePlusKey(() => setShowAddNodeModal(true));
-
   return (
     <>
     <ReactFlow
@@ -53,7 +48,6 @@ export default function Workbench({setMode}: any) {
         setShowRunModal={setShowRunModal}
         setShowAddNodeModal={setShowAddNodeModal}
         setShowConfigModal={setShowConfigModal}
-        setMode={setMode}
       />
       <Background color="#E7E7E7" variant={BackgroundVariant.Lines} />
     </ReactFlow>
