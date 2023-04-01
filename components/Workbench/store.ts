@@ -13,9 +13,11 @@ import {
   ReactFlowInstance,
 } from 'reactflow';
 
-import { ServerClient } from "./ServerClient";
+import { SocketClient } from "./SocketClient";
 import { NodeDescription } from '../../server/commands/describe';
 import { DataStoryNode } from '../Node/DataStoryNode';
+import { WorkerClient } from './WorkerClient';
+import { ServerClient } from './ServerClient';
 
 export type StoreSchema = {
   rfInstance: ReactFlowInstance | undefined;
@@ -82,13 +84,28 @@ export const useStore = create<StoreSchema>((set, get) => ({
   },
   onInitServer: () => {
     console.log("Init server.....")
-    const server = new ServerClient(
-      new WebSocket("ws://localhost:3100"),
-      get().setAvailableNodes,
-      get().updateEdgeCounts,
-    )
+    type ServerType = 'worker' | 'socket'
+    let type = 'socket' as ServerType
 
-    set({ server })
+    if(type === 'worker') {
+      const server = new WorkerClient(
+        get().setAvailableNodes,
+        get().updateEdgeCounts,
+      )
+  
+      set({ server })
+      server.init()
+    }
+
+    if(type === 'socket') {
+      const server = new SocketClient(
+        get().setAvailableNodes,
+        get().updateEdgeCounts,
+      )
+  
+      set({ server })
+      server.init()
+    }    
   },
   server: null,
   availableNodes: [],

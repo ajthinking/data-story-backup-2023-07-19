@@ -1,42 +1,40 @@
-import { shallow } from 'zustand/shallow';
 import { NodeDescription } from '../../server/commands/describe';
-import { useStore } from './store';
+import { ServerClient } from './ServerClient';
 
-export class ServerClient {
+export class SocketClient implements ServerClient {
   private socket: WebSocket;
 
   constructor(
-    socket: WebSocket,
-    setAvailableNodes: (nodes: NodeDescription[]) => void,
-    updateEdgeCounts: (edgeCounts: Record<string, number>) => void,
+    private setAvailableNodes: (nodes: NodeDescription[]) => void,
+    private updateEdgeCounts: (edgeCounts: Record<string, number>) => void,
   ) {
-    // Register the socket
-    this.socket = socket
+    this.socket = new WebSocket("ws://localhost:3100")   
+  }
 
+  init() {
     // Register on open
-    socket.onopen = () => {
+    this.socket.onopen = () => {
       console.log("Connected to server!");
 
-      socket.send(JSON.stringify({
-        type: "describe"
-      }))
+      // Ask the server to describe capabilites
+      this.describe()
     };
 
     // Register on close
-    socket.onerror = (error) => {
+    this.socket.onerror = (error) => {
       console.error("WebSocket error: ", error);
     };
 
-    socket.onmessage = ((data) => {
+    this.socket.onmessage = ((data) => {
       const parsed = JSON.parse(data.data)
 
       if (parsed.type === "describeResponse") {
-        setAvailableNodes(parsed.availableNodes)
+        this.setAvailableNodes(parsed.availableNodes)
         return;
       }
 
       if (parsed.type === "executionUpdate") {
-        updateEdgeCounts(parsed.counts)
+        this.updateEdgeCounts(parsed.counts)
         return;
       }
 
@@ -47,11 +45,7 @@ export class ServerClient {
       }
 
       throw("Unknown message type: " + parsed.type)
-    })    
-  }
-
-  ping() {
-    this.socket.send("ping");
+    }) 
   }
 
   describe() {
