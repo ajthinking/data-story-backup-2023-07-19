@@ -2,7 +2,11 @@ import React, { memo } from 'react';
 import { Handle, Position } from 'reactflow';
 import { PortIcon } from '../Workbench/icons/portIcon';
 
-const CustomHandle = ({ id, isConnectable, isInput }: any) => {
+const CustomHandle = ({ id, isConnectable, isInput }: {
+  id: string,
+  isConnectable: boolean,
+  isInput: boolean
+}) => {
   if(isInput) return (
     <div className="flex items-left justify-start -ml-3">
       <div className="absolute my-0.5 hover:bg-red-500"><PortIcon /></div>

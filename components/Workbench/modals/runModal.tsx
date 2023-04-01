@@ -1,9 +1,11 @@
 import { shallow } from "zustand/shallow";
 import { Modal } from "../modal"
-import { useStore } from '../store';
+import { StoreSchema, useStore } from '../store';
 
-export const RunModal = ({ setShowModal }: any) => {
-  const selector = (state: any) => ({
+export const RunModal = ({ setShowModal }: {
+  setShowModal: (show: boolean) => void
+}) => {
+  const selector = (state: StoreSchema) => ({
     onRun: state.onRun,
   });
 

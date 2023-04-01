@@ -6,10 +6,14 @@ import { AddNodeIcon } from "./icons/addNodeIcon";
 import { ConfigIcon } from "./icons/configIcon";
 
 export function DataStoryControls({
-  setShowConfigModal,
+  // setShowConfigModal,
   setShowRunModal,
   setShowAddNodeModal,
-}: any) {
+}: {
+  // setShowConfigModal: (showConfigModal: boolean) => void;
+  setShowRunModal: (showRunModal: boolean) => void;
+  setShowAddNodeModal: (showAddNodeModal: boolean) => void;
+}) {
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
         <ControlButton
           title="Run"
@@ -25,13 +29,13 @@ export function DataStoryControls({
         >
           <AddNodeIcon />
         </ControlButton>                
-        <ControlButton
+        {/* <ControlButton
           onClick={() => setShowConfigModal(true)}
           title="Config"
           aria-label="Config"
         >
           <ConfigIcon />
-        </ControlButton>
+        </ControlButton> */}
         {/* <ControlButton
             title="Table"
             aria-label="Table"

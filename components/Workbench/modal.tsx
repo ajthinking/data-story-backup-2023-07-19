@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { useEscapeKey } from "./hooks/useEscapeKey";
 export function Modal({
   setShowModal,
@@ -7,7 +7,14 @@ export function Modal({
   children,
   primaryAction,
   onPrimaryAction,
-}: any) {
+}: {
+  setShowModal: (showModal: boolean) => void;
+  title?: string;
+  content?: string;
+  children?: ReactNode;
+  primaryAction?: string;
+  onPrimaryAction?: () => void;
+}) {
   useEscapeKey(() => setShowModal(false));
 
   return <>

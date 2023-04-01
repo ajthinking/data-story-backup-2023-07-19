@@ -87,7 +87,7 @@ export interface NodeLifeCycle {
   type: string
   defaultParams: () => Param[] | Promise<Param[]>
   onBoot?: () => void | Promise<void>
-  onCreateItems?: (node: Node) => void | Promise<void>
+  onCreateItems?: (node: DataStoryNode) => void | Promise<void>
   onNoItems?: () => void | Promise<void>
   beforeItem?: () => void | Promise<void>
   beforeItems?: () => void | Promise<void>

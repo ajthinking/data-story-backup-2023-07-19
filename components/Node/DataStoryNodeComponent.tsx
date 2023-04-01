@@ -1,11 +1,14 @@
 import React, { memo } from 'react';
-import { Handle, Position } from 'reactflow';
-import { useStore } from '../Workbench/store';
+import { StoreSchema, useStore } from '../Workbench/store';
 import { shallow } from 'zustand/shallow';
 import CustomHandle from './CustomHandle';
+import { DataStoryNodeData } from './DataStoryNode';
 
-const DataStoryNode = ({ id, data }: any) => {
-  const selector = (state: any) => ({
+const DataStoryNodeComponent = ({ id, data }: {
+  id: string,
+  data: DataStoryNodeData
+}) => {
+  const selector = (state: StoreSchema) => ({
     setOpenNodeModalId: state.setOpenNodeModalId,
   });
 
@@ -24,7 +27,10 @@ const DataStoryNode = ({ id, data }: any) => {
           { data.label }
         </div>
         <div className="flex flex-col mx-2">
-          {data.inputs.map((input: any) => (<div
+          {data.inputs.map((input: {
+            id: string,
+            name: string
+          }) => (<div
             className="flex border border-gray-300 rounded px-2 py-1 bg-gray-50"
             key={input.id}
           >
@@ -32,7 +38,10 @@ const DataStoryNode = ({ id, data }: any) => {
             <div className="ml-2 w-full">{input.name}</div>
           </div>))}
         
-          {data.outputs.map((output: any) => (<div
+          {data.outputs.map((output: {
+            id: string,
+            name: string
+          }) => (<div
             className="flex pl-3 border border-gray-300 rounded px-2 py-1 bg-gray-50"
             key={output.id}
           >
@@ -46,4 +55,4 @@ const DataStoryNode = ({ id, data }: any) => {
   );
 };
 
-export default memo(DataStoryNode)
+export default memo(DataStoryNodeComponent)

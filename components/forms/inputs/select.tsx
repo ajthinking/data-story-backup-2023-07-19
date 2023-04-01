@@ -1,4 +1,10 @@
-export const Select = ({ param, register }: any) => {
+import { UseFormRegister } from "react-hook-form"
+import { Param } from "../../../core/Param"
+
+export const Select = ({ param, register }: {
+  param: Param,
+  register: UseFormRegister<Record<string, any>>
+}) => {
   return (<div
     className="flex flex-col"
     key={param.name}
@@ -8,7 +14,7 @@ export const Select = ({ param, register }: any) => {
       className="w-full text-xs px-2 py-1 border rounded border-blue-200"
       {...register(param.name)}
     >
-      {param.selectOptions.map((option: any) => {
+      {param.selectOptions!.map((option: string) => {
         return (<option key={option} value={option}>{option}</option>)
       })} 
     </select>

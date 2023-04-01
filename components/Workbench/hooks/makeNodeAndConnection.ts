@@ -1,19 +1,20 @@
-import { Connection, Node } from "reactflow";
+import { Connection } from "reactflow";
 import { NodeDescription } from "../../../server/commands/describe";
+import { DataStoryNode } from "../../Node/DataStoryNode";
 import { guessConnection } from "./guessConnection";
 import { guessPosition } from "./guessPosition";
 
 export const makeNodeAndConnection = (
-  existingNodes: Node[],
+  existingNodes: DataStoryNode[],
   nodeDescription: NodeDescription
-): [Node, Connection | null] => {
+): [DataStoryNode, Connection | null] => {
   const scopedId = (name: string) => {
     const max = existingNodes
-      .filter((node: Node) => node.data.computer === name)
-      .map((node: Node) => node.id)
-      .map((id: string) => id.split('.')[1])
-      .map((id: string) => parseInt(id))
-      .reduce((max: number, id: number) => Math.max(max, id), 0)
+      .filter((node) => node.data.computer === name)
+      .map((node) => node.id)
+      .map((id) => id.split('.')[1])
+      .map((id) => parseInt(id))
+      .reduce((max, id) => Math.max(max, id), 0)
 
     return max + 1      
   }
@@ -25,7 +26,8 @@ export const makeNodeAndConnection = (
     id,
     position: guessPosition(existingNodes, nodeDescription),
     data: {
-      params: nodeDescription.params,
+      // Ensure two nodes of same type don't share the same params object
+      params: structuredClone(nodeDescription.params),
       computer: nodeDescription.name,
       label: nodeDescription.label ?? nodeDescription.name,
       inputs: nodeDescription.inputs.map((input: string) => {
@@ -41,7 +43,7 @@ export const makeNodeAndConnection = (
         }
       }),
     },
-    type: "dataStoryNode"
+    type: "dataStoryNodeComponent"
   }
 
   const connection = guessConnection(existingNodes, node)

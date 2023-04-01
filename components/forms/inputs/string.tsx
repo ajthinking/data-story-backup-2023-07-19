@@ -1,4 +1,10 @@
-export const String_ = ({ param, register }: any) => {
+import { UseFormRegister } from "react-hook-form"
+import { Param } from "../../../core/Param"
+
+export const String_ = ({ param, register }: {
+  param: Param,
+  register: UseFormRegister<Record<string, any>>
+}) => {
   return (<div
     className="flex flex-col"
     key={param.name}

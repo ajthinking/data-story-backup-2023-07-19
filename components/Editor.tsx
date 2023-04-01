@@ -6,22 +6,22 @@ import { ControlButton } from 'reactflow';
 import { TableIcon } from './Workbench/icons/tableIcon';
 import { DiagramIcon } from './Workbench/icons/diagramIcon';
 import { BackIcon } from './Workbench/icons/backIcon';
-import { useStore } from './Workbench/store';
+import { StoreSchema, useStore } from './Workbench/store';
 import { shallow } from 'zustand/shallow';
 
-export const Editor = ({setMode}: any) => {
-  const selector = (state: any) => ({
-    dumps: state.dumps,
-  });
+export const Editor = () => {
+  // const selector = (state: StoreSchema) => ({
+  //   dumps: state.dumps,
+  // });
 
-  const { dumps } = useStore(selector, shallow);
+  // const { dumps } = useStore(selector, shallow);
 
   let mocked = ''
 
-  for (const [key, items] of Object.entries(dumps)) {
-    mocked = JSON.stringify(items, null, 2);
-    break;
-  }
+  // for (const [key, items] of Object.entries(dumps)) {
+  //   mocked = JSON.stringify(items, null, 2);
+  //   break;
+  // }
 
   return (
     <div className="flex w-full bg-vsCodeWarmGray-900">
@@ -29,7 +29,7 @@ export const Editor = ({setMode}: any) => {
         <li className="mr-2"
             title="Back to Diagram"
             aria-label="Back to Diagram"
-            onClick={() => setMode('workbench')}        
+            // onClick={() => setMode('workbench')}        
         >
             <a href="#" aria-current="page" className="inline-block rounded-t-lg active text-blue-500">
               <BackIcon />

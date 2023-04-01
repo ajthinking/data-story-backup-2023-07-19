@@ -12,7 +12,7 @@ const scalar = {
       },
     ],
   },
-  type: "dataStoryNode"
+  type: "dataStoryNodeComponent"
 }
 
 const multiply = {
@@ -34,7 +34,7 @@ const multiply = {
       },
     ],
   },
-  type: "dataStoryNode"  
+  type: "dataStoryNodeComponent"  
 }
 
 const log = {
@@ -51,7 +51,7 @@ const log = {
     ],
     outputs: [],
   },
-  type: "dataStoryNode"  
+  type: "dataStoryNodeComponent"  
 }
 
 export const initialNodes = [

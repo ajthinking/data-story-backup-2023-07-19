@@ -3,7 +3,6 @@ import {
   Connection,
   Edge,
   EdgeChange,
-  Node,
   NodeChange,
   addEdge,
   OnNodesChange,
@@ -14,13 +13,18 @@ import {
   ReactFlowInstance,
 } from 'reactflow';
 
-type StoreSchema = {
+import { ServerClient } from "./ServerClient";
+import { NodeDescription } from '../../server/commands/describe';
+import { DataStoryNode } from '../Node/DataStoryNode';
+
+export type StoreSchema = {
   rfInstance: ReactFlowInstance | undefined;
   availableNodes: NodeDescription[],
   setAvailableNodes: (nodes: NodeDescription[]) => void,
-  nodes: Node[];
+  nodes: DataStoryNode[];
   edges: Edge[];
   server: null | ServerClient;
+  onAddNode: (node: DataStoryNode) => void;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
@@ -30,11 +34,8 @@ type StoreSchema = {
   updateEdgeCounts: (edgeCounts: Record<string, number>) => void;
   setEdges: (edges: Edge[]) => void;
   openNodeModalId: string | null;
-  setOpenNodeModalId: (id: string) => void;
+  setOpenNodeModalId: (id: string | null) => void;
 };
-
-import { ServerClient } from "./ServerClient";
-import { NodeDescription } from '../../server/commands/describe';
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
 export const useStore = create<StoreSchema>((set, get) => ({
@@ -62,7 +63,7 @@ export const useStore = create<StoreSchema>((set, get) => ({
       }, get().edges),
     });
   },
-  onAddNode: (node: Node) => {
+  onAddNode: (node: DataStoryNode) => {
     set({
       nodes: [...get().nodes, node],
     })

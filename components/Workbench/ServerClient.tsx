@@ -1,4 +1,5 @@
 import { shallow } from 'zustand/shallow';
+import { NodeDescription } from '../../server/commands/describe';
 import { useStore } from './store';
 
 export class ServerClient {
@@ -6,8 +7,8 @@ export class ServerClient {
 
   constructor(
     socket: WebSocket,
-    setAvailableNodes: any,
-    updateEdgeCounts: any,
+    setAvailableNodes: (nodes: NodeDescription[]) => void,
+    updateEdgeCounts: (edgeCounts: Record<string, number>) => void,
   ) {
     // Register the socket
     this.socket = socket
@@ -47,23 +48,7 @@ export class ServerClient {
 
       throw("Unknown message type: " + parsed.type)
     })    
-
-    // // Register on message
-    // socket.onmessage = (event) => {
-    //   const data = JSON.parse(event.data)
-
-    //   if(data.type === "describeResponse") {
-
-    //   }
-    // };    
   }
-
-  // onMessage(callback: (data: any) => void) {
-  //   this.socket.onmessage = (event) => {
-  //     const data = JSON.parse(event.data)
-  //     callback(data)
-  //   }
-  // }
 
   ping() {
     this.socket.send("ping");

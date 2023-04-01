@@ -1,6 +1,6 @@
-import { Node } from "reactflow";
+import { DataStoryNode } from "../../Node/DataStoryNode";
 
-export const guessConnection = (existingNodes: Node[], node: Node) => {
+export const guessConnection = (existingNodes: DataStoryNode[], node: DataStoryNode) => {
   const previousNode = existingNodes.at(-1)
   if(!previousNode) return null;
 

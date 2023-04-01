@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Connection } from "reactflow";
 import { shallow } from "zustand/shallow";
 import { NodeDescription } from "../../../server/commands/describe";
+import { DataStoryNode } from "../../Node/DataStoryNode";
 import { makeNodeAndConnection } from "../hooks/makeNodeAndConnection";
 import { Modal } from "../modal"
-import { useStore } from '../store';
+import { StoreSchema, useStore } from '../store';
 
-export const AddNodeModal = ({ setShowModal }: any) => {
+export const AddNodeModal = ({ setShowModal }: {
+  setShowModal: (show: boolean) => void
+}) => {
+  const inputReference = useRef<HTMLInputElement>(null);  
   const [search, setSearch] = useState("");
-  const [filteredNodes, setFilteredNodes] = useState(undefined)
 
-  const selector = (state: any) => ({
+  useEffect(() => {
+    inputReference?.current?.focus();
+}, [])  
+
+  const selector = (state: StoreSchema) => ({
       nodes: state.nodes,
       edges: state.edges,
       onAddNode: state.onAddNode,
@@ -21,7 +29,13 @@ export const AddNodeModal = ({ setShowModal }: any) => {
 
   const doAddNode = (nodeDescription: NodeDescription) => {
     // Create node and attempt to guess connection
-    const [node, connection]: any = makeNodeAndConnection(nodes, nodeDescription)
+    const [
+      node,
+      connection
+    ]: [
+      DataStoryNode,
+      Connection | null
+    ] = makeNodeAndConnection(nodes, nodeDescription)
 
     // Call React Flow hooks to add node and link to store
     onAddNode(node)
@@ -50,11 +64,13 @@ export const AddNodeModal = ({ setShowModal }: any) => {
         className="w-full mb-2 text-gray-500 font-mono text-sm border border-gray-100 rounded px-4 py-4" placeholder={"Type format, action, resource ..."}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        ref={inputReference}
       ></input>
     </div>
     <div className="group grid grid-cols-2 gap-2">
       {matchingNodes.map((nodeDescription: NodeDescription) => {
-        return (<div
+        return (<button
+          tabIndex={0}
           className="flex justify-between font-bold cursor-pointer bg-slate-100 hover:bg-slate-200 text-gray-400 flex items-center px-4 py-2 border border-gray-300 text-base shadow"
           key={nodeDescription.name}
           onClick={() => doAddNode(nodeDescription)}
@@ -68,7 +84,7 @@ export const AddNodeModal = ({ setShowModal }: any) => {
             </div>
 
             {/* <button className="hidden group-hover:block">Child</button> */}
-        </div>)
+        </button>)
       })}                                                
     </div>
   </Modal>)

@@ -1,4 +1,4 @@
-import { Param } from "./Param"
+import { Param, ParamValue } from "./Param"
 
 export const string = (name: string) => new ParamBuilder(name, 'string')
 export const number = (name: string) => new ParamBuilder(name, 'number')
@@ -10,7 +10,7 @@ export class ParamBuilder {
 
   constructor(private name: string, private type: string) {}
 
-  value(value: any): ParamBuilder {
+  value(value: ParamValue): ParamBuilder {
     this.value = value
 
     return this

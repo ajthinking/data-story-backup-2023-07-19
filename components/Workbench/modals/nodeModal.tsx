@@ -4,12 +4,13 @@ import { Number } from "../../forms/inputs/number";
 import { Select } from "../../forms/inputs/select";
 import { String_ } from "../../forms/inputs/string";
 import { Modal } from "../modal"
-import { useStore } from '../store';
+import { StoreSchema, useStore } from '../store';
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { Param, ParamValue } from "../../../core/Param";
+import { DataStoryNode } from "../../Node/DataStoryNode";
 
 export const NodeModal = () => {
-  const selector = (state: any) => ({
+  const selector = (state: StoreSchema) => ({
     nodes: state.nodes,
     openNodeModalId: state.openNodeModalId,
     setOpenNodeModalId: state.setOpenNodeModalId,
@@ -17,20 +18,16 @@ export const NodeModal = () => {
 
   const { nodes, openNodeModalId, setOpenNodeModalId } = useStore(selector, shallow);
 
-  const node = nodes.find((node: any) => node.id === openNodeModalId)
+  const node = nodes.find((node: DataStoryNode) => node.id === openNodeModalId)!
 
   const { register, handleSubmit } = useForm({
-    defaultValues: Object.values(node.data.params).reduce((acc: any, param: any) => {
+    defaultValues: Object.values(node.data.params).reduce((acc: Record<string, ParamValue>, param: Param) => {
       acc[param.name] = param.value
       return acc
-    }, {}) as any
+    }, {})
   });
 
-  const [data, setData] = useState("");
-
-
-
-  const nonDefaultParams = Object.values(node.data.params).filter((param: any) => {
+  const nonDefaultParams = Object.values(node.data.params).filter((param) => {
     return param.name !== 'name' && param.name !== 'label'
   })
 
@@ -41,17 +38,18 @@ export const NodeModal = () => {
       }
     })()
     
-    setOpenNodeModalId(undefined)
+    setOpenNodeModalId(null)
   }
 
   return (<Modal
     title={node.data.computer}
-    setShowModal={(_: any) => setOpenNodeModalId(null)}
+    // What is this line??
+    setShowModal={(open: boolean) => setOpenNodeModalId(null)}
     primaryAction={"Save"}
     onPrimaryAction={saveAndClose}  
   >
     <form onSubmit={handleSubmit(() => alert("submitting!"))}>
-      {nonDefaultParams.map((param: any) => {
+      {nonDefaultParams.map(param => {
         return (<div
           className="flex flex-col"
           key={param.name}
