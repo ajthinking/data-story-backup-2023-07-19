@@ -3,16 +3,16 @@ type ReturnResult = void | never
 type NextArgument = void
 
 import { InputDeviceInterface } from "./InputDevice"
-import { Item } from "./Item"
 import { OutputDeviceInterface } from "./OutputDevice"
 import { Param } from "./Param"
 import { ParamsDevice } from "./ParamsDevice"
+import { Storage } from "./Storage"
 
 export type RunArgs = {
   input: InputDeviceInterface,
   output: OutputDeviceInterface,
   params: ParamsDevice,
-  storage?: any,
+  storage?: Storage,
 }
 
 export interface Computer {

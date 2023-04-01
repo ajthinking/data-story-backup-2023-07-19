@@ -42,8 +42,7 @@ export class ServerClient {
 
       if(parsed.type === "executionResult") {
         alert("Execution complete 💫")
-
-        setDumps(parsed.items)
+        // setDumps(parsed.items)
 
         return
       }

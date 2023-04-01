@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { shallow } from "zustand/shallow";
 import { NodeDescription } from "../../../server/commands/describe";
+import { makeNodeAndConnection } from "../hooks/makeNodeAndConnection";
 import { Modal } from "../modal"
 import { useStore } from '../store';
 
@@ -19,71 +20,14 @@ export const AddNodeModal = ({ setShowModal }: any) => {
   const { nodes, onAddNode, onConnect, availableNodes } = useStore(selector, shallow);
 
   const doAddNode = (nodeDescription: NodeDescription) => {
-    const scopedId = (name: string) => {
-      const max = nodes
-        .filter((node: any) => node.data.computer === name)
-        .map((node: any) => node.id)
-        .map((id: string) => id.split('.')[1])
-        .map((id: string) => parseInt(id))
-        .reduce((max: number, id: number) => Math.max(max, id), 0)
-  
-      return max + 1      
-    }
+    // Create node and attempt to guess connection
+    const [node, connection]: any = makeNodeAndConnection(nodes, nodeDescription)
 
-    const maxX = nodes.map((node: any) => node.position.x).reduce((max: number, x: number) => Math.max(max, x), -100)
-
-    const counter = scopedId(nodeDescription.name)
-    const id = `${nodeDescription.name}.${counter}`;
-
-    console.log({nodeDescription})
-
-    const node = {
-      id,
-      position: { x: maxX + 200, y: 50 },
-      data: {
-        params: nodeDescription.params,
-        computer: nodeDescription.name,
-        label: nodeDescription.label ?? nodeDescription.name,
-        inputs: nodeDescription.inputs.map((input: string) => {
-          return {
-            id: `${id}.${input}`,
-            name: input
-          }
-        }),
-        outputs: nodeDescription.outputs.map((input: string) => {
-          return {
-            id: `${id}.${input}`,
-            name: input
-          }
-        }),
-      },
-      type: "dataStoryNode"
-    }
-
-    const getConnection = () => {
-      const previousNode = nodes.at(-1)
-      if(!previousNode) return null;
-
-      const firstOutput = previousNode.data.outputs[0]
-      if(!firstOutput) return null;
-
-      const firstInput = node.data.inputs[0]
-      if(!firstInput) return null;
-
-      return {
-        id: `${previousNode.id}.${firstOutput.name}-->${node.id}.${firstInput.name}`,
-        sourceHandle: firstOutput.id,
-        targetHandle: firstInput.id,
-        source: previousNode.id,
-        target: node.id,
-      }
-    }
-
-    const connection = getConnection()
-
+    // Call React Flow hooks to add node and link to store
     onAddNode(node)
     if(connection) onConnect(connection);
 
+    // Close modal
     setShowModal(false)
   }
 

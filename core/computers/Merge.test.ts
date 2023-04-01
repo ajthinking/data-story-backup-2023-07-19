@@ -3,7 +3,7 @@ import { RunArgs } from "../Computer";
 import { when } from "../support/computerTester/ComputerTester";
 import { Merge } from "./Merge";
 
-it('does something', async () => {
+it('merges objects when selected properties match', async () => {
   await when(Merge)
     .hasParams({
       requestor_merge_property: 'id',

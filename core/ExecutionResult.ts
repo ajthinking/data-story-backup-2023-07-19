@@ -7,7 +7,6 @@ export class ExecutionResult {
 
   constructor(
     public id: string,
-    public items: { [key: string]: Item[] }
   ) {}
 
   stringify() {    

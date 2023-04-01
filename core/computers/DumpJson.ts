@@ -16,10 +16,6 @@ export const DumpJson: ComputerFactory = (): Computer => ({
     const id = (Math.random() + 1).toString(36).substring(7);
     const key = `${this.name}-${id}`
 
-    console.log({
-      storage
-    })
-
-    storage.putExecutionItems(key, input.pull())
+    storage?.putExecutionItems(key, input.pull())
   },
 });

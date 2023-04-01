@@ -37,7 +37,6 @@ export const run = async (ws: WebSocket, data: RunMessage) => {
   }
 
   ws.send(new ExecutionResult(
-    storage.currentExecutionId!,
-    (await storage.serialize()).items,
+    storage.currentExecutionId!
   ).stringify())
 }

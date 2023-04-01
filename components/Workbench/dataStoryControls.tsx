@@ -35,13 +35,13 @@ export function DataStoryControls({
         >
           <ConfigIcon />
         </ControlButton>
-        <ControlButton
+        {/* <ControlButton
             title="Table"
             aria-label="Table"
             onClick={() => setMode('dump')}
           >
           <TableIcon />          
-        </ControlButton>                             
+        </ControlButton>                              */}
       </Controls>;
 }
   

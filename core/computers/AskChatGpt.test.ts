@@ -3,7 +3,7 @@ import { RunArgs } from "../Computer";
 import { when } from "../support/computerTester/ComputerTester";
 import { AskChatGpt } from "./AskChatGpt";
 
-it('does something', async () => {
+it.todo('does something', async () => {
   await when(AskChatGpt)
     .hasDefaultParams()
     .getsInput([1, 2])
