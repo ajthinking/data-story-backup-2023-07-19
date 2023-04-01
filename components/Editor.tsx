@@ -18,10 +18,7 @@ export const Editor = ({setMode}: any) => {
 
   let mocked = ''
 
-  console.log({dumps})
-
   for (const [key, items] of Object.entries(dumps)) {
-    console.log({key, items})
     mocked = JSON.stringify(items, null, 2);
     break;
   }

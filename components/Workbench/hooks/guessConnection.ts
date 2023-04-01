@@ -1,4 +1,6 @@
-export const guessConnection = (existingNodes: any[], node: any) => {
+import { Node } from "reactflow";
+
+export const guessConnection = (existingNodes: Node[], node: Node) => {
   const previousNode = existingNodes.at(-1)
   if(!previousNode) return null;
 

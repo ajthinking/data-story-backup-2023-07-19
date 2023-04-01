@@ -1,4 +1,7 @@
-export const guessPosition = (existingNodes: any[], nodeDescription: any) => {
+import { Node } from "reactflow";
+import { NodeDescription } from "../../../server/commands/describe";
+
+export const guessPosition = (existingNodes: Node[], nodeDescription: NodeDescription) => {
   // Defines starting position for new nodes
   const startX = 75;
   const startY = 50;
@@ -18,5 +21,5 @@ export const guessPosition = (existingNodes: any[], nodeDescription: any) => {
 
   const mostRecentNode = existingNodes.at(-1)
 
-  return { x: maxX + spaceX, y: mostRecentNode.position.y }
+  return { x: maxX + spaceX, y: mostRecentNode?.position.y ?? startY + spaceY  }
 }

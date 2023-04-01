@@ -11,10 +11,9 @@ export const CreateJson: ComputerFactory = (): Computer => ({
   },
 
   async *run({ output, params: { json } }: RunArgs) {
-    console.log('attempting parsing', typeof json)
-
     const parsed = JSON.parse(json)
 
+    // TODO ADD ERRORS - SIMILAR LIKE IN JSONFILE
     output.push(
       // wraps the parsed json in an array if it's not already an array
       [parsed].flat()

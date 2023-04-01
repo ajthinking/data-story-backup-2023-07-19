@@ -1,12 +1,16 @@
+import { Connection, Node } from "reactflow";
 import { NodeDescription } from "../../../server/commands/describe";
 import { guessConnection } from "./guessConnection";
 import { guessPosition } from "./guessPosition";
 
-export const makeNodeAndConnection = (existingNodes: any[], nodeDescription: NodeDescription) => {
+export const makeNodeAndConnection = (
+  existingNodes: Node[],
+  nodeDescription: NodeDescription
+): [Node, Connection | null] => {
   const scopedId = (name: string) => {
     const max = existingNodes
-      .filter((node: any) => node.data.computer === name)
-      .map((node: any) => node.id)
+      .filter((node: Node) => node.data.computer === name)
+      .map((node: Node) => node.id)
       .map((id: string) => id.split('.')[1])
       .map((id: string) => parseInt(id))
       .reduce((max: number, id: number) => Math.max(max, id), 0)

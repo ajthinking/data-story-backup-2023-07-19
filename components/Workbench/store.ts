@@ -11,40 +11,36 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
+  ReactFlowInstance,
 } from 'reactflow';
 
-import { initialNodes } from '../initialNodes';
-import { initialEdges } from '../initialEdges';
-
-type RFState = {
-  rfInstance: any;
-  availableNodes: any[],
-  setAvailableNodes: any,
+type StoreSchema = {
+  rfInstance: ReactFlowInstance | undefined;
+  availableNodes: NodeDescription[],
+  setAvailableNodes: (nodes: NodeDescription[]) => void,
   nodes: Node[];
   edges: Edge[];
   server: null | ServerClient;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
-  onInit: any;
-  onRun: any;
-  onInitServer: any;
-  updateEdgeCounts: any;
-  setEdges: any;
+  onInit: (rfInstance: ReactFlowInstance) => void;
+  onRun: () => void;
+  onInitServer: () => void;
+  updateEdgeCounts: (edgeCounts: Record<string, number>) => void;
+  setEdges: (edges: Edge[]) => void;
   openNodeModalId: string | null;
-  setOpenNodeModalId: any;
-  dumps: {};
-  setDumps: any;
+  setOpenNodeModalId: (id: string) => void;
 };
 
 import { ServerClient } from "./ServerClient";
 import { NodeDescription } from '../../server/commands/describe';
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
-export const useStore = create<RFState>((set, get) => ({
-  rfInstance: null,
-  nodes: [], //initialNodes,
-  edges: [], //initialEdges,
+export const useStore = create<StoreSchema>((set, get) => ({
+  rfInstance: undefined,
+  nodes: [],
+  edges: [],
   onNodesChange: (changes: NodeChange[]) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),
@@ -66,7 +62,7 @@ export const useStore = create<RFState>((set, get) => ({
       }, get().edges),
     });
   },
-  onAddNode: (node: any) => {
+  onAddNode: (node: Node) => {
     set({
       nodes: [...get().nodes, node],
     })
@@ -74,13 +70,13 @@ export const useStore = create<RFState>((set, get) => ({
   setEdges(edges: Edge[]) {
     set({ edges })
   },
-  onInit: (rfInstance: any) => {
+  onInit: (rfInstance: ReactFlowInstance) => {
     set({ rfInstance })
     get().onInitServer()
   },
   onRun: () => {
     get().server!.run(
-      get().rfInstance.toObject()      
+      get().rfInstance!.toObject()      
     )
   },
   onInitServer: () => {
@@ -89,7 +85,6 @@ export const useStore = create<RFState>((set, get) => ({
       new WebSocket("ws://localhost:3100"),
       get().setAvailableNodes,
       get().updateEdgeCounts,
-      get().setDumps
     )
 
     set({ server })
@@ -123,9 +118,5 @@ export const useStore = create<RFState>((set, get) => ({
   openNodeModalId: null,
   setOpenNodeModalId: (id: string | null) => {
     set({ openNodeModalId: id })
-  },
-  dumps: {},
-  setDumps: (dumps: any[]) => {
-    set({ dumps })
   },
 }));

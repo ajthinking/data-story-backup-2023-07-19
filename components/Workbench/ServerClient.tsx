@@ -8,7 +8,6 @@ export class ServerClient {
     socket: WebSocket,
     setAvailableNodes: any,
     updateEdgeCounts: any,
-    setDumps: any,
   ) {
     // Register the socket
     this.socket = socket
@@ -41,8 +40,7 @@ export class ServerClient {
       }
 
       if(parsed.type === "executionResult") {
-        alert("Execution complete 💫")
-        // setDumps(parsed.items)
+        setTimeout(() => alert("Execution complete 💫"), 100)
 
         return
       }
