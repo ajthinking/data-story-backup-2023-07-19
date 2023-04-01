@@ -34,4 +34,7 @@ yarn make:node YourNewNode
 
 # Run tests
 yarn test
-````
+```
+
+### License
+Proprietary. See [LICENSE.md](/LICENSE.md)
