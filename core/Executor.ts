@@ -16,13 +16,11 @@ import { Storage } from "./Storage";
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
 export class Executor {
-  // consider refactoring all of these... maybe into a Memory class?
+  // TODO: move this to a ExecutionMemory instance
   nodeStatuses = new Map<NodeId, NodeStatus>();
   nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();  
   linkItems = new Map<LinkId, Item[]>();
   linkCounts = new Map<LinkId, number>();
-  // do we need to add a PromiseBank?
-  // to keep track of promises that are in flight
 
   constructor(
     public diagram: Diagram,
