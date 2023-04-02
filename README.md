@@ -10,8 +10,8 @@
 ### Development installation
 ```bash
 # Install
-git clone git@github.com:ajthinking/data-story-v2.git
-cd data-story-v2
+git clone git@github.com:ajthinking/data-story.git
+cd data-story
 yarn
 
 # Start the server
