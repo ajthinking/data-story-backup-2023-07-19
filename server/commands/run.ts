@@ -8,20 +8,15 @@ import { FileStorage } from '../../core/FileStorage';
 import { NullStorage } from '../../core/NullStorage';
 import { ExecutionUpdate } from '../../core/ExecutionUpdate';
 import { ExecutionResult } from '../../core/ExecutionResult';
+import { computerRegistry } from '../computerRegistry';
 
 export const run = async (ws: WebSocket, data: RunMessage) => {
   const diagram = new DiagramFactory().fromReactFlow(
     data.reactFlow
   )
 
-  const computerRegistry = new Map<string, Computer>()
-
-  for(const factory of Object.values(computers)) {
-    const instance = factory()
-    computerRegistry.set(instance.name, instance)
-  }
-
   const storage = new FileStorage('.datastory')
+  await storage.init()
   await storage.createExecution()
 
   const executor = new Executor(
@@ -35,6 +30,8 @@ export const run = async (ws: WebSocket, data: RunMessage) => {
   for await(const update of execution) {
     ws.send(update.stringify())
   }
+
+  console.log("Execution complete!")
 
   ws.send(new ExecutionResult(
     storage.currentExecutionId!

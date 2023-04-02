@@ -8,10 +8,11 @@ export class FileStorage implements Storage {
   constructor(private root: string) {}
 
   /**
-   * Creates the root directory if it doesn't exist
+   * Creates the directories we need if they doesn't exist
    */
   async init(): Promise<void> {
     await fs.mkdir(this.root, { recursive: true })
+    await fs.mkdir(`${this.root}/executions`, { recursive: true })
   }
 
   async createExecution(): Promise<void> {

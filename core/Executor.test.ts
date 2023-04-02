@@ -5,11 +5,12 @@ import { Executor } from "./Executor";
 import { Computer, RunArgs } from "./Computer";
 import { Link, LinkId } from "./Link";
 import { DiagramBuilder } from "./DiagramBuilder";
-import { CreateJson } from "./computers";
+import { CreateJson, Throw } from "./computers";
 import { ExecutionResult } from "./ExecutionResult";
 import { Item } from "./Item";
 import { NullStorage } from "./NullStorage";
 import { ExecutionUpdate } from "./ExecutionUpdate";
+import { whenRunning } from "./support/diagramExecutionTester/DiagramExecutionTester";
 
 describe('execute', () => {
   it('can execute an empty diagram and return an execution update', async () => {
@@ -208,5 +209,26 @@ describe('execute', () => {
 
     const result = await updates.next()
     expect(result.done).toBe(true)    
+  })
+
+  it('can test diagram executions like this', async () => {
+    const diagram = new DiagramBuilder()
+      .add(CreateJson)
+      .get()
+  
+    await whenRunning(diagram)
+      .expectSuccess()
+      .ok()
+  })
+
+  it.todo('can test failed diagram executions like this', async () => {
+    const diagram = new DiagramBuilder()
+      .add(CreateJson)
+      .add(Throw)
+      .get()
+    
+    await whenRunning(diagram)
+      .expectFail()
+      .ok()
   })
 })

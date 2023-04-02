@@ -12,3 +12,4 @@ export { Pass } from './Pass'
 export { Request } from './Request'
 export { Signal } from './Signal'
 export { Sleep } from './Sleep'
+export { Throw } from './Throw';

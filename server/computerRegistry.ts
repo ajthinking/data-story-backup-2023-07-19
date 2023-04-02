@@ -1,7 +1,11 @@
+import * as computers from '../core/computers'
 import { Computer } from "../core/Computer";
-import { Ignore, Pass, Signal } from "../core/computers";
 
-export const computerRegistry = new Map<string, Computer>()
-  .set('Signal', Signal())
-  .set('Pass', Pass())
-  .set('Ignore', Ignore())
+const registry = new Map<string, Computer>()
+
+for(const factory of Object.values(computers)) {
+  const instance = factory()
+  registry.set(instance.name, instance)
+}
+
+export const computerRegistry = registry;
