@@ -12,6 +12,7 @@ import { isFinished } from "./utils/isFinished";
 import { Param } from "./Param";
 import { ParamsDevice } from "./ParamsDevice";
 import { Storage } from "./Storage";
+import { ExecutionMemory } from "./ExecutionMemory";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -21,12 +22,20 @@ export class Executor {
   nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();  
   linkItems = new Map<LinkId, Item[]>();
   linkCounts = new Map<LinkId, number>();
+  // memory: ExecutionMemory;
 
   constructor(
     public diagram: Diagram,
     public computers: Map<string, Computer>,
     public storage: Storage
-  ) {}
+  ) {
+    // this.memory = new ExecutionMemory(
+    //   this.nodeStatuses,
+    //   this.nodeRunners,
+    //   this.linkItems,
+    //   this.linkCounts
+    // )
+  }
 
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
     let startTime = new Date().getTime();
