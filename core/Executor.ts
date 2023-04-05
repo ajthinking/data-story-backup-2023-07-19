@@ -207,7 +207,14 @@ export class Executor {
       tree[input.name] = {}
 
       for(const link of this.diagram.linksConnectedToPortId(input.id)) {
-        tree[input.name][link.id] = memory.getLinkItems(link.id)!
+        // tree[input.name][link.id] = memory.getLinkItems(link.id)!
+
+        tree[input.name] = {
+          ...tree[input.name],
+          get [link.id]() {
+            return memory.getLinkItems(link.id)!
+          }
+        }
       }
     }
 
@@ -221,10 +228,25 @@ export class Executor {
       tree[output.name] = {}
 
       for(const link of this.diagram.linksConnectedToPortId(output.id)) {
-        tree[output.name][link.id] = memory.getLinkItems(link.id)!
+        // WHAT DOES THIS EVEN
+        tree[output.name] = {
+          ...tree[output.name],
+          // WHAT DOES THIS EVEN MEAN?
+          get [link.id]() {
+            return memory.getLinkItems(link.id)!
+          },
+          // THIS DOES NOT INTERFERE
+          // IT IS NOT WORKING
+          set [link.id](items: Item[]) {
+            memory.setLinkItems(link.id, items)
+          }
+        }        
       }
     }
 
+    // TODO link counts need to be packaged to use memory!!
+    // TODO link items need to be packaged to use memory!!
+    // SE ABOVE!
     return new OutputDevice(tree, memory.getLinkCounts())
   }
 
