@@ -1,6 +1,7 @@
-type NextResult = undefined
-type ReturnResult = void | never
-type NextArgument = void
+export type NextResult = undefined
+export type ReturnResult = void | never
+export type NextArgument = void
+export type PortName = string
 
 import { InputDeviceInterface } from "./InputDevice"
 import { OutputDeviceInterface } from "./OutputDevice"
@@ -19,8 +20,8 @@ export interface Computer {
   name: string
   label?: string
   category?: string
-  inputs?: string[]
-  outputs?: string[]
+  inputs?: PortName[]
+  outputs?: PortName[]
   params?: Record<string, Param>
   tags?: string[]
 
