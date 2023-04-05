@@ -2,7 +2,6 @@ require('dotenv').config({ path: `.env.local` })
 import WebSocket from 'ws'
 import { onMessage } from './onMessage'
 
-
 const wsServer = new WebSocket.Server({
     port: 3100,
 })

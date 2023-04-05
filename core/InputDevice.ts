@@ -1,6 +1,7 @@
 import { LinkId } from "./Link"
 import { Item } from "./Item"
 import { PortId } from "./Port"
+import { ExecutionMemory } from "./ExecutionMemory"
 
 type InputStatus = 'AWAITING' | 'COMPLETE' | 'EXHAUSTED'
 
@@ -10,11 +11,11 @@ type LinkItems = Record<LinkId, Item[]>
  * Example:
  * {
  *   input: {
- *     'Source.1.output<--->Target.1.input': [1, 2]
- *     'Source.2.output<--->Target.1.input': [3, 4, 5]
+ *     'Source.1.output--->Target.1.input': [1, 2]
+ *     'Source.2.output--->Target.1.input': [3, 4, 5]
  *   },
  *   another: {
-  *    'Source.3.output<--->Target.1.another': ['a text']
+  *    'Source.3.output--->Target.1.another': ['a text']
  *   }
  * }
  */
@@ -26,7 +27,10 @@ export interface InputDeviceInterface {
 }
 
 export class InputDevice implements InputDeviceInterface {
-  constructor(private inputTree: InputTree = {}) {}
+  constructor(
+    private inputTree: InputTree = {},
+    private memory: ExecutionMemory,
+  ) {}
 
   // haveItemsAtInput(name: string): boolean {}
 
@@ -44,15 +48,14 @@ export class InputDevice implements InputDeviceInterface {
   /**
    * Removes and return items at edges connected to input with name 
    */
-  pullFrom(name: string, count?: number) {
-    let remaining = count || Infinity
+  pullFrom(name: string, count: number = Infinity) {
+    let remaining = count
     const pulled: Item[] = []
     const connectedLinks = this.inputTree[name]
-    const incomingItemLists = Object.values(connectedLinks)
+    const incomingLinkIds = Object.keys(connectedLinks)
 
-    for(const itemList of incomingItemLists) {
-      // splice will *removes* them from the inputTree
-      const taken = itemList.splice(0, remaining)
+    for(const linkId of incomingLinkIds) {
+      const taken = this.memory.pullLinkItems(linkId, remaining)
       pulled.push(...taken)
       remaining -= taken.length
       if(remaining === 0) break

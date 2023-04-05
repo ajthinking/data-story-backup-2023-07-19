@@ -12,11 +12,11 @@ type LinkItems = Record<LinkId, Item[]>
  * Example:
  * {
  *   input: {
- *     'Source.1.output<--->Target.1.input': [1, 2]
- *     'Source.2.output<--->Target.1.input': [3, 4, 5]
+ *     'Source.1.output--->Target.1.input': [1, 2]
+ *     'Source.2.output--->Target.1.input': [3, 4, 5]
  *   },
  *   another: {
-  *    'Source.3.output<--->Target.1.another': ['a text']
+  *    'Source.3.output--->Target.1.another': ['a text']
  *   }
  * }
  */

@@ -16,18 +16,18 @@ export class WorkerClient implements ServerClient {
     this.worker.addEventListener("message", (event) => {
       const parsed = JSON.parse(event.data);
 
-      if (parsed.type === "describeResponse") {
+      if (parsed.type === "DescribeResponse") {
         console.log("Got describe response: ", parsed)
         this.setAvailableNodes(parsed.availableNodes);
         return;
       }
 
-      if (parsed.type === "executionUpdate") {
+      if (parsed.type === "ExecutionUpdate") {
         this.updateEdgeCounts(parsed.counts);
         return;
       }
 
-      if (parsed.type === "executionResult") {
+      if (parsed.type === "ExecutionResult") {
         setTimeout(() => alert("Execution complete 💫"), 100);
         return;
       }

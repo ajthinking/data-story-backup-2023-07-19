@@ -61,7 +61,7 @@ export const useStore = create<StoreSchema>((set, get) => ({
     set({
       edges: addEdge({
         ...connection,
-        id: `${fromHandleId}-->${toHandleId}`,
+        id: `${fromHandleId}--->${toHandleId}`,
       }, get().edges),
     });
   },

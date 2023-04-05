@@ -62,7 +62,7 @@ export class DiagramBuilder {
     if(!previousNodePort || !newNodePort) return
 
     const link = new Link(
-      `${previousNodePort.id}-->${newNodePort.id}`,
+      `${previousNodePort.id}--->${newNodePort.id}`,
       previousNodePort.id,
       newNodePort.id,
     )

@@ -18,6 +18,5 @@ export const CreateJson: ComputerFactory = (): Computer => ({
       // wraps the parsed json in an array if it's not already an array
       [parsed].flat()
     )
-    yield;
   },
 });

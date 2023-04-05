@@ -11,7 +11,7 @@ export const guessConnection = (existingNodes: DataStoryNode[], node: DataStoryN
   if(!firstInput) return null;
 
   return {
-    id: `${previousNode.id}.${firstOutput.name}-->${node.id}.${firstInput.name}`,
+    id: `${previousNode.id}.${firstOutput.name}--->${node.id}.${firstInput.name}`,
     sourceHandle: firstOutput.id,
     targetHandle: firstInput.id,
     source: previousNode.id,

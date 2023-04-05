@@ -63,7 +63,7 @@ describe('add', () => {
 
     expect(diagram.links).toMatchObject([
       {
-        id: 'CreateJson.1.output-->Pass.1.input',
+        id: 'CreateJson.1.output--->Pass.1.input',
         sourcePortId: 'CreateJson.1.output',
         targetPortId: 'Pass.1.input'
       }

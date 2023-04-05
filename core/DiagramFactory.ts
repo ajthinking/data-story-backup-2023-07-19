@@ -175,7 +175,7 @@ export class DiagramFactory {
       "sourceHandle": "Signal.1.output",
       "target": "Pass.1",
       "targetHandle": "Pass.1.input",
-      "id": "Signal.1.output-->Pass.1.input"
+      "id": "Signal.1.output--->Pass.1.input"
     }
   ],
   "viewport": {
@@ -216,7 +216,7 @@ export class DiagramFactory {
   ],
   "links": [
     {
-      "id": "Signal.1.output-->Pass.1.input",
+      "id": "Signal.1.output--->Pass.1.input",
       "sourcePortId": "Signal.1.output",
       "targetPortId": "Pass.1.input"
     }

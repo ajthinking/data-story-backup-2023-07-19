@@ -83,7 +83,7 @@ export const sampleDiagram = `{
   ],
   "edges": [
     {
-      "id": "Scalar.1.output<--->Multiply.1.input",
+      "id": "Scalar.1.output--->Multiply.1.input",
       "source": "Scalar.1",
       "target": "Multiply.1",
       "sourceHandle": "Scalar.1.output",
@@ -91,7 +91,7 @@ export const sampleDiagram = `{
       "label": 582
     },
     {
-      "id": "Multiply.1.output<--->Log.1.input",
+      "id": "Multiply.1.output--->Log.1.input",
       "source": "Multiply.1",
       "target": "Log.1",
       "sourceHandle": "Multiply.1.output",

@@ -7,8 +7,8 @@ describe('pull', () => {
   it('returns items at port named "input"', () => {
     const input = new InputDevice({
       input: {
-        'Source.1.output-->Target.1.input': [1, 2],
-        'Source.2.output-->Target.1.input': [3, 4],
+        'Source.1.output--->Target.1.input': [1, 2],
+        'Source.2.output--->Target.1.input': [3, 4],
       },
     })
 
@@ -24,15 +24,15 @@ describe('pull', () => {
   it('removes the items pulled from the links', () => {
     const tree: InputTree = {
       input: {
-        'Source.1.output-->Target.1.input': [1, 2],
-        'Source.2.output-->Target.1.input': [3, 4],
+        'Source.1.output--->Target.1.input': [1, 2],
+        'Source.2.output--->Target.1.input': [3, 4],
       },
     }
 
     new InputDevice(tree).pull()
 
-    const atLink1 = tree.input['Source.1.output-->Target.1.input']
-    const atLink2 = tree.input['Source.2.output-->Target.1.input']
+    const atLink1 = tree.input['Source.1.output--->Target.1.input']
+    const atLink2 = tree.input['Source.2.output--->Target.1.input']
     
     
     expect(atLink1).toMatchObject([])
@@ -42,8 +42,8 @@ describe('pull', () => {
   it('may pull a specified number of items', () => {
     const input = new InputDevice({
       input: {
-        'Source.1.output-->Target.1.input': [1, 2],
-        'Source.2.output-->Target.1.input': [3, 4],
+        'Source.1.output--->Target.1.input': [1, 2],
+        'Source.2.output--->Target.1.input': [3, 4],
       },
     })
 
@@ -57,8 +57,8 @@ describe('pullFrom', () => {
   it('returns items at named port', () => {
     const input = new InputDevice({
       numbers: {
-        'Source.1.output-->Target.1.numbers': [1, 2],
-        'Source.2.output-->Target.1.numbers': [3, 4],
+        'Source.1.output--->Target.1.numbers': [1, 2],
+        'Source.2.output--->Target.1.numbers': [3, 4],
       },
     })
 
@@ -68,15 +68,15 @@ describe('pullFrom', () => {
   it('removes the items pulled from the links', () => {
     const tree: InputTree = {
       numbers: {
-        'Source.1.output-->Target.1.numbers': [1, 2],
-        'Source.2.output-->Target.1.numbers': [3, 4],
+        'Source.1.output--->Target.1.numbers': [1, 2],
+        'Source.2.output--->Target.1.numbers': [3, 4],
       },
     }
 
     new InputDevice(tree).pullFrom('numbers')
 
-    const atLink1 = tree.numbers['Source.1.output-->Target.1.numbers']
-    const atLink2 = tree.numbers['Source.2.output-->Target.1.numbers']
+    const atLink1 = tree.numbers['Source.1.output--->Target.1.numbers']
+    const atLink2 = tree.numbers['Source.2.output--->Target.1.numbers']
     
     
     expect(atLink1).toMatchObject([])

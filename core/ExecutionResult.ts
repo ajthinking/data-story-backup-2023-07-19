@@ -3,7 +3,7 @@ import { Item } from "./Item";
 import { LinkId } from "./Link";
 
 export class ExecutionResult {
-  type = "executionResult"
+  type = "ExecutionResult"
 
   constructor(
     public id: string,

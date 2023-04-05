@@ -28,21 +28,30 @@ export class SocketClient implements ServerClient {
     this.socket.onmessage = ((data) => {
       const parsed = JSON.parse(data.data)
 
-      if (parsed.type === "describeResponse") {
+      if (parsed.type === "DescribeResponse") {
         this.setAvailableNodes(parsed.availableNodes)
         return;
       }
 
-      if (parsed.type === "executionUpdate") {
+      if (parsed.type === "ExecutionUpdate") {
         this.updateEdgeCounts(parsed.counts)
         return;
       }
 
-      if(parsed.type === "executionResult") {
+      if(parsed.type === "ExecutionResult") {
         setTimeout(() => alert("Execution complete 💫"), 100)
 
         return
       }
+
+      if(parsed.type === "ExecutionFailure") {
+        console.log("Execution failed: ", {
+          history: parsed.history,
+        })
+        setTimeout(() => alert(parsed.message), 100)
+
+        return
+      }      
 
       throw("Unknown message type: " + parsed.type)
     }) 

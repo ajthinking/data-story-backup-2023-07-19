@@ -1,10 +1,17 @@
 import { shallow } from "zustand/shallow";
 import { Modal } from "../modal"
 import { StoreSchema, useStore } from '../store';
+import { useEffect, useRef } from "react";
 
 export const RunModal = ({ setShowModal }: {
   setShowModal: (show: boolean) => void
 }) => {
+  const runButtonReference = useRef<HTMLButtonElement>(null);  
+
+  useEffect(() => {
+    runButtonReference?.current?.focus();
+  }, [])
+
   const selector = (state: StoreSchema) => ({
     onRun: state.onRun,
   });
@@ -18,6 +25,7 @@ export const RunModal = ({ setShowModal }: {
     <div className="flex flex-col space-y-2">
       <div className="text-xs mb-4 text-gray-500">Server: <span className="ml-2 font-mono text-gray-600">localhost:3100</span></div>
       <button
+        ref={runButtonReference}
         className="flex items-center justify-center space-y-4 space-x-2 my-4"
         onClick={() => {
           onRun()

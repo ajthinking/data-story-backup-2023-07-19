@@ -35,8 +35,24 @@ export default function Workbench() {
   // MOVE OUT
   useEffect(() => {
     function handleKeyPress(event: KeyboardEvent) {
-      const shiftPlusOnSwedishMacKeyboard = event.shiftKey && event.code === "Minus"
-      if (shiftPlusOnSwedishMacKeyboard) setShowAddNodeModal(true);
+      // Swedish Mac keyboard 🤷‍♂️
+      const shiftR = event.shiftKey && event.code === "KeyR";
+      const shiftPlus = event.shiftKey && event.code === "Minus"
+      
+      // Ensure no modal is already open
+      if ([
+        openNodeModalId,
+        showConfigModal,
+        showRunModal,
+        showAddNodeModal,
+      ].find(Boolean)) {
+        console.log("Could not complete shortcut, a modal already open")
+        return;
+      }
+
+      // Open modal!
+      if (shiftR) setShowRunModal(true);
+      if (shiftPlus) setShowAddNodeModal(true);
     }
 
     // Add the event listener when the component mounts

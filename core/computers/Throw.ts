@@ -9,9 +9,9 @@ export const Throw: ComputerFactory = (): Computer => ({
   },
 
   async *run({ input }: RunArgs) {
-    console.log("Running the throw node")
     input.pull()
-    console.log("Pulled...")
-    throw Error('Throw node thrown an error')
+    console.log(111111)
+    throw Error('Throw node thrown an error. This is fine 🔥🔥🔥')
+    console.log(222222)
   },
 });

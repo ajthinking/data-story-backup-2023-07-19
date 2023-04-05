@@ -13,6 +13,7 @@ import { Param } from "./Param";
 import { ParamsDevice } from "./ParamsDevice";
 import { Storage } from "./Storage";
 import { ExecutionMemory } from "./ExecutionMemory";
+import { ExecutionFailure } from "./ExecutionFailure";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -28,9 +29,12 @@ export class Executor {
   }
 
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
+    this.memory.pushHistoryMessage('Starting execution 🚀')
+
     let pendingPromises: Promise<any>[] = []
+    let executionError: Error | undefined     
     
-    while(!this.isComplete()) {
+    while(!this.isComplete() && !executionError) {
       // cleanup old promises that are done
       pendingPromises = await this.clearFinishedPromises(pendingPromises)
 
@@ -45,14 +49,19 @@ export class Executor {
         const runner = this.memory.getNodeRunner(node.id)!;
         const promise = runner.next()
 
-        // Handle run result
+        // Handle run error
+        promise.catch((error: Error) => {
+          console.log("Inner Catch", error) 
+        })
+
+        // Handle run success
         promise.then((result: IteratorResult<undefined, void>) => {
           if(result.done) {
             this.memory.setNodeStatus(node.id, 'COMPLETE');
             return;
           }
 
-          // not done, so node is available again!
+          // Not done, so node is available again!
           this.memory.setNodeStatus(node.id, 'AVAILABLE')
         })
 
@@ -62,8 +71,10 @@ export class Executor {
       // Add this batch of promises to the pending list
       pendingPromises.push(...promises)
 
-      // If no promises, then we are stuck??? TODO ensure this works!
+      // If no promises, then we are stuck
       if(pendingPromises.length === 0) {
+        this.memory.pushHistoryMessage('No pending promises, so we are stuck?! 🤷‍♂️')
+
         // Mark all nodes as complete
         for(const node of this.diagram.nodes) {
           this.memory.setNodeStatus(node.id, 'COMPLETE')
@@ -76,6 +87,11 @@ export class Executor {
         await Promise.race(pendingPromises);
         yield new ExecutionUpdate(this.memory.getLinkCounts())
       }
+    }
+
+    // UNCOMMENT WHEN BUG ABOVE IS FIXED
+    if(executionError) {
+      // throw(executionError)
     }
 
     yield new ExecutionUpdate(this.memory.getLinkCounts())
@@ -201,6 +217,7 @@ export class Executor {
   }
 
   protected makeInputDevice(node: Node, memory: ExecutionMemory) {
+    // Consider the utility of the InputTree. Is it worthwhile?
     let tree: InputTree = {}
 
     for(const input of node.inputs) {
@@ -218,7 +235,7 @@ export class Executor {
       }
     }
 
-    return new InputDevice(tree)
+    return new InputDevice(tree, memory)
   }
 
   protected makeOutputDevice(node: Node, memory: ExecutionMemory) {
@@ -228,26 +245,23 @@ export class Executor {
       tree[output.name] = {}
 
       for(const link of this.diagram.linksConnectedToPortId(output.id)) {
-        // WHAT DOES THIS EVEN
         tree[output.name] = {
           ...tree[output.name],
-          // WHAT DOES THIS EVEN MEAN?
           get [link.id]() {
             return memory.getLinkItems(link.id)!
           },
-          // THIS DOES NOT INTERFERE
-          // IT IS NOT WORKING
-          set [link.id](items: Item[]) {
-            memory.setLinkItems(link.id, items)
-          }
-        }        
+        }
       }
     }
 
     // TODO link counts need to be packaged to use memory!!
     // TODO link items need to be packaged to use memory!!
     // SE ABOVE!
-    return new OutputDevice(tree, memory.getLinkCounts())
+    return new OutputDevice(
+      tree,
+      memory.getLinkCounts(),
+      memory
+    )
   }
 
   protected makeParamsDevice(computer: Computer, node: Node): ParamsDevice {

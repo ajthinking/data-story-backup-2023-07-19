@@ -4,7 +4,7 @@ import { Edge } from "reactflow";
 
 export const initialEdges: Edge<any>[] = [
   {
-    id: 'Scalar.1.output<--->Multiply.1.input',
+    id: 'Scalar.1.output--->Multiply.1.input',
     source: 'Scalar.1',
     target: 'Multiply.1',
     sourceHandle: 'Scalar.1.output',
@@ -12,7 +12,7 @@ export const initialEdges: Edge<any>[] = [
     label: '132',
   },
   {
-    id: 'Multiply.1.output<--->Log.1.input',
+    id: 'Multiply.1.output--->Log.1.input',
     source: 'Multiply.1',
     target: 'Log.1',
     sourceHandle: 'Multiply.1.output',

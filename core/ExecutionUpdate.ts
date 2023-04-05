@@ -1,7 +1,7 @@
 import { LinkId } from "./Link";
 
 export class ExecutionUpdate {
-  type = "executionUpdate"
+  type = "ExecutionUpdate"
 
   constructor(
     public linkCounts: Map<LinkId, number>,
