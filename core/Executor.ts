@@ -17,30 +17,17 @@ import { ExecutionMemory } from "./ExecutionMemory";
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
 export class Executor {
-  // TODO: move this to a ExecutionMemory instance
-  nodeStatuses = new Map<NodeId, NodeStatus>();
-  nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();  
-  linkItems = new Map<LinkId, Item[]>();
-  linkCounts = new Map<LinkId, number>();
-  // memory: ExecutionMemory;
+  memory: ExecutionMemory;
 
   constructor(
     public diagram: Diagram,
     public computers: Map<string, Computer>,
     public storage: Storage
   ) {
-    // this.memory = new ExecutionMemory(
-    //   this.nodeStatuses,
-    //   this.nodeRunners,
-    //   this.linkItems,
-    //   this.linkCounts
-    // )
+    this.memory = this.makeExecutionMemory();
   }
 
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
-    let startTime = new Date().getTime();
-    this.initState()
-
     let pendingPromises: Promise<any>[] = []
     
     while(!this.isComplete()) {
@@ -52,21 +39,21 @@ export class Executor {
 
       const promises = runnables.map(node => {
         // Put node in busy state
-        this.nodeStatuses.set(node.id, 'BUSY')
+        this.memory.setNodeStatus(node.id, 'BUSY')
 
         // Run
-        const runner = this.nodeRunners.get(node.id)!;
+        const runner = this.memory.getNodeRunner(node.id)!;
         const promise = runner.next()
 
         // Handle run result
         promise.then((result: IteratorResult<undefined, void>) => {
           if(result.done) {
-            this.nodeStatuses.set(node.id, 'COMPLETE');
+            this.memory.setNodeStatus(node.id, 'COMPLETE');
             return;
           }
 
           // not done, so node is available again!
-          this.nodeStatuses.set(node.id, 'AVAILABLE')
+          this.memory.setNodeStatus(node.id, 'AVAILABLE')
         })
 
         return promise
@@ -79,7 +66,7 @@ export class Executor {
       if(pendingPromises.length === 0) {
         // Mark all nodes as complete
         for(const node of this.diagram.nodes) {
-          this.nodeStatuses.set(node.id, 'COMPLETE')
+          this.memory.setNodeStatus(node.id, 'COMPLETE')
         }
       }
 
@@ -87,41 +74,57 @@ export class Executor {
       // it can open up for more nodes to proceed immediately
       if(pendingPromises.length > 0) {
         await Promise.race(pendingPromises);
-        yield new ExecutionUpdate(this.linkCounts)
+        yield new ExecutionUpdate(this.memory.getLinkCounts())
       }
     }
 
-    yield new ExecutionUpdate(this.linkCounts)
+    yield new ExecutionUpdate(this.memory.getLinkCounts())
   }
 
-  protected initState() {
+  protected makeExecutionMemory() {
+    // Maps
+    const nodeStatuses = new Map<NodeId, NodeStatus>();
+    const linkItems = new Map<LinkId, Item[]>();
+    const linkCounts = new Map<LinkId, number>();
+    const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
+
+    // The memory object
+    const memory = new ExecutionMemory(
+      nodeStatuses,
+      nodeRunners,
+      linkItems,
+      linkCounts
+    )
+
+    // Configure memory initial state
     for(const link of this.diagram.links) {
       // Set all links to be empty
-      this.linkItems.set(link.id, [])
-      this.linkCounts.set(link.id, 0)
+      linkItems.set(link.id, [])
+      linkCounts.set(link.id, 0)
     }
     
     for(const node of this.diagram.nodes) {
       // Set all nodes to available
-      this.nodeStatuses.set(node.id, 'AVAILABLE')
+      nodeStatuses.set(node.id, 'AVAILABLE')
 
-      // Initialize runner generators
+      // // Initialize runner generators
       const computer = this.computers.get(node.type)!
-
-      this.nodeRunners.set(
+      nodeRunners.set(
         node.id,
         computer.run({
-          input: this.makeInputDevice(node),
-          output: this.makeOutputDevice(node),
+          input: this.makeInputDevice(node, memory),
+          output: this.makeOutputDevice(node, memory),
           params: this.makeParamsDevice(computer, node),
           storage: this.storage
         })
       )
     }
+
+    return memory
   }
 
   protected isComplete(): boolean {
-    for(const status of this.nodeStatuses.values()) {
+    for(const status of this.memory.getNodeStatuses().values()) {
       if(status !== 'COMPLETE') return false;
     }
 
@@ -160,7 +163,7 @@ export class Executor {
   // TODO: this should be renamed to SHOULD_RUN_NODE_DEFAULT ?!
   protected canRunNodeDefault(node: Node) {
     // Must be available
-    if(this.nodeStatuses.get(node.id) !== 'AVAILABLE') return false;
+    if(this.memory.getNodeStatus(node.id) !== 'AVAILABLE') return false;
 
     // If one input port, it must not be empty
     if(node.inputs.length === 1 && !this.inputHaveItems(node.inputs[0].id)) return false;
@@ -175,7 +178,7 @@ export class Executor {
   protected inputHaveItems(id: PortId): boolean {
     const links = this.diagram.linksConnectedToPortId(id)
     const linkWithItems = links.find(link => {
-      const items = this.linkItems.get(link.id)!
+      const items = this.memory.getLinkItems(link.id)!
       return items.length > 0
     })
     
@@ -186,7 +189,7 @@ export class Executor {
     const links = this.diagram.linksConnectedToPortId(port.id)
     const nodeIds = links.map(link => link.sourcePortId)
     
-    return nodeIds.every(nodeId => this.nodeStatuses.get(nodeId) === 'COMPLETE')
+    return nodeIds.every(nodeId => this.memory.getNodeStatus(nodeId) === 'COMPLETE')
   }
   
   protected inputsHaveAllItems(inputs: Port[]) {
@@ -194,35 +197,35 @@ export class Executor {
   }
 
   protected noBusyNodes() {
-    return Array.from(this.nodeStatuses.values()).every(status => status !== 'BUSY')
+    return Array.from(this.memory.getNodeStatuses().values()).every(status => status !== 'BUSY')
   }
 
-  protected makeInputDevice(node: Node) {
+  protected makeInputDevice(node: Node, memory: ExecutionMemory) {
     let tree: InputTree = {}
 
     for(const input of node.inputs) {
       tree[input.name] = {}
 
       for(const link of this.diagram.linksConnectedToPortId(input.id)) {
-        tree[input.name][link.id] = this.linkItems.get(link.id)!
+        tree[input.name][link.id] = memory.getLinkItems(link.id)!
       }
     }
 
     return new InputDevice(tree)
   }
 
-  protected makeOutputDevice(node: Node) {
+  protected makeOutputDevice(node: Node, memory: ExecutionMemory) {
     let tree: OutputTree = {}
 
     for(const output of node.outputs) {
       tree[output.name] = {}
 
       for(const link of this.diagram.linksConnectedToPortId(output.id)) {
-        tree[output.name][link.id] = this.linkItems.get(link.id)!
+        tree[output.name][link.id] = memory.getLinkItems(link.id)!
       }
     }
 
-    return new OutputDevice(tree, this.linkCounts)
+    return new OutputDevice(tree, memory.getLinkCounts())
   }
 
   protected makeParamsDevice(computer: Computer, node: Node): ParamsDevice {

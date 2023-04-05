@@ -26,7 +26,7 @@ export class DiagramBuilder {
       outputs: (computer.outputs ?? []).map(name => {
         return new Port(`${nodeId}.${name}`, name)
       }),
-      params: structuredClone(computer.params)
+      params: (computer.params)
     })
 
     this.diagram.nodes.push(node)

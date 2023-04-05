@@ -18,6 +18,8 @@ export class ExecutionMemory {
   }
 
   setNodeStatus(nodeId: NodeId, status: NodeStatus) {
+    console.log(`Setting node ${nodeId} to ${status}`)
+
     this.nodeStatuses.set(nodeId, status)
   }
 
@@ -30,6 +32,8 @@ export class ExecutionMemory {
   }
 
   setNodeRunner(nodeId: NodeId, status: AsyncGenerator<undefined, void, void>) {
+    console.log(`Setting node ${nodeId} runner`)
+
     this.nodeRunners.set(nodeId, status)
   }
 
@@ -38,6 +42,8 @@ export class ExecutionMemory {
   }
 
   setLinkItems(linkId: LinkId, items: Item[]) {
+    console.log(`Setting link ${linkId} items: ${JSON.stringify(items)}`)
+
     this.linkItems.set(linkId, items)
   }
 
@@ -45,12 +51,12 @@ export class ExecutionMemory {
     return this.linkCounts.get(linkId)
   }
 
+  setLinkCount(linkId: LinkId, count: number) {
+    console.log(`Setting link ${linkId} count: ${count}`)
+    this.linkCounts.set(linkId, count)
+  }  
+
   getLinkCounts(): Map<LinkId, number> {
     return this.linkCounts
   }
-
-  setLinkCount(linkId: LinkId, count: number) {
-    this.linkCounts.set(linkId, count)
-  }
-
 }

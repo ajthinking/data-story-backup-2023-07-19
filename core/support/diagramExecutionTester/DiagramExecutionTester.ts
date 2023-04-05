@@ -5,6 +5,7 @@ import { ExecutionResult } from "../../ExecutionResult";
 import { ExecutionUpdate } from "../../ExecutionUpdate";
 import { Executor } from "../../Executor";
 import { FileStorage } from "../../FileStorage";
+import { NullStorage } from "../../NullStorage";
 
 export const whenRunning = (diagram: Diagram) => {
   return new DiagramExecutionTester(diagram)
@@ -17,6 +18,7 @@ export class DiagramExecutionTester {
   constructor(public diagram: Diagram) {}
 
   async ok() {
+
     const executor = new Executor(
       this.diagram, 
       computerRegistry,
@@ -67,7 +69,7 @@ export class DiagramExecutionTester {
   
 
   protected async makeStorage() {
-    const storage = new FileStorage('.datastory')
+    const storage = new NullStorage()
     await storage.init()
     await storage.createExecution()
 
