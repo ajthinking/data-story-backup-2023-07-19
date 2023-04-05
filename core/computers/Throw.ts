@@ -10,8 +10,6 @@ export const Throw: ComputerFactory = (): Computer => ({
 
   async *run({ input }: RunArgs) {
     input.pull()
-    console.log(111111)
-    throw Error('Throw node thrown an error. This is fine 🔥🔥🔥')
-    console.log(222222)
+    throw Error('Some error')
   },
 });
