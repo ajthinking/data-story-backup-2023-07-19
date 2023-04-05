@@ -15,7 +15,7 @@ export const AddNodeModal = ({ setShowModal }: {
 
   useEffect(() => {
     inputReference?.current?.focus();
-}, [])  
+  }, [])
 
   const selector = (state: StoreSchema) => ({
       nodes: state.nodes,
