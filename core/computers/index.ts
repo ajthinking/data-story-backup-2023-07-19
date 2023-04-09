@@ -1,6 +1,7 @@
 export * from './hubspot'
 export * from './placeholders'
 export { AskChatGpt } from './AskChatGpt';
+export { CreateAttribute } from './CreateAttribute';
 export { CreateJson } from './CreateJson'
 export { DumpJson } from './DumpJson';
 export { Ignore } from './Ignore'

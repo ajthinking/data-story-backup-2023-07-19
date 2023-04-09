@@ -4,24 +4,6 @@ import { PortId } from "./Port"
 import { ExecutionMemory } from "./ExecutionMemory"
 import { PortName } from "./Computer"
 
-type InputStatus = 'AWAITING' | 'COMPLETE' | 'EXHAUSTED'
-
-type LinkItems = Record<LinkId, Item[]>
-
-/**
- * Example:
- * {
- *   input: {
- *     'Source.1.output--->Target.1.input': [1, 2]
- *     'Source.2.output--->Target.1.input': [3, 4, 5]
- *   },
- *   another: {
-  *    'Source.3.output--->Target.1.another': ['a text']
- *   }
- * }
- */
-export type InputTree = Record<PortId, LinkItems>
-
 export type PortLinkMap = Record<PortName, LinkId[]>
 
 export interface InputDeviceInterface {
@@ -60,9 +42,9 @@ export class InputDevice implements InputDeviceInterface {
     const connectedLinks = this.portLinkMap[name]
 
     for(const linkId of connectedLinks) {
-      const taken = this.memory.pullLinkItems(linkId, remaining)
-      pulled.push(...taken)
-      remaining -= taken.length
+      const batch = this.memory.pullLinkItems(linkId, remaining)
+      pulled.push(...batch)
+      remaining -= batch.length
       if(remaining === 0) break
     }
 
