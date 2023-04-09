@@ -1,12 +1,12 @@
 import { expect } from "vitest";
 import { Computer, ComputerFactory } from "../../Computer";
 import { Diagram } from "../../Diagram";
-import { Executor } from "../../Executor";
-import { InputDevice } from "../../InputDevice";
+import { Executor, NodeStatus } from "../../Executor";
+import { InputDevice, PortLinkMap } from "../../InputDevice";
 import { InputDeviceFactory } from "../../InputDeviceFactory";
 import { Item } from "../../Item";
-import { Link } from "../../Link";
-import { Node } from "../../Node";
+import { Link, LinkId } from "../../Link";
+import { Node, NodeId } from "../../Node";
 import { OutputDevice } from "../../OutputDevice";
 import { OutputDeviceFactory } from "../../OutputDeviceFactory";
 import { Param } from "../../Param";
@@ -16,6 +16,8 @@ import { TestStep } from "./TestStep";
 
 import { doRun, expectCanRun, expectCantRun, expectOutput, expectOutputs, getsInput, getsInputs } from "./testSteps";
 import { expectDone } from "./testSteps/expectDone";
+import { ExecutionMemory } from "../../ExecutionMemory";
+import { NullStorage } from "../../NullStorage";
 
 export const when = (factory: ComputerFactory) => {
   return new ComputerTester(factory())
@@ -36,26 +38,22 @@ export type ExplicitParamValues = {
 type TestStepArgs = any[]
 
 export class ComputerTester {
-  constructor(public computer: Computer) {}
   diagram: Diagram | null = null
   node: Node | null = null
-
   explicitParams: ExplicitParamValues = {}
-
   steps: [TestStep, TestStepArgs][] = []
-  
   inputs: {
     [key: string]: Item[]
   } = {}
-  
   expectedOutputs: {
     [key: string]: Item[]
   } = {}
-
   runner: AsyncGenerator | null = null
-
   inputDevice: InputDevice | null = null
   outputDevice: OutputDevice | null = null
+  memory: ExecutionMemory | null = null
+
+  constructor(public computer: Computer) {}  
 
   /**
    * After all steps have been registered, call this method to perform them 💫
@@ -63,19 +61,26 @@ export class ComputerTester {
   async ok() {
     this.diagram = this.makeDiagram()
     this.node = this.diagram.nodes[0]
-    
+    this.memory = this.makeExecutionMemory()
+
     this.inputDevice = this.makeInputDevice()
     this.outputDevice = this.makeOutputDevice()
-    const params: ParamsDevice = this.makeParamsDevice()
 
+    // Initialize runner
+    this.memory.setNodeRunner(
+        this.node.id,
+        this.computer.run({
+          input: this.inputDevice,
+          output: this.outputDevice,
+          params: this.makeParamsDevice(),
+          storage: new NullStorage(),
+        })
+    )
 
+    // Runner handle
+    this.runner = this.memory.getNodeRunner(this.node.id)!
 
-    this.runner = this.computer.run({
-      input: this.inputDevice,
-      output: this.outputDevice,
-      params,
-    })
-
+    // Perform the preparation and assertion steps
     for(const [step, args] of this.steps) {
       await step.handle(this, ...args)
     }
@@ -176,18 +181,31 @@ export class ComputerTester {
   }
 
   protected makeInputDevice() {
-    return InputDeviceFactory.createWithItemsAtFirstLink(
-      this.node!,
-      this.diagram!,
-      this.inputs
-    )
+    let map: PortLinkMap = {}
+
+    for(const input of this.node!.inputs) {
+      const connectedLinkIds = this.diagram!
+        .linksConnectedToPortId(input.id)
+        .map(link => link.id)
+
+      map[input.name] = connectedLinkIds
+    }
+
+    return new InputDevice(map, this.memory!)
   }
 
   protected makeOutputDevice() {
-    return OutputDeviceFactory.create(
-      this.node!,
-      this.diagram!,      
-    )
+    let map: PortLinkMap = {}
+
+    for(const output of this.node!.outputs) {
+      const connectedLinkIds = this.diagram!
+        .linksConnectedToPortId(output.id)
+        .map(link => link.id)
+
+      map[output.name] = connectedLinkIds
+    }
+
+    return new OutputDevice(map, this.memory!)
   }
 
   protected makeParamsDevice(): ParamsDevice {
@@ -207,5 +225,35 @@ export class ComputerTester {
 
     return device as ParamsDevice;
   }
+
+  protected makeExecutionMemory() {
+    // Maps
+    const nodeStatuses = new Map<NodeId, NodeStatus>();
+    const linkItems = new Map<LinkId, Item[]>();
+    const linkCounts = new Map<LinkId, number>();
+    const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
+
+    // The memory object
+    const memory = new ExecutionMemory(
+      nodeStatuses,
+      nodeRunners,
+      linkItems,
+      linkCounts
+    )
+
+    // Configure memory initial state
+    for(const link of this.diagram!.links) {
+      // Set all links to be empty
+      linkItems.set(link.id, [])
+      linkCounts.set(link.id, 0)
+    }
+    
+    for(const node of this.diagram!.nodes) {
+      // Set all nodes to available
+      nodeStatuses.set(node.id, 'AVAILABLE')
+    }
+
+    return memory
+  }  
 }
 

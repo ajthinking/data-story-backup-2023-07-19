@@ -2,7 +2,6 @@ import { NodeStatus } from "./Executor"
 import { Item } from "./Item"
 import { LinkId } from "./Link"
 import { NodeId } from "./Node"
-import { green, blue } from "../utils/coloredStrings"
 
 export class ExecutionMemory {
   history: string[] = []
@@ -15,9 +14,6 @@ export class ExecutionMemory {
   ) {}
 
   getNodeStatus(nodeId: NodeId): NodeStatus | undefined {
-    // console.log(
-    //   green(`Getting node ${nodeId} status`)
-    // )
     return this.nodeStatuses.get(nodeId)
   }
 
@@ -28,16 +24,10 @@ export class ExecutionMemory {
   }
 
   getNodeStatuses(): Map<NodeId, NodeStatus> {
-    // console.log(
-    //   green(`Getting node statuses`)
-    // )
     return this.nodeStatuses
   }
 
   getNodeRunner(nodeId: NodeId): AsyncGenerator<undefined, void, void> | undefined {
-    // console.log(
-    //   green(`Getting node ${nodeId} runner`)
-    // )
     return this.nodeRunners.get(nodeId)
   }
 
@@ -48,9 +38,6 @@ export class ExecutionMemory {
   }
 
   getLinkItems(linkId: LinkId): Item[] | undefined {
-    // console.log(
-    //   green(`Getting link ${linkId} items`)
-    // )
     return this.linkItems.get(linkId)
   }
 
@@ -76,11 +63,18 @@ export class ExecutionMemory {
     this.linkItems.set(linkId, items)
   }
 
+  getLinkCount(linkId: LinkId): number | undefined {
+    return this.linkCounts.get(linkId)
+  }
+
   getLinkCounts(): Map<LinkId, number> {
-    // console.log(
-    //   green(`Getting link counts`)
-    // )
     return this.linkCounts
+  }
+
+  setLinkCount(linkId: LinkId, count: number) {
+    this.history.push(`Setting link ${linkId} count to ${count}`)
+
+    this.linkCounts.set(linkId, count)
   }
 
   getHistory(): string[] {

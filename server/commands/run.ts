@@ -1,12 +1,8 @@
 import WebSocket from 'ws';
-import { Computer } from '../../core/Computer';
 import { DiagramFactory } from "../../core/DiagramFactory"
 import { Executor } from "../../core/Executor"
 import { RunMessage } from '../onMessage';
-import * as computers from '../../core/computers'
 import { FileStorage } from '../../core/FileStorage';
-import { NullStorage } from '../../core/NullStorage';
-import { ExecutionUpdate } from '../../core/ExecutionUpdate';
 import { ExecutionResult } from '../../core/ExecutionResult';
 import { computerRegistry } from '../computerRegistry';
 import { ExecutionFailure } from '../../core/ExecutionFailure';
@@ -37,14 +33,7 @@ export const run = async (ws: WebSocket, data: RunMessage) => {
       storage.currentExecutionId!
     ).stringify())    
   } catch(error) {
-    console.log(
-      "Outer Catch",
-      error,
-      "Here is the state history of the executor:",
-      executor.memory.getHistory()
-    )
-    
-    if (ws.readyState === WebSocket.OPEN) { // Check if the WebSocket connection is still open
+    if (ws.readyState === WebSocket.OPEN) {
       console.log("Sending ExecutionFailure to client")
       ws.send(new ExecutionFailure(executor.memory.getHistory()).stringify())
     } else {

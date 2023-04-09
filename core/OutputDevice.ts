@@ -8,6 +8,8 @@ type LinkItems = Record<LinkId, Item[]>
 
 export type OutputTree = Record<PortId, LinkItems>
 
+export type PortLinkMap = Record<PortName, LinkId[]>
+
 export interface OutputDeviceInterface {
   push(items: Item[]): void
   pushTo(name: string, items: Item[]): void
@@ -16,8 +18,7 @@ export interface OutputDeviceInterface {
 
 export class OutputDevice implements OutputDeviceInterface {
   constructor(
-    private outputTree: OutputTree = {},
-    private linkCounts: Map<LinkId, number>,
+    private portLinkMap: PortLinkMap = {},
     private memory: ExecutionMemory,
   ) {}
 
@@ -26,33 +27,16 @@ export class OutputDevice implements OutputDeviceInterface {
   }
 
   pushTo(name: PortName, items: Item[]) {
-    /*
-      Example structure:
-      {
-        'Source.1.output--->Target.1.input': [1, 2, 3]
-        'Source.2.output--->Target.1.input': [2, 3]
-      }
-    */    
-    const connectedLinks = this.outputTree[name]
+    const connectedLinks = this.portLinkMap[name]
 
-    /*
-      Example structure:
-      [
-        'Source.1.output--->Target.1.input'
-        'Source.2.output--->Target.1.input'
-      ]
-    */
-    const linkIds = Object.keys(connectedLinks)
-
-    // Update items on link
-    for(const linkId of linkIds) {
+    
+    for(const linkId of connectedLinks) {
+      // Update items on link
       this.memory.pushLinkItems(linkId, items)
-    }
 
-    // Update link counts
-    for(const linkId of Object.keys(connectedLinks)) {
-      const count = this.linkCounts.get(linkId)!
-      this.linkCounts.set(linkId, count + items.length)
+      // Update link counts
+      const count = this.memory.getLinkCount(linkId)!
+      this.memory.setLinkCount(linkId, count + items.length)
     }
   }
 
@@ -61,9 +45,8 @@ export class OutputDevice implements OutputDeviceInterface {
    * (Test) Utility to get items have been outputted through a port
    */
   itemsOutputtedThrough(name: PortName): Item[] {
-    const connectedLinks = this.outputTree[name]
-    const [firstLinkItems] = Object.values(connectedLinks)
+    const [connectedLink] = this.portLinkMap[name]
 
-    return firstLinkItems
+    return this.memory.getLinkItems(connectedLink) ?? []
   }
 }

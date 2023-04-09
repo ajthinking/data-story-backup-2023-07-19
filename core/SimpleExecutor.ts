@@ -1,6 +1,6 @@
 import { Node, NodeId } from "./Node";
 import { Diagram } from "./Diagram";
-import { InputDevice, InputTree, PortLinkMap } from "./InputDevice";
+import { InputDevice, InputTree } from "./InputDevice";
 import { OutputDevice, OutputTree } from "./OutputDevice";
 import { Port, PortId } from "./Port";
 import { Computer } from "./Computer";
@@ -14,11 +14,10 @@ import { Storage } from "./Storage";
 import { ExecutionMemory } from "./ExecutionMemory";
 import { ExecutionFailure } from "./ExecutionFailure";
 import { ExecutorInterface } from "./ExecutorInterface";
-import { connect } from "http2";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
-export class Executor implements ExecutorInterface {
+export class SimpleExecutor implements ExecutorInterface {
   memory: ExecutionMemory;
 
   constructor(
@@ -30,12 +29,11 @@ export class Executor implements ExecutorInterface {
   }
 
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
-    this.memory.pushHistoryMessage('Starting execution 🚀')
-
     let pendingPromises: Promise<any>[] = []
-    let executionError: Error | undefined     
+
+    let exception: Error | undefined;
     
-    while(!this.isComplete() && !executionError) {
+    while(!this.isComplete()) {
       // cleanup old promises that are done
       pendingPromises = await this.clearFinishedPromises(pendingPromises)
 
@@ -43,25 +41,23 @@ export class Executor implements ExecutorInterface {
       const runnables = this.getRunnableNodes()
 
       const promises = runnables.map(node => {
-        // Put node in busy state
-        this.memory.setNodeStatus(node.id, 'BUSY')
 
         // Run
-        const runner = this.memory.getNodeRunner(node.id)!; 
-        return runner.next()
-          .then((result: IteratorResult<undefined, void>) => {
-            if(result.done) {
-              this.memory.setNodeStatus(node.id, 'COMPLETE');
-              return;
+        const runner = this.memory.getNodeRunner(node.id)!;      
+        const promise = runner.next()
+          .catch((error: Error) => {
+            exception = error; 
+          })
+          .then((result: void | IteratorResult<undefined, void>) => {
+            if(result?.done) {
+              return this.memory.setNodeStatus(node.id, 'COMPLETE');
             }
 
             // Not done, so node is available again!
             this.memory.setNodeStatus(node.id, 'AVAILABLE')
-          })        
-          .catch((error: Error) => {
-            console.log("Registering an execution error")
-            executionError = error;
           })
+
+        return promise
       })
 
       // Add this batch of promises to the pending list
@@ -83,11 +79,6 @@ export class Executor implements ExecutorInterface {
         await Promise.race(pendingPromises);
         yield new ExecutionUpdate(this.memory.getLinkCounts())
       }
-    }
-
-    if(executionError) {
-      console.log("Rethrowing the execution error in an awaitable timeline")
-      throw(executionError)
     }
 
     yield new ExecutionUpdate(this.memory.getLinkCounts())
@@ -213,25 +204,51 @@ export class Executor implements ExecutorInterface {
   }
 
   protected makeInputDevice(node: Node, memory: ExecutionMemory) {
-    let map: PortLinkMap = {}
+    // Consider the utility of the InputTree. Is it worthwhile?
+    let tree: InputTree = {}
 
     for(const input of node.inputs) {
-      const connectedLinks = this.diagram.linksConnectedToPortId(input.id)
-      map[input.name] = connectedLinks.map(link => link.id);
+      tree[input.name] = {}
+
+      for(const link of this.diagram.linksConnectedToPortId(input.id)) {
+        // tree[input.name][link.id] = memory.getLinkItems(link.id)!
+
+        tree[input.name] = {
+          ...tree[input.name],
+          get [link.id]() {
+            return memory.getLinkItems(link.id)!
+          }
+        }
+      }
     }
 
-    return new InputDevice(map, memory)
+    return new InputDevice(tree, memory)
   }
 
   protected makeOutputDevice(node: Node, memory: ExecutionMemory) {
-    let map: PortLinkMap = {}
+    let tree: OutputTree = {}
 
     for(const output of node.outputs) {
-      const connectedLinks = this.diagram.linksConnectedToPortId(output.id)
-      map[output.name] = connectedLinks.map(link => link.id);
+      tree[output.name] = {}
+
+      for(const link of this.diagram.linksConnectedToPortId(output.id)) {
+        tree[output.name] = {
+          ...tree[output.name],
+          get [link.id]() {
+            return memory.getLinkItems(link.id)!
+          },
+        }
+      }
     }
 
-    return new OutputDevice(map, memory)
+    // TODO link counts need to be packaged to use memory!!
+    // TODO link items need to be packaged to use memory!!
+    // SE ABOVE!
+    return new OutputDevice(
+      tree,
+      memory.getLinkCounts(),
+      memory
+    )
   }
 
   protected makeParamsDevice(computer: Computer, node: Node): ParamsDevice {

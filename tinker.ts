@@ -1,33 +1,47 @@
-import { Sleep } from "./core/computers/Sleep"
-import { Item } from "./core/Item";
-import { sleep } from "./core/utils/sleep";
-
 export {}
 
-async function* myAsyncGenerator() {
-  try {
-    await sleep(1000)
-    yield 'First value';
-    await sleep(1000)
-    yield 'Second value';
-    await sleep(1000)
-    throw new Error('An error occurred in the async generator');
-  } catch (error) {
-    throw error
+(async () => {
+  // The async generator
+  const computer = async function *run() {
+    throw Error('Some error!')
   }
-}
 
-(async () => {  
-  const promise = new Promise((resolve, reject) => {
-    throw new Error('Some error without a handler😱')
-  });
+  // Initialize the generator
+  const runner = computer()
 
-  await sleep(1000)
+  // Store reference to the promise
+  const promise = runner.next()
+    .then(() => {
+      console.log("Handle success")
+    })
+    .catch((error: Error) => {
+      console.log("Catch", error)
+    });
+
+  // Await Error Success
+  await promise;
+})();
+
+(async () => {
+  // The async generator
+  const computer = async function *run() {
+    throw Error('Some error!')
+  }
+
+  // Initialize the generator
+  const runner = computer()
+
+  // Store reference to the promise
+  const promise = runner.next()
+
+  promise.then(() => {
+    console.log("Handle success")
+  })
 
   promise.catch((error: Error) => {
-    console.log("Got ya! Bye!")
+    console.log("Catch", error)
   });
 
-  console.log("HOHOH")
-
-})()
+  // Await Error Success
+  await promise;
+})();

@@ -2,6 +2,7 @@ import { LinkId } from "./Link"
 import { Item } from "./Item"
 import { PortId } from "./Port"
 import { ExecutionMemory } from "./ExecutionMemory"
+import { PortName } from "./Computer"
 
 type InputStatus = 'AWAITING' | 'COMPLETE' | 'EXHAUSTED'
 
@@ -21,6 +22,8 @@ type LinkItems = Record<LinkId, Item[]>
  */
 export type InputTree = Record<PortId, LinkItems>
 
+export type PortLinkMap = Record<PortName, LinkId[]>
+
 export interface InputDeviceInterface {
   pull: (count?: number) => Item[]
   pullFrom: (name: string, count?: number) => Item[]
@@ -28,7 +31,7 @@ export interface InputDeviceInterface {
 
 export class InputDevice implements InputDeviceInterface {
   constructor(
-    private inputTree: InputTree = {},
+    private portLinkMap: PortLinkMap = {},
     private memory: ExecutionMemory,
   ) {}
 
@@ -51,10 +54,12 @@ export class InputDevice implements InputDeviceInterface {
   pullFrom(name: string, count: number = Infinity) {
     let remaining = count
     const pulled: Item[] = []
-    const connectedLinks = this.inputTree[name]
-    const incomingLinkIds = Object.keys(connectedLinks)
+    // This one is not using the link items anymore
+    // Now we are using the memory!
+    // TODO: Slaughter the portLinkMap
+    const connectedLinks = this.portLinkMap[name]
 
-    for(const linkId of incomingLinkIds) {
+    for(const linkId of connectedLinks) {
       const taken = this.memory.pullLinkItems(linkId, remaining)
       pulled.push(...taken)
       remaining -= taken.length
@@ -67,7 +72,7 @@ export class InputDevice implements InputDeviceInterface {
   /**
    * Shorthand to set items while testing
    */
-  setItemsAt(portName: string, linkId: LinkId, items: Item[]) {
-    this.inputTree[portName][linkId] = items
+  setItemsAt(linkId: LinkId, items: Item[]) {
+    this.memory.setLinkItems(linkId, items)
   }
 }
