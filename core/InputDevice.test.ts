@@ -1,6 +1,6 @@
 import { Input } from "postcss";
 import { expect, it, describe } from "vitest";
-import { InputDevice, InputTree } from "./InputDevice";
+import { InputDevice } from "./InputDevice";
 import { Item } from "./Item";
 import { ExecutionMemory } from "./ExecutionMemory";
 import { NodeId } from "./Node";

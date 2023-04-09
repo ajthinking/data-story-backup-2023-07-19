@@ -1,6 +1,6 @@
 import { Node, NodeId } from "./Node";
 import { Diagram } from "./Diagram";
-import { InputDevice, InputTree, PortLinkMap } from "./InputDevice";
+import { InputDevice, PortLinkMap } from "./InputDevice";
 import { OutputDevice, OutputTree } from "./OutputDevice";
 import { Port, PortId } from "./Port";
 import { Computer } from "./Computer";
