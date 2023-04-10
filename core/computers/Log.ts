@@ -10,7 +10,8 @@ export const Log: ComputerFactory = (): Computer => ({
 
   async *run({ input, output }: RunArgs) {
     while(true) {
-      const incoming = input.pull()
+      // log the *item* - not ItemWithParams
+      const incoming = input.pull().map(i => i.value)
       
       console.log(JSON.stringify(incoming, null, 2))
       console.groupEnd()

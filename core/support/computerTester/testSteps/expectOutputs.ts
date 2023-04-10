@@ -1,15 +1,15 @@
 import { expect } from "vitest";
-import { Item } from "../../../Item";
+import { ItemValue } from "../../../ItemValue";
 import { ComputerTester } from "../ComputerTester";
 import { TestStep } from "../TestStep";
 
 export const expectOutputs: TestStep = {
-  async handle(tester: ComputerTester, expectedOutputs: { [key: string]: Item[]}) {
+  async handle(tester: ComputerTester, expectedOutputs: { [key: string]: ItemValue[]}) {
     
     const actual = Object.keys(expectedOutputs).reduce((acc, key) => {
       acc[key] = tester.outputDevice!.itemsOutputtedThrough(key);
       return acc
-    }, {} as { [key: string]: Item[] });
+    }, {} as { [key: string]: ItemValue[] });
 
     expect(actual).toMatchObject(expectedOutputs)
   }

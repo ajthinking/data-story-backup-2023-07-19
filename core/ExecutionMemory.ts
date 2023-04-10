@@ -1,5 +1,5 @@
 import { NodeStatus } from "./Executor"
-import { Item } from "./Item"
+import { ItemValue } from "./ItemValue"
 import { LinkId } from "./Link"
 import { NodeId } from "./Node"
 
@@ -9,7 +9,7 @@ export class ExecutionMemory {
   constructor(
     private nodeStatuses: Map<NodeId, NodeStatus>,
     private nodeRunners: Map<NodeId, AsyncGenerator<undefined, void, void>>,  
-    private linkItems: Map<LinkId, Item[]>,
+    private linkItems: Map<LinkId, ItemValue[]>,
     private linkCounts: Map<LinkId, number>
   ) {}
 
@@ -37,11 +37,11 @@ export class ExecutionMemory {
     this.nodeRunners.set(nodeId, status)
   }
 
-  getLinkItems(linkId: LinkId): Item[] | undefined {
+  getLinkItems(linkId: LinkId): ItemValue[] | undefined {
     return this.linkItems.get(linkId)
   }
 
-  pullLinkItems(linkId: LinkId, count: number = Infinity): Item[] {
+  pullLinkItems(linkId: LinkId, count: number = Infinity): ItemValue[] {
     const linkItems = this.linkItems.get(linkId)!
     const pulled = linkItems.splice(0, count)
 
@@ -50,14 +50,14 @@ export class ExecutionMemory {
     return pulled
   }
 
-  pushLinkItems(linkId: LinkId, items: Item[]): void {
+  pushLinkItems(linkId: LinkId, items: ItemValue[]): void {
     const linkItems = this.linkItems.get(linkId)!
     linkItems.push(...items)
 
     this.history.push(`Pushed ${items.length} items to link ${linkId}`)
   }
 
-  setLinkItems(linkId: LinkId, items: Item[]) {
+  setLinkItems(linkId: LinkId, items: ItemValue[]) {
     this.history.push(`Setting link ${linkId} items: ${JSON.stringify(items)}`)
 
     this.linkItems.set(linkId, items)

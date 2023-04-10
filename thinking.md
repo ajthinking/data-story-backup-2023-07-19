@@ -109,9 +109,16 @@ We want it to be simple to understand.
 Consider the wrapper idea:
 ```ts
 class Item {
+  type: 'DataStoryItem'
   value: any;
   params: {
     [key: string]: any
+    get x() {} // dynamic getters using a Proxy
   }
 }
 ```
+This could be acompanied by a type `SimpleItem` which describes an
+Unwrapped item value, useful for tests, debug, viewing, tables etc.
+
+Items only have params when in computers. Otherwise they dont have params.
+So it is not obvious Item is a good name for these super powered items.

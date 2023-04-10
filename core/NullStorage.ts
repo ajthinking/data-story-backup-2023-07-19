@@ -1,4 +1,4 @@
-import { Item } from "./Item";
+import { ItemValue } from "./ItemValue";
 import { Storage } from "./Storage";
 
 export class NullStorage implements Storage {
@@ -6,5 +6,5 @@ export class NullStorage implements Storage {
   
   async init() {}
   async createExecution() {}
-  async putExecutionItems(key: string, items: Item[]) {}
+  async putExecutionItems(key: string, items: ItemValue[]) {}
 }

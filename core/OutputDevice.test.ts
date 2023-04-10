@@ -1,12 +1,10 @@
-import { Input } from "postcss";
 import { expect, it, describe } from "vitest";
-import { InputTree } from "./InputDevice";
 import { LinkId } from "./Link";
 import { OutputDevice } from "./OutputDevice";
 import { ExecutionMemory } from "./ExecutionMemory";
 import { NodeStatus } from "./Executor";
 import { NodeId } from "./Node";
-import { Item } from "./Item";
+import { ItemValue } from "./ItemValue";
 
 describe('push', () => {
   it('pushes items to all links connected to port "output"', async () => {
@@ -20,7 +18,7 @@ describe('push', () => {
     const memory = new ExecutionMemory(
       new Map<NodeId, NodeStatus>(),
       new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, Item[]>(),
+      new Map<LinkId, ItemValue[]>(),
       new Map<LinkId, number>(),
     )
 
@@ -55,7 +53,7 @@ describe('pushTo', () => {
     const memory = new ExecutionMemory(
       new Map<NodeId, NodeStatus>(),
       new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, Item[]>(),
+      new Map<LinkId, ItemValue[]>(),
       new Map<LinkId, number>(),
     )
 

@@ -1,10 +1,10 @@
 import { expect } from "vitest";
-import { Item } from "../../../Item";
+import { ItemValue } from "../../../ItemValue";
 import { ComputerTester } from "../ComputerTester";
 import { TestStep } from "../TestStep";
 
 export const expectOutput: TestStep = {
-  async handle(tester: ComputerTester, expectedOutput: Item[]) {
+  async handle(tester: ComputerTester, expectedOutput: ItemValue[]) {
 
     const actual = tester.outputDevice!.itemsOutputtedThrough('output');
 

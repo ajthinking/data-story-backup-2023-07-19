@@ -1,19 +1,20 @@
 import { LinkId } from "./Link"
-import { Item } from "./Item"
+import { ItemValue } from "./ItemValue"
 import { PortId } from "./Port"
 import { PortName } from "./Computer"
 import { ExecutionMemory } from "./ExecutionMemory"
+import { ItemWithParams } from "./ItemWithParams"
 
-type LinkItems = Record<LinkId, Item[]>
+type LinkItems = Record<LinkId, ItemValue[]>
 
 export type OutputTree = Record<PortId, LinkItems>
 
 export type PortLinkMap = Record<PortName, LinkId[]>
 
 export interface OutputDeviceInterface {
-  push(items: Item[]): void
-  pushTo(name: string, items: Item[]): void
-  itemsAt?(name: string): Item[]
+  push(items: ItemValue[]): void
+  pushTo(name: string, items: ItemValue[]): void
+  itemsAt?(name: string): ItemValue[]
 }
 
 export class OutputDevice implements OutputDeviceInterface {
@@ -22,13 +23,15 @@ export class OutputDevice implements OutputDeviceInterface {
     private memory: ExecutionMemory,
   ) {}
 
-  push(items: Item[]) {
+  push(items: ItemValue[]) {
     return this.pushTo('output', items)
   }
 
-  pushTo(name: PortName, items: Item[]) {
+  pushTo(name: PortName, itemable: (ItemValue | ItemWithParams)[]) {
     const connectedLinks = this.portLinkMap[name]
 
+    // When outputting we should not be in a params infused ItemWithParams
+    const items = itemable.map(i =>  i instanceof ItemWithParams ? i.value: i)
     
     for(const linkId of connectedLinks) {
       // Update items on link
@@ -44,7 +47,7 @@ export class OutputDevice implements OutputDeviceInterface {
    * 
    * (Test) Utility to get items have been outputted through a port
    */
-  itemsOutputtedThrough(name: PortName): Item[] {
+  itemsOutputtedThrough(name: PortName): ItemValue[] {
     const [connectedLink] = this.portLinkMap[name]
 
     return this.memory.getLinkItems(connectedLink) ?? []

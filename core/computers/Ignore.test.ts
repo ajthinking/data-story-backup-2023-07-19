@@ -1,7 +1,7 @@
 import { expect, it, vi } from "vitest";
 import { RunArgs } from "../Computer";
 import { when } from "../support/computerTester/ComputerTester";
-import { Item } from "../Item";
+import { ItemValue } from "../ItemValue";
 import { Ignore } from "./Ignore";
 
 it('does nothing', async () => {

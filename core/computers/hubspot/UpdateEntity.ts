@@ -1,6 +1,6 @@
 import { Client } from "@hubspot/api-client";
 import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { ObjectItem } from "../../Item";
+import { ObjectItemValue } from "../../ItemValue";
 import { DefaultParams } from "../../Param";
 import { json, string } from "../../ParamBuilder";
 
@@ -56,7 +56,7 @@ export const UpdateEntity: ComputerFactory = (): Computer => ({
     const properties = JSON.parse(params.properties)
     
     while(true) {
-      const incoming = input.pull() as ObjectItem[]
+      const incoming = input.pull() as ObjectItemValue[]
 
       for(const item of incoming) {
         try {

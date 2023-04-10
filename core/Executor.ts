@@ -4,17 +4,14 @@ import { InputDevice, PortLinkMap } from "./InputDevice";
 import { OutputDevice, OutputTree } from "./OutputDevice";
 import { Port, PortId } from "./Port";
 import { Computer } from "./Computer";
-import { Item } from "./Item";
+import { ItemValue } from "./ItemValue";
 import { LinkId } from "./Link";
 import { ExecutionUpdate } from "./ExecutionUpdate";
-import { ExecutionResult } from "./ExecutionResult";
 import { isFinished } from "./utils/isFinished";
 import { ParamsDevice } from "./ParamsDevice";
 import { Storage } from "./Storage";
 import { ExecutionMemory } from "./ExecutionMemory";
-import { ExecutionFailure } from "./ExecutionFailure";
 import { ExecutorInterface } from "./ExecutorInterface";
-import { connect } from "http2";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -96,7 +93,7 @@ export class Executor implements ExecutorInterface {
   protected makeExecutionMemory() {
     // Maps
     const nodeStatuses = new Map<NodeId, NodeStatus>();
-    const linkItems = new Map<LinkId, Item[]>();
+    const linkItems = new Map<LinkId, ItemValue[]>();
     const linkCounts = new Map<LinkId, number>();
     const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
 
@@ -220,7 +217,11 @@ export class Executor implements ExecutorInterface {
       map[input.name] = connectedLinks.map(link => link.id);
     }
 
-    return new InputDevice(map, memory)
+    return new InputDevice(
+      map,
+      memory,
+      this.makeParamsDevice(this.computers.get(node.type)!, node)
+    )
   }
 
   protected makeOutputDevice(node: Node, memory: ExecutionMemory) {

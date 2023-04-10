@@ -2,7 +2,7 @@ import { Computer, ComputerFactory } from "../../Computer";
 import { Diagram } from "../../Diagram";
 import { Executor, NodeStatus } from "../../Executor";
 import { InputDevice, PortLinkMap } from "../../InputDevice";
-import { Item } from "../../Item";
+import { ItemValue } from "../../ItemValue";
 import { Link, LinkId } from "../../Link";
 import { Node, NodeId } from "../../Node";
 import { OutputDevice } from "../../OutputDevice";
@@ -20,11 +20,11 @@ export const when = (factory: ComputerFactory) => {
 }
 
 export type ExpectedOutputItems = {
-  [key: string]: Item[]
+  [key: string]: ItemValue[]
 }
 
 export type InputValues = {
-  [key: string]: Item[]
+  [key: string]: ItemValue[]
 }
 
 export type ExplicitParamValues = {
@@ -39,10 +39,10 @@ export class ComputerTester {
   explicitParams: ExplicitParamValues = {}
   steps: [TestStep, TestStepArgs][] = []
   inputs: {
-    [key: string]: Item[]
+    [key: string]: ItemValue[]
   } = {}
   expectedOutputs: {
-    [key: string]: Item[]
+    [key: string]: ItemValue[]
   } = {}
   runner: AsyncGenerator | null = null
   inputDevice: InputDevice | null = null
@@ -98,7 +98,7 @@ export class ComputerTester {
     return this
   }
 
-  getsInput(input: Item[]) {
+  getsInput(input: ItemValue[]) {
     this.steps.push([getsInput, [input]])
 
     return this
@@ -128,7 +128,7 @@ export class ComputerTester {
     return this
   }
 
-  expectOutput(output: Item[]) {
+  expectOutput(output: ItemValue[]) {
     this.steps.push([expectOutput, [output]])
 
     return this
@@ -187,7 +187,11 @@ export class ComputerTester {
       map[input.name] = connectedLinkIds
     }
 
-    return new InputDevice(map, this.memory!)
+    return new InputDevice(
+      map,
+      this.memory!,
+      this.makeParamsDevice()
+    )
   }
 
   protected makeOutputDevice() {
@@ -225,7 +229,7 @@ export class ComputerTester {
   protected makeExecutionMemory() {
     // Maps
     const nodeStatuses = new Map<NodeId, NodeStatus>();
-    const linkItems = new Map<LinkId, Item[]>();
+    const linkItems = new Map<LinkId, ItemValue[]>();
     const linkCounts = new Map<LinkId, number>();
     const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
 

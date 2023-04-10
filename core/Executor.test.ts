@@ -7,7 +7,7 @@ import { Link, LinkId } from "./Link";
 import { DiagramBuilder } from "./DiagramBuilder";
 import { CreateJson, Throw } from "./computers";
 import { ExecutionResult } from "./ExecutionResult";
-import { Item } from "./Item";
+import { ItemValue } from "./ItemValue";
 import { NullStorage } from "./NullStorage";
 import { ExecutionUpdate } from "./ExecutionUpdate";
 import { whenRunning } from "./support/diagramExecutionTester/DiagramExecutionTester";
@@ -188,7 +188,7 @@ describe('execute', () => {
       currentExecutionId: '1',
       init: async () => {},
       createExecution: async () => {},
-      putExecutionItems: async (key: string, items: Item[]) => {},
+      putExecutionItems: async (key: string, items: ItemValue[]) => {},
     }
     
     const executor = new Executor(diagram, computers, storage)

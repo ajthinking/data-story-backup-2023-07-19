@@ -13,8 +13,9 @@ export const Multiply: ComputerFactory = (): Computer => ({
   
   async *run({ input, output, params: { factor } }: RunArgs) {
     while(true) {
-      const incoming = input.pull() as number[]
-      const products = incoming.map(n => n * factor)
+      const incoming = input.pull()
+      const products = incoming
+        .map(item => (item.value as number) * factor)
 
       output.push(products)
       yield;

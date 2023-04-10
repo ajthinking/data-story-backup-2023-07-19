@@ -1,5 +1,5 @@
 import { ExecutionUpdate } from "./ExecutionUpdate";
-import { Item } from "./Item";
+import { ItemValue } from "./ItemValue";
 import { LinkId } from "./Link";
 
 export class ExecutionResult {

@@ -12,3 +12,12 @@ it('outputs items incrementally', async () => {
     .expectOutput([1, 2])
     .ok()
 })
+
+it('can use parameterized duration', async () => {
+  await when(Sleep)
+    .hasParams({ duration: "${ms}" })
+    .getsInput([{ ms: 1 }])
+    .doRun()
+    .expectOutput([{ ms: 1 }])
+    .ok()
+})

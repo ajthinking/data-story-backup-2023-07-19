@@ -1,4 +1,4 @@
-import { Item } from "./Item";
+import { ItemValue } from "./ItemValue";
 import { Storage } from "./Storage";
 import { promises as fs } from 'fs';
 
@@ -43,7 +43,7 @@ export class FileStorage implements Storage {
   /**
    * Store items as pretty JSON 
    */
-  async putExecutionItems(key: string, items: Item[]): Promise<void> {
+  async putExecutionItems(key: string, items: ItemValue[]): Promise<void> {
     const path = `${this.root}/executions/${this.currentExecutionId}/${key}.json`
     const content = JSON.stringify(items, null, 2)
 
@@ -54,7 +54,7 @@ export class FileStorage implements Storage {
     root: string,
     currentExecutionId: string | null,
     items: {
-      [key: string]: Item[],
+      [key: string]: ItemValue[],
     }
   }> {
     const execution = `${this.root}/executions/${this.currentExecutionId}`
@@ -65,7 +65,7 @@ export class FileStorage implements Storage {
       .filter(path => path.isFile())
       .map(path => path.name)
 
-    const items: { [key: string]: Item[] } = {}
+    const items: { [key: string]: ItemValue[] } = {}
 
     for(const file of files) {
       const path = `${this.root}/executions/${this.currentExecutionId}/${file}`

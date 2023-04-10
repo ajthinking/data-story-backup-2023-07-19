@@ -1,4 +1,4 @@
-import { Item } from "./Item";
+import { ItemValue } from "./ItemValue";
 import { Param } from "./Param";
 
 type ParamId = string

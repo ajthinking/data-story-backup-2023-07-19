@@ -1,9 +1,9 @@
-import { Item } from "../../../Item";
+import { ItemValue } from "../../../ItemValue";
 import { ComputerTester } from "../ComputerTester";
 import { TestStep } from "../TestStep";
 
 export const getsInputs: TestStep = {
-  async handle(tester: ComputerTester, inputs: { [key: string]: Item[]}) {
+  async handle(tester: ComputerTester, inputs: { [key: string]: ItemValue[]}) {
     const portNames = Object.keys(inputs)
 
     for(const portName of portNames) {

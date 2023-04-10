@@ -1,47 +1,35 @@
-export {}
+export class DataStoryItem {
+  value: any;
+  param: any;
 
-(async () => {
-  // The async generator
-  const computer = async function *run() {
-    throw Error('Some error!')
-  }
+  constructor(value: any, params: any[]) {
+    this.value = value;
+    this.param = new Proxy({}, {
+      get: (_, prop: string) => {
+        const param = params.find(param => param[prop]);
+        if (!param) return undefined;
 
-  // Initialize the generator
-  const runner = computer()
-
-  // Store reference to the promise
-  const promise = runner.next()
-    .then(() => {
-      console.log("Handle success")
-    })
-    .catch((error: Error) => {
-      console.log("Catch", error)
+        const value = param[prop].replace(/\${(\w+)}/g, function(this: any, _: any, name: any) {
+          return this.value[name];
+        }.bind(this));
+        return value;
+      }
     });
-
-  // Await Error Success
-  await promise;
-})();
+  }
+}
 
 (async () => {
-  // The async generator
-  const computer = async function *run() {
-    throw Error('Some error!')
-  }
+  const item = new DataStoryItem(
+    { name: 'Bob' },
+    [
+      {
+        greeting: 'Hello ${name}!',
+      }
+    ]
+  )
 
-  // Initialize the generator
-  const runner = computer()
-
-  // Store reference to the promise
-  const promise = runner.next()
-
-  promise.then(() => {
-    console.log("Handle success")
-  })
-
-  promise.catch((error: Error) => {
-    console.log("Catch", error)
-  });
-
-  // Await Error Success
-  await promise;
+  console.log(
+    item.value,
+    item.param.greeting,
+  )
 })();

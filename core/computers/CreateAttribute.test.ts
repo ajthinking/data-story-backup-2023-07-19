@@ -14,7 +14,7 @@ it('sets an attribute key value on the item', async () => {
     .ok()
 })
 
-it.todo('can set a parameterized attribute key value on the item', async () => {
+it('can set a parameterized attribute key value on the item', async () => {
   await when(CreateAttribute)
     .hasParams({
       key: 'greeting',

@@ -1,5 +1,6 @@
 import { Computer, ComputerFactory, RunArgs } from "../Computer";
-import { ObjectItem } from "../Item";
+import { ObjectItemValue } from "../ItemValue";
+import { ItemWithParams } from "../ItemWithParams";
 import { DefaultParams } from "../Param";
 import { string } from "../ParamBuilder";
 
@@ -19,8 +20,10 @@ export const Merge: ComputerFactory = (): Computer => ({
   async *run({ input, output, params }: RunArgs) {
     while(true) {
       // For now assume all items are ready :)
-      const requestors = input.pullFrom('requestors') as ObjectItem[]
-      const suppliers = input.pullFrom('suppliers') as ObjectItem[]
+
+      // No interpolation - extract underlying item form ItemWithParams
+      const requestors = input.pullFrom('requestors').map(i => i.value) as ObjectItemValue[]
+      const suppliers = input.pullFrom('suppliers').map(i => i.value) as ObjectItemValue[]
 
       for(const requestor of requestors) {
         const requestorKey = params.requestor_merge_property
