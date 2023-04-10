@@ -7,6 +7,7 @@ export { DumpJson } from './DumpJson';
 export { Ignore } from './Ignore'
 export { InstantThrow } from './InstantThrow';
 export { JsonFile } from './JsonFile';
+export { ListFiles } from './ListFiles';
 export { Log } from './Log';
 export { Merge } from './Merge';
 export { Multiply } from './Multiply'
