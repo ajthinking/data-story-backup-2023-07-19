@@ -14,7 +14,7 @@ import {
 } from 'reactflow';
 
 import { SocketClient } from "./SocketClient";
-import { NodeDescription } from '../../server/commands/describe';
+import { NodeDescription } from '../../server/NodeDescription';
 import { DataStoryNode } from '../Node/DataStoryNode';
 import { WorkerClient } from './WorkerClient';
 import { ServerClient } from './ServerClient';

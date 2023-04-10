@@ -100,3 +100,18 @@ export interface NodeLifeCycle {
   onShutdown?: () => void | Promise<void>
 }
 ```
+
+## 2023-04-10
+We need to be able to parameterize.
+This means *params* is dependent on *item*.
+We want it to be simple to use.
+We want it to be simple to understand.
+Consider the wrapper idea:
+```ts
+class Item {
+  value: any;
+  params: {
+    [key: string]: any
+  }
+}
+```

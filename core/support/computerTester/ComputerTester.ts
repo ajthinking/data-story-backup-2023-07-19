@@ -1,4 +1,3 @@
-import { expect } from "vitest";
 import { Computer, ComputerFactory } from "../../Computer";
 import { Diagram } from "../../Diagram";
 import { Executor, NodeStatus } from "../../Executor";
@@ -7,7 +6,6 @@ import { Item } from "../../Item";
 import { Link, LinkId } from "../../Link";
 import { Node, NodeId } from "../../Node";
 import { OutputDevice } from "../../OutputDevice";
-import { Param } from "../../Param";
 import { ParamsDevice } from "../../ParamsDevice";
 import { Port } from "../../Port";
 import { TestStep } from "./TestStep";
@@ -254,4 +252,3 @@ export class ComputerTester {
     return memory
   }  
 }
-

@@ -1,4 +1,4 @@
-import { NodeDescription } from '../../server/commands/describe';
+import { NodeDescription } from '../../server/NodeDescription';
 import { ServerClient } from './ServerClient';
 
 export class WorkerClient implements ServerClient {

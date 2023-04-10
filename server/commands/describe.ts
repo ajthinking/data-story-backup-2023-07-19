@@ -1,15 +1,6 @@
 import * as computers from '../../core/computers';
 import { Param } from '../../core/Param';
-
-export type NodeDescription = {
-  name: string,
-  label?: string,
-  category?: string,
-  inputs: string[],
-  outputs: string[],
-  params: Record<string, Param>,
-  tags: string[],
-}
+import { NodeDescription } from '../NodeDescription';
 
 export const describe = () => {
   const nodeDescriptions: NodeDescription[] = Object.values(computers).map((computer) => { 
