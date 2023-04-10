@@ -1,5 +1,5 @@
 import { expect, it } from "vitest"
-import { NodeDescription } from "../../../server/commands/describe"
+import { NodeDescription } from "../../../server/NodeDescription"
 import { DataStoryNode } from "../../Node/DataStoryNode"
 import { guessPosition } from "./guessPosition"
 
