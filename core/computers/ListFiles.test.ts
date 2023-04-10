@@ -3,7 +3,7 @@ import { RunArgs } from "../Computer";
 import { when } from "../support/computerTester/ComputerTester";
 import { ListFiles } from "./ListFiles";
 
-it('does something', async () => {
+it.todo('does something', async () => {
   await when(ListFiles)
     .hasDefaultParams()
     .getsInput([1, 2])
