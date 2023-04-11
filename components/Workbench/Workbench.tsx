@@ -62,7 +62,7 @@ export default function Workbench() {
     return () => {
       window.removeEventListener("keyup", handleKeyPress);
     };
-  }, []);
+  }, [openNodeModalId, showConfigModal, showRunModal, showAddNodeModal]);
   
   return (
     <>
