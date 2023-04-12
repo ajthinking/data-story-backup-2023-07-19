@@ -45,10 +45,7 @@ export default function Workbench() {
         showConfigModal,
         showRunModal,
         showAddNodeModal,
-      ].find(Boolean)) {
-        console.log("Could not complete shortcut, a modal already open")
-        return;
-      }
+      ].find(Boolean)) return;
 
       // Open modal!
       if (shiftR) setShowRunModal(true);
@@ -66,29 +63,29 @@ export default function Workbench() {
   
   return (
     <>
-    <ReactFlow
-      className="bg-gray-50"
-      nodes={nodes}
-      edges={edges}
-      nodeTypes={nodeTypes}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      onInit={onInit}
-    >     
-      <DataStoryControls
-        setShowRunModal={setShowRunModal}
-        setShowAddNodeModal={setShowAddNodeModal}
-        // setShowConfigModal={setShowConfigModal}
-      />
-      <Background color="#E7E7E7" variant={BackgroundVariant.Lines} />
-    </ReactFlow>
+      <ReactFlow
+        className="bg-gray-50"
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        onInit={onInit}
+      >     
+        <DataStoryControls
+          setShowRunModal={setShowRunModal}
+          setShowAddNodeModal={setShowAddNodeModal}
+          // setShowConfigModal={setShowConfigModal}
+        />
+        <Background color="#E7E7E7" variant={BackgroundVariant.Lines} />
+      </ReactFlow>
 
-    {/* Modals */}
-    {showRunModal && <RunModal setShowModal={setShowRunModal}/>}    
-    {showAddNodeModal && <AddNodeModal setShowModal={setShowAddNodeModal}/>}    
-    {showConfigModal && <ConfigModal setShowModal={setShowConfigModal}/>}
-    {openNodeModalId && <NodeModal/>}
+      {/* Modals */}
+      {showRunModal && <RunModal setShowModal={setShowRunModal}/>}    
+      {showAddNodeModal && <AddNodeModal setShowModal={setShowAddNodeModal}/>}    
+      {showConfigModal && <ConfigModal setShowModal={setShowConfigModal}/>}
+      {openNodeModalId && <NodeModal/>}
     </>
   );
 }

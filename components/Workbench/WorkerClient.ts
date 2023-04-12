@@ -1,4 +1,5 @@
 import { NodeDescription } from '../../server/NodeDescription';
+import { SerializedReactFlow } from './SerializedReactFlow';
 import { ServerClient } from './ServerClient';
 
 export class WorkerClient implements ServerClient {
@@ -51,7 +52,7 @@ export class WorkerClient implements ServerClient {
     this.worker.postMessage(message);
   }
 
-  run(reactFlow: any) {
+  run(reactFlow: SerializedReactFlow) {
     const message = JSON.stringify({
       type: "run",
       reactFlow: reactFlow,

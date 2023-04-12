@@ -1,9 +1,10 @@
 import WebSocket from 'ws';
 import { describe, run } from "./commands"
+import { SerializedReactFlow } from '../components/Workbench/SerializedReactFlow';
 
 export type RunMessage = {
   type: "run"
-  reactFlow: any
+  reactFlow: SerializedReactFlow
 }
 
 export type DescribeMessage = {

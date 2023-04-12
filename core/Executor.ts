@@ -29,7 +29,7 @@ export class Executor implements ExecutorInterface {
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
     this.memory.pushHistoryMessage('Starting execution 🚀')
 
-    let pendingPromises: Promise<any>[] = []
+    let pendingPromises: Promise<void>[] = []
     let executionError: Error | undefined     
     
     while(!this.isComplete() && !executionError) {
@@ -140,7 +140,7 @@ export class Executor implements ExecutorInterface {
     return true
   }
 
-  protected async clearFinishedPromises(promises: Promise<any>[]) {
+  protected async clearFinishedPromises(promises: Promise<void>[]) {
     const passed = []
 
     for(const promise of promises) {

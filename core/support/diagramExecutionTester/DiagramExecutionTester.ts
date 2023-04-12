@@ -1,10 +1,9 @@
 import { expect } from "vitest";
 import { computerRegistry } from "../../../server/computerRegistry";
 import { Diagram } from "../../Diagram";
-import { ExecutionResult } from "../../ExecutionResult";
 import { ExecutionUpdate } from "../../ExecutionUpdate";
 import { Executor } from "../../Executor";
-import { FileStorage } from "../../FileStorage";
+
 import { NullStorage } from "../../NullStorage";
 
 export const whenRunning = (diagram: Diagram) => {

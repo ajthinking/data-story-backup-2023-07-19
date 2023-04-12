@@ -1,106 +1,30 @@
+import { SerializedReactFlow } from "../components/Workbench/SerializedReactFlow"
 import { Diagram } from "./Diagram"
 import { Link } from "./Link"
 import { Node } from "./Node"
 import { Port } from "./Port"
 
-/*
-{
-  "nodes": [
-    {
-      "width": 128,
-      "height": 52,
-      "id": "Signal0.7993711459744541",
-      "position": {
-        "x": 101.2618246308146,
-        "y": 202.66893570290534
-      },
-      "data": {
-        "computer": "Signal",
-        "label": "Signal",
-        "inputs": [],
-        "outputs": [
-          {
-            "id": "Signal0.7993711459744541-undefined"
-          }
-        ]
-      },
-      "type": "dataStoryNodeComponent",
-      "selected": false,
-      "positionAbsolute": {
-        "x": 101.2618246308146,
-        "y": 202.66893570290534
-      },
-      "dragging": false
-    },
-    {
-      "width": 128,
-      "height": 78,
-      "id": "Pass0.0906613692536935",
-      "position": {
-        "x": 373.1397321248163,
-        "y": 201.0105657225256
-      },
-      "data": {
-        "computer": "Pass",
-        "label": "Pass",
-        "inputs": [
-          {
-            "id": "Pass0.0906613692536935-undefined"
-          }
-        ],
-        "outputs": [
-          {
-            "id": "Pass0.0906613692536935-undefined"
-          }
-        ]
-      },
-      "type": "dataStoryNodeComponent",
-      "selected": true,
-      "positionAbsolute": {
-        "x": 373.1397321248163,
-        "y": 201.0105657225256
-      },
-      "dragging": false
-    }
-  ],
-  "edges": [
-    {
-      "source": "Signal0.7993711459744541",
-      "sourceHandle": "Signal0.7993711459744541-undefined",
-      "target": "Pass0.0906613692536935",
-      "targetHandle": "Pass0.0906613692536935-undefined",
-      "id": "reactflow__edge-Signal0.7993711459744541Signal0.7993711459744541-undefined-Pass0.0906613692536935Pass0.0906613692536935-undefined"
-    }
-  ],
-  "viewport": {
-    "x": 0,
-    "y": 0,
-    "zoom": 1
-  }
-}
-*/
-
 export class DiagramFactory {
-  fromReactFlow(flow: any): Diagram {    
-    const nodes = flow.nodes.map((flowNode: any) => {
+  fromReactFlow(flow: SerializedReactFlow): Diagram {    
+    const nodes = flow.nodes.map(flowNode => {
       return new Node({
         id: flowNode.id,
         type: flowNode.data.computer,
-        inputs: flowNode.data.inputs.map((input: any) => {
+        inputs: flowNode.data.inputs.map(input => {
           // This should be passed in a property
-          return new Port(input.id, input.id.split(".").pop())
+          return new Port(input.id, input.id.split(".").pop()!)
         }),
-        outputs: flowNode.data.outputs.map((output: any) => {
+        outputs: flowNode.data.outputs.map(output => {
           // This should be passed in a property
-          return new Port(output.id, output.id.split(".").pop())
+          return new Port(output.id, output.id.split(".").pop()!)
         }),
         // continue with PARAMS here!
         params: flowNode.data.params || {},   
       })
     })
 
-    const links = flow.edges.map((edge: any) => {
-      return new Link(edge.id, edge.sourceHandle, edge.targetHandle)
+    const links = flow.edges.map(edge => {
+      return new Link(edge.id, edge.sourceHandle!, edge.targetHandle!)
     })
 
     return new Diagram(nodes, links)
