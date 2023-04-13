@@ -4,6 +4,7 @@ import React from "react";
 import { RunIcon } from "./icons/runIcon";
 import { AddNodeIcon } from "./icons/addNodeIcon";
 import { ConfigIcon } from "./icons/configIcon";
+import { SaveIcon } from "./icons/saveIcon";
 
 export function DataStoryControls({
   // setShowConfigModal,
@@ -43,6 +44,15 @@ export function DataStoryControls({
           >
           <TableIcon />          
         </ControlButton>                              */}
+      <ControlButton
+          onClick={() => {
+            alert("HEJ!")
+          }}
+          title="Add Node"
+          aria-label="Add Node"
+        >
+          <SaveIcon />
+        </ControlButton>           
       </Controls>;
 }
   

@@ -74,4 +74,14 @@ export class SocketClient implements ServerClient {
 
     this.socket.send(message);
   }
+
+  async save(name: string, reactFlow: SerializedReactFlow) {
+    const message = JSON.stringify({
+      type: "save",
+      name,
+      reactFlow  
+    })
+
+    this.socket.send(message);
+  }
 }
