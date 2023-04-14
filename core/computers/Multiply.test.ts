@@ -1,4 +1,3 @@
-import { it } from "vitest";
 import { when } from "../support/computerTester/ComputerTester";
 import { Multiply } from "./Multiply";
 

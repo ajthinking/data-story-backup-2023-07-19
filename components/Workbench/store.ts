@@ -37,7 +37,7 @@ export type StoreSchema = {
   setEdges: (edges: Edge[]) => void;
   openNodeModalId: string | null;
   setOpenNodeModalId: (id: string | null) => void;
-  save: () => void;
+  onSave: () => void;
 };
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
@@ -138,5 +138,12 @@ export const useStore = create<StoreSchema>((set, get) => ({
   setOpenNodeModalId: (id: string | null) => {
     set({ openNodeModalId: id })
   },
-  save: () => {},
+  onSave: () => {
+    get().server!.save(
+      "demo.json",
+      get().rfInstance!.toObject()      
+    )
+
+    console.log("Saving...")
+  },
 }));

@@ -6,5 +6,10 @@ export const save = async (ws: WebSocket, data: SaveMessage) => {
   const storage = new FileStorage('.datastory')
   await storage.init()
 
-  console.log("SAVE WAS CALLED!", data.name, data.reactFlow)
+  console.log("IN SAVE HAHA!!!")
+
+  await storage.put(
+    `${data.name}.json`,
+    JSON.stringify(data.reactFlow, null, 2)
+  )
 }

@@ -1,4 +1,3 @@
-import { expect, it, vi } from "vitest";
 import { when } from "../support/computerTester/ComputerTester";
 import { Log } from "./Log";
 

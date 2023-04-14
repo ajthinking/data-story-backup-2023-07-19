@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config'
 
-export default defineConfig({
+export default defineConfig({ 
   test: {
     globals: true,
     coverage: {
@@ -10,6 +10,6 @@ export default defineConfig({
         '**/*.test.ts',
         'core/support/computerTester/**'
       ]
-    }
+    },
   },
 })

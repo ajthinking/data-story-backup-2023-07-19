@@ -1,4 +1,3 @@
-import { it } from "vitest";
 import { when } from "../support/computerTester/ComputerTester";
 import { Signal } from "./Signal";
 it('outputs items incrementaly', async () => {

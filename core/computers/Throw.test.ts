@@ -1,4 +1,3 @@
-import { expect, it } from "vitest";
 import { when } from "../support/computerTester/ComputerTester";
 import { Throw } from "./Throw";
 

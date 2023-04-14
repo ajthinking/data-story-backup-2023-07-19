@@ -1,5 +1,4 @@
 import axios from "axios";
-import { vi, it } from "vitest";
 import { when } from "../support/computerTester/ComputerTester";
 import { Request } from "./Request";
 vi.mock('axios')

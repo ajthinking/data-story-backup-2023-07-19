@@ -5,6 +5,8 @@ import { RunIcon } from "./icons/runIcon";
 import { AddNodeIcon } from "./icons/addNodeIcon";
 import { ConfigIcon } from "./icons/configIcon";
 import { SaveIcon } from "./icons/saveIcon";
+import { StoreSchema, useStore } from "./store";
+import { shallow } from "zustand/shallow";
 
 export function DataStoryControls({
   // setShowConfigModal,
@@ -15,6 +17,12 @@ export function DataStoryControls({
   setShowRunModal: (showRunModal: boolean) => void;
   setShowAddNodeModal: (showAddNodeModal: boolean) => void;
 }) {
+  const selector = (state: StoreSchema) => ({
+    onSave: state.onSave,
+  });
+
+  const { onSave } = useStore(selector, shallow);
+
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
         <ControlButton
           title="Run"
@@ -45,9 +53,7 @@ export function DataStoryControls({
           <TableIcon />          
         </ControlButton>                              */}
       <ControlButton
-          onClick={() => {
-            alert("HEJ!")
-          }}
+          onClick={() => onSave()}
           title="Add Node"
           aria-label="Add Node"
         >

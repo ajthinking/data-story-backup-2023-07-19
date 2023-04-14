@@ -1,5 +1,3 @@
-import { expect, it } from "vitest";
-import { RunArgs } from "../Computer";
 import { when } from "../support/computerTester/ComputerTester";
 import { AskChatGpt } from "./AskChatGpt";
 

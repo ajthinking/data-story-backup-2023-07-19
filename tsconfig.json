@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "incremental": true,
     "noImplicitAny": true,
+    "types": ["vitest/globals"]
   },
   "ts-node": {
     "compilerOptions": {

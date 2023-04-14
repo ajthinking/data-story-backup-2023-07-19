@@ -1,5 +1,4 @@
-export const testFileContent = (name: string) => `import { expect, it } from "vitest";
-import { RunArgs } from "../Computer";
+export const testFileContent = (name: string) => `import { RunArgs } from "../Computer";
 import { when } from "../support/computerTester/ComputerTester";
 import { ${name} } from "./${name}";
 

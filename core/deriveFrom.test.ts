@@ -1,4 +1,3 @@
-import { expect, it } from "vitest";
 import { Ignore } from "./computers";
 import { deriveFrom } from "./deriveFrom";
 
