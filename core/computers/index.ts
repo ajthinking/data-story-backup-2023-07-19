@@ -1,5 +1,5 @@
-export * from './hubspot'
-export * from './placeholders'
+export * from './HubSpot'
+export * from './Placeholders'
 export { AskChatGpt } from './AskChatGpt';
 export { CreateAttribute } from './CreateAttribute';
 export { CreateJson } from './CreateJson'
@@ -10,7 +10,6 @@ export { JsonFile } from './JsonFile';
 export { ListFiles } from './ListFiles';
 export { Log } from './Log';
 export { Merge } from './Merge';
-export { Multiply } from './Multiply'
 export { Pass } from './Pass'
 export { Request } from './Request'
 export { Signal } from './Signal'

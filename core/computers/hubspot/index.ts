@@ -1,14 +1,14 @@
 import { deriveFrom } from "../../deriveFrom";
-import { HubSpotEntity } from "./HubSpotEntity";
-import { UpdateEntity } from "./UpdateEntity";
 
-export { HubSpotEntity } from './HubSpotEntity';
-export { UpdateEntity } from './UpdateEntity';
+import { GetAllEntities } from './GetAllEntities'
+import { UpdateEntity } from './UpdateEntity'
+
+
 
 /**
  * GET ALL ************************************************************
  */
-export const Contacts = deriveFrom(HubSpotEntity, {
+export const Contacts = deriveFrom(GetAllEntities, {
   name: 'Contacts',
   label: 'Contacts.all',  
   params: {
@@ -17,7 +17,7 @@ export const Contacts = deriveFrom(HubSpotEntity, {
   },
 })
 
-export const Companies = deriveFrom(HubSpotEntity, {
+export const Companies = deriveFrom(GetAllEntities, {
   name: 'Companies',
   params: {
     entity: 'companies',
@@ -25,7 +25,7 @@ export const Companies = deriveFrom(HubSpotEntity, {
   },
 })
 
-export const Deals = deriveFrom(HubSpotEntity, {
+export const Deals = deriveFrom(GetAllEntities, {
   name: 'Deals',
   params: {
     entity: 'deals',
@@ -33,7 +33,7 @@ export const Deals = deriveFrom(HubSpotEntity, {
   },
 })
 
-export const Tickets = deriveFrom(HubSpotEntity, {
+export const Tickets = deriveFrom(GetAllEntities, {
   name: 'Tickets',
   params: {
     entity: 'tickets',
@@ -41,7 +41,7 @@ export const Tickets = deriveFrom(HubSpotEntity, {
   },
 })
 
-export const LineItems = deriveFrom(HubSpotEntity, {
+export const LineItems = deriveFrom(GetAllEntities, {
   name: 'LineItems',
   params: {
     entity: 'lineItems',
@@ -49,7 +49,7 @@ export const LineItems = deriveFrom(HubSpotEntity, {
   },
 })
 
-export const Products = deriveFrom(HubSpotEntity, {
+export const Products = deriveFrom(GetAllEntities, {
   name: 'Products',
   params: {
     entity: 'products',

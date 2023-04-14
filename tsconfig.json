@@ -22,6 +22,6 @@
       "module": "CommonJS"
     }
   },   
-  "include": ["next-env.d.ts", "tinker.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "tinker.ts", "**/*.ts", "**/*.tsx", "**/**/*.ts"],
   "exclude": ["node_modules"]
 }
