@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "tinker": "npx ts-node ./tinker.ts",
-    "make:node": "npx ts-node ./core/support/scripts/compose/compose.ts",
+    "make:node": "npx ts-node ./core/support/scripts/addNode/addNode.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

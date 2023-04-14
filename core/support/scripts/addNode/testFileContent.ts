@@ -1,5 +1,4 @@
-export const testFileContent = (name: string) => `import { RunArgs } from "../Computer";
-import { when } from "../support/computerTester/ComputerTester";
+export const testFileContent = (name: string) => `import { when } from "../../support/computerTester/ComputerTester";
 import { ${name} } from "./${name}";
 
 it('does something', async () => {

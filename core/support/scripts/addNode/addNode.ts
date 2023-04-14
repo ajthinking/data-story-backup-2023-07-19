@@ -10,11 +10,25 @@ if (!name) {
   process.exit(1);
 }
 
+// Create the directory
+const directoryName = `${NODE_ROOT}/${name}`;
+fs.mkdirSync(directoryName, { recursive: true })
+
 // Create file
-const sourceFileName = `${NODE_ROOT}/${name}.ts`;
+const sourceFileName = `${NODE_ROOT}/${name}/${name}.ts`;
 fs.writeFileSync(sourceFileName, sourceFileContent(name));
 
-// Add the file in the index (if it doesn't exist) and sort it
+// Create index file
+const localIndexFileName = `${NODE_ROOT}/${name}/index.ts`;
+const localIndexFileContent = `export { ${name} } from './${name}'`
+fs.writeFileSync(localIndexFileName, localIndexFileContent);
+
+// Create index file
+const readmeFileName = `${NODE_ROOT}/${name}/${name}.md`;
+const readmeFileContent = `### ${name}`
+fs.writeFileSync(readmeFileName, readmeFileContent);
+
+// Add the file in the global index (if it doesn't exist) and sort it
 const indexFileName = `${NODE_ROOT}/index.ts`;
 const importStatement = `export { ${name} } from './${name}';`;
 const indexFileContent = fs.readFileSync(indexFileName, 'utf8');
@@ -31,7 +45,7 @@ if(!alreadyImported) {
 }
 
 // Create testfile
-const testFileName = `${NODE_ROOT}/${name}.test.ts`;
+const testFileName = `${NODE_ROOT}/${name}/${name}.test.ts`;
 fs.writeFileSync(testFileName, testFileContent(name));
 
 export {}

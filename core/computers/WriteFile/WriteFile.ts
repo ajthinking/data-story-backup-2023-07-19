@@ -1,8 +1,8 @@
-export const sourceFileContent = (name: string) => `import { Computer, ComputerFactory, RunArgs } from "../Computer";
-import { DefaultParams } from "../Param";
+import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { DefaultParams } from "../../Param";
 
-export const ${name}: ComputerFactory = (): Computer => ({
-  name: '${name}',
+export const WriteFile: ComputerFactory = (): Computer => ({
+  name: 'WriteFile',
   inputs: ['input'],
   outputs: ['output'],
   params: {
@@ -18,4 +18,3 @@ export const ${name}: ComputerFactory = (): Computer => ({
     }
   },
 });
-`;
