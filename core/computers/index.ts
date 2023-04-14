@@ -12,6 +12,7 @@ export { Log } from './Log';
 export { Merge } from './Merge';
 export { Pass } from './Pass'
 export { Request } from './Request'
+export { RunCommand } from './RunCommand';
 export { Signal } from './Signal'
 export { Sleep } from './Sleep'
 export { Throw } from './Throw';
