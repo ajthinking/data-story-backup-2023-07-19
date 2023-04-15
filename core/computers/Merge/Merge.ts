@@ -1,6 +1,5 @@
 import { Computer, ComputerFactory, RunArgs } from "../../Computer";
 import { ObjectItemValue } from "../../ItemValue";
-import { ItemWithParams } from "../../ItemWithParams";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 
@@ -17,9 +16,19 @@ export const Merge: ComputerFactory = (): Computer => ({
     supplier_merge_property: string('supplier_merge_property').get(),
   },
 
+  // What should options be?
+  // Memory, node and diagram? // Bloated
+  // The execution // Simple, but discusting
+  // Exactly the same as *run? // Strange
+  // InputDeviceReader? // Perhaps.
+  // Situations we need to support:
+  //  - All items at port
+  //  - {Count} items at port
+  // async canRun(options: any) {}
+
   async *run({ input, output, params }: RunArgs) {
     while(true) {
-      // For now assume all items are ready :)
+      // For now use default heuristics which awaits all ports to be complete
 
       // No interpolation - extract underlying item form ItemWithParams
       const requestors = input.pullFrom('requestors').map(i => i.value) as ObjectItemValue[]

@@ -18,3 +18,11 @@ it('merges objects when selected properties match', async () => {
     })
     .ok()
 })
+
+describe('canRun', async () => {
+  it('returns true if all suppliers are ready', async () => {
+  })
+
+  it('returns false if any suppliers are not ready', async () => {
+  })
+})
