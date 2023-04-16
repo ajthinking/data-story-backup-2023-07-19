@@ -20,6 +20,19 @@ export class InputDevice implements InputDeviceInterface {
     private params: Record<string, ParamValue>
   ) {}
 
+  // To complete these, we need to be able to access
+  // the nodes spawning the items to the links.
+  // This is not currently possible.
+  // To achieve this we need a way to go from linkId to sourceNodeId
+  // That information lives in "diagram"
+  // We could pass in the diagram, but that would be a circular dependency
+  // Consider not passing in the portLinkMap, but instead the whole diagram
+  // Yes, the portLinkMap does have its place as a cache
+  // But we can generate it in the constructor
+  // However, this requires we also know the acting node
+  // So we need to pass in: actingNode, diagram, memory, params
+  // Now this starts to get a lot of passing and constructing
+  // Therefore, consider using a factory: InputDeviceFactory
   // haveItemsAtInput(name: string): boolean {}
 
   // haveAllItemsAtInput(name: string): boolean {}
@@ -39,9 +52,6 @@ export class InputDevice implements InputDeviceInterface {
   pullFrom(name: string, count: number = Infinity): ItemWithParams[] {
     let remaining = count
     const pulled: ItemValue[] = []
-    // This one is not using the link items anymore
-    // Now we are using the memory!
-    // TODO: Slaughter the portLinkMap
     const connectedLinks = this.portLinkMap[name]
 
     for(const linkId of connectedLinks) {
