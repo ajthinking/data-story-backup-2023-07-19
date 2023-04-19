@@ -8,6 +8,9 @@ export class SocketClient implements ServerClient {
   constructor(
     private setAvailableNodes: (nodes: NodeDescription[]) => void,
     private updateEdgeCounts: (edgeCounts: Record<string, number>) => void,
+    private setNodes: (nodes: any) => void,
+    private setEdges: (edges: any) => void,
+    // private setViewport: (viewport: any) => void,
   ) {
     this.socket = new WebSocket("ws://localhost:3100")   
   }
@@ -52,7 +55,19 @@ export class SocketClient implements ServerClient {
         setTimeout(() => alert(parsed.message), 100)
 
         return
-      }      
+      }   
+      
+      if(parsed.type === "OpenResponse") {
+        console.log("Open response: ", parsed)
+
+        const flow = parsed.flow;
+
+        // const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+        this.setNodes(flow.nodes || []);
+        this.setEdges(flow.edges || []);
+
+        return;
+      }
 
       throw("Unknown message type: " + parsed.type)
     }) 
@@ -70,6 +85,15 @@ export class SocketClient implements ServerClient {
     const message = JSON.stringify({
       type: "run",
       reactFlow,
+    })
+
+    this.socket.send(message);
+  }
+
+  async open(name: string) {
+    const message = JSON.stringify({
+      type: "open",
+      name,
     })
 
     this.socket.send(message);

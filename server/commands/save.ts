@@ -9,7 +9,7 @@ export const save = async (ws: WebSocket, data: SaveMessage) => {
   console.log("IN SAVE HAHA!!!")
 
   await storage.put(
-    `${data.name}.json`,
+    data.name,
     JSON.stringify(data.reactFlow, null, 2)
   )
 }

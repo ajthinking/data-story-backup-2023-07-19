@@ -43,7 +43,6 @@ export const NodeModal = () => {
 
   return (<Modal
     title={node.data.computer}
-    // What is this line??
     setShowModal={(open: boolean) => setOpenNodeModalId(null)}
     primaryAction={"Save"}
     onPrimaryAction={saveAndClose}  

@@ -16,7 +16,6 @@ import {
 import { SocketClient } from "./SocketClient";
 import { NodeDescription } from '../../server/NodeDescription';
 import { DataStoryNode } from '../Node/DataStoryNode';
-import { WorkerClient } from './WorkerClient';
 import { ServerClient } from './ServerClient';
 
 export type StoreSchema = {
@@ -26,6 +25,7 @@ export type StoreSchema = {
   nodes: DataStoryNode[];
   edges: Edge[];
   server: null | ServerClient;
+  refreshNodes: () => void;
   onAddNode: (node: DataStoryNode) => void;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
@@ -37,6 +37,7 @@ export type StoreSchema = {
   setEdges: (edges: Edge[]) => void;
   openNodeModalId: string | null;
   setOpenNodeModalId: (id: string | null) => void;
+  onOpen: () => void;
   onSave: () => void;
 };
 
@@ -71,6 +72,13 @@ export const useStore = create<StoreSchema>((set, get) => ({
       nodes: [...get().nodes, node],
     })
   },
+  refreshNodes: () => {
+    console.log(get().nodes)
+
+    set({
+      nodes: [...get().nodes],
+    })
+  },
   setEdges(edges: Edge[]) {
     set({ edges })
   },
@@ -102,6 +110,9 @@ export const useStore = create<StoreSchema>((set, get) => ({
       const server = new SocketClient(
         get().setAvailableNodes,
         get().updateEdgeCounts,
+        (nodes) => set({ nodes }),
+        (edges) => set({ edges }),
+        // (viewport) => set({ viewport }),
       )
   
       set({ server })
@@ -138,9 +149,14 @@ export const useStore = create<StoreSchema>((set, get) => ({
   setOpenNodeModalId: (id: string | null) => {
     set({ openNodeModalId: id })
   },
+  onOpen: () => {
+    get().server!.open("demo.story.json")
+
+    console.log("Opening...")
+  },
   onSave: () => {
     get().server!.save(
-      "demo.json",
+      "demo.story.json",
       get().rfInstance!.toObject()      
     )
 

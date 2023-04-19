@@ -25,6 +25,7 @@ export const Merge: ComputerFactory = (): Computer => ({
   //  - All items at port
   //  - {Count} items at port
   // async canRun(options: any) {}
+  // CanRunDeivice ? Might be.
 
   async *run({ input, output, params }: RunArgs) {
     while(true) {

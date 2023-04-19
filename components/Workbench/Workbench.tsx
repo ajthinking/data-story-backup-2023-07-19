@@ -9,6 +9,7 @@ import { StoreSchema, useStore } from './store';
 import { shallow } from 'zustand/shallow'
 import { NodeModal } from './modals/nodeModal';
 import "reactflow/dist/style.css";
+import { NodeSettingsModal } from './modals/nodeSettingsModal';
 
 const nodeTypes = {
   dataStoryNodeComponent: DataStoryNodeComponent,
@@ -85,7 +86,7 @@ export default function Workbench() {
       {showRunModal && <RunModal setShowModal={setShowRunModal}/>}    
       {showAddNodeModal && <AddNodeModal setShowModal={setShowAddNodeModal}/>}    
       {showConfigModal && <ConfigModal setShowModal={setShowConfigModal}/>}
-      {openNodeModalId && <NodeModal/>}
+      {openNodeModalId && <NodeSettingsModal/>}
     </>
   );
 }

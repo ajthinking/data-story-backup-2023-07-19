@@ -3,14 +3,12 @@ import { useEscapeKey } from "./hooks/useEscapeKey";
 export function Modal({
   setShowModal,
   title,
-  content,
   children,
   primaryAction,
   onPrimaryAction,
 }: {
   setShowModal: (showModal: boolean) => void;
   title?: string;
-  content?: string;
   children?: ReactNode;
   primaryAction?: string;
   onPrimaryAction?: () => void;
@@ -22,7 +20,7 @@ export function Modal({
             <div className="relative w-full max-w-4xl my-8 mx-auto px-8">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {title && (<div className="flex items-start justify-between px-8 py-2 border-solid border-slate-200 rounded-t">
-                  <div className="mt-4 flex flex-col align-center justify-middleitems-center justify-center text-lg text-gray-400 font-bold tracking widest">
+                  <div contentEditable="true" className="pr-4 mt-4 flex flex-col align-center justify-middleitems-center justify-center text-lg text-gray-400 font-bold tracking widest">
                     {title}
                   </div>
                   <button className="p-1 ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowModal(false)}>
@@ -32,9 +30,6 @@ export function Modal({
                   </button>
                 </div>)}
                 <div className="max-h-128 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1">
-                  <p className="my-4 text-slate-500 text-sm leading-relaxed">
-                    {content || null}
-                  </p>
                   {children}
                 </div>
                 {primaryAction && (<div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">

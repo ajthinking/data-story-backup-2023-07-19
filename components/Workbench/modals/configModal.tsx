@@ -5,7 +5,6 @@ export const ConfigModal = ({ setShowModal }: {
 }) => {
   return (<Modal
     title={"Config"}
-    content={"Modal content baby!"}
     setShowModal={setShowModal}
   />)
 }

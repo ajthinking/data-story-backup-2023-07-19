@@ -7,6 +7,7 @@ import { ConfigIcon } from "./icons/configIcon";
 import { SaveIcon } from "./icons/saveIcon";
 import { StoreSchema, useStore } from "./store";
 import { shallow } from "zustand/shallow";
+import { OpenIcon } from "./icons/openIcon";
 
 export function DataStoryControls({
   // setShowConfigModal,
@@ -18,10 +19,11 @@ export function DataStoryControls({
   setShowAddNodeModal: (showAddNodeModal: boolean) => void;
 }) {
   const selector = (state: StoreSchema) => ({
+    onOpen: state.onOpen,
     onSave: state.onSave,
   });
 
-  const { onSave } = useStore(selector, shallow);
+  const { onOpen, onSave } = useStore(selector, shallow);
 
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
         <ControlButton
@@ -54,11 +56,18 @@ export function DataStoryControls({
         </ControlButton>                              */}
       <ControlButton
           onClick={() => onSave()}
-          title="Add Node"
-          aria-label="Add Node"
+          title="Save as demo"
+          aria-label="Save as demo"
         >
           <SaveIcon />
-        </ControlButton>           
+        </ControlButton>
+        <ControlButton
+          onClick={() => onOpen()}
+          title="Open demo"
+          aria-label="Open demo"
+        >
+          <OpenIcon />
+        </ControlButton>                  
       </Controls>;
 }
   
