@@ -16,19 +16,6 @@ export const Merge: ComputerFactory = (): Computer => ({
     supplier_merge_property: string('supplier_merge_property').get(),
   },
 
-  // What should options be?
-  // Memory, node and diagram? // Bloated
-  // The execution // Simple, but discusting
-  // Exactly the same as *run? // Strange
-  // InputDeviceReader? // Perhaps.
-  // Situations we need to support:
-  //  - All items at port
-  //  - {Count} items at port
-  // async canRun(options: any) {}
-  // CanRunDeivice ? Might be.
-  // Use the input device??? Obvsiosly!
-  // Yes, but the input device does not have knowledge about the diagram.
-
   async *run({ input, output, params }: RunArgs) {
     while(true) {
       // For now use default heuristics which awaits all ports to be complete

@@ -11,4 +11,10 @@ export class Diagram {
   linksConnectedToPortId(id: PortId): Link[] {
     return this.links.filter(link => link.sourcePortId === id || link.targetPortId === id)
   }
+
+  nodeWithOutputPortId(portId: PortId): Node | undefined {
+    return this.nodes.find(node => {
+      return node.outputs.find(output => output.id === portId)
+    })
+  }
 }
