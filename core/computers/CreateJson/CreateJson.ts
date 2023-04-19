@@ -11,12 +11,14 @@ export const CreateJson: ComputerFactory = (): Computer => ({
   },
 
   async *run({ output, params: { json } }: RunArgs) {
-    const parsed = JSON.parse(json)
-
-    // TODO ADD ERRORS - SIMILAR LIKE IN JSONFILE
-    output.push(
-      // wraps the parsed json in an array if it's not already an array
-      [parsed].flat()
-    )
+    try {
+      const parsed = JSON.parse(json)
+      output.push(
+        // wraps the parsed json in an array if it's not already an array
+        [parsed].flat()
+      )
+    } catch(error) {
+      throw error;
+    }
   },
 });
