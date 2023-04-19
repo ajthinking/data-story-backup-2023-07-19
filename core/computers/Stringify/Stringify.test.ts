@@ -1,8 +1,8 @@
 import { when } from "../../support/computerTester/ComputerTester";
-import { WriteFile } from "./WriteFile";
+import { Stringify } from "./Stringify";
 
 it.todo('does something', async () => {
-  await when(WriteFile)
+  await when(Stringify)
     .hasDefaultParams()
     .getsInput([1, 2])
     .doRun()

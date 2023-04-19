@@ -1,8 +1,8 @@
 import { when } from "../../support/computerTester/ComputerTester";
-import { WriteFile } from "./WriteFile";
+import { Filter } from "./Filter";
 
 it.todo('does something', async () => {
-  await when(WriteFile)
+  await when(Filter)
     .hasDefaultParams()
     .getsInput([1, 2])
     .doRun()

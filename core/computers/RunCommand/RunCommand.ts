@@ -1,7 +1,26 @@
 import { Computer, ComputerFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
-import { exec } from "child_process";
+import { promisify } from 'util';
+import { exec as execCallback } from 'child_process';
+
+const exec = promisify(execCallback);
+
+async function awaitableExec(command: string): Promise<{
+  stdout?: string,
+  stderr?: string,
+  error?: Error,
+}> {
+  try {
+    const { stdout, stderr } = await exec(command);
+    return { stdout, stderr };
+  } catch (error: any) {
+    console.error(`Error executing command: ${command}`, error);
+    // throw error;
+
+    return { error };
+  }
+}
 
 export const RunCommand: ComputerFactory = (): Computer => ({
   name: 'RunCommand',
@@ -16,37 +35,30 @@ export const RunCommand: ComputerFactory = (): Computer => ({
     while(true) {
       const [ { params: { command } } ] = input.pull()
 
-      console.log("HERE")
+      const { stdout, stderr, error } = await awaitableExec(command);
 
-      let execStdout;
-      let execError;
-
-      try {
-
-
-
-        exec(command, (error, stdout, stderr) => {
-          if (error) return execError = error
-          if (stderr) return execError = stderr
-        
-          execStdout = stdout;
-        });
-
-        if(execStdout) {
-          output.push(execStdout)
-          yield;
-          continue;
-        }
-
-        if(execError) {
-          output.pushTo('error', execError)
-          yield;
-          continue;
-        }
-      } catch(e) {
-        console.log(e)
-        throw e;
+      if(stdout) {
+        console.log("STD OUT")
+        output.push([stdout])
+        yield;
+        continue;
       }
+
+      if(stderr) {
+        console.log("EXEC ERROR")
+        output.pushTo('error', [stderr])
+        yield;
+        continue;
+      }
+
+      if(error) {
+        console.log("error (not stderr)")
+        output.pushTo('error', [error])
+        yield;
+        continue;
+      }      
+
+      throw new Error("Unknown exec result!")
     }
   },
 });

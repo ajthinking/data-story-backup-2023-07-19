@@ -1,8 +1,8 @@
 import { when } from "../../support/computerTester/ComputerTester";
-import { WriteFile } from "./WriteFile";
+import { Aggregate } from "./Aggregate";
 
 it.todo('does something', async () => {
-  await when(WriteFile)
+  await when(Aggregate)
     .hasDefaultParams()
     .getsInput([1, 2])
     .doRun()

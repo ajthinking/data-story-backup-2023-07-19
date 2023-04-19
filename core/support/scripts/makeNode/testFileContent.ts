@@ -1,7 +1,7 @@
 export const testFileContent = (name: string) => `import { when } from "../../support/computerTester/ComputerTester";
 import { ${name} } from "./${name}";
 
-it('does something', async () => {
+it.todo('does something', async () => {
   await when(${name})
     .hasDefaultParams()
     .getsInput([1, 2])

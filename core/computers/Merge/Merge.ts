@@ -26,6 +26,8 @@ export const Merge: ComputerFactory = (): Computer => ({
   //  - {Count} items at port
   // async canRun(options: any) {}
   // CanRunDeivice ? Might be.
+  // Use the input device??? Obvsiosly!
+  // Yes, but the input device does not have knowledge about the diagram.
 
   async *run({ input, output, params }: RunArgs) {
     while(true) {

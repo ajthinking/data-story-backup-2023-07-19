@@ -20,7 +20,7 @@ export function Modal({
             <div className="relative w-full max-w-4xl my-8 mx-auto px-8">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {title && (<div className="flex items-start justify-between px-8 py-2 border-solid border-slate-200 rounded-t">
-                  <div contentEditable="true" className="pr-4 mt-4 flex flex-col align-center justify-middleitems-center justify-center text-lg text-gray-400 font-bold tracking widest">
+                  <div className="pr-4 mt-4 flex flex-col align-center justify-middleitems-center justify-center text-lg text-gray-400 font-bold tracking widest">
                     {title}
                   </div>
                   <button className="p-1 ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={() => setShowModal(false)}>
