@@ -10,9 +10,11 @@ import { shallow } from 'zustand/shallow'
 import { NodeModal } from './modals/nodeModal';
 import "reactflow/dist/style.css";
 import { NodeSettingsModal } from './modals/nodeSettingsModal';
+import DataStoryCommentNodeComponent from '../Node/DataStoryCommentNodeComponent';
 
 const nodeTypes = {
   dataStoryNodeComponent: DataStoryNodeComponent,
+  dataStoryCommentNodeComponent: DataStoryCommentNodeComponent,
 };
 
 export default function Workbench() {

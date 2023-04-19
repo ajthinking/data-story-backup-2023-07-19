@@ -43,7 +43,9 @@ export const makeNodeAndConnection = (
         }
       }),
     },
-    type: "dataStoryNodeComponent"
+    type: nodeDescription.name === 'Comment'
+      ? "dataStoryCommentNodeComponent"
+      : "dataStoryNodeComponent",
   }
 
   const connection = guessConnection(existingNodes, node)
