@@ -177,6 +177,8 @@ export class Executor implements ExecutorInterface {
 
   // TODO: this should be renamed to SHOULD_RUN_NODE_DEFAULT ?!
   protected canRunNodeDefault(node: Node) {
+    // TODO REFACTOR TO USE inputDevice here.
+
     // Must be available
     if(this.memory.getNodeStatus(node.id) !== 'AVAILABLE') return false;
 
