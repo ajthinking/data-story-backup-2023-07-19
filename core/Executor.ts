@@ -1,6 +1,6 @@
 import { Node, NodeId } from "./Node";
 import { Diagram } from "./Diagram";
-import { InputDevice, PortLinkMap } from "./InputDevice";
+import { OldInputDevice, PortLinkMap } from "./OldInputDevice";
 import { OutputDevice, OutputTree } from "./OutputDevice";
 import { Port, PortId } from "./Port";
 import { Computer } from "./Computer";
@@ -12,6 +12,7 @@ import { ParamsDevice } from "./ParamsDevice";
 import { Storage } from "./Storage";
 import { ExecutionMemory } from "./ExecutionMemory";
 import { ExecutorInterface } from "./ExecutorInterface";
+import { SmartInputDevice } from "./SmartInputDevice";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -49,6 +50,8 @@ export class Executor implements ExecutorInterface {
           .then((result: IteratorResult<undefined, void>) => {
             if(result.done) {
               this.memory.setNodeStatus(node.id, 'COMPLETE');
+              // TODO consider notifying the children.
+              // But, then, they also need to notify their children, and so on.
               return;
             }
 
@@ -96,14 +99,16 @@ export class Executor implements ExecutorInterface {
     const linkItems = new Map<LinkId, ItemValue[]>();
     const linkCounts = new Map<LinkId, number>();
     const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
+    const inputDevices = new Map<PortId, SmartInputDevice>();
 
     // The memory object
-    const memory = new ExecutionMemory(
+    const memory = new ExecutionMemory({
       nodeStatuses,
       nodeRunners,
       linkItems,
-      linkCounts
-    )
+      linkCounts,
+      inputDevices,
+    })
 
     // Configure memory initial state
     for(const link of this.diagram.links) {
@@ -116,12 +121,16 @@ export class Executor implements ExecutorInterface {
       // Set all nodes to available
       nodeStatuses.set(node.id, 'AVAILABLE')
 
+      // Register input devices
+      const inputDevice = this.makeInputDevice(node, memory)
+      inputDevices.set(node.id, inputDevice)
+
       // // Initialize runner generators
       const computer = this.computers.get(node.type)!
       nodeRunners.set(
         node.id,
         computer.run({
-          input: this.makeInputDevice(node, memory),
+          input: inputDevice,
           output: this.makeOutputDevice(node, memory),
           params: this.makeParamsDevice(computer, node),
           storage: this.storage
@@ -157,11 +166,8 @@ export class Executor implements ExecutorInterface {
       const computer = this.computers.get(node.type)!
       const hook = computer.canRun
       if(hook) return hook({
-        // TODO: fix later!
-        // node,
-        // diagram: this.diagram,
-        // nodeStatuses: this.nodeStatuses,
-        // add input/output devices here?
+        isAvailable: () => this.memory.getNodeStatus(node.id) === 'AVAILABLE',
+        input: this.memory.getInputDevice(node.id)!
       })
 
       // Decide with some heuristics
@@ -210,18 +216,18 @@ export class Executor implements ExecutorInterface {
   }
 
   protected makeInputDevice(node: Node, memory: ExecutionMemory) {
-    let map: PortLinkMap = {}
-
-    for(const input of node.inputs) {
-      const connectedLinks = this.diagram.linksConnectedToPortId(input.id)
-      map[input.name] = connectedLinks.map(link => link.id);
-    }
-
-    return new InputDevice(
-      map,
+    return new SmartInputDevice(
+      node,
+      this.diagram,
       memory,
       this.makeParamsDevice(this.computers.get(node.type)!, node)
     )
+
+    // return new OldInputDevice(
+    //   map,
+    //   memory,
+    //   this.makeParamsDevice(this.computers.get(node.type)!, node)
+    // )
   }
 
   protected makeOutputDevice(node: Node, memory: ExecutionMemory) {
@@ -244,4 +250,16 @@ export class Executor implements ExecutorInterface {
 
     return device as ParamsDevice;
   }
+
+  // TODO
+  // protected markNodeAsComplete(node: Node) {
+  //   this.memory.setNodeStatus(node.id, 'COMPLETE')
+  // }
+
+  // protected markDecendantsAsComplete(node: Node) {
+  //   // TODO: But can we really do this? What if the node is not complete?
+
+  //   // Ensure node is not busy
+  //   // Ensure items is complete
+  // }
 }

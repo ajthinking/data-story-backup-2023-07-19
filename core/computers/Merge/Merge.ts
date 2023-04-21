@@ -16,7 +16,23 @@ export const Merge: ComputerFactory = (): Computer => ({
     supplier_merge_property: string('supplier_merge_property').get(),
   },
 
-  async *run({ input, output, params }: RunArgs) {
+  canRun({ isAvailable, input }) {
+    console.log({
+      isAvailable: isAvailable(),
+      anyItemsAtRequestors: input.haveItemsAtInput('requestors'),
+      itemsAtRequestors: input.itemCountAtInput('requestors'),
+      allItemsAtSuppliers: input.haveAllItemsAtInput('suppliers'),
+      itemsAtSuppliers: input.itemCountAtInput('suppliers'),
+    })
+
+    return [
+      isAvailable(),
+      input.haveItemsAtInput('requestors'),
+      input.haveAllItemsAtInput('suppliers')
+    ].every(Boolean)
+  },
+
+  async *run({ input, output, params }) {
     while(true) {
       // For now use default heuristics which awaits all ports to be complete
 

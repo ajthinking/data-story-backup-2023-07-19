@@ -3,7 +3,7 @@ export type ReturnResult = void | never
 export type NextArgument = void
 export type PortName = string
 
-import { InputDeviceInterface } from "./InputDevice"
+import { InputDeviceInterface } from "./SmartInputDevice"
 import { OutputDeviceInterface } from "./OutputDevice"
 import { Param } from "./Param"
 import { ParamsDevice } from "./ParamsDevice"
@@ -26,7 +26,10 @@ export interface Computer {
   tags?: string[]
 
   run: (args: RunArgs) => AsyncGenerator<NextResult, ReturnResult, NextArgument>
-  canRun?: (options: any) => boolean
+  canRun?: (options: {
+    isAvailable: () => boolean,
+    input: InputDeviceInterface,
+  }) => boolean
 }
 
 export type ComputerFactory = (options?: any) => Computer

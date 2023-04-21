@@ -8,12 +8,18 @@ import { Param, ParamValue } from "./Param"
 
 export type PortLinkMap = Record<PortName, LinkId[]>
 
-export interface InputDeviceInterface {
+/**
+ * @deprecated This interface is no longer supported and should not be used.
+ */
+export interface OldInputDeviceInterface {
   pull: (count?: number) => ItemWithParams[]
   pullFrom: (name: string, count?: number) => ItemWithParams[]
 }
 
-export class InputDevice implements InputDeviceInterface {
+/**
+ * @deprecated This class is no longer supported and should not be used.
+ */
+export class OldInputDevice implements OldInputDeviceInterface {
   constructor(
     private portLinkMap: PortLinkMap = {},
     private memory: ExecutionMemory,

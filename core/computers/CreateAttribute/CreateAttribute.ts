@@ -1,8 +1,8 @@
 import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { ObjectItemValue } from "../../ItemValue";
 import { ItemWithParams } from "../../ItemWithParams";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
+import { ObjectItemValue } from "../../ItemValue";
 
 export const CreateAttribute: ComputerFactory = (): Computer => ({
   name: 'CreateAttribute',
@@ -10,20 +10,17 @@ export const CreateAttribute: ComputerFactory = (): Computer => ({
   outputs: ['output'],
   params: {
     ...DefaultParams,
-    key: string('key').value('foo').get(),
-    value: string('value').value('bar').get(),
+    key: string('key').get(),
+    value: string('value').get(),
   },
 
   async *run({ input, output, params }: RunArgs) {
     while(true) {
       const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
-      
-      const outcoming = incoming.map((item) => {
-        item.value[params.key] = item.params.value
+      output.push(incoming.map(item => {
+        item.value[item.params.key] = item.params.value
         return item
-      })
-
-      output.push(outcoming)
+      }))
 
       yield;
     }

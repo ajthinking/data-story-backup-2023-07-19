@@ -21,7 +21,9 @@ export const Signal: ComputerFactory = (): Computer => ({
 
     while(i <= count) {
       await sleep(period)
-      output.push([i++])
+      output.push([{
+        id: i++
+      }])
 
       yield;
     }

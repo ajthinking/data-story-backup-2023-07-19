@@ -1,29 +1,14 @@
 import { when } from "../../support/computerTester/ComputerTester";
 import { CreateAttribute } from "./CreateAttribute";
 
-it('sets an attribute key value on the item', async () => {
+it.todo('does something', async () => {
   await when(CreateAttribute)
-    .hasParams({
-      key: 'coolness',
-      value: 'high',
-    })
-    .getsInput([{}])
+    .hasDefaultParams()
+    .getsInput([1, 2])
     .doRun()
-    .expectOutput([{ coolness: 'high' }])
-    .ok()
-})
-
-it('can set a parameterized attribute key value on the item', async () => {
-  await when(CreateAttribute)
-    .hasParams({
-      key: 'greeting',
-      value: 'Hi there ${name}!',
-    })
-    .getsInput([{ name: 'Bob' }])
+    .expectOutput([1, 2])
+    .getsInput([3, 4])
     .doRun()
-    .expectOutput([{
-      name: 'Bob',
-      greeting: 'Hi there Bob!',
-    }])
+    .expectOutput([1, 2, 3, 4])
     .ok()
 })

@@ -2,16 +2,32 @@ import { NodeStatus } from "./Executor"
 import { ItemValue } from "./ItemValue"
 import { LinkId } from "./Link"
 import { NodeId } from "./Node"
+import { InputDeviceInterface } from "./SmartInputDevice"
+
+type MemoryValues = {
+  nodeStatuses?: Map<NodeId, NodeStatus>,
+  nodeRunners?: Map<NodeId, AsyncGenerator<undefined, void, void>>,
+  linkItems?: Map<LinkId, ItemValue[]>,
+  linkCounts?: Map<LinkId, number>
+  inputDevices?: Map<NodeId, InputDeviceInterface>,
+}
 
 export class ExecutionMemory {
+  nodeStatuses: Map<NodeId, NodeStatus>
+  nodeRunners: Map<NodeId, AsyncGenerator<undefined, void, void>>
+  linkItems: Map<LinkId, ItemValue[]>
+  linkCounts: Map<LinkId, number>
+  inputDevices: Map<NodeId, InputDeviceInterface>  
+  
   history: string[] = []
 
-  constructor(
-    private nodeStatuses: Map<NodeId, NodeStatus>,
-    private nodeRunners: Map<NodeId, AsyncGenerator<undefined, void, void>>,  
-    private linkItems: Map<LinkId, ItemValue[]>,
-    private linkCounts: Map<LinkId, number>
-  ) {}
+  constructor(values: MemoryValues) {
+    this.nodeStatuses = values.nodeStatuses || new Map()
+    this.nodeRunners = values.nodeRunners || new Map()
+    this.linkItems = values.linkItems || new Map()
+    this.linkCounts = values.linkCounts || new Map()
+    this.inputDevices = values.inputDevices || new Map()
+  }
 
   getNodeStatus(nodeId: NodeId): NodeStatus | undefined {
     return this.nodeStatuses.get(nodeId)
@@ -75,6 +91,15 @@ export class ExecutionMemory {
     this.history.push(`Setting link ${linkId} count to ${count}`)
 
     this.linkCounts.set(linkId, count)
+  }
+
+  getInputDevice(nodeId: NodeId): InputDeviceInterface | undefined {
+    return this.inputDevices.get(nodeId)
+  }
+
+  setInputDevice(nodeId: NodeId, device: InputDeviceInterface) {
+    this.history.push(`Setting node ${nodeId} input device`)
+    this.inputDevices.set(nodeId, device)
   }
 
   getHistory(): string[] {

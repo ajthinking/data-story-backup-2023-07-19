@@ -1,4 +1,4 @@
-import { InputDevice } from "./InputDevice";
+import { OldInputDevice } from "./OldInputDevice";
 import { ItemValue } from "./ItemValue";
 import { ExecutionMemory } from "./ExecutionMemory";
 import { NodeId } from "./Node";
@@ -24,7 +24,7 @@ describe('pull', () => {
     memory.setLinkItems('Source.1.output--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.output--->Target.1.input', [3, 4])
 
-    const input = new InputDevice(map, memory, {})
+    const input = new OldInputDevice(map, memory, {})
 
     expect(input.pull()).toMatchObject([
       { value:1 },
@@ -43,7 +43,7 @@ describe('pull', () => {
     )
 
     expect(() => {
-      new InputDevice({}, memory, {}).pull()
+      new OldInputDevice({}, memory, {}).pull()
     }).toThrowError()
   })  
 
@@ -65,7 +65,7 @@ describe('pull', () => {
     memory.setLinkItems('Source.1.output--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.output--->Target.1.input', [3, 4])
 
-    const input = new InputDevice(map, memory, {})
+    const input = new OldInputDevice(map, memory, {})
     input.pull()
 
     const atLink1 = memory.getLinkItems('Source.1.output--->Target.1.input')
@@ -94,7 +94,7 @@ describe('pull', () => {
     memory.setLinkItems('Source.1.output--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.output--->Target.1.input', [3, 4])
 
-    const input = new InputDevice(map, memory, {})
+    const input = new OldInputDevice(map, memory, {})
 
     expect(input.pull(1)).toMatchObject([{ value: 1 }])
     expect(input.pull(2)).toMatchObject([{ value: 2 }, { value: 3 }])
@@ -121,7 +121,7 @@ describe('pullFrom', () => {
     memory.setLinkItems('Source.1.numbers--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.numbers--->Target.1.input', [3, 4])
 
-    const input = new InputDevice(map, memory, {})
+    const input = new OldInputDevice(map, memory, {})
 
     expect(input.pullFrom('numbers')).toMatchObject([
       { value: 1 },
@@ -149,7 +149,7 @@ describe('pullFrom', () => {
     memory.setLinkItems('Source.1.numbers--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.numbers--->Target.1.input', [3, 4])
 
-    const input = new InputDevice(map, memory, {})
+    const input = new OldInputDevice(map, memory, {})
     input.pullFrom('numbers')
 
     const atLink1 = memory.getLinkItems('Source.1.numbers--->Target.1.input')
@@ -184,7 +184,7 @@ describe('params', () => {
       { name: 'Bob' },
     ])
 
-    const input = new InputDevice(map, memory, params)
+    const input = new OldInputDevice(map, memory, params)
 
     const [ item ] = input.pull()
 

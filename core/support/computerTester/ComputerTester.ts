@@ -1,7 +1,7 @@
 import { Computer, ComputerFactory } from "../../Computer";
 import { Diagram } from "../../Diagram";
-import { Executor, NodeStatus } from "../../Executor";
-import { InputDevice, PortLinkMap } from "../../InputDevice";
+import { NodeStatus } from "../../Executor";
+import { OldInputDevice, PortLinkMap } from "../../OldInputDevice";
 import { ItemValue } from "../../ItemValue";
 import { Link, LinkId } from "../../Link";
 import { Node, NodeId } from "../../Node";
@@ -45,7 +45,7 @@ export class ComputerTester {
     [key: string]: ItemValue[]
   } = {}
   runner: AsyncGenerator | null = null
-  inputDevice: InputDevice | null = null
+  inputDevice: OldInputDevice | null = null
   outputDevice: OutputDevice | null = null
   memory: ExecutionMemory | null = null
 
@@ -97,6 +97,9 @@ export class ComputerTester {
 
     return this
   }
+
+  // TODO getsFinalInput
+  // TODO getsFinalInputs
 
   getsInput(input: ItemValue[]) {
     this.steps.push([getsInput, [input]])
@@ -187,7 +190,7 @@ export class ComputerTester {
       map[input.name] = connectedLinkIds
     }
 
-    return new InputDevice(
+    return new OldInputDevice(
       map,
       this.memory!,
       this.makeParamsDevice()
@@ -234,12 +237,13 @@ export class ComputerTester {
     const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
 
     // The memory object
-    const memory = new ExecutionMemory(
+    const memory = new ExecutionMemory({
       nodeStatuses,
       nodeRunners,
       linkItems,
-      linkCounts
-    )
+      linkCounts,
+      // TODO inputDevice
+    })
 
     // Configure memory initial state
     for(const link of this.diagram!.links) {

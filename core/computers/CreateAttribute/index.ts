@@ -1,1 +1,1 @@
-export { CreateAttribute } from './CreateAttribute';
+export { CreateAttribute } from './CreateAttribute'

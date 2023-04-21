@@ -58,8 +58,6 @@ export class SocketClient implements ServerClient {
       }   
       
       if(parsed.type === "OpenResponse") {
-        console.log("Open response: ", parsed)
-
         const flow = parsed.flow;
 
         // const { x = 0, y = 0, zoom = 1 } = flow.viewport;

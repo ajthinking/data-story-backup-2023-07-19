@@ -13,6 +13,9 @@ export type PortLinkMap = Record<PortName, LinkId[]>
 export interface InputDeviceInterface {
   pull: (count?: number) => ItemWithParams[]
   pullFrom: (name: string, count?: number) => ItemWithParams[]
+  haveItemsAtInput(name: string): boolean;
+  haveAllItemsAtInput(name: string): boolean;
+  itemCountAtInput(name: string): number;
 }
 
 export class SmartInputDevice implements InputDeviceInterface {
@@ -80,10 +83,23 @@ export class SmartInputDevice implements InputDeviceInterface {
       const sourceNode = this.diagram.nodeWithOutputPortId(sourcePort)!
       const sourceStatus = this.memory.getNodeStatus(sourceNode.id)
 
+      console.log('sourceStatus', sourceStatus)
       if(sourceStatus !== 'COMPLETE') return false
     }
 
     return true
+  }
+
+  itemCountAtInput(name: string): number {
+    const port = this.node.inputs.find(input => input.name === name)!
+    const links = this.diagram.linksConnectedToPortId(port.id)
+
+    let count = 0
+    for(const link of links) {
+      count += this.memory.getLinkItems(link.id)!.length
+    }
+
+    return count
   }
 
   protected linksAtPort(name: string): LinkId[] {
