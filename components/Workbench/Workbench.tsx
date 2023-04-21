@@ -75,6 +75,8 @@ export default function Workbench() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onInit={onInit}
+        minZoom={0.25}
+        maxZoom={8}
       >     
         <DataStoryControls
           setShowRunModal={setShowRunModal}
