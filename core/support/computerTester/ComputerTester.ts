@@ -1,7 +1,7 @@
 import { Computer, ComputerFactory } from "../../Computer";
 import { Diagram } from "../../Diagram";
 import { NodeStatus } from "../../Executor";
-import { OldInputDevice, PortLinkMap } from "../../OldInputDevice";
+import { PortLinkMap } from "../../OldInputDevice";
 import { ItemValue } from "../../ItemValue";
 import { Link, LinkId } from "../../Link";
 import { Node, NodeId } from "../../Node";
@@ -182,16 +182,6 @@ export class ComputerTester {
   }
 
   protected makeInputDevice() {
-    let map: PortLinkMap = {}
-
-    for(const input of this.node!.inputs) {
-      const connectedLinkIds = this.diagram!
-        .linksConnectedToPortId(input.id)
-        .map(link => link.id)
-
-      map[input.name] = connectedLinkIds
-    }
-
     return new SmartInputDevice(
       this.node!,
       this.diagram!,
