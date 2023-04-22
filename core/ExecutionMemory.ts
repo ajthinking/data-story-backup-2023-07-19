@@ -2,7 +2,7 @@ import { NodeStatus } from "./Executor"
 import { ItemValue } from "./ItemValue"
 import { LinkId } from "./Link"
 import { NodeId } from "./Node"
-import { InputDeviceInterface } from "./SmartInputDevice"
+import { InputDeviceInterface } from "./InputDeviceInterface"
 
 type MemoryValues = {
   nodeStatuses?: Map<NodeId, NodeStatus>,
@@ -35,6 +35,7 @@ export class ExecutionMemory {
 
   setNodeStatus(nodeId: NodeId, status: NodeStatus) {
     this.history.push(`Setting node ${nodeId} to ${status}`)
+    console.log(`Setting node ${nodeId} to ${status}`)
 
     this.nodeStatuses.set(nodeId, status)
   }

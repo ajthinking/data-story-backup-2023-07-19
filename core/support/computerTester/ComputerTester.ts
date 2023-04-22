@@ -14,6 +14,8 @@ import { doRun, expectCanRun, expectCantRun, expectOutput, expectOutputs, getsIn
 import { expectDone } from "./testSteps/expectDone";
 import { ExecutionMemory } from "../../ExecutionMemory";
 import { NullStorage } from "../../NullStorage";
+import { InputDeviceInterface } from "../../InputDeviceInterface";
+import { SmartInputDevice } from "../../SmartInputDevice";
 
 export const when = (factory: ComputerFactory) => {
   return new ComputerTester(factory())
@@ -45,7 +47,7 @@ export class ComputerTester {
     [key: string]: ItemValue[]
   } = {}
   runner: AsyncGenerator | null = null
-  inputDevice: OldInputDevice | null = null
+  inputDevice: InputDeviceInterface | null = null
   outputDevice: OutputDevice | null = null
   memory: ExecutionMemory | null = null
 
@@ -190,10 +192,11 @@ export class ComputerTester {
       map[input.name] = connectedLinkIds
     }
 
-    return new OldInputDevice(
-      map,
+    return new SmartInputDevice(
+      this.node!,
+      this.diagram!,
       this.memory!,
-      this.makeParamsDevice()
+      this.makeParamsDevice(),
     )
   }
 

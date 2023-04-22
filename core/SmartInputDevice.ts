@@ -1,22 +1,14 @@
 import { LinkId } from "./Link"
 import { ItemValue } from "./ItemValue"
-import { PortId } from "./Port"
 import { ExecutionMemory } from "./ExecutionMemory"
 import { PortName } from "./Computer"
 import { ItemWithParams } from "./ItemWithParams"
-import { Param, ParamValue } from "./Param"
+import { ParamValue } from "./Param"
 import { Diagram } from "./Diagram"
 import { Node } from "./Node"
+import { InputDeviceInterface } from "./InputDeviceInterface"
 
 export type PortLinkMap = Record<PortName, LinkId[]>
-
-export interface InputDeviceInterface {
-  pull: (count?: number) => ItemWithParams[]
-  pullFrom: (name: string, count?: number) => ItemWithParams[]
-  haveItemsAtInput(name: string): boolean;
-  haveAllItemsAtInput(name: string): boolean;
-  itemCountAtInput(name: string): number;
-}
 
 export class SmartInputDevice implements InputDeviceInterface {
   constructor(
@@ -43,24 +35,17 @@ export class SmartInputDevice implements InputDeviceInterface {
   pullFrom(name: string, count: number = Infinity): ItemWithParams[] {
     let remaining = count
     const pulled: ItemValue[] = []
-    const links = this.linksAtPort(name)
+    const links = this.diagram.linksAtInput(this.node, name)
 
-    for(const linkId of links) {
-      const batch = this.memory.pullLinkItems(linkId, remaining)
+    for(const link of links) {
+      const batch = this.memory.pullLinkItems(link.id, remaining)
       pulled.push(...batch)
       remaining -= batch.length
       if(remaining === 0) break
     }
 
-    // enhance ItemValue to ItemWithParams
+    // Enhance ItemValue to ItemWithParams
     return pulled.map(item => new ItemWithParams(item, this.params))
-  }
-
-  /**
-   * Shorthand to set items while testing
-   */
-  setItemsAt(linkId: LinkId, items: ItemValue[]) {
-    this.memory.setLinkItems(linkId, items)
   }
 
   haveItemsAtInput(name: string): boolean {
@@ -83,14 +68,21 @@ export class SmartInputDevice implements InputDeviceInterface {
       const sourceNode = this.diagram.nodeWithOutputPortId(sourcePort)!
       const sourceStatus = this.memory.getNodeStatus(sourceNode.id)
 
-      console.log('sourceStatus', sourceStatus)
       if(sourceStatus !== 'COMPLETE') return false
     }
 
     return true
   }
 
-  itemCountAtInput(name: string): number {
+  haveAllItemsAtAllInputs(): boolean {
+    for(const input of this.node.inputs) {
+      if(!this.haveAllItemsAtInput(input.name)) return false
+    }
+
+    return true
+  }
+
+  haveItemCountAtInput(name: string): number {
     const port = this.node.inputs.find(input => input.name === name)!
     const links = this.diagram.linksConnectedToPortId(port.id)
 
@@ -102,10 +94,18 @@ export class SmartInputDevice implements InputDeviceInterface {
     return count
   }
 
-  protected linksAtPort(name: string): LinkId[] {
-    const port = this.node.inputs.find(input => input.name === name)!
-    const links = this.diagram.linksConnectedToPortId(port.id)
+  haveItemsAtAnyInput(): boolean {
+    for(const input of this.node.inputs) {
+      if(this.haveItemsAtInput(input.name)) return true
+    }
 
-    return links.map(link => link.id)
+    return false
   }
+
+  /**
+   * @visibleForTesting
+   */
+  setItemsAt(linkId: LinkId, items: ItemValue[]) {
+    this.memory.setLinkItems(linkId, items)
+  }  
 }

@@ -3,7 +3,7 @@ export type ReturnResult = void | never
 export type NextArgument = void
 export type PortName = string
 
-import { InputDeviceInterface } from "./SmartInputDevice"
+import { InputDeviceInterface } from "./InputDeviceInterface"
 import { OutputDeviceInterface } from "./OutputDevice"
 import { Param } from "./Param"
 import { ParamsDevice } from "./ParamsDevice"

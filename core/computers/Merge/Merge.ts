@@ -18,11 +18,10 @@ export const Merge: ComputerFactory = (): Computer => ({
 
   canRun({ isAvailable, input }) {
     console.log({
+      type: 'Can Merge run?',
       isAvailable: isAvailable(),
-      anyItemsAtRequestors: input.haveItemsAtInput('requestors'),
-      itemsAtRequestors: input.itemCountAtInput('requestors'),
-      allItemsAtSuppliers: input.haveAllItemsAtInput('suppliers'),
-      itemsAtSuppliers: input.itemCountAtInput('suppliers'),
+      requestors: input.haveItemsAtInput('requestors'),
+      suppliers: input.haveAllItemsAtInput('suppliers')
     })
 
     return [

@@ -50,8 +50,19 @@ export class Executor implements ExecutorInterface {
           .then((result: IteratorResult<undefined, void>) => {
             if(result.done) {
               this.memory.setNodeStatus(node.id, 'COMPLETE');
-              // TODO consider notifying the children.
-              // But, then, they also need to notify their children, and so on.
+              // TODO: The problem with this implementation:
+              // If a node is done, but its output is not yet consumed,
+              // then yes we can mark node as complete, but we will not be
+              // able to complete decendant nodes depending on it.
+              // Because they probably still have the just outputted items to process.
+              // So, we have to wait until the "cleanup" loop.
+              // This can be solved by having a "consumed" flag on the node ??
+              // Or, upon a "rounds complete event" the input device can notify ??
+              // Or something else...
+              this.diagram.directDescendant(node).forEach(node => {
+                this.attemptToMarkNodeComplete(node);
+              })
+
               return;
             }
 
@@ -67,13 +78,15 @@ export class Executor implements ExecutorInterface {
       // Add this batch of promises to the pending list
       pendingPromises.push(...promises)
 
-      // If no promises, then we are stuck
+      // If no promises, then we might be stuck
       if(pendingPromises.length === 0) {
-        this.memory.pushHistoryMessage('No pending promises, so we are stuck?! 🤷‍♂️')
+        this.memory.pushHistoryMessage('No pending promises.')
 
-        // Mark all nodes as complete
+        console.log("No pending promises. Checking for completed nodes.")
+
+        // Check for nodes we can mark as complete
         for(const node of this.diagram.nodes) {
-          this.memory.setNodeStatus(node.id, 'COMPLETE')
+          this.attemptToMarkNodeComplete(node);
         }
       }
 
@@ -110,7 +123,7 @@ export class Executor implements ExecutorInterface {
       inputDevices,
     })
 
-    // Configure memory initial state
+    // Configure the memory's initial state
     for(const link of this.diagram.links) {
       // Set all links to be empty
       linkItems.set(link.id, [])
@@ -177,44 +190,22 @@ export class Executor implements ExecutorInterface {
 
   // TODO: this should be renamed to SHOULD_RUN_NODE_DEFAULT ?!
   protected canRunNodeDefault(node: Node) {
-    // TODO REFACTOR TO USE inputDevice here.
+    // Get the nodes input device
+    const input = this.memory.getInputDevice(node.id)!
 
     // Must be available
     if(this.memory.getNodeStatus(node.id) !== 'AVAILABLE') return false;
 
     // If one input port, it must not be empty
-    if(node.inputs.length === 1 && !this.inputHaveItems(node.inputs[0].id)) return false;
+    if(node.inputs.length === 1 && !input.haveItemsAtInput(node.inputs.at(0)!.name))
+      return false;
 
     // If two or more ports, all items must be awaited
-    if(node.inputs.length >= 2 && !this.inputsHaveAllItems(node.inputs)) return false;
+    if(node.inputs.length >= 2 && !input.haveAllItemsAtAllInputs())
+      return false;
 
     // All passed
     return true
-  }
-
-  protected inputHaveItems(id: PortId): boolean {
-    const links = this.diagram.linksConnectedToPortId(id)
-    const linkWithItems = links.find(link => {
-      const items = this.memory.getLinkItems(link.id)!
-      return items.length > 0
-    })
-    
-    return Boolean(linkWithItems)
-  }
-
-  protected inputHaveAllItems(port: Port): boolean {
-    const links = this.diagram.linksConnectedToPortId(port.id)
-    const nodeIds = links.map(link => link.sourcePortId)
-    
-    return nodeIds.every(nodeId => this.memory.getNodeStatus(nodeId) === 'COMPLETE')
-  }
-  
-  protected inputsHaveAllItems(inputs: Port[]) {
-    return inputs.every(this.inputHaveAllItems)
-  }
-
-  protected noBusyNodes() {
-    return Array.from(this.memory.getNodeStatuses().values()).every(status => status !== 'BUSY')
   }
 
   protected makeInputDevice(node: Node, memory: ExecutionMemory) {
@@ -224,12 +215,6 @@ export class Executor implements ExecutorInterface {
       memory,
       this.makeParamsDevice(this.computers.get(node.type)!, node)
     )
-
-    // return new OldInputDevice(
-    //   map,
-    //   memory,
-    //   this.makeParamsDevice(this.computers.get(node.type)!, node)
-    // )
   }
 
   protected makeOutputDevice(node: Node, memory: ExecutionMemory) {
@@ -253,15 +238,24 @@ export class Executor implements ExecutorInterface {
     return device as ParamsDevice;
   }
 
-  // TODO
-  // protected markNodeAsComplete(node: Node) {
-  //   this.memory.setNodeStatus(node.id, 'COMPLETE')
-  // }
+  /**
+   * Marks nodes as complete if some default heuristics are met.
+   */
+  protected attemptToMarkNodeComplete(node: Node) {
+    // Node must not be busy
+    if(this.memory.getNodeStatus(node.id) === 'BUSY') return;
+    
+    // Node must have no awaiting items at links
+    const input = this.memory.getInputDevice(node.id)!
+    if(input.haveItemsAtAnyInput()) return;
 
-  // protected markDecendantsAsComplete(node: Node) {
-  //   // TODO: But can we really do this? What if the node is not complete?
-
-  //   // Ensure node is not busy
-  //   // Ensure items is complete
-  // }
+    // Node must have no incomplete ancestors
+    const ancestors = this.diagram.directAncestor(node)
+    for(const ancestor of ancestors) {
+      if(this.memory.getNodeStatus(ancestor.id) !== 'COMPLETE') return;
+    }
+    
+    // Passed all checks, so mark as complete
+    this.memory.setNodeStatus(node.id, 'COMPLETE')
+  }
 }
