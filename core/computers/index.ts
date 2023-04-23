@@ -1,6 +1,5 @@
 export * from './HubSpot'
 export * from './Placeholders'
-export { Aggregate } from './Aggregate';
 export { AskChatGpt } from './AskChatGpt';
 export { Comment } from './Comment';
 export { CreateAttribute } from './CreateAttribute';
