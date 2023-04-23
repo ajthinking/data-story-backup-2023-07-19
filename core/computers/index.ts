@@ -7,11 +7,13 @@ export { CreateJson } from './CreateJson'
 export { DumpJson } from './DumpJson';
 export { Ignore } from './Ignore'
 export { InstantThrow } from './InstantThrow';
+export { Join } from './Join';
 export { JsonFile } from './JsonFile';
 export { ListFiles } from './ListFiles';
 export { Log } from './Log';
 export { Merge } from './Merge';
 export { Pass } from './Pass'
+export { Pluck } from './Pluck';
 export { Request } from './Request'
 export { RunCommand } from './RunCommand';
 export { Signal } from './Signal'
