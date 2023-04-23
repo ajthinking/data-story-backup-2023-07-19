@@ -19,8 +19,6 @@ export const Join: ComputerFactory = (): Computer => ({
   
   async *run({ input, output, params }: RunArgs) {
     while(true) {
-      console.log("RUNING JOIN TO MANY TIMES???")
-
       const incoming = input.pull()
       const joined = incoming.map(({ value }) => value).join(params.separator)
 
