@@ -1,0 +1,223 @@
+{
+  "nodes": [
+    {
+      "width": 128,
+      "height": 52,
+      "id": "CreateJson.1",
+      "position": {
+        "x": 109,
+        "y": 187
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": ""
+          },
+          "json": {
+            "id": "json",
+            "name": "json",
+            "type": "json",
+            "value": "[{ \"name\": \"John\"}]"
+          }
+        },
+        "computer": "CreateJson",
+        "label": "CreateJson",
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "CreateJson.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 109,
+        "y": 187
+      },
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 78,
+      "id": "CreateAttribute.1",
+      "position": {
+        "x": 309,
+        "y": 187
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "CreateGreeting"
+          },
+          "key": {
+            "id": "key",
+            "name": "key",
+            "type": "string",
+            "value": "greeting"
+          },
+          "value": {
+            "id": "value",
+            "name": "value",
+            "type": "string",
+            "value": "Welcome ${name}!"
+          }
+        },
+        "computer": "CreateAttribute",
+        "label": "CreateGreeting",
+        "inputs": [
+          {
+            "id": "CreateAttribute.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "CreateAttribute.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 309,
+        "y": 187
+      }
+    },
+    {
+      "width": 128,
+      "height": 52,
+      "id": "Log.1",
+      "position": {
+        "x": 526,
+        "y": 209
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": ""
+          }
+        },
+        "computer": "Log",
+        "label": "Log",
+        "inputs": [
+          {
+            "id": "Log.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": []
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 526,
+        "y": 209
+      },
+      "dragging": false
+    },
+    {
+      "width": 576,
+      "height": 96,
+      "id": "Comment.1",
+      "position": {
+        "x": 105,
+        "y": 49
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "Comment"
+          },
+          "content": {
+            "id": "content",
+            "name": "content",
+            "type": "json",
+            "value": "/* Welcome to the first demo flow. Now you can try to pan, move around nodes, double click nodes to open their settings. Then, press the run icon to execute the flow. In this simple flow we will just create a few dummy objects and log them. */"
+          }
+        },
+        "computer": "Comment",
+        "label": "Comment",
+        "inputs": [],
+        "outputs": []
+      },
+      "type": "dataStoryCommentNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 105,
+        "y": 49
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "id": "CreateJson.1.output--->CreateAttribute.1.input",
+      "sourceHandle": "CreateJson.1.output",
+      "targetHandle": "CreateAttribute.1.input",
+      "source": "CreateJson.1",
+      "target": "CreateAttribute.1",
+      "selected": false,
+      "label": 1,
+      "labelBgStyle": {
+        "opacity": 0.6
+      }
+    },
+    {
+      "id": "CreateAttribute.1.output--->Log.1.input",
+      "sourceHandle": "CreateAttribute.1.output",
+      "targetHandle": "Log.1.input",
+      "source": "CreateAttribute.1",
+      "target": "Log.1",
+      "label": 1,
+      "labelBgStyle": {
+        "opacity": 0.6
+      },
+      "selected": false
+    }
+  ],
+  "viewport": {
+    "x": -17,
+    "y": 140,
+    "zoom": 1
+  }
+}
