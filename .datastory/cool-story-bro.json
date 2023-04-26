@@ -1,0 +1,54 @@
+{
+  "nodes": [
+    {
+      "width": 128,
+      "height": 78,
+      "id": "Pass.1",
+      "position": {
+        "x": 200,
+        "y": 250
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": ""
+          }
+        },
+        "computer": "Pass",
+        "label": "Pass",
+        "inputs": [
+          {
+            "id": "Pass.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Pass.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "positionAbsolute": {
+        "x": 200,
+        "y": 250
+      }
+    }
+  ],
+  "edges": [],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

@@ -38,4 +38,6 @@ yarn-error.log*
 next-env.d.ts
 
 # datastory
-.datastory
+.datastory/cache
+.datastory/data
+.datastory/executions

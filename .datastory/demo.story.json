@@ -1,0 +1,418 @@
+{
+  "nodes": [
+    {
+      "width": 128,
+      "height": 52,
+      "id": "CreateJson.1",
+      "position": {
+        "x": 119,
+        "y": 118
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "CreateJson"
+          },
+          "json": {
+            "id": "json",
+            "name": "json",
+            "type": "json",
+            "value": "[{\"word\": \"strength\"}, {\"word\": \"honor\"}]"
+          }
+        },
+        "computer": "CreateJson",
+        "label": "CreateJson",
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "CreateJson.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 119,
+        "y": 118
+      },
+      "dragging": false
+    },
+    {
+      "width": 131,
+      "height": 78,
+      "id": "CreateAttribute.1",
+      "position": {
+        "x": 331,
+        "y": 117
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "CreateAttribute"
+          },
+          "key": {
+            "id": "key",
+            "name": "key",
+            "type": "string",
+            "value": "prompt"
+          },
+          "value": {
+            "id": "value",
+            "name": "value",
+            "type": "string",
+            "value": "What does ${word} mean?"
+          }
+        },
+        "computer": "CreateAttribute",
+        "label": "CreateAttribute",
+        "inputs": [
+          {
+            "id": "CreateAttribute.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "CreateAttribute.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 331,
+        "y": 117
+      },
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 130,
+      "id": "AskChatGpt.1",
+      "position": {
+        "x": 531,
+        "y": 117
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "AskChatGpt"
+          },
+          "prompt": {
+            "id": "prompt",
+            "name": "prompt",
+            "type": "string",
+            "value": "${prompt}"
+          }
+        },
+        "computer": "AskChatGpt",
+        "label": "AskChatGpt",
+        "inputs": [
+          {
+            "id": "AskChatGpt.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "AskChatGpt.1.completions",
+            "name": "completions"
+          },
+          {
+            "id": "AskChatGpt.1.scores",
+            "name": "scores"
+          },
+          {
+            "id": "AskChatGpt.1.tokens_used",
+            "name": "tokens_used"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 531,
+        "y": 117
+      }
+    },
+    {
+      "width": 176,
+      "height": 78,
+      "id": "Pluck.1",
+      "position": {
+        "x": 97.6705690978201,
+        "y": 328.816997997287
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "Pluck(text).join(',')"
+          },
+          "property": {
+            "id": "property",
+            "name": "property",
+            "type": "string",
+            "value": "text"
+          }
+        },
+        "computer": "Pluck",
+        "label": "Pluck(text).join(',')",
+        "inputs": [
+          {
+            "id": "Pluck.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Pluck.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": true,
+      "positionAbsolute": {
+        "x": 97.6705690978201,
+        "y": 328.816997997287
+      },
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 78,
+      "id": "Join.1",
+      "position": {
+        "x": 309.8245218394733,
+        "y": 352.6356070245233
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "Join"
+          },
+          "separator": {
+            "id": "separator",
+            "name": "separator",
+            "type": "string",
+            "value": "-----"
+          }
+        },
+        "computer": "Join",
+        "label": "Join",
+        "inputs": [
+          {
+            "id": "Join.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Join.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 309.8245218394733,
+        "y": 352.6356070245233
+      },
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 52,
+      "id": "Log.1",
+      "position": {
+        "x": 510.71228725748404,
+        "y": 383.55375045077665
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": ""
+          }
+        },
+        "computer": "Log",
+        "label": "Log",
+        "inputs": [
+          {
+            "id": "Log.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": []
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 510.71228725748404,
+        "y": 383.55375045077665
+      },
+      "dragging": false
+    },
+    {
+      "width": 350,
+      "height": 48,
+      "id": "Comment.1",
+      "position": {
+        "x": 140.8394938690634,
+        "y": 39.225002297505455
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "Comment"
+          },
+          "content": {
+            "id": "content",
+            "name": "content",
+            "type": "json",
+            "value": "/* Visually controlled ChatGPT automation */"
+          }
+        },
+        "computer": "Comment",
+        "label": "Comment",
+        "inputs": [],
+        "outputs": []
+      },
+      "type": "dataStoryCommentNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 140.8394938690634,
+        "y": 39.225002297505455
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "CreateJson.1",
+      "sourceHandle": "CreateJson.1.output",
+      "target": "CreateAttribute.1",
+      "targetHandle": "CreateAttribute.1.input",
+      "id": "CreateJson.1.output--->CreateAttribute.1.input",
+      "label": 2,
+      "labelBgStyle": {
+        "opacity": 0.6
+      }
+    },
+    {
+      "id": "CreateAttribute.1.output--->AskChatGpt.1.input",
+      "sourceHandle": "CreateAttribute.1.output",
+      "targetHandle": "AskChatGpt.1.input",
+      "source": "CreateAttribute.1",
+      "target": "AskChatGpt.1",
+      "label": 2,
+      "labelBgStyle": {
+        "opacity": 0.6
+      }
+    },
+    {
+      "id": "AskChatGpt.1.completions--->Pluck.1.input",
+      "sourceHandle": "AskChatGpt.1.completions",
+      "targetHandle": "Pluck.1.input",
+      "source": "AskChatGpt.1",
+      "target": "Pluck.1",
+      "label": 2,
+      "labelBgStyle": {
+        "opacity": 0.6
+      }
+    },
+    {
+      "id": "Pluck.1.output--->Join.1.input",
+      "sourceHandle": "Pluck.1.output",
+      "targetHandle": "Join.1.input",
+      "source": "Pluck.1",
+      "target": "Join.1",
+      "label": 2,
+      "labelBgStyle": {
+        "opacity": 0.6
+      }
+    },
+    {
+      "id": "Join.1.output--->Log.1.input",
+      "sourceHandle": "Join.1.output",
+      "targetHandle": "Log.1.input",
+      "source": "Join.1",
+      "target": "Log.1",
+      "label": 1,
+      "labelBgStyle": {
+        "opacity": 0.6
+      }
+    }
+  ],
+  "viewport": {
+    "x": 32.396036158024685,
+    "y": 14.988258601339055,
+    "zoom": 1.1455178979797564
+  }
+}
