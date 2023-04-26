@@ -83,11 +83,6 @@ export class FileStorage implements Storage {
   }
 
   async put(filename: string, content: string) {
-    console.log({
-      path: `${this.root}/${filename}`,
-      content
-    })
-
     await fs.writeFile(`${this.root}/${filename}`, content)
   }
 }

@@ -177,6 +177,11 @@ export const useStore = create<StoreSchema>((set, get) => ({
     let name = get().flowName
     if(!name.endsWith(".json")) name = name + ".json"
 
+    if(name === "untitled.json") {
+      alert("Please choose a name before saving.")
+      return
+    }
+
     get().server!.save(
       name,
       get().rfInstance!.toObject()      
