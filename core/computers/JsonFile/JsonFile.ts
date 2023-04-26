@@ -8,7 +8,7 @@ export const JsonFile: ComputerFactory = (): Computer => ({
   outputs: ['items', 'error'],
   params: {
     ...DefaultParams,
-    path: string('path').value('./.datastory/names.json').get(),
+    path: string('path').value('./.datastory/data/names.json').get(),
   },
 
   // TODO: Consider reading using a stream/generator

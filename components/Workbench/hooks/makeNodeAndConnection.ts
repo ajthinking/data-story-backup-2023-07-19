@@ -1,5 +1,5 @@
 import { Connection } from "reactflow";
-import { NodeDescription } from "../../../server/commands/describe";
+import { NodeDescription } from "../../../server/NodeDescription";
 import { DataStoryNode } from "../../Node/DataStoryNode";
 import { guessConnection } from "./guessConnection";
 import { guessPosition } from "./guessPosition";

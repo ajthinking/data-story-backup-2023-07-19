@@ -1,8 +1,33 @@
 import React from "react";
+import { StoreSchema, useStore } from "../Workbench/store";
+import { shallow } from "zustand/shallow";
+import { useRouter } from "next/router";
 
-export function Header({}) {
+export function Header({
+  flowName,
+}: {
+  flowName?: string;
+}) {
+  const router = useRouter();
+
+  const selector = (state: StoreSchema) => ({
+    setFlowName: state.setFlowName,
+  });
+
+  const { setFlowName } = useStore(selector, shallow);
+
   return <div className="flex justify-between items-center px-4 py-2 text-blue-500 bg-gray-800 font-bold font-mono">
-    <div className="cursor-pointer select-none font-mono">{"<DataStory />"}</div>
+    <span className="cursor-pointer select-none font-mono">
+      <span onClick={() => router.push('/')}>{`<DataStory />`}
+      </span>
+      {flowName !== undefined && <span className="ml-4 text-yellow-500 text-sm">
+        <input
+          className="pl-1 bg-gray-800 mx-auto"
+          value={`${flowName}`}
+          onChange={(e) => setFlowName(e.target.value)}
+        />
+      </span>}
+    </span>
     <div className="space-x-2 select-none ml-4 text-xs tracking-widest text-gray-100">
       {/* <a target={"_blank"} href={"https://github.com/ajthinking/data-story#readme"}>docs</a>
       <span className="">|</span> */}

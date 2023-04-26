@@ -1,4 +1,5 @@
 import { Controls, ControlButton } from "reactflow";
+import { useRouter } from 'next/router';
 
 import React from "react";
 import { RunIcon } from "./icons/runIcon";
@@ -18,12 +19,13 @@ export function DataStoryControls({
   setShowRunModal: (showRunModal: boolean) => void;
   setShowAddNodeModal: (showAddNodeModal: boolean) => void;
 }) {
+  const router = useRouter();
+
   const selector = (state: StoreSchema) => ({
-    onOpen: state.onOpen,
     onSave: state.onSave,
   });
 
-  const { onOpen, onSave } = useStore(selector, shallow);
+  const { onSave } = useStore(selector, shallow);
 
   return <Controls position={'top-left'} showInteractive={false} showZoom={false} showFitView={false}>
         <ControlButton
@@ -62,7 +64,7 @@ export function DataStoryControls({
           <SaveIcon />
         </ControlButton>
         <ControlButton
-          onClick={() => onOpen()}
+          onClick={() => router.push('/')}
           title="Open demo"
           aria-label="Open demo"
         >

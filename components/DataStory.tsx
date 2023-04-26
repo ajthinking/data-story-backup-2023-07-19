@@ -1,10 +1,29 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from "./Editor";
 import { Header } from "./Header";
 import Workbench from "./Workbench";
-export function DataStory() {
-  const [mode, setMode] = useState('workbench')
+import { StoreSchema, useStore } from "./Workbench/store";
+import { shallow } from "zustand/shallow";
+export function DataStory({
+  defaultFlowName,
+  flow,
+}: {
+  defaultFlowName?: string;
+  flow?: any;
+}) {
+  const selector = (state: StoreSchema) => ({
+    flowName: state.flowName,
+    setFlowName: state.setFlowName,
+    open: state.open,
+  });
+
+  const { flowName, setFlowName, open } = useStore(selector, shallow);
+
+  useEffect(() => {
+    if(flow) open(flow.nodes, flow.edges);
+    if(defaultFlowName) setFlowName(defaultFlowName);
+  }, [flow, defaultFlowName, open, setFlowName])
 
   return <>
       <Head>
@@ -14,10 +33,9 @@ export function DataStory() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full h-screen bg-vsCodeWarmGray-900">
-        <Header />
+        <Header flowName={flowName} />
         <div className="w-full h-5/6">
-          {mode === 'workbench' && <Workbench />}
-          {mode === 'dump' && <Editor />}
+          {<Workbench />}
         </div>
       </div>
     </>;

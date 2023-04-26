@@ -71,6 +71,7 @@ export class Executor implements ExecutorInterface {
           })        
           .catch((error: Error) => {
             console.log("Registering an execution error")
+            this.memory.pushHistoryMessage(error.message || 'Error in node')
             executionError = error;
           })
       })

@@ -19,6 +19,8 @@ import { DataStoryNode } from '../Node/DataStoryNode';
 import { ServerClient } from './ServerClient';
 
 export type StoreSchema = {
+  flowName: string;
+  setFlowName: (name: string) => void;
   rfInstance: ReactFlowInstance | undefined;
   availableNodes: NodeDescription[],
   setAvailableNodes: (nodes: NodeDescription[]) => void,
@@ -37,12 +39,20 @@ export type StoreSchema = {
   setEdges: (edges: Edge[]) => void;
   openNodeModalId: string | null;
   setOpenNodeModalId: (id: string | null) => void;
+  open: (nodes: DataStoryNode[], edges: Edge[]) => void;
   onOpen: () => void;
   onSave: () => void;
+  setNodes: (nodes: DataStoryNode[]) => void;
 };
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
 export const useStore = create<StoreSchema>((set, get) => ({
+  flowName: 'untitled',
+  setFlowName: (name: string) => {
+    set({
+      flowName: name,
+    });
+  },
   rfInstance: undefined,
   nodes: [],
   edges: [],
@@ -70,6 +80,11 @@ export const useStore = create<StoreSchema>((set, get) => ({
   onAddNode: (node: DataStoryNode) => {
     set({
       nodes: [...get().nodes, node],
+    })
+  },
+  setNodes: (nodes: DataStoryNode[]) => {
+    set({
+      nodes: [...nodes],
     })
   },
   refreshNodes: () => {
@@ -154,9 +169,16 @@ export const useStore = create<StoreSchema>((set, get) => ({
 
     console.log("Opening...")
   },
+  open: (nodes: DataStoryNode[], edges: any) => {
+    get().setNodes(nodes);
+    get().setEdges(edges);
+  },
   onSave: () => {
+    let name = get().flowName
+    if(!name.endsWith(".json")) name = name + ".json"
+
     get().server!.save(
-      "demo.story.json",
+      name,
       get().rfInstance!.toObject()      
     )
 
