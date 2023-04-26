@@ -13,7 +13,7 @@ export default function Workbench({
   const router = useRouter();
 
   const goToNewUntitled = () => {
-    router.push('/workbench/untitled.json')
+    router.push('/workbench/untitled')
   }
 
   return (
@@ -43,7 +43,7 @@ export default function Workbench({
                   className="cursor-pointer dark:bg-gray-800 hover:bg-blue-800 bg-white border-b  dark:border-gray-700"
                 >
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {flow}
+                    {flow.replace('.json', '')}
                   </th>
                 </tr>))}
                 <tr

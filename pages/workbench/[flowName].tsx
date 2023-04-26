@@ -16,13 +16,17 @@ export default function Workbench({
 
 // This function gets called at build time
 export async function getStaticProps({ params }: any) {
-  const flow = params.flowName === 'untitled.json'
+  const flow = params.flowName === 'untitled'
     ? '{"nodes": [], "edges": []}'
     : fs.readFileSync(__dirname + '/../../../../.datastory/' + params.flowName, 'utf8')
 
+  const flowName = params.flowName === 'untitled'
+    ? ''
+    : params.flowName.replace('.json', '')
+
   return {
     props: {
-      flowName: params.flowName,
+      flowName,
       flow,
     },
   }
@@ -36,7 +40,7 @@ export async function getStaticPaths() {
 
 
   return {
-    paths: [...flowNames, 'untitled.json'].map((flowName) => ({
+    paths: [...flowNames, 'untitled'].map((flowName) => ({
       params: {
         flowName
       },

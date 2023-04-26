@@ -175,12 +175,13 @@ export const useStore = create<StoreSchema>((set, get) => ({
   },
   onSave: () => {
     let name = get().flowName
-    if(!name.endsWith(".json")) name = name + ".json"
 
-    if(name === "untitled.json") {
+    if(name === "untitled" || name === "" || name === undefined) {
       alert("Please choose a name before saving.")
       return
-    }
+    }    
+
+    if(!name.endsWith(".json")) name = name + ".json"
 
     get().server!.save(
       name,

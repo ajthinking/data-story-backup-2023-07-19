@@ -22,7 +22,7 @@ export function DataStory({
 
   useEffect(() => {
     if(flow) open(flow.nodes, flow.edges);
-    if(defaultFlowName) setFlowName(defaultFlowName);
+    if(defaultFlowName !== undefined) setFlowName(defaultFlowName);
   }, [flow, defaultFlowName, open, setFlowName])
 
   return <>
