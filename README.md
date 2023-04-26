@@ -4,9 +4,6 @@
 
 > This project is currently under construction.
 
-
-
-
 ### Development installation
 ```bash
 # Install
@@ -15,17 +12,14 @@ cd data-story
 yarn
 
 # Start the server
-npx ts-node server/socket.ts
+nodemon server/socket.ts
 
 # Start the client (in a new tab)
 yarn dev
 ```
 
 ### React Component
-Until organized into npm packages, *everything* lives in a NextJs app. Later, we will export a component:
-```tsx
-<DataStory server={server} diagram?={diagram} />
-```
+Until organized into npm packages, *everything* lives in a NextJs app. Later, we will export a component ´<DataStory />` as well as a server lib.
 
 ### Commands
 ```bash
