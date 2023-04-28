@@ -1,5 +1,5 @@
 import { ItemValue, ObjectItemValue } from "./ItemValue";
-import { Param, ParamValue } from "./Param";
+import { ParamValue } from "./Param";
 
 export class ItemWithParams<T = ItemValue> {
   type = 'ItemWithParams' as const

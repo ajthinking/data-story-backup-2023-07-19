@@ -1,7 +1,3 @@
-import { ExecutionUpdate } from "./ExecutionUpdate";
-import { ItemValue } from "./ItemValue";
-import { LinkId } from "./Link";
-
 export class ExecutionResult {
   type = "ExecutionResult"
 

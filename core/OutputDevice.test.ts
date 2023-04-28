@@ -1,9 +1,5 @@
-import { LinkId } from "./Link";
 import { OutputDevice } from "./OutputDevice";
 import { ExecutionMemory } from "./ExecutionMemory";
-import { NodeStatus } from "./Executor";
-import { NodeId } from "./Node";
-import { ItemValue } from "./ItemValue";
 
 describe('push', () => {
   it('pushes items to all links connected to port "output"', async () => {
@@ -14,12 +10,7 @@ describe('push', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     memory.setLinkItems('Source.1.output--->Target.1.input', [1])
     memory.setLinkItems('Source.1.output--->Target.2.input', [2])
@@ -49,12 +40,7 @@ describe('pushTo', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     memory.setLinkItems('Source.1.strings--->Target.1.input', ['a'])
     memory.setLinkItems('Source.1.strings--->Target.2.input', ['b'])

@@ -1,5 +1,5 @@
-import { Link, LinkId } from "./Link"
-import { Node, NodeId } from "./Node"
+import { Link } from "./Link"
+import { Node } from "./Node"
 import { PortId } from "./Port"
 
 export class Diagram {

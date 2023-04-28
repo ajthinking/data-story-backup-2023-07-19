@@ -1,7 +1,6 @@
 import { Ignore } from "./computers";
 import { deriveFrom } from "./deriveFrom";
 
-
 it('returns a function', async () => {
   const factory = deriveFrom(Ignore, {
     name: 'IgnoreDerivation',

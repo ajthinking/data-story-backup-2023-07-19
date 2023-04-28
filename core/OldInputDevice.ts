@@ -1,10 +1,9 @@
 import { LinkId } from "./Link"
 import { ItemValue } from "./ItemValue"
-import { PortId } from "./Port"
 import { ExecutionMemory } from "./ExecutionMemory"
 import { PortName } from "./Computer"
 import { ItemWithParams } from "./ItemWithParams"
-import { Param, ParamValue } from "./Param"
+import { ParamValue } from "./Param"
 
 export type PortLinkMap = Record<PortName, LinkId[]>
 

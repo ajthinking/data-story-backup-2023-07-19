@@ -1,9 +1,5 @@
 import { OldInputDevice } from "./OldInputDevice";
-import { ItemValue } from "./ItemValue";
 import { ExecutionMemory } from "./ExecutionMemory";
-import { NodeId } from "./Node";
-import { LinkId } from "./Link";
-import { NodeStatus } from "./Executor";
 
 describe('pull', () => {
   it('returns items at port named "input" wrapped as ItemWithParams', () => {
@@ -14,12 +10,7 @@ describe('pull', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     memory.setLinkItems('Source.1.output--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.output--->Target.1.input', [3, 4])
@@ -35,12 +26,7 @@ describe('pull', () => {
   })
 
   it('throws if a port named "input" is not present', () => {
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     expect(() => {
       new OldInputDevice({}, memory, {}).pull()
@@ -55,12 +41,7 @@ describe('pull', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     memory.setLinkItems('Source.1.output--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.output--->Target.1.input', [3, 4])
@@ -84,12 +65,7 @@ describe('pull', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     memory.setLinkItems('Source.1.output--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.output--->Target.1.input', [3, 4])
@@ -111,12 +87,7 @@ describe('pullFrom', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     memory.setLinkItems('Source.1.numbers--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.numbers--->Target.1.input', [3, 4])
@@ -139,12 +110,7 @@ describe('pullFrom', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     memory.setLinkItems('Source.1.numbers--->Target.1.input', [1, 2])
     memory.setLinkItems('Source.2.numbers--->Target.1.input', [3, 4])
@@ -169,12 +135,7 @@ describe('params', () => {
       ],
     }
 
-    const memory = new ExecutionMemory(
-      new Map<NodeId, NodeStatus>(),
-      new Map<string, AsyncGenerator<undefined, void, void>>(),
-      new Map<LinkId, ItemValue[]>(),
-      new Map<LinkId, number>(),
-    )
+    const memory = new ExecutionMemory()
 
     const params = {
       greeting: 'Hello ${name}',

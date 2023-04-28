@@ -1,4 +1,3 @@
-import { describe, expect, expectTypeOf, it } from "vitest";
 import { Ignore, CreateJson, Pass } from "./computers";
 import { Diagram } from "./Diagram";
 import { DiagramBuilder } from "./DiagramBuilder";

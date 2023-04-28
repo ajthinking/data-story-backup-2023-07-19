@@ -21,7 +21,7 @@ export class ExecutionMemory {
   
   history: string[] = []
 
-  constructor(values: MemoryValues) {
+  constructor(values: MemoryValues = {}) {
     this.nodeStatuses = values.nodeStatuses || new Map()
     this.nodeRunners = values.nodeRunners || new Map()
     this.linkItems = values.linkItems || new Map()

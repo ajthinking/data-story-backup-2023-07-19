@@ -1,5 +1,5 @@
 import WebSocket from 'ws';
-import { RunMessage, SaveMessage } from '../onMessage';
+import { SaveMessage } from '../onMessage';
 import { FileStorage } from '../../core/FileStorage';
 
 export const save = async (ws: WebSocket, data: SaveMessage) => {
