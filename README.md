@@ -31,4 +31,4 @@ yarn test
 ```
 
 ### License
-Proprietary. See [LICENSE.md](/LICENSE.md)
+To be decided
