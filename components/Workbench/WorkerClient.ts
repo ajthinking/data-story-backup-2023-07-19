@@ -1,63 +1,65 @@
-import { NodeDescription } from '../../server/NodeDescription';
-import { SerializedReactFlow } from './SerializedReactFlow';
-import { ServerClient } from './ServerClient';
+export {};
 
-export class WorkerClient implements ServerClient {
-  private worker: Worker;
+// import { NodeDescription } from '../../server/NodeDescription';
+// import { SerializedReactFlow } from './SerializedReactFlow';
+// import { ServerClient } from './ServerClient';
 
-  constructor(
-    private setAvailableNodes: (nodes: NodeDescription[]) => void,
-    private updateEdgeCounts: (edgeCounts: Record<string, number>) => void,
-  ) {
-    this.worker = new Worker("./worker.js");
-  }
+// export class WorkerClient implements ServerClient {
+//   private worker: Worker;
 
-  init() {
-    console.log("Hey, I'm the worker client! Im cool!")
-    this.worker.addEventListener("message", (event) => {
-      const parsed = JSON.parse(event.data);
+//   constructor(
+//     private setAvailableNodes: (nodes: NodeDescription[]) => void,
+//     private updateEdgeCounts: (edgeCounts: Record<string, number>) => void,
+//   ) {
+//     this.worker = new Worker("./worker.js");
+//   }
 
-      if (parsed.type === "DescribeResponse") {
-        console.log("Got describe response: ", parsed)
-        this.setAvailableNodes(parsed.availableNodes);
-        return;
-      }
+//   init() {
+//     console.log("Hey, I'm the worker client! Im cool!")
+//     this.worker.addEventListener("message", (event) => {
+//       const parsed = JSON.parse(event.data);
 
-      if (parsed.type === "ExecutionUpdate") {
-        this.updateEdgeCounts(parsed.counts);
-        return;
-      }
+//       if (parsed.type === "DescribeResponse") {
+//         console.log("Got describe response: ", parsed)
+//         this.setAvailableNodes(parsed.availableNodes);
+//         return;
+//       }
 
-      if (parsed.type === "ExecutionResult") {
-        setTimeout(() => alert("Execution complete 💫"), 100);
-        return;
-      }
+//       if (parsed.type === "ExecutionUpdate") {
+//         this.updateEdgeCounts(parsed.counts);
+//         return;
+//       }
 
-      throw new Error("Unknown message type: " + parsed.type);
-    });
+//       if (parsed.type === "ExecutionResult") {
+//         setTimeout(() => alert("Execution complete 💫"), 100);
+//         return;
+//       }
 
-    this.worker.addEventListener("error", (error) => {
-      console.error("Worker error: ", error);
-    });
+//       throw new Error("Unknown message type: " + parsed.type);
+//     });
 
-    // Ask the worker to describe capabilities
-    this.describe();
-  }
+//     this.worker.addEventListener("error", (error) => {
+//       console.error("Worker error: ", error);
+//     });
 
-  describe() {
-    const message = JSON.stringify({
-      type: "describe",
-    });
+//     // Ask the worker to describe capabilities
+//     this.describe();
+//   }
 
-    this.worker.postMessage(message);
-  }
+//   describe() {
+//     const message = JSON.stringify({
+//       type: "describe",
+//     });
 
-  run(reactFlow: SerializedReactFlow) {
-    const message = JSON.stringify({
-      type: "run",
-      reactFlow: reactFlow,
-    });
+//     this.worker.postMessage(message);
+//   }
 
-    this.worker.postMessage(message);
-  }
-}
+//   run(reactFlow: SerializedReactFlow) {
+//     const message = JSON.stringify({
+//       type: "run",
+//       reactFlow: reactFlow,
+//     });
+
+//     this.worker.postMessage(message);
+//   }
+// }

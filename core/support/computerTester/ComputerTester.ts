@@ -126,17 +126,19 @@ export class ComputerTester {
     return this
   }
 
-  expectCanRun() {
-    this.steps.push([expectCanRun, []])
+  // TODO
+  // expectCanRun() {
+  //   this.steps.push([expectCanRun, []])
 
-    return this
-  }
+  //   return this
+  // }
 
-  expectCantRun() {
-    this.steps.push([expectCantRun, []])
+  // TODO  
+  // expectCantRun() {
+  //   this.steps.push([expectCantRun, []])
 
-    return this
-  }
+  //   return this
+  // }
 
   expectDone() {
     this.steps.push([expectDone, []])
