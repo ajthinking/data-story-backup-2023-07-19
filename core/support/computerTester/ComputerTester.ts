@@ -10,7 +10,17 @@ import { ParamsDevice } from "../../ParamsDevice";
 import { Port } from "../../Port";
 import { TestStep } from "./TestStep";
 
-import { doRun, expectCanRun, expectCantRun, expectOutput, expectOutputs, getsInput, getsInputs } from "./testSteps";
+import {
+  doRun,
+  expectCanRun,
+  expectCantRun,
+  expectError,
+  expectOutput,
+  expectOutputs,
+  getsInput,
+  getsInputs,
+} from "./testSteps";
+
 import { expectDone } from "./testSteps/expectDone";
 import { ExecutionMemory } from "../../ExecutionMemory";
 import { NullStorage } from "../../NullStorage";
@@ -50,6 +60,7 @@ export class ComputerTester {
   inputDevice: InputDeviceInterface | null = null
   outputDevice: OutputDevice | null = null
   memory: ExecutionMemory | null = null
+  expectedErrorMessage: string | undefined
 
   constructor(public computer: Computer) {}  
 
@@ -129,6 +140,12 @@ export class ComputerTester {
 
   expectDone() {
     this.steps.push([expectDone, []])
+
+    return this
+  }
+
+  expectError(message: string) {
+    this.steps.push([expectError, [message]])
 
     return this
   }

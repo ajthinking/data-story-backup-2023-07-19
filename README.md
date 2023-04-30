@@ -19,7 +19,7 @@ yarn dev
 ```
 
 ### React Component
-Until organized into npm packages, *everything* lives in a NextJs app. Later, we will export a component ´<DataStory />` as well as a server lib.
+Until organized into npm packages, *everything* lives in a NextJs app. Later, we will export a React component as well as a server lib.
 
 ### Commands
 ```bash

@@ -1,7 +1,6 @@
 import { Computer, ComputerFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
-import { sleep } from "../../utils/sleep";
 
 export const Throw: ComputerFactory = (): Computer => ({
   name: 'Throw',
