@@ -4,6 +4,9 @@ import { ExecutionResult } from "./ExecutionResult"
 describe('stringify', () => {
   it('should stringify', () => {
     const result = new ExecutionResult('id')
-    expect(result.stringify()).toEqual('{"type":"ExecutionResult","id":"id"}')
+    const stringified = result.stringify()
+    const reparsed = JSON.parse(stringified)
+
+    expect(reparsed).toMatchObject(result)
   })
 })
