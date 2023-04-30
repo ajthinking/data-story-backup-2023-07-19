@@ -1,14 +1,16 @@
 import { when } from "../../support/computerTester/ComputerTester";
 import { CreateAttribute } from "./CreateAttribute";
 
-it.todo('does something', async () => {
+it('adds an attribute to objects', async () => {
   await when(CreateAttribute)
-    .hasDefaultParams()
-    .getsInput([1, 2])
+    .hasParams({
+      key: "prio",
+      value: "zero"
+    })
+    .getsInput([{}])
     .doRun()
-    .expectOutput([1, 2])
-    .getsInput([3, 4])
-    .doRun()
-    .expectOutput([1, 2, 3, 4])
+    .expectOutput([{
+      prio: "zero"
+    }])
     .ok()
 })
