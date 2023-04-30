@@ -1,13 +1,14 @@
 import WebSocket from 'ws';
 import { DiagramFactory } from "../../core/DiagramFactory"
 import { Executor } from "../../core/Executor"
-import { RunMessage } from '../onMessage';
+import { RunMessage } from '../messages/RunMessage';
 import { FileStorage } from '../../core/FileStorage';
 import { ExecutionResult } from '../../core/ExecutionResult';
 import { computerRegistry } from '../computerRegistry';
 import { ExecutionFailure } from '../../core/ExecutionFailure';
+import { MessageHandler } from '../MessageHandler';
 
-export const run = async (ws: WebSocket, data: RunMessage) => {
+export const run: MessageHandler<RunMessage> = async (ws: WebSocket, data: RunMessage) => {
   const diagram = new DiagramFactory().fromReactFlow(
     data.reactFlow
   )

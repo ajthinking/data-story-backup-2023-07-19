@@ -1,8 +1,12 @@
 import WebSocket from 'ws';
-import { SaveMessage } from '../onMessage';
+import { SaveMessage } from '../messages/SaveMessage';
 import { FileStorage } from '../../core/FileStorage';
+import { MessageHandler } from '../MessageHandler';
 
-export const save = async (ws: WebSocket, data: SaveMessage) => {
+export const save: MessageHandler<SaveMessage> = async (
+  ws: WebSocket,
+  data: SaveMessage
+) => {
   const storage = new FileStorage('.datastory')
   await storage.init()
 

@@ -1,7 +1,14 @@
 import * as computers from '../../core/computers';
+import { Message } from '../Message';
+import { MessageHandler } from '../MessageHandler';
 import { NodeDescription } from '../NodeDescription';
+import { DescribeMessage } from '../messages/DescribeMessage';
+import WebSocket from 'ws';
 
-export const describe = () => {
+export const describe: MessageHandler<DescribeMessage> = async (
+  ws: WebSocket,
+  data: DescribeMessage
+) => {
   const nodeDescriptions: NodeDescription[] = Object.values(computers).map((computer) => { 
     const instance = computer()
     
@@ -16,11 +23,10 @@ export const describe = () => {
     }
   })
 
-  return {
+  const response = {
     type: 'DescribeResponse',
     availableNodes: nodeDescriptions,
-    stringify() {
-      return JSON.stringify(this)
-    }
   }
+
+  ws.send(JSON.stringify(response))
 }
