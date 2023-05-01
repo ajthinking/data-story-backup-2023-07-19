@@ -12,7 +12,7 @@ export const Pluck: ComputerFactory = (): Computer => ({
     property: string('property').get()
   },
   
-  async *run({ input, output }: RunArgs) {
+  async *run({ input, output }) {
     while(true) {
       const incoming = input!.pull() as ItemWithParams<{
         [key: string]: any

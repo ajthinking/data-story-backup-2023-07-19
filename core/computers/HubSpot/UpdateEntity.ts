@@ -27,7 +27,7 @@ export const UpdateEntity: ComputerFactory = (): Computer => ({
   tags: ['Abstract'],
   category: 'HubSpot',  
 
-  async *run({ input, output, params }: RunArgs) {
+  async *run({ input, output, params }) {
     const entity = params.entity as string    
     const api = getBasicApi(entity)
     const properties = JSON.parse(params.properties)

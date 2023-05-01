@@ -5,6 +5,7 @@ export { Comment } from './Comment';
 export { CreateAttribute } from './CreateAttribute';
 export { CreateJson } from './CreateJson'
 export { DumpJson } from './DumpJson';
+export { Filter } from './Filter';
 export { Ignore } from './Ignore'
 export { InstantThrow } from './InstantThrow';
 export { Join } from './Join';

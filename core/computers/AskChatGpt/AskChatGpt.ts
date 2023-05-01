@@ -13,7 +13,7 @@ export const AskChatGpt: ComputerFactory = (): Computer => ({
   },
   category: 'API',
 
-  async *run({ input, output, params }: RunArgs) {
+  async *run({ input, output, params }) {
 
     const openai = new OpenAIApi(
       new Configuration({

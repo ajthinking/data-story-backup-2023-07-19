@@ -15,7 +15,7 @@ export const Request: ComputerFactory = (): Computer => ({
     featurePath: string('featurePath').value('data').get(),
   },
 
-  async *run({ output, params: { url, method, body, config } }: RunArgs) {
+  async *run({ output, params: { url, method, body, config } }) {
     if(method === 'GET') {
       const response = await axios.get(url, config)
       output.pushTo('items', await response.data)

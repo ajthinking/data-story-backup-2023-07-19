@@ -11,5 +11,5 @@ export const Comment: ComputerFactory = (): Computer => ({
     content: json('content').value('This is a comment').get(),
   },
 
-  async *run({}: RunArgs) {},
+  async *run({}) {},
 });

@@ -14,7 +14,7 @@ export const CreateAttribute: ComputerFactory = (): Computer => ({
     value: string('value').get(),
   },
 
-  async *run({ input, output, params }: RunArgs) {
+  async *run({ input, output, params }) {
     while(true) {
       const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
       output.push(incoming.map(item => {

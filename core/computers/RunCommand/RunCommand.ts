@@ -31,7 +31,7 @@ export const RunCommand: ComputerFactory = (): Computer => ({
     command: string('command').value('echo "Hello World"').get(),
   },
 
-  async *run({ input, output, params }: RunArgs) {
+  async *run({ input, output, params }) {
     while(true) {
       const [ { params: { command } } ] = input.pull()
 

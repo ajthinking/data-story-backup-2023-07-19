@@ -8,7 +8,7 @@ export const InstantThrow: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  async *run({}: RunArgs) {
+  async *run({}) {
     throw Error("Instant Error!")
   },
 });

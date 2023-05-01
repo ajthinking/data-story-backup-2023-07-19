@@ -10,7 +10,7 @@ export const CreateJson: ComputerFactory = (): Computer => ({
     json: json('json').value(`[{ "name": "John"}]`).get(),
   },
 
-  async *run({ output, params: { json } }: RunArgs) {
+  async *run({ output, params: { json } }) {
     try {
       const parsed = JSON.parse(json)
       output.push(

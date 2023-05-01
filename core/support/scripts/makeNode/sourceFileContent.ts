@@ -9,7 +9,7 @@ export const ${name}: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  async *run({ input, output, params }: RunArgs) {
+  async *run({ input, output, params }) {
     while(true) {
       const incoming = input.pull()
       output.push(incoming)

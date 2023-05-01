@@ -3,7 +3,10 @@ import { SerializedReactFlow } from './SerializedReactFlow';
 import { ServerClient } from './ServerClient';
 
 export class SocketClient implements ServerClient {
-  private socket: WebSocket;
+  private socket?: WebSocket;
+  private maxReconnectTries = 10;
+  private reconnectTimeout = 2000;
+  private reconnectTries = 0;
 
   constructor(
     private setAvailableNodes: (nodes: NodeDescription[]) => void,
@@ -11,11 +14,11 @@ export class SocketClient implements ServerClient {
     private setNodes: (nodes: any) => void,
     private setEdges: (edges: any) => void,
     // private setViewport: (viewport: any) => void,
-  ) {
-    this.socket = new WebSocket("ws://localhost:3100")   
-  }
+  ) {}
 
   init() {
+    this.socket = new WebSocket("ws://localhost:3100")   
+
     // Register on open
     this.socket.onopen = () => {
       console.log("Connected to server!");
@@ -28,6 +31,19 @@ export class SocketClient implements ServerClient {
     this.socket.onerror = (error) => {
       console.error("WebSocket error: ", error);
     };
+
+    // Register on close
+    this.socket.onclose = () => {
+      console.error("WEBSOCKET CLOSED!!!");
+
+      if (this.reconnectTries < this.maxReconnectTries) {
+        setTimeout(() => {
+          console.log("Reconnecting...");
+          this.reconnectTries++;
+          this.init();
+        }, this.reconnectTimeout);
+      }
+    };    
 
     this.socket.onmessage = ((data) => {
       const parsed = JSON.parse(data.data)
@@ -76,7 +92,7 @@ export class SocketClient implements ServerClient {
       type: "describe",
     })
 
-    this.socket.send(message);
+    this.socket!.send(message);
   }
 
   run(reactFlow: SerializedReactFlow) {
@@ -85,7 +101,7 @@ export class SocketClient implements ServerClient {
       reactFlow,
     })
 
-    this.socket.send(message);
+    this.socket!.send(message);
   }
 
   async open(name: string) {
@@ -94,7 +110,7 @@ export class SocketClient implements ServerClient {
       name,
     })
 
-    this.socket.send(message);
+    this.socket!.send(message);
   }
 
   async save(name: string, reactFlow: SerializedReactFlow) {
@@ -104,6 +120,6 @@ export class SocketClient implements ServerClient {
       reactFlow  
     })
 
-    this.socket.send(message);
+    this.socket!.send(message);
   }
 }

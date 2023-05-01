@@ -8,7 +8,7 @@ export const Log: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  async *run({ input, output }: RunArgs) {
+  async *run({ input, output }) {
     while(true) {
       // log the *item* - not ItemWithParams
       const incoming = input.pull().map(i => i.value)

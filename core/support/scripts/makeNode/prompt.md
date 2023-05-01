@@ -12,7 +12,7 @@ export const Pass: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
   
-  async *run({ input, output }: RunArgs) {
+  async *run({ input, output }) {
     while(true) {
       const incoming = input!.pull()
       output.push(incoming)
@@ -40,7 +40,7 @@ export const Request: ComputerFactory = (): Computer => ({
     featurePath: string('featurePath').value('data').get(),
   },
 
-  async *run({ output, params: { url, method, body, config } }: RunArgs) {
+  async *run({ output, params: { url, method, body, config } }) {
     if(method === 'GET') {
       const response = await axios.get(url, config)
       output.pushTo('items', await response.data)
@@ -66,7 +66,7 @@ export const Log: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  async *run({ input, output }: RunArgs) {
+  async *run({ input, output }) {
     while(true) {
       // log the *item* - not ItemWithParams
       const incoming = input.pull().map(i => i.value)
@@ -96,7 +96,7 @@ export const CreateAttribute: ComputerFactory = (): Computer => ({
     value: string('value').get(),
   },
 
-  async *run({ input, output, params }: RunArgs) {
+  async *run({ input, output, params }) {
     while(true) {
       const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
       output.push(incoming.map(item => {
@@ -122,7 +122,7 @@ export const CreateJson: ComputerFactory = (): Computer => ({
     json: json('json').value(`[{ "name": "John"}]`).get(),
   },
 
-  async *run({ output, params: { json } }: RunArgs) {
+  async *run({ output, params: { json } }) {
     try {
       const parsed = JSON.parse(json)
       output.push(
@@ -150,7 +150,7 @@ export const DumpJson: ComputerFactory = (): Computer => ({
   //   return input.hasAllItems()
   // },
 
-  async *run({ input, storage }: RunArgs) {
+  async *run({ input, storage }) {
     const id = (Math.random() + 1).toString(36).substring(7);
     const key = `${this.name}-${id}`
 
@@ -169,7 +169,7 @@ export const Ignore: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  async *run({ input }: RunArgs) {
+  async *run({ input }) {
     while(true) {
       input.pull()
       yield;
@@ -260,7 +260,7 @@ export const Signal: ComputerFactory = (): Computer => ({
   async *run({
     output,
     params: { period, count}
-  }: RunArgs) {
+  }) {
     let i = 1;
 
     while(i <= count) {
@@ -289,7 +289,7 @@ export const Sleep: ComputerFactory = (): Computer => ({
     duration: number('duration').value(100).get()
   },
 
-  async *run({ input, output }: RunArgs) {
+  async *run({ input, output }) {
     while(true) {
       const [ { value, params: { duration } } ] = input.pull(1)
       await sleep(duration)
@@ -312,7 +312,7 @@ export const Throw: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  async *run({ input }: RunArgs) {
+  async *run({ input }) {
     input.pull()
     throw Error('Some error')
   },

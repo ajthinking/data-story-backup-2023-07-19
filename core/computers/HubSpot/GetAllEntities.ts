@@ -41,7 +41,7 @@ export const GetAllEntities: ComputerFactory = (): Computer => ({
   tags: ['Abstract'],
   category: 'HubSpot',
 
-  async *run({ output, params }: RunArgs) {
+  async *run({ output, params }) {
     const entity = params.entity as string    
     const api = getBasicApi(entity)
     const properties = JSON.parse(params.properties)

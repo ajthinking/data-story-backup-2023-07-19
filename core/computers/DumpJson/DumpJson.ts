@@ -12,7 +12,7 @@ export const DumpJson: ComputerFactory = (): Computer => ({
   //   return input.hasAllItems()
   // },
 
-  async *run({ input, storage }: RunArgs) {
+  async *run({ input, storage }) {
     const id = (Math.random() + 1).toString(36).substring(7);
     const key = `${this.name}-${id}`
 

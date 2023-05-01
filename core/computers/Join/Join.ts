@@ -17,7 +17,7 @@ export const Join: ComputerFactory = (): Computer => ({
       && input.haveAllItemsAtInput('input')
   },
   
-  async *run({ input, output, params }: RunArgs) {
+  async *run({ input, output, params }) {
     while(true) {
       const incoming = input.pull()
       const joined = incoming.map(({ value }) => value).join(params.separator)

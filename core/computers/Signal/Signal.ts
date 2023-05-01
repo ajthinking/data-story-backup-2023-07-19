@@ -16,7 +16,7 @@ export const Signal: ComputerFactory = (): Computer => ({
   async *run({
     output,
     params: { period, count}
-  }: RunArgs) {
+  }) {
     let i = 1;
 
     while(i <= count) {

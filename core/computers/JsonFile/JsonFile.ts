@@ -12,7 +12,7 @@ export const JsonFile: ComputerFactory = (): Computer => ({
   },
 
   // TODO: Consider reading using a stream/generator
-  async *run({ output, params }: RunArgs) {
+  async *run({ output, params }) {
     try {
       const content = await fs.readFile(params.path, 'utf8')
       const parsed = JSON.parse(content)

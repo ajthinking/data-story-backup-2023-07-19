@@ -8,7 +8,7 @@ export const Ignore: ComputerFactory = (): Computer => ({
     ...DefaultParams,
   },
 
-  async *run({ input }: RunArgs) {
+  async *run({ input }) {
     while(true) {
       input.pull()
       yield;
