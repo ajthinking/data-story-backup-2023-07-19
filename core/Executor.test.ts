@@ -162,7 +162,7 @@ describe('execute', () => {
 
     const createComputer = {
       name: 'Create',
-      async *run({ output }) {
+      async *run({ output }: RunArgs) {
         order.push('running create')
         output.push([1])
       },
@@ -170,7 +170,7 @@ describe('execute', () => {
 
     const logComputer = {
       name: 'Log',
-      async *run({ input }) {
+      async *run({ input }: RunArgs) {
         // console.log ... or something
         
         order.push('running log')
