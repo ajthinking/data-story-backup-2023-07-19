@@ -22,10 +22,12 @@ export function Header({
   return <div className="flex justify-between items-center px-4 py-2 text-blue-500 bg-gray-800 font-bold font-mono">
     <span className="cursor-pointer select-none font-mono">
       <span onClick={() => router.push('/')}>{`<DataStory />`}
-      </span>
-      {flowName !== undefined && <span className={`ml-4 ${flowColor} text-sm`}>
+      </span >
+      {flowName !== undefined && <span
+        className={`ml-4 ${flowColor} text-sm`}
+      >
         <input
-          className="pl-1 bg-gray-800 mx-auto"
+          className="pl-1 bg-gray-800 resize-x overflow-x-auto"
           value={`${flowName}`}
           onChange={(e) => setFlowName(e.target.value)}
           placeholder={'untitled'}

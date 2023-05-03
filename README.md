@@ -1,8 +1,18 @@
 ## DataStory :dizzy:
 
+> Under construction.
+
 ![ds_readme_gif](https://user-images.githubusercontent.com/3457668/229267838-b8dcc5cc-9639-4f95-962b-48eae8250d4e.gif)
 
-> This project is currently under construction.
+Visual Programming | Data Transformation | ETL | Process design
+
+### Features
+* Design executable flowcharts in a simple web interface
+* Load, create or fetch data from any API
+* Flexible JSON transformations
+* Deploy and run headless on a schedule or on events
+* Create custom nodes for your business case or software
+* Embeddable within ReactJS apps
 
 ### Development installation
 ```bash

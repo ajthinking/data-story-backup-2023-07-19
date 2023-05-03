@@ -1,7 +1,7 @@
 import { Computer, ComputerFactory, RunArgs } from "../../Computer";
 import { ItemWithParams } from "../../ItemWithParams";
 import { DefaultParams } from "../../Param";
-import { string } from "../../ParamBuilder";
+import { string, text } from "../../ParamBuilder";
 import { ObjectItemValue } from "../../ItemValue";
 
 export const CreateAttribute: ComputerFactory = (): Computer => ({
@@ -11,7 +11,7 @@ export const CreateAttribute: ComputerFactory = (): Computer => ({
   params: {
     ...DefaultParams,
     key: string('key').get(),
-    value: string('value').get(),
+    value: text('value').get(),
   },
 
   async *run({ input, output, params }) {

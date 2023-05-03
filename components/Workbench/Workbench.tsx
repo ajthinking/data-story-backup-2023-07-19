@@ -2,12 +2,10 @@ import { DataStoryControls } from './dataStoryControls';
 import { useEffect, useState } from "react";
 import ReactFlow, { Background, BackgroundVariant } from "reactflow";
 import DataStoryNodeComponent from "../Node/DataStoryNodeComponent";
-import { ConfigModal } from './modals/configModal'
 import { RunModal } from './modals/runModal';
 import { AddNodeModal } from './modals/addNodeModal';
 import { StoreSchema, useStore } from './store';
 import { shallow } from 'zustand/shallow'
-import { NodeModal } from './modals/nodeModal';
 import "reactflow/dist/style.css";
 import { NodeSettingsModal } from './modals/nodeSettingsModal';
 import DataStoryCommentNodeComponent from '../Node/DataStoryCommentNodeComponent';

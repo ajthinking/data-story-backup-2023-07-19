@@ -20,6 +20,7 @@ export const guessPosition = (existingNodes: DataStoryNode[], nodeDescription: N
   }
 
   const mostRecentNode = existingNodes.at(-1)
+  const baseX = mostRecentNode?.position.x ?? maxX
 
-  return { x: maxX + spaceX, y: mostRecentNode?.position.y ?? startY + spaceY  }
+  return { x: baseX + spaceX, y: mostRecentNode?.position.y ?? startY + spaceY  }
 }

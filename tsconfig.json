@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,13 +19,24 @@
     "jsx": "preserve",
     "incremental": true,
     "noImplicitAny": true,
-    "types": ["vitest/globals"]
+    "types": [
+      "vitest/globals"
+    ],
+    "noEmit": true
   },
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
     }
-  },   
-  "include": ["next-env.d.ts", "tinker.ts", "**/*.ts", "**/*.tsx", "**/**/*.ts"],
-  "exclude": ["node_modules"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "tinker.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,9 +1,11 @@
+
 import { Param, ParamValue } from "./Param"
 
 export const string = (name: string) => new ParamBuilder(name, 'string')
 export const number = (name: string) => new ParamBuilder(name, 'number')
 export const json = (name: string) => new ParamBuilder(name, 'json')
 export const select = (name: string) => new ParamBuilder(name, 'select')
+export const text = (name: string) => new ParamBuilder(name, 'text')
 
 export class ParamBuilder {
   selectOptions?: string[]

@@ -3,6 +3,7 @@ import { Json } from "../../forms/inputs/json";
 import { Number } from "../../forms/inputs/number";
 import { Select } from "../../forms/inputs/select";
 import { String_ } from "../../forms/inputs/string";
+import { Text } from "../../forms/inputs/text";
 import { StoreSchema, useStore } from '../store';
 import { useForm } from "react-hook-form";
 import { Param, ParamValue } from "../../../core/Param";
@@ -85,6 +86,7 @@ export const NodeSettingsModal = () => {
                         key={param.name}
                       >
                         {param.type === 'string' && <String_ register={register} param={param} />}
+                        {param.type === 'text' && <Text register={register} param={param} />}
                         {param.type === 'number' && <Number register={register} param={param} />}
                         {param.type === 'json' && <Json register={register} param={param} />}
                         {param.type === 'select' && <Select register={register} param={param} />}
