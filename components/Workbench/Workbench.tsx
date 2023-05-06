@@ -7,7 +7,7 @@ import { AddNodeModal } from './modals/addNodeModal';
 import { StoreSchema, useStore } from './store';
 import { shallow } from 'zustand/shallow'
 import "reactflow/dist/style.css";
-import { NodeSettingsModal } from './modals/nodeSettingsModal';
+import { NodeSettingsModal } from './modals/nodeSettingsModal/nodeSettingsModal';
 import DataStoryCommentNodeComponent from '../Node/DataStoryCommentNodeComponent';
 
 const nodeTypes = {

@@ -1,16 +1,23 @@
+import { Params } from './tabs/Params';
 import { shallow } from "zustand/shallow";
-import { Json } from "../../forms/inputs/json";
-import { Number } from "../../forms/inputs/number";
-import { Select } from "../../forms/inputs/select";
-import { String_ } from "../../forms/inputs/string";
-import { Text } from "../../forms/inputs/text";
-import { StoreSchema, useStore } from '../store';
+import { Json } from "../../../forms/inputs/json";
+import { Number } from "../../../forms/inputs/number";
+import { Select } from "../../../forms/inputs/select";
+import { String_ } from "../../../forms/inputs/string";
+import { Text } from "../../../forms/inputs/text";
+import { StoreSchema, useStore } from '../../store';
 import { useForm } from "react-hook-form";
-import { Param, ParamValue } from "../../../core/Param";
-import { DataStoryNode } from "../../Node/DataStoryNode";
-import { useEscapeKey } from "../hooks/useEscapeKey";
+import { Param, ParamValue } from "../../../../core/Param";
+import { DataStoryNode } from "../../../Node/DataStoryNode";
+import { useEscapeKey } from "../../hooks/useEscapeKey";
+import { useState } from "react";
+import { InputSchemas } from './tabs/InputSchemas';
+import { OutputSchemas } from './tabs/OutputSchemas';
+import { Config } from './tabs/Config';
 
 export const NodeSettingsModal = () => {
+  const [tab, setTab] = useState('Params')
+
   const selector = (state: StoreSchema) => ({
     nodes: state.nodes,
     openNodeModalId: state.openNodeModalId,
@@ -34,10 +41,6 @@ export const NodeSettingsModal = () => {
     }
   });
 
-  const nonDefaultParams = Object.values(node.data.params).filter((param) => {
-    return param.name !== 'name' && param.name !== 'label'
-  })
-
   const close = () => setOpenNodeModalId(null);
 
   const saveAndClose = () => {
@@ -58,7 +61,6 @@ export const NodeSettingsModal = () => {
           <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none">
             <form
               className="relative w-full max-w-4xl my-8 mx-auto px-8"
-              onSubmit={handleSubmit(() => alert("submitting!"))}
             >
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between px-8 py-2 border-solid border-slate-200 rounded-t">
@@ -72,28 +74,16 @@ export const NodeSettingsModal = () => {
                     </span>
                   </div>
                 </div>
-                <div className="mx-8 flex space-x-8 text-xxs uppercase text-gray-400">
-                  
-                  <div className="pb-2 hover:text-gray-500 cursor-pointer border-b-2 border-blue-400">params</div>
-                  <div title="coming soon" className="pb-2 hover:text-gray-500 cursor-pointer">input schema</div>
-                  <div title="coming soon" className="pb-2 hover:text-gray-500 cursor-pointer">output schema</div>
-                  <div title="coming soon" className="pb-2 hover:text-gray-500 cursor-pointer">config</div>
+                <div className="mx-8 flex space-x-8 text-xxs uppercase text-gray-400">           
+                  <div onClick={() => setTab('Params')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'Params' && " border-b-2 border-blue-400"}`}>params</div>
+                  <div onClick={() => setTab('InputSchemas')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'InputSchemas' && " border-b-2 border-blue-400"}`}>input schema</div>
+                  <div onClick={() => setTab('OutputSchemas')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'OutputSchemas' && " border-b-2 border-blue-400"}`}>output schema</div>
+                  <div onClick={() => setTab('Config')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'Config' && " border-b-2 border-blue-400"}`}>config</div>
                 </div>
-                <div className="max-h-128 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1">
-                    {nonDefaultParams.map(param => {
-                      return (<div
-                        className="flex flex-col"
-                        key={param.name}
-                      >
-                        {param.type === 'string' && <String_ register={register} param={param} />}
-                        {param.type === 'text' && <Text register={register} param={param} />}
-                        {param.type === 'number' && <Number register={register} param={param} />}
-                        {param.type === 'json' && <Json register={register} param={param} />}
-                        {param.type === 'select' && <Select register={register} param={param} />}
-                      </div>)
-                    })}
-                    {nonDefaultParams.length === 0 && <div className="text-xs text-gray-400">No parameters</div>}
-                </div>
+                {tab === 'Params' && <Params node={node} register={register} />}
+                {tab === 'InputSchemas' && <InputSchemas node={node} register={register} />}
+                {tab === 'OutputSchemas' && <OutputSchemas node={node} register={register} />}
+                {tab === 'Config' && <Config node={node} register={register} />}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button className="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={close}>
                     Close

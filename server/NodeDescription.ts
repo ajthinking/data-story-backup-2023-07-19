@@ -8,4 +8,10 @@ export type NodeDescription = {
   outputs: string[],
   params: Record<string, Param>,
   tags: string[],
+  inputSchemas?: {
+    [key: string]: any,
+  },
+  outputSchemas?: {
+    [key: string]: any,
+  },
 }

@@ -42,6 +42,8 @@ export const makeNodeAndConnection = (
           name: input
         }
       }),
+      inputSchemas: nodeDescription.inputSchemas ?? {},
+      outputSchemas: nodeDescription.outputSchemas ?? {},
     },
     type: nodeDescription.name === 'Comment'
       ? "dataStoryCommentNodeComponent"

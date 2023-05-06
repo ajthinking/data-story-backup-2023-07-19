@@ -24,6 +24,12 @@ export interface Computer {
   outputs?: PortName[]
   params?: Record<string, Param>
   tags?: string[]
+  inputSchemas?: {
+    [key: string]: any,
+  },
+  outputSchemas?: {
+    [key: string]: any,
+  },
 
   run: (args: RunArgs) => AsyncGenerator<NextResult, ReturnResult, NextArgument>
   canRun?: (options: {

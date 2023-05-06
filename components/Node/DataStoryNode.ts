@@ -7,14 +7,12 @@ export type DataStoryNodeData = {
   label: string,
   inputs: { id: string, name: string }[],
   outputs: { id: string, name: string }[],
-
-  // TODO
-  // inputSchemas: {
-  //   [key: string]: string,
-  // }
-  // outputSchemas: {
-  //   [key: string]: string,
-  // }
+  inputSchemas: {
+    [key: string]: any,
+  }
+  outputSchemas: {
+    [key: string]: any,
+  }
 }
 
 export type DataStoryNode = Node<DataStoryNodeData>;

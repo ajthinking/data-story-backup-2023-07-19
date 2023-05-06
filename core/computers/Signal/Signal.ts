@@ -12,6 +12,11 @@ export const Signal: ComputerFactory = (): Computer => ({
     period: number('period').value(50).get(),
     count: number('count').value(500).get(),
   },
+  outputSchemas: {
+    output: {
+      id: 'number'
+    }
+  },
 
   async *run({
     output,
