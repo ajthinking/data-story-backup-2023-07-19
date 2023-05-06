@@ -79,7 +79,11 @@ export const useStore = create<StoreSchema>((set, get) => ({
   },
   onAddNode: (node: DataStoryNode) => {
     set({
-      nodes: [...get().nodes, node],
+      nodes: [...get().nodes.map(node => {
+        // When adding a node, deselect all other nodes
+        node.selected = false
+        return node
+      }), node],
     })
   },
   setNodes: (nodes: DataStoryNode[]) => {

@@ -22,6 +22,8 @@ export const makeNodeAndConnection = (
   const counter = scopedId(nodeDescription.name)
   const id = `${nodeDescription.name}.${counter}`;
 
+  
+
   const node = {
     id,
     position: guessPosition(existingNodes, nodeDescription),
@@ -45,6 +47,7 @@ export const makeNodeAndConnection = (
       inputSchemas: nodeDescription.inputSchemas ?? {},
       outputSchemas: nodeDescription.outputSchemas ?? {},
     },
+    selected: true,
     type: nodeDescription.name === 'Comment'
       ? "dataStoryCommentNodeComponent"
       : "dataStoryNodeComponent",

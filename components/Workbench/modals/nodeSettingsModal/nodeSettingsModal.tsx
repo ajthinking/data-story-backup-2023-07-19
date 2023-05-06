@@ -1,10 +1,5 @@
 import { Params } from './tabs/Params';
 import { shallow } from "zustand/shallow";
-import { Json } from "../../../forms/inputs/json";
-import { Number } from "../../../forms/inputs/number";
-import { Select } from "../../../forms/inputs/select";
-import { String_ } from "../../../forms/inputs/string";
-import { Text } from "../../../forms/inputs/text";
 import { StoreSchema, useStore } from '../../store';
 import { useForm } from "react-hook-form";
 import { Param, ParamValue } from "../../../../core/Param";
@@ -58,7 +53,7 @@ export const NodeSettingsModal = () => {
   useEscapeKey(close);
 
   return <>
-          <div className="justify-center items-center flex overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="flex justify-center overflow-x-hidden fixed inset-0 z-50 outline-none focus:outline-none">
             <form
               className="relative w-full max-w-4xl my-8 mx-auto px-8"
             >

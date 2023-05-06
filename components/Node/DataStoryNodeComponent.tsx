@@ -4,9 +4,10 @@ import { shallow } from 'zustand/shallow';
 import CustomHandle from './CustomHandle';
 import { DataStoryNodeData } from './DataStoryNode';
 
-const DataStoryNodeComponent = ({ id, data }: {
+const DataStoryNodeComponent = ({ id, data, selected }: {
   id: string,
   data: DataStoryNodeData
+  selected: boolean
 }) => {
   const selector = (state: StoreSchema) => ({
     setOpenNodeModalId: state.setOpenNodeModalId,
@@ -23,7 +24,7 @@ const DataStoryNodeComponent = ({ id, data }: {
         }}
       >
         <div className="w-32" />
-        <div className="flex py-1 text-xs font-bold font-mono tracking-wide border border-gray-400 rounded bg-blue-600 text-gray-100 px-2">
+        <div className={"flex py-1 text-xs font-bold font-mono tracking-wide border border-gray-400 rounded bg-blue-600 text-gray-100 px-2" + (selected ? ' bg-blue-700' : '') }>
           { data.label }
         </div>
         <div className="flex flex-col mx-2">
