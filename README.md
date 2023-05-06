@@ -41,5 +41,8 @@ yarn make:node YourNewNode
 yarn test
 ```
 
+### Thank you
+Built with [React Flow](https://reactflow.dev/)
+
 ### License
 To be decided
