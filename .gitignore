@@ -41,3 +41,4 @@ next-env.d.ts
 .datastory/cache
 .datastory/data
 .datastory/executions
+.datastory/local*.*

@@ -58,15 +58,15 @@ export function DataStoryControls({
         </ControlButton>                              */}
       <ControlButton
           onClick={() => onSave()}
-          title="Save as demo"
-          aria-label="Save as demo"
+          title="Save"
+          aria-label="Save"
         >
           <SaveIcon />
         </ControlButton>
         <ControlButton
           onClick={() => router.push('/')}
-          title="Open demo"
-          aria-label="Open demo"
+          title="Open"
+          aria-label="Open"
         >
           <OpenIcon />
         </ControlButton>                  

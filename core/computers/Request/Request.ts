@@ -12,7 +12,7 @@ export const Request: ComputerFactory = (): Computer => ({
     method: select('method').options(['GET', 'POST', 'PUT', 'DELETE']).get().value('GET'),
     body: json('body').value('{}').get(),
     config: json('config').value('{}').get(),
-    featurePath: string('featurePath').value('data').get(),
+    // itemPath: string('itemPath').value('data').get(),
   },
 
   async *run({ output, params: { url, method, body, config } }) {

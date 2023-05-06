@@ -1,158 +1,12 @@
 {
   "nodes": [
     {
-      "width": 128,
-      "height": 52,
-      "id": "CreateJson.1",
-      "position": {
-        "x": 109,
-        "y": 187
-      },
-      "data": {
-        "params": {
-          "name": {
-            "id": "name",
-            "name": "name",
-            "type": "string",
-            "value": ""
-          },
-          "label": {
-            "id": "label",
-            "name": "label",
-            "type": "string",
-            "value": "CreateJson"
-          },
-          "json": {
-            "id": "json",
-            "name": "json",
-            "type": "json",
-            "value": "[\n  { \"name\": \"John\"},\n  { \"name\": \"Jess\"},\n  { \"name\": \"Jack\"}\n]"
-          }
-        },
-        "computer": "CreateJson",
-        "label": "CreateJson",
-        "inputs": [],
-        "outputs": [
-          {
-            "id": "CreateJson.1.output",
-            "name": "output"
-          }
-        ]
-      },
-      "type": "dataStoryNodeComponent",
-      "selected": false,
-      "positionAbsolute": {
-        "x": 109,
-        "y": 187
-      },
-      "dragging": false
-    },
-    {
-      "width": 131,
-      "height": 78,
-      "id": "CreateAttribute.1",
-      "position": {
-        "x": 309,
-        "y": 187
-      },
-      "data": {
-        "params": {
-          "name": {
-            "id": "name",
-            "name": "name",
-            "type": "string",
-            "value": ""
-          },
-          "label": {
-            "id": "label",
-            "name": "label",
-            "type": "string",
-            "value": "CreateAttribute"
-          },
-          "key": {
-            "id": "key",
-            "name": "key",
-            "type": "string",
-            "value": "greeting"
-          },
-          "value": {
-            "id": "value",
-            "name": "value",
-            "type": "string",
-            "value": "Welcome ${name}!"
-          }
-        },
-        "computer": "CreateAttribute",
-        "label": "CreateAttribute",
-        "inputs": [
-          {
-            "id": "CreateAttribute.1.input",
-            "name": "input"
-          }
-        ],
-        "outputs": [
-          {
-            "id": "CreateAttribute.1.output",
-            "name": "output"
-          }
-        ]
-      },
-      "type": "dataStoryNodeComponent",
-      "selected": false,
-      "dragging": false,
-      "positionAbsolute": {
-        "x": 309,
-        "y": 187
-      }
-    },
-    {
-      "width": 128,
-      "height": 52,
-      "id": "Log.1",
-      "position": {
-        "x": 526,
-        "y": 209
-      },
-      "data": {
-        "params": {
-          "name": {
-            "id": "name",
-            "name": "name",
-            "type": "string",
-            "value": ""
-          },
-          "label": {
-            "id": "label",
-            "name": "label",
-            "type": "string",
-            "value": "Log"
-          }
-        },
-        "computer": "Log",
-        "label": "Log",
-        "inputs": [
-          {
-            "id": "Log.1.input",
-            "name": "input"
-          }
-        ],
-        "outputs": []
-      },
-      "type": "dataStoryNodeComponent",
-      "selected": false,
-      "positionAbsolute": {
-        "x": 526,
-        "y": 209
-      },
-      "dragging": false
-    },
-    {
       "width": 576,
       "height": 64,
       "id": "Comment.1",
       "position": {
-        "x": 105,
-        "y": 49
+        "x": 69,
+        "y": 57
       },
       "data": {
         "params": {
@@ -172,7 +26,7 @@
             "id": "content",
             "name": "content",
             "type": "json",
-            "value": "/* Welcome to the first demo flow‍! In this simple flow we will just create a few dummy objects and log them. */"
+            "value": "/* Using Chat GPT experiment. To run this, first add your key as OPEN_AI_SECRET in .env.local */"
           }
         },
         "computer": "Comment",
@@ -183,36 +37,174 @@
       "type": "dataStoryCommentNodeComponent",
       "selected": false,
       "positionAbsolute": {
-        "x": 105,
-        "y": 49
+        "x": 69,
+        "y": 57
+      },
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 52,
+      "id": "CreateJson.1",
+      "position": {
+        "x": 87,
+        "y": 179
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "CreateJson"
+          },
+          "json": {
+            "id": "json",
+            "name": "json",
+            "type": "json",
+            "value": "[\n  { \"prompt\": \"What is the meaning of life?\"},\n  { \"prompt\": \"What is democracy?\"},\n  { \"prompt\": \"Give an example for a fun programming project!\"}\n]"
+          }
+        },
+        "computer": "CreateJson",
+        "label": "CreateJson",
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "CreateJson.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 87,
+        "y": 179
+      },
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 52,
+      "id": "Log.1",
+      "position": {
+        "x": 542,
+        "y": 206
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": ""
+          }
+        },
+        "computer": "Log",
+        "label": "Log",
+        "inputs": [
+          {
+            "id": "Log.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": []
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 542,
+        "y": 206
+      },
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 78,
+      "id": "AskChatGpt.1",
+      "position": {
+        "x": 327,
+        "y": 179
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "AskChatGpt"
+          },
+          "prompt": {
+            "id": "prompt",
+            "name": "prompt",
+            "type": "string",
+            "value": "${prompt}"
+          }
+        },
+        "computer": "AskChatGpt",
+        "label": "AskChatGpt",
+        "inputs": [
+          {
+            "id": "AskChatGpt.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "AskChatGpt.1.completions",
+            "name": "completions"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 327,
+        "y": 179
       },
       "dragging": false
     }
   ],
   "edges": [
     {
-      "id": "CreateJson.1.output--->CreateAttribute.1.input",
-      "sourceHandle": "CreateJson.1.output",
-      "targetHandle": "CreateAttribute.1.input",
       "source": "CreateJson.1",
-      "target": "CreateAttribute.1",
-      "selected": false,
+      "sourceHandle": "CreateJson.1.output",
+      "target": "AskChatGpt.1",
+      "targetHandle": "AskChatGpt.1.input",
+      "id": "CreateJson.1.output--->AskChatGpt.1.input",
       "label": 3,
       "labelBgStyle": {
         "opacity": 0.6
       }
     },
     {
-      "id": "CreateAttribute.1.output--->Log.1.input",
-      "sourceHandle": "CreateAttribute.1.output",
-      "targetHandle": "Log.1.input",
-      "source": "CreateAttribute.1",
+      "source": "AskChatGpt.1",
+      "sourceHandle": "AskChatGpt.1.completions",
       "target": "Log.1",
+      "targetHandle": "Log.1.input",
+      "id": "AskChatGpt.1.completions--->Log.1.input",
       "label": 3,
       "labelBgStyle": {
         "opacity": 0.6
-      },
-      "selected": false
+      }
     }
   ],
   "viewport": {

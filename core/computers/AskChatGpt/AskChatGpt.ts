@@ -6,14 +6,14 @@ import { string } from "../../ParamBuilder";
 export const AskChatGpt: ComputerFactory = (): Computer => ({
   name: 'AskChatGpt',
   inputs: ['input'],
-  outputs: ['completions', 'scores', 'tokens_used'],
+  outputs: ['completions'],
   params: {
     ...DefaultParams,
     prompt: string('prompt').value('What is the meaning of life?').get(),
   },
   category: 'API',
 
-  async *run({ input, output, params }) {
+  async *run({ input, output }) {
 
     const openai = new OpenAIApi(
       new Configuration({

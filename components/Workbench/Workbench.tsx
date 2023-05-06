@@ -87,7 +87,6 @@ export default function Workbench() {
       {/* Modals */}
       {showRunModal && <RunModal setShowModal={setShowRunModal}/>}    
       {showAddNodeModal && <AddNodeModal setShowModal={setShowAddNodeModal}/>}    
-      {showConfigModal && <ConfigModal setShowModal={setShowConfigModal}/>}
       {openNodeModalId && <NodeSettingsModal/>}
     </>
   );
