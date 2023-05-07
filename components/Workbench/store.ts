@@ -28,6 +28,7 @@ export type StoreSchema = {
   edges: Edge[];
   server: null | ServerClient;
   refreshNodes: () => void;
+  updateNode: (node: DataStoryNode) => void;
   onAddNode: (node: DataStoryNode) => void;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
@@ -43,6 +44,7 @@ export type StoreSchema = {
   onOpen: () => void;
   onSave: () => void;
   setNodes: (nodes: DataStoryNode[]) => void;
+  traverseNodes: (direction: 'up' | 'down' | 'left' | 'right') => void;
 };
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
@@ -84,6 +86,17 @@ export const useStore = create<StoreSchema>((set, get) => ({
         node.selected = false
         return node
       }), node],
+    })
+  },
+  updateNode: (node: DataStoryNode) => {
+    set({
+      nodes: get().nodes.map(existingNode => {
+        if(existingNode.id === node.id) {
+          return node
+        }
+
+        return existingNode
+      }),
     })
   },
   setNodes: (nodes: DataStoryNode[]) => {
@@ -194,4 +207,100 @@ export const useStore = create<StoreSchema>((set, get) => ({
 
     console.log("Saving...")
   },
+  traverseNodes: (direction: 'up' | 'down' | 'left' | 'right') => {
+    const selectedNodes = get().nodes.filter(node => node.selected)
+
+    // If multiple nodes are selected we cant navigate
+    if(selectedNodes.length > 1) return
+
+    // If no nodes are selected, select the first node
+    if(selectedNodes.length === 0 && get().nodes.length > 0) {
+      const firstNode = get().nodes.at(0)!
+      firstNode.selected = true
+      get().updateNode(firstNode)
+      return
+    }
+
+    // // If one node is selected, navigate
+    if(selectedNodes.length === 1 && get().nodes.length > 0) {
+      const node = selectedNodes.at(0)!
+      const otherNodes = get().nodes.filter(otherNode => otherNode.id !== node.id)
+
+      // Find the closest node in the direction
+      if(direction === 'up') {
+        const closestNode = otherNodes.reduce((closest, otherNode) => {
+          if(otherNode.position.y < node.position.y) {
+            if(closest === null) return otherNode
+            if(otherNode.position.y > closest.position.y) return otherNode
+          }
+
+          return closest
+        }, null as DataStoryNode | null)
+
+        if(closestNode) {
+          node.selected = false
+          get().updateNode(node)          
+          closestNode.selected = true
+          get().updateNode(closestNode)
+        }
+      }
+
+      if(direction === 'down') {
+        const closestNode = otherNodes.reduce((closest, otherNode) => {
+          if(otherNode.position.y > node.position.y) {
+            if(closest === null) return otherNode
+            if(otherNode.position.y < closest.position.y) return otherNode
+          }
+
+          return closest
+        }, null as DataStoryNode | null)
+
+        if(closestNode) {
+          node.selected = false
+          get().updateNode(node)
+          closestNode.selected = true
+          get().updateNode(closestNode)
+        }
+      }
+
+      if(direction === 'left') {
+        console.log("here?")
+        const closestNode = otherNodes.reduce((closest, otherNode) => {
+          if(otherNode.position.x < node.position.x) {
+            if(closest === null) return otherNode
+            if(otherNode.position.x > closest.position.x) return otherNode
+          }
+
+          return closest
+        }, null as DataStoryNode | null)
+
+        if(closestNode) {
+          node.selected = false
+          get().updateNode(node)          
+          closestNode.selected = true
+          get().updateNode(closestNode)
+        }
+      }
+
+      if(direction === 'right') {
+        const closestNode = otherNodes.reduce((closest, otherNode) => {
+          if(otherNode.position.x > node.position.x) {
+            if(closest === null) return otherNode
+            if(otherNode.position.x < closest.position.x) return otherNode
+          }
+
+          return closest
+        }, null as DataStoryNode | null)
+
+        if(closestNode) {
+          node.selected = false
+          get().updateNode(node)          
+          closestNode.selected = true
+          get().updateNode(closestNode)
+        }
+      }
+    }
+
+
+  }
 }));

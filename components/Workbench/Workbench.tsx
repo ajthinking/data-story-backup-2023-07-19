@@ -1,3 +1,4 @@
+import "reactflow/dist/style.css";
 import { DataStoryControls } from './dataStoryControls';
 import { useEffect, useState } from "react";
 import ReactFlow, { Background, BackgroundVariant } from "reactflow";
@@ -6,7 +7,6 @@ import { RunModal } from './modals/runModal';
 import { AddNodeModal } from './modals/addNodeModal';
 import { StoreSchema, useStore } from './store';
 import { shallow } from 'zustand/shallow'
-import "reactflow/dist/style.css";
 import { NodeSettingsModal } from './modals/nodeSettingsModal/nodeSettingsModal';
 import DataStoryCommentNodeComponent from '../Node/DataStoryCommentNodeComponent';
 
@@ -25,11 +25,12 @@ export default function Workbench() {
     onInit: state.onInit,
     openNodeModalId: state.openNodeModalId,
     setOpenNodeModalId: state.setOpenNodeModalId,
+    traverseNodes: state.traverseNodes,
   });
 
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, onInit, openNodeModalId, setOpenNodeModalId } = useStore(selector, shallow);  
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, onInit, openNodeModalId, setOpenNodeModalId, traverseNodes } = useStore(selector, shallow);  
 
-  const [showConfigModal, setShowConfigModal] = useState(false);
+  const [showConfigModal] = useState(false);
   const [showRunModal, setShowRunModal] = useState(false);
   const [showAddNodeModal, setShowAddNodeModal] = useState(false);
 
@@ -39,6 +40,13 @@ export default function Workbench() {
       // Swedish Mac keyboard 🤷‍♂️
       const shiftR = event.shiftKey && event.code === "KeyR";
       const shiftPlus = event.shiftKey && event.code === "Minus"
+
+      const arrowUp = event.code === "ArrowUp";
+      const arrowDown = event.code === "ArrowDown";
+      const arrowLeft = event.code === "ArrowLeft";
+      const arrowRight = event.code === "ArrowRight";
+
+      const enter = event.code === "Enter";
       
       // Ensure no modal is already open
       if ([
@@ -51,6 +59,29 @@ export default function Workbench() {
       // Open modal!
       if (shiftR) setShowRunModal(true);
       if (shiftPlus) setShowAddNodeModal(true);
+
+      // Open node settings modal
+      const openable = (() => {
+        const selectedNodes = nodes.filter((node) => node.selected);
+        const one = selectedNodes.length === 1;
+        if(!one) return null;
+
+        return selectedNodes[0];
+      })()
+
+      console.log({
+        enter,
+        openable,
+        showAddNodeModal,
+      })
+      
+      if (enter && openable && !showAddNodeModal) setOpenNodeModalId(openable.id);
+
+      // Select nodes
+      if (arrowUp) traverseNodes("up");
+      if (arrowDown) traverseNodes("down");
+      if (arrowLeft) traverseNodes("left");
+      if (arrowRight) traverseNodes("right");
     }
 
     // Add the event listener when the component mounts
@@ -60,7 +91,15 @@ export default function Workbench() {
     return () => {
       window.removeEventListener("keyup", handleKeyPress);
     };
-  }, [openNodeModalId, showConfigModal, showRunModal, showAddNodeModal]);
+  }, [
+    nodes,
+    openNodeModalId,
+    showConfigModal,
+    showRunModal,
+    showAddNodeModal,
+    setOpenNodeModalId,
+    traverseNodes,
+  ]);
   
   return (
     <>
