@@ -56,7 +56,6 @@ export const AddNodeModal = ({ setShowModal }: {
   })
 
   return (<Modal
-    // title={"Add Node"}
     setShowModal={setShowModal}
   >
     <div>
@@ -82,8 +81,6 @@ export const AddNodeModal = ({ setShowModal }: {
                 return (<div key={tag} className={style}>{tag}</div>)
               })}
             </div>
-
-            {/* <button className="hidden group-hover:block">Child</button> */}
         </button>)
       })}                                                
     </div>

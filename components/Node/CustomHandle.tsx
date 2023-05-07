@@ -23,7 +23,6 @@ const CustomHandle = ({ id, isConnectable, isInput }: {
 
   return (
       <div className="flex w-full items-right justify-end -mx-4">
-        {/* <div className="bg-indigo-300 hover:bg-indigo-600 my-0.5 h-3 w-3 rounded-full"/> */}
         <div className="absolute my-0.5"><PortIcon /></div>
         <Handle
           className="relative"

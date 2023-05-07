@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { StoreSchema, useStore } from '../Workbench/store';
 import { shallow } from 'zustand/shallow';
-import CustomHandle from './CustomHandle';
 import { DataStoryNodeData } from './DataStoryNode';
 
 const DataStoryCommentNodeComponent = ({ id, data }: {
