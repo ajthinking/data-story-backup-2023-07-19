@@ -22,9 +22,9 @@ export const guessComputerContent = async (computerName: string) => {
     presence_penalty: 0.0,
   });
 
-  if(!completion.data.choices[0]) throw Error("Could not get completion")
+  if(!completion.data.choices.at(0)) throw Error("Could not get completion")
   
-  const result = completion.data.choices[0]!.text!.trimStart();
+  const result = completion.data.choices.at(0)!.text!.trimStart();
 
   console.log(result)
 

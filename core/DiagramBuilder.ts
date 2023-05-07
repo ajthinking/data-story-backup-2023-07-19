@@ -56,8 +56,8 @@ export class DiagramBuilder {
   protected linkToPrevious(newNode: Node) {
     const previousNode = this.previousNode!
 
-    const previousNodePort: Port | undefined = previousNode.outputs[0]
-    const newNodePort: Port | undefined = newNode.inputs[0]
+    const previousNodePort: Port | undefined = previousNode.outputs.at(0)
+    const newNodePort: Port | undefined = newNode.inputs.at(0)
 
     if(!previousNodePort || !newNodePort) return
 

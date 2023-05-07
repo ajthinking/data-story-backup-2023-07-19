@@ -76,7 +76,7 @@ export default function Workbench() {
         const one = selectedNodes.length === 1;
         if(!one) return null;
   
-        return selectedNodes[0];
+        return selectedNodes.at(0);
       })()
   
       // Select nodes
@@ -105,7 +105,7 @@ export default function Workbench() {
         const one = selectedNodes.length === 1;
         if(!one) return null;
   
-        return selectedNodes[0];
+        return selectedNodes.at(0);
       })()
       
       if (enter && openable && !showAddNodeModal) setOpenNodeModalId(openable.id);
