@@ -264,7 +264,6 @@ export const useStore = create<StoreSchema>((set, get) => ({
       }
 
       if(direction === 'left') {
-        console.log("here?")
         const closestNode = otherNodes.reduce((closest, otherNode) => {
           if(otherNode.position.x < node.position.x) {
             if(closest === null) return otherNode

@@ -20,6 +20,8 @@ export const describe: MessageHandler<DescribeMessage> = async (
       outputs: instance.outputs ||  [],
       params: instance.params || {},
       tags: instance.tags || [],
+      inputSchemas: instance.inputSchemas || {},
+      outputSchemas: instance.outputSchemas || {},
     }
   })
 

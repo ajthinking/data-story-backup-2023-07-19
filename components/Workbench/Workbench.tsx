@@ -37,8 +37,8 @@ export default function Workbench() {
   // MOVE OUT
   useEffect(() => {
     // restore enterkey event listener
+    // (it is disabled when the addNodeModal is open)
     if(!showAddNodeModal) {
-      console.log("Restoring enter key event listener")
       window.addEventListener("keydown", handleEnterPress);
     }
 
@@ -65,8 +65,7 @@ export default function Workbench() {
       // Open modal!
       if (shiftR) setShowRunModal(true);
       if (shiftPlus) {
-        // When opening the add node modal, we want to disable the enter key
-        console.log("Disabling enter key event listener")        
+        // When opening the add node modal, we want to disable the enter key      
         window.removeEventListener("keydown", handleEnterPress);
         setShowAddNodeModal(true);
       }
@@ -79,13 +78,6 @@ export default function Workbench() {
   
         return selectedNodes[0];
       })()
-  
-      console.log({
-        method: 'handleKeyPress',
-        enter,
-        openable,
-        showAddNodeModal,
-      })
   
       // Select nodes
       if (arrowUp) traverseNodes("up");

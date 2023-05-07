@@ -9,6 +9,7 @@ import { useState } from "react";
 import { InputSchemas } from './tabs/InputSchemas';
 import { OutputSchemas } from './tabs/OutputSchemas';
 import { Config } from './tabs/Config';
+import { Code } from './tabs/Code';
 
 export const NodeSettingsModal = () => {
   const [tab, setTab] = useState('Params')
@@ -29,7 +30,7 @@ export const NodeSettingsModal = () => {
     return acc
   }, {})
 
-  const { register, handleSubmit } = useForm({
+  const form = useForm({
     defaultValues: {
       ...defaultParamValues,
       ...{ label: node.data.label} as Record<string, any>
@@ -39,7 +40,7 @@ export const NodeSettingsModal = () => {
   const close = () => setOpenNodeModalId(null);
 
   const saveAndClose = () => {
-    handleSubmit((submitted) => {
+    form.handleSubmit((submitted) => {
       for (const [key, value] of Object.entries(submitted)) {
         node.data.params[key].value = value
       }      
@@ -60,7 +61,7 @@ export const NodeSettingsModal = () => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between px-8 py-2 border-solid border-slate-200 rounded-t">
                   <input
-                    {...register('label')}
+                    {...form.register('label')}
                     className="pr-4 mt-4 flex flex-col align-center justify-middleitems-center justify-center text-lg text-gray-400 font-bold tracking widest"
                   />
                   <div className="cursor-pointer p-1 ml-auto text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={close}>
@@ -73,12 +74,14 @@ export const NodeSettingsModal = () => {
                   <div onClick={() => setTab('Params')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'Params' && " border-b-2 border-blue-400"}`}>params</div>
                   <div onClick={() => setTab('InputSchemas')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'InputSchemas' && " border-b-2 border-blue-400"}`}>input schema</div>
                   <div onClick={() => setTab('OutputSchemas')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'OutputSchemas' && " border-b-2 border-blue-400"}`}>output schema</div>
+                  <div onClick={() => setTab('Code')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'Code' && " border-b-2 border-blue-400"}`}>code</div>
                   <div onClick={() => setTab('Config')} className={`pb-2 hover:text-gray-500 cursor-pointer ${tab === 'Config' && " border-b-2 border-blue-400"}`}>config</div>
                 </div>
-                {tab === 'Params' && <Params node={node} register={register} />}
-                {tab === 'InputSchemas' && <InputSchemas node={node} register={register} />}
-                {tab === 'OutputSchemas' && <OutputSchemas node={node} register={register} />}
-                {tab === 'Config' && <Config node={node} register={register} />}
+                {tab === 'Params' && <Params node={node} form={form} />}
+                {tab === 'InputSchemas' && <InputSchemas node={node} register={form.register} />}
+                {tab === 'OutputSchemas' && <OutputSchemas node={node} register={form.register} />}
+                {tab === 'Code' && <Code node={node} register={form.register} />}
+                {tab === 'Config' && <Config node={node} register={form.register} />}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button className="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={close}>
                     Close
