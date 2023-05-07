@@ -12,10 +12,6 @@ export const InterPolatableString = ({ form, label, id, inputSchemas }: {
 }) => {
   const [i, setI] = useState('')
 
-  console.log({
-    inputSchemas
-  })
-
   return (<div
     className="flex flex-col"
     key={id}
