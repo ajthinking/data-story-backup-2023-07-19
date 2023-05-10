@@ -11,10 +11,6 @@ export function OutputSchemas({
 }) {
 
   return <div className="max-h-128 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1 text-sm font-mono text-gray-800">
-    <div className="text-xs text-gray-600 py-2">
-      Use this to define the expected output schema for this node. Note, typically this is auto populated by decendant node schemas. The schema will be used to give you hints on which params that are available for interpolation.
-    </div>
-    
     <div
     className="flex flex-col"
     >

@@ -7,6 +7,7 @@ export type Param = {
   value?: ParamValue
   placeholder?: string,
   selectOptions?: string[],
+  inputSchemaFromPort?: string,
 }
 
 export const name = {

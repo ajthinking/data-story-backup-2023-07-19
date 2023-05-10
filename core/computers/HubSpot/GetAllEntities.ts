@@ -40,6 +40,15 @@ export const GetAllEntities: ComputerFactory = (): Computer => ({
   },
   tags: ['Abstract'],
   category: 'HubSpot',
+  outputSchemas: {
+    all: {
+      id: 'string',
+      createdAt: 'date',
+      updatedAt: 'date',
+      archived: 'boolean',
+      properties: 'object',
+    }
+  },
 
   async *run({ output, params }) {
     const entity = params.entity as string    

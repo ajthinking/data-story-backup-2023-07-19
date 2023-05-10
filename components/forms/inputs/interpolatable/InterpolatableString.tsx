@@ -2,13 +2,13 @@ import { UseFormRegister, UseFormReturn } from "react-hook-form"
 import { Param } from "../../../../core/Param"
 import { useState } from "react"
 
-export const InterPolatableString = ({ form, label, id, inputSchemas }: {
+export const InterPolatableString = ({ form, label, id, inputSchema }: {
   label: string,
   id: string
   form: UseFormReturn<{
     [x: string]: any;
   }>,
-  inputSchemas: any
+  inputSchema: any
 }) => {
   const [i, setI] = useState('')
 
@@ -18,13 +18,13 @@ export const InterPolatableString = ({ form, label, id, inputSchemas }: {
   >
     <label className="mt-2 mb-1 text-xs text-gray-400">{label}</label>
     <div className="flex w-full">
-      <input
-        type="text"
+      <textarea
+        rows={1}
         placeholder=""
         className="w-full text-xs px-2 py-1 border border-blue-200"
         {...form.register(id)}
       >
-      </input>
+      </textarea>
       <select
           value={i}
           onChange={(e) => {
@@ -33,10 +33,11 @@ export const InterPolatableString = ({ form, label, id, inputSchemas }: {
               form.getValues(id) + '${' + e.target.value + '}'
             )
           }}
-          className="ml-1 border border-gray-300 text-xs w-6 text-gray-300 bg-gray-300 hover:border-gray-400 focus:outline-none appearance-none">
+          className="ml-1 max-h-6 border border-gray-300 text-xs w-6 text-gray-300 bg-gray-300 hover:border-gray-400 focus:outline-none appearance-none">
           <option></option>
-          <option>a</option>
-          <option>b</option>
+          {Object.keys(inputSchema).map((key) => {
+            return <option key={key}>{key}</option>
+          })}
       </select> 
 
     </div>

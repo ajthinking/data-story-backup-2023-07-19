@@ -11,7 +11,7 @@ export const CreateAttribute: ComputerFactory = (): Computer => ({
   params: {
     ...DefaultParams,
     key: string('key').get(),
-    value: text('value').get(),
+    value: string('value').get(),
   },
 
   async *run({ input, output, params }) {

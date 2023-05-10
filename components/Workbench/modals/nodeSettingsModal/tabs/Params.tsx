@@ -7,6 +7,8 @@ import { Text } from "../../../../forms/inputs/text";
 import { Select } from "../../../../forms/inputs/select";
 import { InterPolatableString } from "../../../../forms/inputs/interpolatable/InterpolatableString";
 import { UseFormReturn } from "react-hook-form";
+import { flattenObjectOneLevel } from "../../../../../core/utils/flattenObjectOneLevel";
+
 export function Params({
   node,
   form
@@ -23,9 +25,14 @@ export function Params({
 
   return <div className="max-h-128 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1">
     {nonDefaultParams.map(param => {
+      const inputSchema = param.inputSchemaFromPort
+        ? node.data.inputSchemas[param.inputSchemaFromPort]
+        : flattenObjectOneLevel(node.data.inputSchemas)
+      
+
       return <div className="flex flex-col" key={param.name}>
         {/* {param.type === 'string' && <String_ register={form.register} label={param.name} id={param.name} />} */}
-        {param.type === 'string' && <InterPolatableString form={form} label={param.name} id={param.name} inputSchemas={node.data.inputSchemas} />}
+        {param.type === 'string' && <InterPolatableString form={form} label={param.name} id={param.name} inputSchema={inputSchema} />}
         {param.type === 'text' && <Text register={form.register} label={param.name} id={param.name} />}
         {param.type === 'number' && <Number register={form.register} label={param.name} id={param.name} />}
         {param.type === 'json' && <Json register={form.register} label={param.name} id={param.name} />}

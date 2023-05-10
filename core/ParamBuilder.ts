@@ -1,4 +1,5 @@
 
+import { PortName } from "./Computer"
 import { Param, ParamValue } from "./Param"
 
 export const string = (name: string) => new ParamBuilder(name, 'string')
@@ -9,11 +10,18 @@ export const text = (name: string) => new ParamBuilder(name, 'text')
 
 export class ParamBuilder {
   selectOptions?: string[]
+  inputSchemaFromPort?: PortName
 
   constructor(private name: string, private type: string) {}
 
   value(value: ParamValue): ParamBuilder {
     this.value = value
+
+    return this
+  }
+
+  schemaFromPort(portName: PortName) {
+    this.inputSchemaFromPort = portName
 
     return this
   }
@@ -31,6 +39,7 @@ export class ParamBuilder {
       type: this.type,
       value: this.value,
       selectOptions: this.selectOptions,
+      inputSchemaFromPort: this.inputSchemaFromPort
     }
   }
 }

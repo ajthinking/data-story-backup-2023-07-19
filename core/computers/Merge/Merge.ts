@@ -12,8 +12,12 @@ export const Merge: ComputerFactory = (): Computer => ({
   ],
   params: {
     ...DefaultParams,
-    requestor_merge_property: string('requestor_merge_property').get(),
-    supplier_merge_property: string('supplier_merge_property').get(),
+    requestor_merge_property: string('requestor_merge_property')
+      .schemaFromPort('requestors')
+      .get(),
+    supplier_merge_property: string('supplier_merge_property')
+      .schemaFromPort('suppliers')
+      .get(),
   },
 
   canRun({ isAvailable, input }) {

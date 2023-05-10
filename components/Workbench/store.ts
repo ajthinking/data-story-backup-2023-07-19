@@ -45,6 +45,7 @@ export type StoreSchema = {
   onSave: () => void;
   setNodes: (nodes: DataStoryNode[]) => void;
   traverseNodes: (direction: 'up' | 'down' | 'left' | 'right') => void;
+  calculateInputSchema: (node: DataStoryNode) => void;
 };
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
@@ -78,6 +79,12 @@ export const useStore = create<StoreSchema>((set, get) => ({
         id: `${fromHandleId}--->${toHandleId}`,
       }, get().edges),
     });
+
+    // Calculate input schema for the target node
+    const targetNode = get().nodes.find(node => node.id === connection.target)
+    if(targetNode) {
+      get().calculateInputSchema(targetNode)
+    }
   },
   onAddNode: (node: DataStoryNode) => {
     set({
@@ -299,7 +306,32 @@ export const useStore = create<StoreSchema>((set, get) => ({
         }
       }
     }
+  },
+  calculateInputSchema: (node: DataStoryNode) => {
+    const links = get().edges.filter(edge => edge.target === node.id)
 
+    console.log({links})
 
-  }
+    const inputSchemas = links.reduce((schema: any, link) => {
+      const sourceNode = get().nodes.find(node => node.id === link.source)
+      if(!sourceNode) return schema
+
+      const keys = Object.keys(sourceNode.data.outputSchemas)
+
+      for(const key of keys) {
+        const portSchema = sourceNode.data.outputSchemas[key]
+
+        return {
+          ...schema,
+          [key]: portSchema,
+        }
+      }
+    }, {})
+
+    node.data.inputSchemas = inputSchemas
+
+    get().updateNode(node)
+
+    console.log("Calculated input schema for node: ", node.data.label, inputSchemas)
+  },
 }));

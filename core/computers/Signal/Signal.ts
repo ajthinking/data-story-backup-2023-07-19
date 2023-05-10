@@ -14,7 +14,7 @@ export const Signal: ComputerFactory = (): Computer => ({
   },
   outputSchemas: {
     output: {
-      id: 'number'
+      id: null
     }
   },
 

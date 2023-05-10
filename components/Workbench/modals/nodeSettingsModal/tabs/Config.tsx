@@ -9,8 +9,8 @@ export function Config({
   register: any
 }) {
 
-  return <div className="max-h-128 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1 text-sm font-mono text-gray-800">
-    Coming soon
+  return <div className="max-h-128 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1 text-xs font-mono text-gray-800">
+    Nothing here yet
   </div>;
 }
   

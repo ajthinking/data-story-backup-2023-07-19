@@ -8,6 +8,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-between m-12 bg-gray-100 font-mono text-xs max-w-md">
+      <textarea rows={1} className="bg-red-500"></textarea>
       <div className="flex p-4">
         {/* Columns */}
         <div className="w-full">
