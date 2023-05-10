@@ -27,12 +27,11 @@ export function Params({
     {nonDefaultParams.map(param => {
       const inputSchema = param.inputSchemaFromPort
         ? node.data.inputSchemas[param.inputSchemaFromPort]
-        : flattenObjectOneLevel(node.data.inputSchemas)
-      
+        : flattenObjectOneLevel(node.data.inputSchemas);
 
       return <div className="flex flex-col" key={param.name}>
         {/* {param.type === 'string' && <String_ register={form.register} label={param.name} id={param.name} />} */}
-        {param.type === 'string' && <InterPolatableString form={form} label={param.name} id={param.name} inputSchema={inputSchema} />}
+        {param.type === 'string' && <InterPolatableString form={form} label={param.name} id={param.name} inputSchema={inputSchema || {}} />}
         {param.type === 'text' && <Text register={form.register} label={param.name} id={param.name} />}
         {param.type === 'number' && <Number register={form.register} label={param.name} id={param.name} />}
         {param.type === 'json' && <Json register={form.register} label={param.name} id={param.name} />}

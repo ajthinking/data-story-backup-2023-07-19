@@ -309,29 +309,21 @@ export const useStore = create<StoreSchema>((set, get) => ({
   },
   calculateInputSchema: (node: DataStoryNode) => {
     const links = get().edges.filter(edge => edge.target === node.id)
+    const inputSchemas: Record<string, any> = {}
 
-    console.log({links})
-
-    const inputSchemas = links.reduce((schema: any, link) => {
+    links.forEach(link => {
       const sourceNode = get().nodes.find(node => node.id === link.source)
-      if(!sourceNode) return schema
+      if(!sourceNode) return
 
-      const keys = Object.keys(sourceNode.data.outputSchemas)
+      const sourcePortName = sourceNode.data.outputs.find(output => output.id === link.sourceHandle)?.name
+      const targetPortName = node.data.inputs.find(input => input.id === link.targetHandle)?.name
+      if(!sourcePortName || !targetPortName) return;
 
-      for(const key of keys) {
-        const portSchema = sourceNode.data.outputSchemas[key]
-
-        return {
-          ...schema,
-          [key]: portSchema,
-        }
-      }
-    }, {})
+      inputSchemas[targetPortName] = sourceNode.data.outputSchemas[sourcePortName] ?? {}
+    })
 
     node.data.inputSchemas = inputSchemas
 
     get().updateNode(node)
-
-    console.log("Calculated input schema for node: ", node.data.label, inputSchemas)
   },
 }));
