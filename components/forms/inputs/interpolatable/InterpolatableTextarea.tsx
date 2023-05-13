@@ -1,5 +1,4 @@
-import { UseFormRegister, UseFormReturn } from "react-hook-form"
-import { Param } from "../../../../core/Param"
+import { UseFormReturn } from "react-hook-form"
 import { useState } from "react"
 
 export const InterPolatableTextArea = ({ form, label, rows, id, inputSchema }: {

@@ -1,7 +1,6 @@
-import { Computer, NextResult, PortName, RunArgs } from "./Computer";
+import { Computer, PortName } from "./Computer";
 import { ComputerConfig } from "./ComputerConfig";
 import { DefaultParams } from "./Param";
-import { Param } from "./Param";
 import { PortWithSchema } from "./PortWithSchema";
 
 /**

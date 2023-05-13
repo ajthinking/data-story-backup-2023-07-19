@@ -7,7 +7,14 @@ import { sleep } from "../../utils/sleep";
 export const Signal: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Signal',
   inputs: [],
-  outputs: ['output'],
+
+  outputs: [{
+    name: 'output',
+    schema: {
+      id: 'any',
+    }
+  }],
+  
   params: {
     ...DefaultParams,
     period: number('period').value(50).get(),
