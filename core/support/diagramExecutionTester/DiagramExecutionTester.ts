@@ -1,10 +1,10 @@
 import { expect } from "vitest";
-import { computerRegistry } from "../../../server/computerRegistry";
 import { Diagram } from "../../Diagram";
 import { ExecutionUpdate } from "../../ExecutionUpdate";
 import { Executor } from "../../Executor";
 
 import { NullStorage } from "../../NullStorage";
+import { ComputerRegistry } from "../../../server/computerRegistry";
 
 export const whenRunning = (diagram: Diagram) => {
   return new DiagramExecutionTester(diagram)
@@ -20,7 +20,7 @@ export class DiagramExecutionTester {
 
     const executor = new Executor(
       this.diagram, 
-      computerRegistry,
+      ComputerRegistry.all(),
       await this.makeStorage()
     )
     

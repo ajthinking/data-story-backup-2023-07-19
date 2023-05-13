@@ -166,7 +166,7 @@ describe('execute', () => {
         order.push('running create')
         output.push([1])
       },
-    }
+    } as Computer
 
     const logComputer = {
       name: 'Log',
@@ -176,7 +176,7 @@ describe('execute', () => {
         order.push('running log')
         const items = input.pull()
       },
-    }
+    } as Computer
 
     const computers = new Map<string, Computer>()
       .set(createComputer.name, createComputer)

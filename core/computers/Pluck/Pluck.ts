@@ -1,9 +1,10 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { ItemWithParams } from "../../ItemWithParams";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const Pluck: ComputerFactory = (): Computer => ({
+export const Pluck: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Pluck',
   inputs: ['input'],
   outputs: ['output'],

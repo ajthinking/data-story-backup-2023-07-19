@@ -1,4 +1,5 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
+import { ComputerConfig } from "../../ComputerConfig";
 import { DefaultParams } from "../../Param";
 import { json, string } from "../../ParamBuilder";
 import { hubspot } from "./hubspot";
@@ -30,7 +31,7 @@ type EntityPage = {
   }
 }
 
-export const GetAllEntities: ComputerFactory = (): Computer => ({
+export const GetAllEntities: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'GetAll',
   outputs: ['all', 'errors'],
   params: {
@@ -40,15 +41,6 @@ export const GetAllEntities: ComputerFactory = (): Computer => ({
   },
   tags: ['Abstract'],
   category: 'HubSpot',
-  outputSchemas: {
-    all: {
-      id: 'string',
-      createdAt: 'date',
-      updatedAt: 'date',
-      archived: 'boolean',
-      properties: 'object',
-    }
-  },
 
   async *run({ output, params }) {
     const entity = params.entity as string    

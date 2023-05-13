@@ -1,7 +1,8 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const Pass: ComputerFactory = (): Computer => ({
+export const Pass: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Pass',
   inputs: ['input'],
   outputs: ['output'],

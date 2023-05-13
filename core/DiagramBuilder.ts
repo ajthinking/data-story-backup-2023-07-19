@@ -1,4 +1,5 @@
-import { Computer, ComputerFactory } from "./Computer";
+import { Computer, ComputerConfigFactory } from "./Computer";
+import { ComputerFactory } from "./ComputerFactory";
 import { Diagram } from "./Diagram";
 import { Link } from "./Link";
 import { Node } from "./Node";
@@ -12,19 +13,20 @@ export class DiagramBuilder {
     this.diagram = new Diagram([], [])
   }
 
-  add(addable: ComputerFactory | Computer) {
-    const computer = typeof addable === 'function' ? addable() : addable
+  add(addable: ComputerConfigFactory | Computer) {
+    const config = typeof addable === 'function' ? addable() : addable
+    const computer = ComputerFactory.fromComputerConfig(config)
 
     const nodeId = `${computer.name}.${this.getScopedId(computer.name)}`
 
     const node = new Node({
       id: nodeId,
       type: computer.name,
-      inputs: (computer.inputs ?? []).map(name => {
-        return new Port(`${nodeId}.${name}`, name)
+      inputs: (computer.inputs ?? []).map(input => {
+        return new Port(`${nodeId}.${input.name}`, input.name)
       }),
-      outputs: (computer.outputs ?? []).map(name => {
-        return new Port(`${nodeId}.${name}`, name)
+      outputs: (computer.outputs ?? []).map(output => {
+        return new Port(`${nodeId}.${output.name}`, output.name)
       }),
       params: (computer.params)
     })

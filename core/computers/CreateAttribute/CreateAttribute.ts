@@ -1,10 +1,11 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { ItemWithParams } from "../../ItemWithParams";
 import { DefaultParams } from "../../Param";
 import { string, text } from "../../ParamBuilder";
 import { ObjectItemValue } from "../../ItemValue";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const CreateAttribute: ComputerFactory = (): Computer => ({
+export const CreateAttribute: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'CreateAttribute',
   inputs: ['input'],
   outputs: ['output'],

@@ -1,9 +1,10 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
+import { ComputerConfig } from "../../ComputerConfig";
 import { ObjectItemValue } from "../../ItemValue";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 
-export const Merge: ComputerFactory = (): Computer => ({
+export const Merge: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Merge',
   inputs: ['requestors', 'suppliers'],
   outputs: [

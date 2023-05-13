@@ -1,4 +1,6 @@
 export type PortWithSchema = {
   name: string,
-  schema: string,
+  schema: {
+    [key: string]: any,
+  },
 }

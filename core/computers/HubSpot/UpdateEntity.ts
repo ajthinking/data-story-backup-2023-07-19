@@ -1,8 +1,9 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { ObjectItemValue } from "../../ItemValue";
 import { DefaultParams } from "../../Param";
 import { json, string } from "../../ParamBuilder";
 import { hubspot } from "./hubspot";
+import { ComputerConfig } from "../../ComputerConfig";
 
 const getBasicApi = (entity: string) => {
   if(entity === 'contacts') return hubspot.crm.contacts.basicApi;
@@ -15,7 +16,7 @@ const getBasicApi = (entity: string) => {
   throw new Error(`Unsupported entity: ${entity}`)
 }
 
-export const UpdateEntity: ComputerFactory = (): Computer => ({
+export const UpdateEntity: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'UpdateEntity',
   inputs: ['input'],
   outputs: ['updated', 'errors'],

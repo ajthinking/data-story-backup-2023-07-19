@@ -1,8 +1,9 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 import { promisify } from 'util';
 import { exec as execCallback } from 'child_process';
+import { ComputerConfig } from "../../ComputerConfig";
 
 const exec = promisify(execCallback);
 
@@ -22,7 +23,7 @@ async function awaitableExec(command: string): Promise<{
   }
 }
 
-export const RunCommand: ComputerFactory = (): Computer => ({
+export const RunCommand: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'RunCommand',
   inputs: ['input'],
   outputs: ['output', 'error'],

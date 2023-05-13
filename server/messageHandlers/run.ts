@@ -4,7 +4,7 @@ import { Executor } from "../../core/Executor"
 import { RunMessage } from '../messages/RunMessage';
 import { FileStorage } from '../../core/FileStorage';
 import { ExecutionResult } from '../../core/ExecutionResult';
-import { computerRegistry } from '../computerRegistry';
+import { ComputerRegistry } from '../computerRegistry';
 import { ExecutionFailure } from '../../core/ExecutionFailure';
 import { MessageHandler } from '../MessageHandler';
 
@@ -19,7 +19,7 @@ export const run: MessageHandler<RunMessage> = async (ws: WebSocket, data: RunMe
 
   const executor = new Executor(
     diagram, 
-    computerRegistry,
+    ComputerRegistry.all(),
     storage
   )
   

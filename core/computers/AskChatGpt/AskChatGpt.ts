@@ -1,9 +1,10 @@
 import { Configuration, OpenAIApi } from "openai";
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
+import { ComputerConfig } from "../../ComputerConfig";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 
-export const AskChatGpt: ComputerFactory = (): Computer => ({
+export const AskChatGpt: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'AskChatGpt',
   inputs: ['input'],
   outputs: ['completions'],

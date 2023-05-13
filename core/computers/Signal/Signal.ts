@@ -1,9 +1,10 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
+import { ComputerConfig } from "../../ComputerConfig";
 import { DefaultParams } from "../../Param";
 import { number } from "../../ParamBuilder";
 import { sleep } from "../../utils/sleep";
 
-export const Signal: ComputerFactory = (): Computer => ({
+export const Signal: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Signal',
   inputs: [],
   outputs: ['output'],
@@ -11,11 +12,6 @@ export const Signal: ComputerFactory = (): Computer => ({
     ...DefaultParams,
     period: number('period').value(50).get(),
     count: number('count').value(500).get(),
-  },
-  outputSchemas: {
-    output: {
-      id: null
-    }
   },
 
   async *run({

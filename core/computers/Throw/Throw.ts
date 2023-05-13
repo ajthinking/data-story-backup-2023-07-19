@@ -1,8 +1,9 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const Throw: ComputerFactory = (): Computer => ({
+export const Throw: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Throw',
   inputs: ['input'],
   params: {

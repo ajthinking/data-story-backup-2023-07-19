@@ -1,11 +1,35 @@
-import * as computers from '../core/computers'
+import * as computerConfigFactories from '../core/computers'
 import { Computer } from "../core/Computer";
+import { ComputerFactory } from '../core/ComputerFactory';
+import { NodeDescriptionFactory } from './NodeDescriptionFactory';
 
-const registry = new Map<string, Computer>()
+/**
+ * The internal registry of all computers
+ */
+const computers = (() => {
+  const map = new Map<string, Computer>()
 
-for(const factory of Object.values(computers)) {
-  const instance = factory()
-  registry.set(instance.name, instance)
+  for(const configFactory of Object.values(computerConfigFactories)) {
+    const config = configFactory()
+    const computer = ComputerFactory.fromComputerConfig(config)
+    
+    map.set(computer.name, computer)
+  }
+  
+  return map
+})()
+
+/**
+ * The public registry of all computers
+ */
+export const ComputerRegistry = {
+  all() {
+    return computers
+  },
+
+  descriptions() {
+    return Array.from(computers.values()).map(computer => {
+      return NodeDescriptionFactory.fromComputer(computer)
+    })
+  }
 }
-
-export const computerRegistry = registry;

@@ -1,12 +1,11 @@
-import { computerRegistry } from "../../../server/computerRegistry";
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DiagramFactory } from "../../DiagramFactory";
-import { Executor } from "../../Executor";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 import { promises as fs } from 'fs'
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const RunDiagram: ComputerFactory = (): Computer => ({
+export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'RunDiagram',
   inputs: ['input'],
   outputs: ['output'],

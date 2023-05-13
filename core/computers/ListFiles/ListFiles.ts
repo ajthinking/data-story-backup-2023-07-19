@@ -1,10 +1,11 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 import { promises as fs } from 'fs'
 import * as nodePath from 'path'
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const ListFiles: ComputerFactory = (): Computer => ({
+export const ListFiles: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'ListFiles',
   inputs: ['input'],
   outputs: ['output'],

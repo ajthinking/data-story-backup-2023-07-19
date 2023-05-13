@@ -1,4 +1,4 @@
-import { ComputerFactory } from "./Computer";
+import { ComputerConfigFactory } from "./Computer";
 import { ParamValue } from "./Param";
 
 export type DeriveFromOptions = {
@@ -10,7 +10,7 @@ export type DeriveFromOptions = {
 }
 
 export const deriveFrom = (
-  computerFactory: ComputerFactory,
+  computerFactory: ComputerConfigFactory,
   options: Record<string, ParamValue>
 ) => {
   return () => {

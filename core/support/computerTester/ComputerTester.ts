@@ -1,4 +1,4 @@
-import { Computer, ComputerFactory } from "../../Computer";
+import { Computer, ComputerConfigFactory } from "../../Computer";
 import { Diagram } from "../../Diagram";
 import { NodeStatus } from "../../Executor";
 import { PortLinkMap } from "../../OldInputDevice";
@@ -26,8 +26,10 @@ import { ExecutionMemory } from "../../ExecutionMemory";
 import { NullStorage } from "../../NullStorage";
 import { InputDeviceInterface } from "../../InputDeviceInterface";
 import { SmartInputDevice } from "../../SmartInputDevice";
+import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerFactory } from "../../ComputerFactory";
 
-export const when = (factory: ComputerFactory) => {
+export const when = (factory: ComputerConfigFactory) => {
   return new ComputerTester(factory())
 }
 
@@ -61,8 +63,11 @@ export class ComputerTester {
   outputDevice: OutputDevice | null = null
   memory: ExecutionMemory | null = null
   expectedErrorMessage: string | undefined
+  computer: Computer
 
-  constructor(public computer: Computer) {}  
+  constructor(computerConfig: ComputerConfig) {
+    this.computer = ComputerFactory.fromComputerConfig(computerConfig)
+  }  
 
   /**
    * After all steps have been registered, call this method to perform them 💫
@@ -171,12 +176,12 @@ export class ComputerTester {
       id: nodeId,
       type: this.computer.name,
       inputs: (this.computer.inputs || []).map(input => new Port(
-        `${nodeId}.${input}`,
-        input
+        `${nodeId}.${input.name}`,
+        input.name
       )),
       outputs: (this.computer.outputs || []).map(output => new Port(
-        `${nodeId}.${output}`,
-        output
+        `${nodeId}.${output.name}`,
+        output.name
       )),
     })
 

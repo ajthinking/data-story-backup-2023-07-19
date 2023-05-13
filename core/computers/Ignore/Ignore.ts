@@ -1,7 +1,8 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const Ignore: ComputerFactory = (): Computer => ({
+export const Ignore: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Ignore',
   inputs: ['input'],
   params: {

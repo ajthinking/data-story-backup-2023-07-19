@@ -1,9 +1,10 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { ObjectItemValue } from "../../ItemValue";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const Filter: ComputerFactory = (): Computer => ({
+export const Filter: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Filter',
   inputs: ['input'],
   outputs: ['passed', 'failed'],

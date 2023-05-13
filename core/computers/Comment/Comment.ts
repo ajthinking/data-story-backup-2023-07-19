@@ -1,8 +1,9 @@
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
 import { json, string } from "../../ParamBuilder";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const Comment: ComputerFactory = (): Computer => ({
+export const Comment: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Comment',
   inputs: [],
   outputs: [],

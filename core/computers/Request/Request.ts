@@ -1,9 +1,10 @@
 import axios from "axios";
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { DefaultParams } from "../../Param";
 import { json, select, string } from "../../ParamBuilder";
+import { ComputerConfig } from "../../ComputerConfig";
 
-export const Request: ComputerFactory = (): Computer => ({
+export const Request: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Request',
   outputs: ['items', 'response', 'error'],
   params: {

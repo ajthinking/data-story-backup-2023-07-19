@@ -3,10 +3,12 @@ export type ReturnResult = void | never
 export type NextArgument = void
 export type PortName = string
 
+import { ComputerConfig } from "./ComputerConfig"
 import { InputDeviceInterface } from "./InputDeviceInterface"
 import { OutputDeviceInterface } from "./OutputDevice"
 import { Param } from "./Param"
 import { ParamsDevice } from "./ParamsDevice"
+import { PortWithSchema } from "./PortWithSchema"
 import { Storage } from "./Storage"
 
 export type RunArgs = {
@@ -18,18 +20,12 @@ export type RunArgs = {
 
 export interface Computer {
   name: string
-  label?: string
+  label: string
   category?: string
-  inputs?: PortName[]
-  outputs?: PortName[]
-  params?: Record<string, Param>
-  tags?: string[]
-  inputSchemas?: {
-    [key: string]: any,
-  },
-  outputSchemas?: {
-    [key: string]: any,
-  },
+  inputs: PortWithSchema[]
+  outputs: PortWithSchema[]
+  params: Record<string, Param>
+  tags: string[]
 
   run: (args: RunArgs) => AsyncGenerator<NextResult, ReturnResult, NextArgument>
   canRun?: (options: {
@@ -38,4 +34,4 @@ export interface Computer {
   }) => boolean
 }
 
-export type ComputerFactory = (options?: any) => Computer
+export type ComputerConfigFactory = (options?: any) => ComputerConfig
