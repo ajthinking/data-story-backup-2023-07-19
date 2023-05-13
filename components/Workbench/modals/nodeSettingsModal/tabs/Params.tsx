@@ -5,7 +5,7 @@ import { Json } from "../../../../forms/inputs/json";
 import { Number } from "../../../../forms/inputs/number";
 import { Text } from "../../../../forms/inputs/text";
 import { Select } from "../../../../forms/inputs/select";
-import { InterPolatableString } from "../../../../forms/inputs/interpolatable/InterpolatableString";
+import { InterPolatableTextArea } from "../../../../forms/inputs/interpolatable/InterpolatableTextarea";
 import { UseFormReturn } from "react-hook-form";
 import { flattenObjectOneLevel } from "../../../../../core/utils/flattenObjectOneLevel";
 
@@ -31,10 +31,23 @@ export function Params({
 
       return <div className="flex flex-col" key={param.name}>
         {/* {param.type === 'string' && <String_ register={form.register} label={param.name} id={param.name} />} */}
-        {param.type === 'string' && <InterPolatableString form={form} label={param.name} id={param.name} inputSchema={inputSchema || {}} />}
+        {param.type === 'string' && <InterPolatableTextArea
+          form={form}
+          label={param.name}
+          id={param.name}
+          inputSchema={inputSchema || {}}
+          rows={param.rows}
+        />}
         {param.type === 'text' && <Text register={form.register} label={param.name} id={param.name} />}
         {param.type === 'number' && <Number register={form.register} label={param.name} id={param.name} />}
-        {param.type === 'json' && <Json register={form.register} label={param.name} id={param.name} />}
+        {/* {param.type === 'json' && <Json register={form.register} label={param.name} id={param.name} />} */}
+        {param.type === 'json' && <InterPolatableTextArea
+          form={form}
+          label={param.name}
+          id={param.name}
+          inputSchema={inputSchema || {}}
+          rows={param.rows}
+        />}        
         {param.type === 'select' && <Select register={form.register} label={param.name} id={param.name} options={param.selectOptions!} />}
       </div>;
     })}

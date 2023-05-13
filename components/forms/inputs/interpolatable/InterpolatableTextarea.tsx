@@ -2,9 +2,10 @@ import { UseFormRegister, UseFormReturn } from "react-hook-form"
 import { Param } from "../../../../core/Param"
 import { useState } from "react"
 
-export const InterPolatableString = ({ form, label, id, inputSchema }: {
+export const InterPolatableTextArea = ({ form, label, rows, id, inputSchema }: {
   label: string,
-  id: string
+  id: string,
+  rows: number,
   form: UseFormReturn<{
     [x: string]: any;
   }>,
@@ -19,7 +20,7 @@ export const InterPolatableString = ({ form, label, id, inputSchema }: {
     <label className="mt-2 mb-1 text-xs text-gray-400">{label}</label>
     <div className="flex w-full">
       <textarea
-        rows={1}
+        rows={rows}
         placeholder=""
         className="w-full text-xs px-2 py-1 border border-blue-200"
         {...form.register(id)}
