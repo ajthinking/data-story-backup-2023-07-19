@@ -10,6 +10,7 @@ type MemoryValues = {
   linkItems?: Map<LinkId, ItemValue[]>,
   linkCounts?: Map<LinkId, number>
   inputDevices?: Map<NodeId, InputDeviceInterface>,
+  hooks?: any[],
 }
 
 export class ExecutionMemory {
@@ -17,7 +18,8 @@ export class ExecutionMemory {
   nodeRunners: Map<NodeId, AsyncGenerator<undefined, void, void>>
   linkItems: Map<LinkId, ItemValue[]>
   linkCounts: Map<LinkId, number>
-  inputDevices: Map<NodeId, InputDeviceInterface>  
+  inputDevices: Map<NodeId, InputDeviceInterface>
+  hooks: any[]
   
   history: string[] = []
 
@@ -27,6 +29,7 @@ export class ExecutionMemory {
     this.linkItems = values.linkItems || new Map()
     this.linkCounts = values.linkCounts || new Map()
     this.inputDevices = values.inputDevices || new Map()
+    this.hooks = values.hooks || []
   }
 
   getNodeStatus(nodeId: NodeId): NodeStatus | undefined {
@@ -109,5 +112,17 @@ export class ExecutionMemory {
 
   pushHistoryMessage(message: string) {
     this.history.push(message)
+  }
+
+  pushHooks(hooks: any[]) {
+    this.hooks.push(hooks)
+  }
+
+  pullHooks() {
+    const pulled = [...this.hooks]
+
+    this.hooks = []
+
+    return pulled
   }
 }

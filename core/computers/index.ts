@@ -2,8 +2,10 @@ export * from './HubSpot'
 export * from './Placeholders'
 export { AskChatGpt } from './AskChatGpt';
 export { Comment } from './Comment';
+export { ConsoleLog } from './ConsoleLog'
 export { CreateAttribute } from './CreateAttribute';
 export { CreateJson } from './CreateJson'
+export { Dump } from './Dump';
 export { DumpJson } from './DumpJson';
 export { Filter } from './Filter';
 export { Ignore } from './Ignore'
@@ -13,8 +15,7 @@ export { JsonFile } from './JsonFile';
 export { ListFiles } from './ListFiles';
 export { Log } from './Log';
 export { Merge } from './Merge';
-export { Pass } from './Pass'
-export { Pluck } from './Pluck';
+export { Pass } from './Pass';
 export { Request } from './Request'
 export { RunCommand } from './RunCommand';
 export { RunDiagram } from './RunDiagram';

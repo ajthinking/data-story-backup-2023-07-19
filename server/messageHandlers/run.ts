@@ -27,7 +27,7 @@ export const run: MessageHandler<RunMessage> = async (ws: WebSocket, data: RunMe
 
   try {
     for await(const update of execution) {
-      ws.send(update.stringify())
+      ws.send(JSON.stringify(update))
     }
 
     ws.send(new ExecutionResult(

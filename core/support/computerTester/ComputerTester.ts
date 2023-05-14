@@ -88,6 +88,7 @@ export class ComputerTester {
           output: this.outputDevice,
           params: this.makeParamsDevice(),
           storage: new NullStorage(),
+          hooks: { register() {} }
         })
     )
 

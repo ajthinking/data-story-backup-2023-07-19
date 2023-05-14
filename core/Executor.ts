@@ -95,7 +95,10 @@ export class Executor implements ExecutorInterface {
       // it can open up for more nodes to proceed immediately
       if(pendingPromises.length > 0) {
         await Promise.race(pendingPromises);
-        yield new ExecutionUpdate(this.memory.getLinkCounts())
+        yield new ExecutionUpdate(
+          this.memory.getLinkCounts(),
+          this.memory.pullHooks()
+        )
       }
     }
 
@@ -104,7 +107,10 @@ export class Executor implements ExecutorInterface {
       throw(executionError)
     }
 
-    yield new ExecutionUpdate(this.memory.getLinkCounts())
+    yield new ExecutionUpdate(
+      this.memory.getLinkCounts(),
+      this.memory.pullHooks()
+    )
   }
 
   protected makeExecutionMemory() {
@@ -147,7 +153,12 @@ export class Executor implements ExecutorInterface {
           input: inputDevice,
           output: this.makeOutputDevice(node, memory),
           params: this.makeParamsDevice(computer, node),
-          storage: this.storage
+          storage: this.storage,
+          hooks: {
+            register: (hooks: any[]) => {
+              this.memory.pushHooks(hooks)
+            }
+          }
         })
       )
     }

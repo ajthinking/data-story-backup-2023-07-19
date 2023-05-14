@@ -1,1 +1,0 @@
-export { Pluck } from './Pluck'

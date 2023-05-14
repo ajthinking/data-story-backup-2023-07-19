@@ -1,7 +1,7 @@
 import { ComputerConfigFactory, RunArgs } from "../../Computer";
 import { ComputerConfig } from "../../ComputerConfig";
 import { DefaultParams } from "../../Param";
-import { json, string } from "../../ParamBuilder";
+import { json, number, string } from "../../ParamBuilder";
 import { hubspot } from "./hubspot";
 
 const getBasicApi = (entity: string) => {
@@ -38,11 +38,13 @@ export const GetAllEntities: ComputerConfigFactory = (): ComputerConfig => ({
     ...DefaultParams,
     entity: string('entity').value('companies').get(),
     properties: json('properties').value('["name"]').get(),
+    limit: number('limit').value(1000).get(),
   },
   tags: ['Abstract'],
   category: 'HubSpot',
 
   async *run({ output, params }) {
+    let taken = 0
     const entity = params.entity as string    
     const api = getBasicApi(entity)
     const properties = JSON.parse(params.properties)
@@ -58,6 +60,7 @@ export const GetAllEntities: ComputerConfigFactory = (): ComputerConfig => ({
         );
 
         // Output the results
+        taken += page.results.length
         output.pushTo('all', page.results);
       
         // Check if there is a next page of results
@@ -71,6 +74,6 @@ export const GetAllEntities: ComputerConfigFactory = (): ComputerConfig => ({
       // Done for now, yield to the event loop
       yield;
     
-    } while (nextPage);
+    } while (nextPage && taken < params.limit);
   },
 });
