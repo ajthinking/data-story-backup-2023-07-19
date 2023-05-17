@@ -10,7 +10,7 @@ import { InputDeviceInterface } from "./InputDeviceInterface"
 
 export type PortLinkMap = Record<PortName, LinkId[]>
 
-export class SmartInputDevice implements InputDeviceInterface {
+export class InputDevice implements InputDeviceInterface {
   constructor(
     // The node that is using this input device
     private node: Node,

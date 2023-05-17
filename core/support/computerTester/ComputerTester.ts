@@ -1,7 +1,7 @@
 import { Computer, ComputerConfigFactory } from "../../Computer";
 import { Diagram } from "../../Diagram";
 import { NodeStatus } from "../../Executor";
-import { PortLinkMap } from "../../OldInputDevice";
+import { PortLinkMap } from "../../PortLinkMap";
 import { ItemValue } from "../../ItemValue";
 import { Link, LinkId } from "../../Link";
 import { Node, NodeId } from "../../Node";
@@ -25,7 +25,7 @@ import { expectDone } from "./testSteps/expectDone";
 import { ExecutionMemory } from "../../ExecutionMemory";
 import { NullStorage } from "../../NullStorage";
 import { InputDeviceInterface } from "../../InputDeviceInterface";
-import { SmartInputDevice } from "../../SmartInputDevice";
+import { InputDevice } from "../../InputDevice";
 import { ComputerConfig } from "../../ComputerConfig";
 import { ComputerFactory } from "../../ComputerFactory";
 
@@ -207,7 +207,7 @@ export class ComputerTester {
   }
 
   protected makeInputDevice() {
-    return new SmartInputDevice(
+    return new InputDevice(
       this.node!,
       this.diagram!,
       this.memory!,

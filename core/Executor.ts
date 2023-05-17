@@ -1,6 +1,6 @@
 import { Node, NodeId } from "./Node";
 import { Diagram } from "./Diagram";
-import { PortLinkMap } from "./OldInputDevice";
+import { PortLinkMap } from "./PortLinkMap";
 import { OutputDevice } from "./OutputDevice";
 import { PortId } from "./Port";
 import { Computer } from "./Computer";
@@ -12,7 +12,7 @@ import { ParamsDevice } from "./ParamsDevice";
 import { Storage } from "./Storage";
 import { ExecutionMemory } from "./ExecutionMemory";
 import { ExecutorInterface } from "./ExecutorInterface";
-import { SmartInputDevice } from "./SmartInputDevice";
+import { InputDevice } from "./InputDevice";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -119,7 +119,7 @@ export class Executor implements ExecutorInterface {
     const linkItems = new Map<LinkId, ItemValue[]>();
     const linkCounts = new Map<LinkId, number>();
     const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
-    const inputDevices = new Map<PortId, SmartInputDevice>();
+    const inputDevices = new Map<PortId, InputDevice>();
 
     // The memory object
     const memory = new ExecutionMemory({
@@ -221,7 +221,7 @@ export class Executor implements ExecutorInterface {
   }
 
   protected makeInputDevice(node: Node, memory: ExecutionMemory) {
-    return new SmartInputDevice(
+    return new InputDevice(
       node,
       this.diagram,
       memory,
