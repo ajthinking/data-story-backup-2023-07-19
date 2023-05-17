@@ -1,9 +1,9 @@
-import { ComputerConfigFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 import { promisify } from 'util';
 import { exec as execCallback } from 'child_process';
-import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerConfig } from "../../types/ComputerConfig";
 
 const exec = promisify(execCallback);
 

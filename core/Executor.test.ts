@@ -1,13 +1,13 @@
 import { Node } from "./Node";
 import { Diagram } from "./Diagram";
 import { Executor } from "./Executor";
-import { Computer, RunArgs } from "./Computer";
+import { Computer, RunArgs } from "./types/Computer";
 import { Link } from "./Link";
 import { DiagramBuilder } from "./DiagramBuilder";
 import { CreateJson, Throw } from "./computers";
-import { ItemValue } from "./ItemValue";
+import { ItemValue } from "./types/ItemValue";
 import { NullStorage } from "./NullStorage";
-import { ExecutionUpdate } from "./ExecutionUpdate";
+import { ExecutionUpdate } from "./types/ExecutionUpdate";
 import { whenRunning } from "./support/diagramExecutionTester/DiagramExecutionTester";
 
 describe('execute', () => {
@@ -22,7 +22,9 @@ describe('execute', () => {
     const updates = executor.execute()
 
     const update = await updates.next()
-    expect(update.value).toBeInstanceOf(ExecutionUpdate)
+    expect(update.value).toMatchObject({
+      type: 'ExecutionUpdate',
+    })
     expect(update.done).toBe(false)
     
     const result = await updates.next()

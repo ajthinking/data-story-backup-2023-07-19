@@ -30,7 +30,10 @@ export type SerializedReactFlowNode = {
       name: string,
     }[],
     params: Record<string, Param>,
+    inputSchemas: Record<string, any>,
+    outputSchemas: Record<string, any>,
   },
+  selected?: boolean,
   type?: string,
   positionAbsolute?: {
     x: number,

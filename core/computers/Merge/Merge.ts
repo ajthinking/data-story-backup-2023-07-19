@@ -1,6 +1,6 @@
-import { ComputerConfigFactory, RunArgs } from "../../Computer";
-import { ComputerConfig } from "../../ComputerConfig";
-import { ObjectItemValue } from "../../ItemValue";
+import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
+import { ComputerConfig } from "../../types/ComputerConfig";
+import { ObjectItemValue } from "../../types/ItemValue";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 

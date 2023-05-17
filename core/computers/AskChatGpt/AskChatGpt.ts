@@ -1,6 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
-import { ComputerConfigFactory, RunArgs } from "../../Computer";
-import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
+import { ComputerConfig } from "../../types/ComputerConfig";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 

@@ -1,8 +1,8 @@
-import { ComputerConfigFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 import { promises as fs } from 'fs'
-import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerConfig } from "../../types/ComputerConfig";
 
 export const JsonFile: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'JsonFile',

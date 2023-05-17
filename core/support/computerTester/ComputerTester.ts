@@ -1,12 +1,12 @@
-import { Computer, ComputerConfigFactory } from "../../Computer";
+import { Computer, ComputerConfigFactory } from "../../types/Computer";
 import { Diagram } from "../../Diagram";
 import { NodeStatus } from "../../Executor";
-import { PortLinkMap } from "../../PortLinkMap";
-import { ItemValue } from "../../ItemValue";
+import { PortLinkMap } from "../../types/PortLinkMap";
+import { ItemValue } from "../../types/ItemValue";
 import { Link, LinkId } from "../../Link";
 import { Node, NodeId } from "../../Node";
 import { OutputDevice } from "../../OutputDevice";
-import { ParamsDevice } from "../../ParamsDevice";
+import { ParamsDevice } from "../../types/ParamsDevice";
 import { Port } from "../../Port";
 import { TestStep } from "./TestStep";
 
@@ -24,9 +24,9 @@ import {
 import { expectDone } from "./testSteps/expectDone";
 import { ExecutionMemory } from "../../ExecutionMemory";
 import { NullStorage } from "../../NullStorage";
-import { InputDeviceInterface } from "../../InputDeviceInterface";
+import { InputDeviceInterface } from "../../types/InputDeviceInterface";
 import { InputDevice } from "../../InputDevice";
-import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerConfig } from "../../types/ComputerConfig";
 import { ComputerFactory } from "../../ComputerFactory";
 
 export const when = (factory: ComputerConfigFactory) => {

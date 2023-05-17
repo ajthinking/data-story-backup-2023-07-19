@@ -1,18 +1,19 @@
 import { Node, NodeId } from "./Node";
 import { Diagram } from "./Diagram";
-import { PortLinkMap } from "./PortLinkMap";
+import { PortLinkMap } from "./types/PortLinkMap";
 import { OutputDevice } from "./OutputDevice";
 import { PortId } from "./Port";
-import { Computer } from "./Computer";
-import { ItemValue } from "./ItemValue";
+import { Computer } from "./types/Computer";
+import { ItemValue } from "./types/ItemValue";
 import { LinkId } from "./Link";
-import { ExecutionUpdate } from "./ExecutionUpdate";
+import { ExecutionUpdate } from "./types/ExecutionUpdate";
 import { isFinished } from "./utils/isFinished";
-import { ParamsDevice } from "./ParamsDevice";
-import { Storage } from "./Storage";
+import { ParamsDevice } from "./types/ParamsDevice";
+import { Storage } from "./types/Storage";
 import { ExecutionMemory } from "./ExecutionMemory";
-import { ExecutorInterface } from "./ExecutorInterface";
+import { ExecutorInterface } from "./types/ExecutorInterface";
 import { InputDevice } from "./InputDevice";
+import { mapToRecord } from "./utils/mapToRecord";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -95,10 +96,11 @@ export class Executor implements ExecutorInterface {
       // it can open up for more nodes to proceed immediately
       if(pendingPromises.length > 0) {
         await Promise.race(pendingPromises);
-        yield new ExecutionUpdate(
-          this.memory.getLinkCounts(),
-          this.memory.pullHooks()
-        )
+        yield {
+          type: 'ExecutionUpdate',
+          counts: mapToRecord(this.memory.getLinkCounts()),
+          hooks: this.memory.pullHooks(),
+        }
       }
     }
 
@@ -107,10 +109,11 @@ export class Executor implements ExecutorInterface {
       throw(executionError)
     }
 
-    yield new ExecutionUpdate(
-      this.memory.getLinkCounts(),
-      this.memory.pullHooks()
-    )
+    yield {
+      type: 'ExecutionUpdate',
+      counts: mapToRecord(this.memory.getLinkCounts()),
+      hooks: this.memory.pullHooks(),
+    }
   }
 
   protected makeExecutionMemory() {

@@ -1,5 +1,5 @@
 import * as computerConfigFactories from '../core/computers'
-import { Computer } from "../core/Computer";
+import { Computer } from "../core/types/Computer";
 import { ComputerFactory } from '../core/ComputerFactory';
 import { NodeDescriptionFactory } from './NodeDescriptionFactory';
 

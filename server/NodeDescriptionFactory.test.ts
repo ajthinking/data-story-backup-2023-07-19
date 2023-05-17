@@ -1,5 +1,5 @@
-import { Computer } from "../core/Computer"
-import { ComputerConfig } from "../core/ComputerConfig"
+import { Computer } from "../core/types/Computer"
+import { ComputerConfig } from "../core/types/ComputerConfig"
 import { ComputerFactory } from "../core/ComputerFactory"
 import { DefaultParams } from "../core/Param"
 import { NodeDescriptionFactory } from "./NodeDescriptionFactory"

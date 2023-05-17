@@ -1,9 +1,9 @@
-import { ComputerConfigFactory, RunArgs } from "../../Computer";
+import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
 import { DiagramFactory } from "../../DiagramFactory";
 import { DefaultParams } from "../../Param";
 import { string } from "../../ParamBuilder";
 import { promises as fs } from 'fs'
-import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerConfig } from "../../types/ComputerConfig";
 
 export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'RunDiagram',
@@ -16,7 +16,7 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
   
   async *run({ input, output, params, storage }) {
     const data = JSON.parse(await fs.readFile(params.path, 'utf8'))
-    const diagram = new DiagramFactory().fromReactFlow(data)
+    const diagram = DiagramFactory.fromReactFlow(data)
     // const executor = new Executor(
     //   diagram,
     //   computerRegistry, // circular dependency?

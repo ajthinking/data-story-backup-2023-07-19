@@ -1,7 +1,7 @@
 import { LinkId } from "./Link"
-import { ItemValue } from "./ItemValue"
+import { ItemValue } from "./types/ItemValue"
 import { PortId } from "./Port"
-import { PortName } from "./Computer"
+import { PortName } from "./types/Computer"
 import { ExecutionMemory } from "./ExecutionMemory"
 import { ItemWithParams } from "./ItemWithParams"
 

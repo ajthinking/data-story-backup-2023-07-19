@@ -5,11 +5,11 @@ import { RunMessage } from '../messages/RunMessage';
 import { FileStorage } from '../../core/FileStorage';
 import { ExecutionResult } from '../../core/ExecutionResult';
 import { ComputerRegistry } from '../computerRegistry';
-import { ExecutionFailure } from '../../core/ExecutionFailure';
+import { ExecutionFailure } from '../../core/types/ExecutionFailure';
 import { MessageHandler } from '../MessageHandler';
 
 export const run: MessageHandler<RunMessage> = async (ws: WebSocket, data: RunMessage) => {
-  const diagram = new DiagramFactory().fromReactFlow(
+  const diagram = DiagramFactory.fromReactFlow(
     data.reactFlow
   )
 
@@ -30,14 +30,25 @@ export const run: MessageHandler<RunMessage> = async (ws: WebSocket, data: RunMe
       ws.send(JSON.stringify(update))
     }
 
-    ws.send(new ExecutionResult(
-      storage.currentExecutionId!
-    ).stringify())    
+    ws.send(
+      JSON.stringify(
+        new ExecutionResult(
+          storage.currentExecutionId!
+        )
+      )
+    )    
   } catch(error) {
     if (ws.readyState === WebSocket.OPEN) {
       console.log("Sending ExecutionFailure to client")
       console.log(error)
-      ws.send(new ExecutionFailure(executor.memory.getHistory()).stringify())
+
+      const failure: ExecutionFailure = {
+        type: "ExecutionFailure",
+        message: 'Execution failed 😩 \nPlease review logs.',
+        history: executor.memory.getHistory()
+      }
+
+      ws.send(JSON.stringify(failure))
     } else {
       console.log("WebSocket connection closed, unable to send ExecutionFailure")
     }

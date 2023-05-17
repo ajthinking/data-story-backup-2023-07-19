@@ -1,4 +1,4 @@
-import { ItemValue } from "../../../ItemValue";
+import { ItemValue } from "../../../types/ItemValue";
 import { ComputerTester } from "../ComputerTester";
 import { TestStep } from "../TestStep";
 

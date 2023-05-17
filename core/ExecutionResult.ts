@@ -4,8 +4,4 @@ export class ExecutionResult {
   constructor(
     public id: string,
   ) {}
-
-  stringify() {    
-    return JSON.stringify(this)
-  }
 }

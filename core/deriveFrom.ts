@@ -1,4 +1,4 @@
-import { ComputerConfigFactory } from "./Computer";
+import { ComputerConfigFactory } from "./types/Computer";
 import { ParamValue } from "./Param";
 
 export type DeriveFromOptions = {

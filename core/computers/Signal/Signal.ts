@@ -1,5 +1,5 @@
-import { ComputerConfigFactory, RunArgs } from "../../Computer";
-import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
+import { ComputerConfig } from "../../types/ComputerConfig";
 import { DefaultParams } from "../../Param";
 import { number } from "../../ParamBuilder";
 import { sleep } from "../../utils/sleep";
@@ -14,7 +14,7 @@ export const Signal: ComputerConfigFactory = (): ComputerConfig => ({
       id: 'any',
     }
   }],
-  
+
   params: {
     ...DefaultParams,
     period: number('period').value(50).get(),

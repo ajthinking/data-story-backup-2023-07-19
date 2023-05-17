@@ -1,6 +1,6 @@
 import { Computer, NextArgument, NextResult, PortName, ReturnResult, RunArgs } from "./Computer"
 import { InputDeviceInterface } from "./InputDeviceInterface"
-import { Param } from "./Param"
+import { Param } from "../Param"
 import { PortWithSchema } from "./PortWithSchema"
 
 /**

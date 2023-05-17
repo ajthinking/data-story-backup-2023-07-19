@@ -1,4 +1,4 @@
-import { Computer, ComputerConfigFactory } from "./Computer";
+import { Computer, ComputerConfigFactory } from "./types/Computer";
 import { ComputerFactory } from "./ComputerFactory";
 import { Diagram } from "./Diagram";
 import { Link } from "./Link";

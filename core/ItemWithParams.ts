@@ -1,4 +1,4 @@
-import { ItemValue, ObjectItemValue } from "./ItemValue";
+import { ItemValue, ObjectItemValue } from "./types/ItemValue";
 import { ParamValue } from "./Param";
 
 export class ItemWithParams<T = ItemValue> {

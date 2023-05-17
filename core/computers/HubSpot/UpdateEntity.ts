@@ -1,9 +1,9 @@
-import { ComputerConfigFactory, RunArgs } from "../../Computer";
-import { ObjectItemValue } from "../../ItemValue";
+import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
+import { ObjectItemValue } from "../../types/ItemValue";
 import { DefaultParams } from "../../Param";
 import { json, string } from "../../ParamBuilder";
 import { hubspot } from "./hubspot";
-import { ComputerConfig } from "../../ComputerConfig";
+import { ComputerConfig } from "../../types/ComputerConfig";
 
 const getBasicApi = (entity: string) => {
   if(entity === 'contacts') return hubspot.crm.contacts.basicApi;
