@@ -180,3 +180,35 @@ describe('pullFrom', () => {
     expect(atLink2).toMatchObject([])
   })  
 })
+
+describe('params', () => {
+  it('has getters for params returning interpolated values', () => {
+    const node = new Node({
+      id: 'target',
+      type: 'node-type',  
+      inputs: [{id: 'target-input-id', name: 'input'}],
+      outputs: [],
+    })
+
+    const links = [
+      new Link('link-1', 'dangling-1', 'target-input-id'),
+    ]
+
+    const diagram = new Diagram([node], links)
+
+    const memory = new ExecutionMemory({
+      linkItems: new Map()
+        .set('link-1', [{ name: 'Bob' }])      
+    })
+
+    const params = {
+      greeting: 'Hello ${name}',
+    }
+
+    const input = new InputDevice(node, diagram, memory, params)
+
+    const [ item ] = input.pull()
+
+    expect(item.params.greeting).toBe('Hello Bob')
+  })
+})
