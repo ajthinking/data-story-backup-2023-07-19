@@ -12,14 +12,18 @@ export const Dump: ComputerConfigFactory = (): ComputerConfig => ({
     ...DefaultParams,
   },
 
-  async *run({ input, hooks }) {
+  async *run({ input, hooks, storage }) {
     while(true) {
       const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
+
+      const name = Math.random().toString(36).substring(7)
+
+      await storage!.putExecutionItems(name, incoming.map(item => item.value))
       
       hooks.register({
         type: 'CONSOLE_LOG',
-        args: ['Dump: http://localhost:3000/api/names']
-      })
+        args: ['Dump:', `http://localhost:3000/api/executions/${storage!.currentExecutionId}/${name}.json`]
+      })      
 
       yield;
     }

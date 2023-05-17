@@ -8,7 +8,9 @@ export const CreateJson: ComputerConfigFactory = (): ComputerConfig => ({
   outputs: ['output'],
   params: {
     ...DefaultParams,
-    json: json('json').value(`[{ "name": "John"}]`).get(),
+    json: json('json').value(JSON.stringify(
+      [{ "path": "/Users/anders/Code/data-story/core/computers"}]
+    )).get(),
   },
 
   async *run({ output, params: { json } }) {

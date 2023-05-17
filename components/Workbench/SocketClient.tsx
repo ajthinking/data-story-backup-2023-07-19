@@ -57,7 +57,7 @@ export class SocketClient implements ServerClient {
         this.updateEdgeCounts(parsed.counts)
 
         for(const hook of parsed.hooks) {
-          if(hook.type = 'CONSOLE_LOG') {
+          if(hook.type === 'CONSOLE_LOG') {
             console.log(...hook.args)
           }
         }
