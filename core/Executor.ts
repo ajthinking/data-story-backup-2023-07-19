@@ -14,6 +14,7 @@ import { ExecutionMemory } from "./ExecutionMemory";
 import { ExecutorInterface } from "./types/ExecutorInterface";
 import { InputDevice } from "./InputDevice";
 import { mapToRecord } from "./utils/mapToRecord";
+import { Hook } from "./types/Hook";
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -158,8 +159,8 @@ export class Executor implements ExecutorInterface {
           params: this.makeParamsDevice(computer, node),
           storage: this.storage,
           hooks: {
-            register: (hooks: any[]) => {
-              this.memory.pushHooks(hooks)
+            register: (hook: Hook) => {
+              this.memory.pushHooks([hook])
             }
           }
         })

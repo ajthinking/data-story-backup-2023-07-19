@@ -15,6 +15,8 @@ export const ConsoleLog: ComputerConfigFactory = (): ComputerConfig => ({
   },
 
   async *run({ input, hooks }) {
+    console.log('ConsoleLog run started!')
+
     while(true) {
       const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
       

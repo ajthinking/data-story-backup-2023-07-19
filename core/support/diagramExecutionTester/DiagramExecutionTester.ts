@@ -1,6 +1,6 @@
 import { expect } from "vitest";
 import { Diagram } from "../../Diagram";
-import { ExecutionUpdate } from "../../ExecutionUpdate";
+import { ExecutionUpdate } from "../../types/ExecutionUpdate";
 import { Executor } from "../../Executor";
 
 import { NullStorage } from "../../NullStorage";

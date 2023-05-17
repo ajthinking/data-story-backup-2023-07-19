@@ -115,7 +115,7 @@ export class ExecutionMemory {
   }
 
   pushHooks(hooks: any[]) {
-    this.hooks.push(hooks)
+    this.hooks.push(...hooks)
   }
 
   pullHooks() {
