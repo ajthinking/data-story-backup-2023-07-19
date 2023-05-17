@@ -1,11 +1,11 @@
-import { Node, NodeId } from "./Node";
+import { Node, NodeId } from "./types/Node";
 import { Diagram } from "./Diagram";
 import { PortLinkMap } from "./types/PortLinkMap";
 import { OutputDevice } from "./OutputDevice";
-import { PortId } from "./Port";
+import { PortId } from "./types/Port";
 import { Computer } from "./types/Computer";
 import { ItemValue } from "./types/ItemValue";
-import { LinkId } from "./Link";
+import { LinkId } from "./types/Link";
 import { ExecutionUpdate } from "./types/ExecutionUpdate";
 import { isFinished } from "./utils/isFinished";
 import { ParamsDevice } from "./types/ParamsDevice";

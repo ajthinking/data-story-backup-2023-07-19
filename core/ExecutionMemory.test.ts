@@ -1,7 +1,7 @@
 import { ExecutionMemory } from './ExecutionMemory';
 import { ItemValue } from './types/ItemValue';
-import { LinkId } from './Link';
-import { NodeId } from './Node';
+import { NodeId } from './types/Node';
+import { LinkId } from './types/Link';
 
 describe('ExecutionMemory', () => {
   describe('getNodeStatus', () => {

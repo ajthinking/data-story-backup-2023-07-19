@@ -1,16 +1,16 @@
-import { Link } from "./Link";
 import { Diagram } from "./Diagram";
-import { Port } from "./Port";
-import { Node } from "./Node";
+import { Port } from "./types/Port";
+import { Link } from "./types/Link";
+import { Node } from "./types/Node";
 
 describe('linksConnectedToPortId', () => {
   it('returns links connected to port', () => {
-    const port = new Port('port-id', 'My Port')
-    const link = new Link(
-      'link-id',
-      'source-port-id',
-      'port-id'
-    )
+    const port: Port = { id: 'port-id', name: 'My Port' }
+    const link: Link = {
+      id: 'link-id',
+      sourcePortId: 'source-port-id',
+      targetPortId: 'port-id'
+    }
 
     const diagram = new Diagram([], [link])
     const result = diagram.linksConnectedToPortId(port.id)
@@ -20,14 +20,15 @@ describe('linksConnectedToPortId', () => {
 
 describe('nodeWithOutputPortId', () => {
   it('returns the node given a output port id', () => {
-    const output = new Port('output-port-id', 'output')
+    const output: Port = { id: 'output-port-id', name: 'output' }
 
-    const node = new Node({
+    const node: Node = {
       id: 'node-id',
       type: 'MyNode',  
       inputs: [],
       outputs: [output],
-    })
+      params: {}
+    }
 
     const diagram = new Diagram([node], [])
     const result = diagram.nodeWithOutputPortId('output-port-id')

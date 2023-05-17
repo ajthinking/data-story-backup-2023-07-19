@@ -1,4 +1,4 @@
-import { Hook } from "./types/Hook"
+import { Hook } from "./Hook"
 
 export type HooksDevice = {
   register: (hook: Hook) => void

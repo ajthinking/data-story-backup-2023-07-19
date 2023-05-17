@@ -1,9 +1,9 @@
 import { Computer, ComputerConfigFactory } from "./types/Computer";
 import { ComputerFactory } from "./ComputerFactory";
 import { Diagram } from "./Diagram";
-import { Link } from "./Link";
-import { Node } from "./Node";
-import { Port } from "./Port";
+import { Node } from "./types/Node";
+import { Port } from "./types/Port";
+import { Link } from "./types/Link";
 
 export class DiagramBuilder {
   diagram: Diagram
@@ -19,17 +19,17 @@ export class DiagramBuilder {
 
     const nodeId = `${computer.name}.${this.getScopedId(computer.name)}`
 
-    const node = new Node({
+    const node: Node = {
       id: nodeId,
       type: computer.name,
       inputs: (computer.inputs ?? []).map(input => {
-        return new Port(`${nodeId}.${input.name}`, input.name)
+        return { id: `${nodeId}.${input.name}`, name: input.name }
       }),
       outputs: (computer.outputs ?? []).map(output => {
-        return new Port(`${nodeId}.${output.name}`, output.name)
+        return { id: `${nodeId}.${output.name}`, name: output.name }
       }),
       params: (computer.params)
-    })
+    }
 
     this.diagram.nodes.push(node)
     
@@ -63,11 +63,11 @@ export class DiagramBuilder {
 
     if(!previousNodePort || !newNodePort) return
 
-    const link = new Link(
-      `${previousNodePort.id}--->${newNodePort.id}`,
-      previousNodePort.id,
-      newNodePort.id,
-    )
+    const link: Link = {
+      id: `${previousNodePort.id}--->${newNodePort.id}`,
+      sourcePortId: previousNodePort.id,
+      targetPortId: newNodePort.id,
+    }
 
     this.diagram.links.push(link)
   }

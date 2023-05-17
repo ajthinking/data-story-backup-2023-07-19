@@ -1,4 +1,4 @@
 import { PortName } from "./Computer";
-import { LinkId } from "../Link";
+import { LinkId } from "../types/Link";
 
 export type PortLinkMap = Record<PortName, LinkId[]>

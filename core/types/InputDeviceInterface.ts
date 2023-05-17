@@ -1,6 +1,6 @@
 import { ItemValue } from "./ItemValue";
 import { ItemWithParams } from "../ItemWithParams";
-import { LinkId } from "../Link";
+import { LinkId } from "../types/Link";
 
 export interface InputDeviceInterface {
   pull: (count?: number) => ItemWithParams[]

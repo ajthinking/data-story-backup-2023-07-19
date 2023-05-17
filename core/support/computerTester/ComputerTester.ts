@@ -3,11 +3,10 @@ import { Diagram } from "../../Diagram";
 import { NodeStatus } from "../../Executor";
 import { PortLinkMap } from "../../types/PortLinkMap";
 import { ItemValue } from "../../types/ItemValue";
-import { Link, LinkId } from "../../Link";
-import { Node, NodeId } from "../../Node";
+import { Node, NodeId } from "../../types/Node";
 import { OutputDevice } from "../../OutputDevice";
 import { ParamsDevice } from "../../types/ParamsDevice";
-import { Port } from "../../Port";
+import { Port } from "../../types/Port";
 import { TestStep } from "./TestStep";
 
 import {
@@ -28,6 +27,7 @@ import { InputDeviceInterface } from "../../types/InputDeviceInterface";
 import { InputDevice } from "../../InputDevice";
 import { ComputerConfig } from "../../types/ComputerConfig";
 import { ComputerFactory } from "../../ComputerFactory";
+import { LinkId } from "../../types/Link";
 
 export const when = (factory: ComputerConfigFactory) => {
   return new ComputerTester(factory())
@@ -173,32 +173,33 @@ export class ComputerTester {
   protected makeDiagram(): Diagram {
     const nodeId = `${this.computer.name}.1`
     // Create a new Node from the computer + params (TODO: this is a general need)    
-    const node = new Node({
+    const node: Node = {
       id: nodeId,
       type: this.computer.name,
-      inputs: (this.computer.inputs || []).map(input => new Port(
-        `${nodeId}.${input.name}`,
-        input.name
-      )),
-      outputs: (this.computer.outputs || []).map(output => new Port(
-        `${nodeId}.${output.name}`,
-        output.name
-      )),
-    })
+      inputs: (this.computer.inputs || []).map(input => ({
+        id: `${nodeId}.${input.name}`,
+        name: input.name
+      })),
+      outputs: (this.computer.outputs || []).map(output => ({
+        id: `${nodeId}.${output.name}`,
+        name: output.name
+      })),
+      params: {}
+    }
 
     // Create dangling links to the inputs
-    const inputLinks = node.inputs.map(inputPort => new Link(
-      `dangling-link-to-port-${inputPort.id}`,
-      `dangling-source-port-id`,
-      `${nodeId}.${inputPort.name}`,
-    ))
+    const inputLinks = node.inputs.map(inputPort => ({
+      id: `dangling-link-to-port-${inputPort.id}`,
+      sourcePortId: `dangling-source-port-id`,
+      targetPortId: `${nodeId}.${inputPort.name}`,
+    }))
 
     // Create dangling links to the outputs
-    const outputLinks = node.outputs.map(outputPort => new Link(
-      `dangling-link-from-port-${outputPort.id}`,
-      `${nodeId}.${outputPort.name}`,
-      `dangling-target-port-id`,
-    ))
+    const outputLinks = node.outputs.map(outputPort => ({
+      id: `dangling-link-from-port-${outputPort.id}`,
+      sourcePortId: `${nodeId}.${outputPort.name}`,
+      targetPortId: `dangling-target-port-id`,
+    }))
     
     return new Diagram([node], [
       ...inputLinks,

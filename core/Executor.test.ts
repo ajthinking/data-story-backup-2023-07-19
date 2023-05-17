@@ -1,14 +1,13 @@
-import { Node } from "./Node";
 import { Diagram } from "./Diagram";
 import { Executor } from "./Executor";
 import { Computer, RunArgs } from "./types/Computer";
-import { Link } from "./Link";
 import { DiagramBuilder } from "./DiagramBuilder";
 import { CreateJson, Throw } from "./computers";
 import { ItemValue } from "./types/ItemValue";
 import { NullStorage } from "./NullStorage";
-import { ExecutionUpdate } from "./types/ExecutionUpdate";
 import { whenRunning } from "./support/diagramExecutionTester/DiagramExecutionTester";
+import { Link } from "./types/Link";
+import { Node } from "./types/Node";
 
 describe('execute', () => {
   it('can execute an empty diagram and return an execution update', async () => {
@@ -32,12 +31,13 @@ describe('execute', () => {
   })
 
   it('can execute a diagram with a single no-input no-output node', async () => {
-    const node = new Node({
+    const node: Node = {
       id: 'node-id',
       type: 'Dummy',
       inputs: [],
       outputs: [],
-    })
+      params: {}
+    }
 
     const diagram = new Diagram([node], [])
 
@@ -67,7 +67,7 @@ describe('execute', () => {
   })
 
   it('can execute a diagram with non connected input node', async () => {
-    const node = new Node({
+    const node: Node = {
       id: 'node-id',
       type: 'Accepter',
       inputs: [{
@@ -75,7 +75,8 @@ describe('execute', () => {
           name: 'input',
       }],
       outputs: [],
-    })
+      params: {}
+    }
 
     const diagram = new Diagram([node], [])
 
@@ -98,7 +99,7 @@ describe('execute', () => {
   })    
 
   it('can execute a diagram with a node outputting items', async () => {
-    const node = new Node({
+    const node: Node = {
       id: 'zergling-spawner-id',
       type: 'Spawner',
       inputs: [],
@@ -108,7 +109,8 @@ describe('execute', () => {
           name: 'output',
         }
       ],
-    })
+      params: {}
+    }
 
     const diagram = new Diagram([node], [])
 
@@ -135,7 +137,7 @@ describe('execute', () => {
   })
 
   it('can execute a diagram with item flowing between two nodes', async () => {
-    const create = new Node({ 
+    const create: Node = { 
       id: 'create-id',
       type: 'Create',
       inputs: [],
@@ -143,9 +145,10 @@ describe('execute', () => {
         id: 'Create.1.output',
         name: 'output',
       }],
-    })
+      params: {}
+    }
 
-    const log = new Node({
+    const log: Node = {
       id: 'log-id',
       type: 'Log',
       inputs: [{
@@ -153,9 +156,14 @@ describe('execute', () => {
         name: 'input',
       }],
       outputs: [],
-    })
+      params: {}
+    }
     
-    const link = new Link('link-id', 'Create.1.output', 'Log.1.input')
+    const link: Link = {
+      id: 'link-id',
+      sourcePortId: 'Create.1.output',
+      targetPortId: 'Log.1.input'
+    }
 
     const diagram = new Diagram([create, log], [link])
 

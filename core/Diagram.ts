@@ -1,6 +1,6 @@
-import { Link } from "./Link"
-import { Node } from "./Node"
-import { PortId } from "./Port"
+import { PortId } from "./types/Port"
+import { Link } from "./types/Link"
+import { Node } from "./types/Node"
 
 export class Diagram {
   constructor(

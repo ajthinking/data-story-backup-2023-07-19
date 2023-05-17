@@ -1,21 +1,21 @@
 import { Diagram } from "./Diagram"
 import { ExecutionMemory } from "./ExecutionMemory"
 import { InputDevice } from "./InputDevice"
-import { Link } from "./Link"
-import { Node } from "./Node"
+import { Node } from "./types/Node"
 
 describe('pull', () => {
   it('returns items at port named "input" wrapped as ItemWithParams', () => {
-    const node = new Node({
+    const node: Node = {
       id: 'target',
       type: 'node-type',  
       inputs: [{id: 'target-input-id', name: 'input'}],
       outputs: [],
-    })
+      params: {}
+    }
 
     const links = [
-      new Link('link-1', 'dangling-1', 'target-input-id'),
-      new Link('link-2', 'dangling-2', 'target-input-id'),
+      { id: 'link-1', sourcePortId: 'dangling-1', targetPortId: 'target-input-id' },
+      { id: 'link-2', sourcePortId: 'dangling-2', targetPortId: 'target-input-id' },
     ]
 
     const diagram = new Diagram([node], links)
@@ -40,12 +40,13 @@ describe('pull', () => {
     const memory = new ExecutionMemory()
 
     expect(() => {
-      const node = new Node({
+      const node: Node = {
         id: 'target',
         type: 'node-type',  
         inputs: [{id: 'target-input-id', name: 'some-other-name'}],
         outputs: [],
-      })
+        params: {}
+      }
 
       const diagram = new Diagram([node], [])
 
@@ -56,16 +57,17 @@ describe('pull', () => {
   })
 
   it('removes the items pulled from the links', () => {
-    const node = new Node({
+    const node: Node = {
       id: 'target',
       type: 'node-type',  
       inputs: [{id: 'target-input-id', name: 'input'}],
       outputs: [],
-    })
+      params: {}
+    }
 
     const links = [
-      new Link('link-1', 'dangling-1', 'target-input-id'),
-      new Link('link-2', 'dangling-2', 'target-input-id'),
+      { id: 'link-1', sourcePortId: 'dangling-1', targetPortId: 'target-input-id' },
+      { id: 'link-2', sourcePortId: 'dangling-2', targetPortId: 'target-input-id' },
     ]
 
     const diagram = new Diagram([node], links)
@@ -88,16 +90,17 @@ describe('pull', () => {
   })
 
   it('may pull a specified number of items', () => {
-    const node = new Node({
+    const node: Node = {
       id: 'target',
       type: 'node-type',  
       inputs: [{id: 'target-input-id', name: 'input'}],
       outputs: [],
-    })
+      params: {}
+    }
 
     const links = [
-      new Link('link-1', 'dangling-1', 'target-input-id'),
-      new Link('link-2', 'dangling-2', 'target-input-id'),
+      { id: 'link-1', sourcePortId: 'dangling-1', targetPortId: 'target-input-id' },
+      { id: 'link-2', sourcePortId: 'dangling-2', targetPortId: 'target-input-id' },
     ]
 
     const diagram = new Diagram([node], links)
@@ -118,16 +121,17 @@ describe('pull', () => {
 
 describe('pullFrom', () => {
   it('returns items at named port', () => {
-    const node = new Node({
+    const node: Node = {
       id: 'target',
       type: 'node-type',  
       inputs: [{id: 'target-input-id', name: 'numbers'}],
       outputs: [],
-    })
+      params: {}
+    }
 
     const links = [
-      new Link('link-1', 'dangling-1', 'target-input-id'),
-      new Link('link-2', 'dangling-2', 'target-input-id'),
+      { id: 'link-1', sourcePortId: 'dangling-1', targetPortId: 'target-input-id' },
+      { id: 'link-2', sourcePortId: 'dangling-2', targetPortId: 'target-input-id' },
     ]
 
     const diagram = new Diagram([node], links)
@@ -149,16 +153,17 @@ describe('pullFrom', () => {
   })
 
   it('removes the items pulled from the links', () => {
-    const node = new Node({
+    const node: Node = {
       id: 'target',
       type: 'node-type',  
       inputs: [{id: 'target-input-id', name: 'numbers'}],
       outputs: [],
-    })
+      params: {}
+    }
 
     const links = [
-      new Link('link-1', 'dangling-1', 'target-input-id'),
-      new Link('link-2', 'dangling-2', 'target-input-id'),
+      { id: 'link-1', sourcePortId: 'dangling-1', targetPortId: 'target-input-id' },
+      { id: 'link-2', sourcePortId: 'dangling-2', targetPortId: 'target-input-id' },
     ]
 
     const diagram = new Diagram([node], links)
@@ -183,15 +188,16 @@ describe('pullFrom', () => {
 
 describe('params', () => {
   it('has getters for params returning interpolated values', () => {
-    const node = new Node({
+    const node: Node = {
       id: 'target',
       type: 'node-type',  
       inputs: [{id: 'target-input-id', name: 'input'}],
       outputs: [],
-    })
+      params: {}
+    }
 
     const links = [
-      new Link('link-1', 'dangling-1', 'target-input-id'),
+      { id: 'link-1', sourcePortId: 'dangling-1', targetPortId: 'target-input-id' },
     ]
 
     const diagram = new Diagram([node], links)
