@@ -9,6 +9,7 @@ export default defineConfig({
         'build/**',
         '.next/**',
         '**/*.test.ts',
+        'core/types/**',
         'core/support/computerTester/**'
       ]
     },
