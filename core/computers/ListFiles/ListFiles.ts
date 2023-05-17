@@ -8,7 +8,14 @@ import { ComputerConfig } from "../../types/ComputerConfig";
 export const ListFiles: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'ListFiles',
   inputs: ['input'],
-  outputs: ['output'],
+  outputs: [{
+    name: 'output',
+    schema: {
+      name: 'string',
+      type: 'string',
+      fullPath: 'string',
+    }
+  }],
   params: {
     ...DefaultParams,
     path: string('path').value('/').get(),

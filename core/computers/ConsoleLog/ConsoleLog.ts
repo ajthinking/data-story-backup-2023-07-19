@@ -19,11 +19,13 @@ export const ConsoleLog: ComputerConfigFactory = (): ComputerConfig => ({
 
     while(true) {
       const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
-      
-      hooks.register({
-        type: 'CONSOLE_LOG',
-        args: incoming.map(item => item.params.message)
-      })
+
+      for(const item of incoming) {
+        hooks.register({
+          type: 'CONSOLE_LOG',
+          args: [item.params.message]
+        })
+      }
 
       yield;
     }
