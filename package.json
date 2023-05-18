@@ -6,6 +6,7 @@
     "tinker": "npx ts-node ./tinker.ts",
     "make:node": "npx ts-node ./core/support/scripts/makeNode/makeNode.ts",
     "remove:node": "npx ts-node ./core/support/scripts/removeNode/removeNode.ts",
+    "remove:data": "npx ts-node ./core/support/scripts/removeStorageData/removeStorageData.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
