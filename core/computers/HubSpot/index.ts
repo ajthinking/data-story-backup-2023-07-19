@@ -10,7 +10,7 @@ import { UpdateEntity } from './UpdateEntity'
  */
 export const Contacts = deriveFrom(GetAllEntities, {
   name: 'Contacts',
-  label: 'Contacts.all',  
+  label: 'Contacts.all',
   params: {
     entity: 'contacts',
     properties: '["firstname"]'

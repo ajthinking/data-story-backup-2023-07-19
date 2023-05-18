@@ -3,17 +3,7 @@ import { ComputerConfig } from "../../types/ComputerConfig";
 import { DefaultParams } from "../../Param";
 import { json, number, string } from "../../ParamBuilder";
 import { hubspot } from "./hubspot";
-
-const getBasicApi = (entity: string) => {
-  if(entity === 'contacts') return hubspot.crm.contacts.basicApi;
-  if(entity === 'companies') return hubspot.crm.companies.basicApi;
-  if(entity === 'deals') return hubspot.crm.deals.basicApi;
-  if(entity === 'tickets') return hubspot.crm.tickets.basicApi;
-  if(entity === 'lineItems') return hubspot.crm.lineItems.basicApi;
-  if(entity === 'products') return hubspot.crm.products.basicApi;
-
-  throw new Error(`Unsupported entity: ${entity}`)
-}
+import { CrmEntity } from "./CrmEntity";
 
 type EntityPage = {
   results: {
@@ -40,20 +30,19 @@ export const GetAllEntities: ComputerConfigFactory = (): ComputerConfig => ({
     properties: json('properties').value('["name"]').get(),
     limit: number('limit').value(1000).get(),
   },
-  tags: ['Abstract'],
   category: 'HubSpot',
+  tags: ['HubSpot'],
 
   async *run({ output, params }) {
     let taken = 0
-    const entity = params.entity as string    
-    const api = getBasicApi(entity)
+    const entity = params.entity as CrmEntity
     const properties = JSON.parse(params.properties)
     let nextPage = null;
     
     do {
       // Make the API call to get a page of results
       try {
-        let page: EntityPage = await api.getPage(
+        let page: EntityPage = await hubspot.crm[entity].basicApi.getPage(
           100,
           nextPage?.after,
           properties,
