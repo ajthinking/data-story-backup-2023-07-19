@@ -9,23 +9,26 @@ export const Dump: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Dump',
   inputs: ['input'],
   params: {
+    dump_name: string('dump_name').value('').get(),
     ...DefaultParams,
   },
 
-  async *run({ input, hooks, storage }) {
-    while(true) {
-      const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
+  canRun({ input }) {
+    return input.haveItemsAtInput('input')
+      && input.haveAllItemsAtInput('input')
+  },
 
-      const name = Math.random().toString(36).substring(7)
+  async *run({ input, hooks, storage, params: { dump_name } }) {
+    const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
 
-      await storage!.putExecutionItems(name, incoming.map(item => item.value))
-      
-      hooks.register({
-        type: 'CONSOLE_LOG',
-        args: ['Dump:', `http://localhost:3000/api/executions/${storage!.currentExecutionId}/${name}.json`]
-      })      
+    const name = dump_name || Math.random().toString(36).substring(7)
 
-      yield;
-    }
+    await storage!.putExecutionItems(name, incoming.map(item => item.value))
+    
+    hooks.register({
+      type: 'CONSOLE_LOG',
+      args: ['Dump:', `http://localhost:3000/api/executions/${storage!.currentExecutionId}/dumps/${name}.json`]
+    })      
+
   },
 });

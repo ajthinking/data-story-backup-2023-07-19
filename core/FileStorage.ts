@@ -36,6 +36,7 @@ export class FileStorage implements Storage {
     const newId = maxId + 1
 
     await fs.mkdir(`${executions}/${newId}`)
+    await fs.mkdir(`${executions}/${newId}/dumps`)
 
     this.currentExecutionId = newId.toString()
   }
@@ -44,7 +45,8 @@ export class FileStorage implements Storage {
    * Store items as pretty JSON 
    */
   async putExecutionItems(key: string, items: ItemValue[]): Promise<void> {
-    const path = `${this.root}/executions/${this.currentExecutionId}/${key}.json`
+    // TODO fix this
+    const path = `${this.root}/executions/${this.currentExecutionId}/dumps/${key}.json`
     const content = JSON.stringify(items, null, 2)
 
     await fs.writeFile(path, content)
