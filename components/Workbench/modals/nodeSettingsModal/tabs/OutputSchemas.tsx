@@ -1,6 +1,5 @@
 import React from "react";
 import { DataStoryNode } from "../../../../Node/DataStoryNode";
-import { Json } from "../../../../forms/inputs/json";
 
 export function OutputSchemas({
   node,

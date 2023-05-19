@@ -1,7 +1,5 @@
 import React from "react";
 import { DataStoryNode } from "../../../../Node/DataStoryNode";
-import { String_ } from "../../../../forms/inputs/string";
-import { Json } from "../../../../forms/inputs/json";
 import { Number } from "../../../../forms/inputs/number";
 import { Text } from "../../../../forms/inputs/text";
 import { Select } from "../../../../forms/inputs/select";

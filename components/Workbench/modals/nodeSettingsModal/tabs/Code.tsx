@@ -1,10 +1,8 @@
 import React from "react";
 import { DataStoryNode } from "../../../../Node/DataStoryNode";
-import { Json } from "../../../../forms/inputs/json";
 
 export function Code({
-  node,
-  register
+  node
 }: {
   node: DataStoryNode,
   register: any

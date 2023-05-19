@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import React from "react";
 import { RunIcon } from "./icons/runIcon";
 import { AddNodeIcon } from "./icons/addNodeIcon";
-import { ConfigIcon } from "./icons/configIcon";
 import { SaveIcon } from "./icons/saveIcon";
 import { StoreSchema, useStore } from "./store";
 import { shallow } from "zustand/shallow";
@@ -42,20 +41,6 @@ export function DataStoryControls({
         >
           <AddNodeIcon />
         </ControlButton>                
-        {/* <ControlButton
-          onClick={() => setShowConfigModal(true)}
-          title="Config"
-          aria-label="Config"
-        >
-          <ConfigIcon />
-        </ControlButton> */}
-        {/* <ControlButton
-            title="Table"
-            aria-label="Table"
-            onClick={() => setMode('dump')}
-          >
-          <TableIcon />          
-        </ControlButton>                              */}
       <ControlButton
           onClick={() => onSave()}
           title="Save"

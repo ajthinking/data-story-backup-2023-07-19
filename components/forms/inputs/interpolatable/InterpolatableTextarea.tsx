@@ -10,7 +10,7 @@ export const InterPolatableTextArea = ({ form, label, rows, id, inputSchema }: {
   }>,
   inputSchema: any
 }) => {
-  const [i, setI] = useState('')
+  const [i] = useState('')
 
   return (<div
     className="flex flex-col"

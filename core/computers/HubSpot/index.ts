@@ -1,9 +1,6 @@
 import { deriveFrom } from "../../deriveFrom";
-
 import { GetAllEntities } from './GetAllEntities'
 import { UpdateEntity } from './UpdateEntity'
-
-
 
 /**
  * GET ALL ************************************************************

@@ -1,5 +1,4 @@
 import { UseFormRegister } from "react-hook-form"
-import { Param } from "../../../core/Param"
 
 export const Select = ({ register, label, id, options }: {
   register: UseFormRegister<Record<string, any>>
