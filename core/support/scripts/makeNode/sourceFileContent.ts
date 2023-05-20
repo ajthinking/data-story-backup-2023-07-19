@@ -1,6 +1,6 @@
-export const sourceFileContent = (name: string) => `import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+export const sourceFileContent = (name: string) => `import { Computer, ComputerConfigFactory } from '../../types/Computer';
 
-export const ${name}: ComputerFactory = (): Computer => ({
+export const ${name}: ComputerConfigFactory = (): Computer => ({
   name: '${name}',
   inputs: ['input'],
   outputs: ['output'],

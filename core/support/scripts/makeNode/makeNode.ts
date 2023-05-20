@@ -23,7 +23,8 @@ const dotenv = require('dotenv');
   try {
     fs.writeFileSync(
       sourceFileName, 
-      await guessComputerContent(name)
+      // await guessComputerContent(name)
+      defaultSourceFileContent(name)
     );
   } catch(error) {
     console.log(error)

@@ -2,6 +2,7 @@ export * from './HubSpot'
 export * from './Placeholders'
 export { AskChatGpt } from './AskChatGpt';
 export { Comment } from './Comment';
+export { Concatenate } from './Concatenate';
 export { ConsoleLog } from './ConsoleLog'
 export { CreateAttribute } from './CreateAttribute';
 export { CreateJson } from './CreateJson'
