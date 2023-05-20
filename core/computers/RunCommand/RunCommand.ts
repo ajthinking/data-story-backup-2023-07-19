@@ -1,5 +1,4 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
-import { DefaultParams } from '../../Param';
 import { string } from '../../ParamBuilder';
 import { promisify } from 'util';
 import { exec as execCallback } from 'child_process';
@@ -28,7 +27,6 @@ export const RunCommand: ComputerConfigFactory = (): ComputerConfig => ({
   inputs: ['input'],
   outputs: ['output', 'error'],
   params: {
-    ...DefaultParams,
     command: string('command').value('echo "Hello World"').get(),
   },
 

@@ -1,6 +1,5 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ObjectItemValue } from '../../types/ItemValue';
-import { DefaultParams } from '../../Param';
 import { json, string } from '../../ParamBuilder';
 import { hubspot } from './hubspot';
 import { ComputerConfig } from '../../types/ComputerConfig';
@@ -11,7 +10,6 @@ export const UpdateEntity: ComputerConfigFactory = (): ComputerConfig => ({
   inputs: ['input'],
   outputs: ['updated', 'errors'],
   params: {
-    ...DefaultParams,
     entity: string('entity').value('companies').get(),
     properties: json('properties').value('["name"]').get(),
   },

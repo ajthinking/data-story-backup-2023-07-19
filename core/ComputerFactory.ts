@@ -20,9 +20,9 @@ export const ComputerFactory = {
       category: config.category,
       inputs: config.inputs?.map(portableToPortWithSchema) ?? [],
       outputs: config.outputs?.map(portableToPortWithSchema) ?? [],
-      params: config.params ?? {
-        ...DefaultParams,        
-      },
+      params: config.params
+        ? { ...DefaultParams, ...config.params}
+        : { ...DefaultParams },
       tags: config.tags ?? [],
       run: config.run ?? (async function*() {}),
       canRun: config.canRun,

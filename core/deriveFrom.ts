@@ -1,5 +1,5 @@
 import { ComputerConfigFactory } from './types/Computer';
-import { ParamValue } from './Param';
+import { DefaultParams, ParamValue } from './Param';
 
 export type DeriveFromOptions = {
   name: string,
@@ -25,8 +25,9 @@ export const deriveFrom = (
     template.category = options.category || template.category
     template.label = options.label || template.label
 
-    // TODO is this nasty?
     if(!template.params) template.params = {}
+      
+    template.params = { ...DefaultParams, ...template.params }
   
     for (const [paramName, paramValue] of Object.entries(options.params || {})) {
       template.params[paramName].value = paramValue

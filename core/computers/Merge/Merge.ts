@@ -1,7 +1,6 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ComputerConfig } from '../../types/ComputerConfig';
 import { ObjectItemValue } from '../../types/ItemValue';
-import { DefaultParams } from '../../Param';
 import { string } from '../../ParamBuilder';
 
 export const Merge: ComputerConfigFactory = (): ComputerConfig => ({
@@ -12,7 +11,6 @@ export const Merge: ComputerConfigFactory = (): ComputerConfig => ({
     'not_merged',
   ],
   params: {
-    ...DefaultParams,
     requestor_merge_property: string('requestor_merge_property')
       .schemaFromPort('requestors')
       .get(),

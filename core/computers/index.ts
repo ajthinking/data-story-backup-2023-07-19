@@ -15,6 +15,7 @@ export { ListFiles } from './ListFiles';
 export { Log } from './Log';
 export { Merge } from './Merge';
 export { Pass } from './Pass';
+export { ReadFiles } from './ReadFiles';
 export { Request } from './Request'
 export { RunCommand } from './RunCommand';
 export { RunDiagram } from './RunDiagram';

@@ -1,5 +1,4 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
-import { DefaultParams } from '../../Param';
 import { string } from '../../ParamBuilder';
 import { promises as fs } from 'fs'
 import * as nodePath from 'path'
@@ -17,7 +16,6 @@ export const ListFiles: ComputerConfigFactory = (): ComputerConfig => ({
     }
   }],
   params: {
-    ...DefaultParams,
     path: string('path').value('/').get(),
   },
 

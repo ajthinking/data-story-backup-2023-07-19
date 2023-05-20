@@ -1,5 +1,4 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
-import { DefaultParams } from '../../Param';
 import { json } from '../../ParamBuilder';
 import { ComputerConfig } from '../../types/ComputerConfig';
 
@@ -7,7 +6,6 @@ export const CreateJson: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'CreateJson',  
   outputs: ['output'],
   params: {
-    ...DefaultParams,
     json: json('json').value(JSON.stringify(
       [{ "path": "/Users/anders/Code/data-story/core/computers"}]
     )).get(),

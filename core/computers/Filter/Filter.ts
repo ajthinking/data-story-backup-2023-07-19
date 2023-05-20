@@ -1,6 +1,5 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ObjectItemValue } from '../../types/ItemValue';
-import { DefaultParams } from '../../Param';
 import { string } from '../../ParamBuilder';
 import { ComputerConfig } from '../../types/ComputerConfig';
 
@@ -9,7 +8,6 @@ export const Filter: ComputerConfigFactory = (): ComputerConfig => ({
   inputs: ['input'],
   outputs: ['passed', 'failed'],
   params: {
-    ...DefaultParams,
     left: string('left').get(),
     // operator: string('operator').get(), // only support equals for now
     right: string('right').get(),

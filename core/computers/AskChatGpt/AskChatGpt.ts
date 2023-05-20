@@ -1,7 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ComputerConfig } from '../../types/ComputerConfig';
-import { DefaultParams } from '../../Param';
 import { string } from '../../ParamBuilder';
 
 export const AskChatGpt: ComputerConfigFactory = (): ComputerConfig => ({
@@ -9,7 +8,6 @@ export const AskChatGpt: ComputerConfigFactory = (): ComputerConfig => ({
   inputs: ['input'],
   outputs: ['completions'],
   params: {
-    ...DefaultParams,
     prompt: string('prompt').value('What is the meaning of life?').get(),
   },
   category: 'API',

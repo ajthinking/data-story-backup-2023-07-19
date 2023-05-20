@@ -1,6 +1,5 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ItemWithParams } from '../../ItemWithParams';
-import { DefaultParams } from '../../Param';
 import { string, text } from '../../ParamBuilder';
 import { ObjectItemValue } from '../../types/ItemValue';
 import { ComputerConfig } from '../../types/ComputerConfig';
@@ -10,7 +9,6 @@ export const CreateAttribute: ComputerConfigFactory = (): ComputerConfig => ({
   inputs: ['input'],
   outputs: ['output'],
   params: {
-    ...DefaultParams,
     key: string('key').get(),
     value: string('value').get(),
   },

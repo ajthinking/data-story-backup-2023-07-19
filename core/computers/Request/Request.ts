@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
-import { DefaultParams } from '../../Param';
 import { json, select, string } from '../../ParamBuilder';
 import { ComputerConfig } from '../../types/ComputerConfig';
 
@@ -8,7 +7,6 @@ export const Request: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Request',
   outputs: ['items', 'response', 'error'],
   params: {
-    ...DefaultParams,
     url: string('url').value('https://jsonplaceholder.typicode.com/todos').get(),
     method: select('method').options(['GET', 'POST', 'PUT', 'DELETE']).get().value('GET'),
     body: json('body').value('{}').get(),

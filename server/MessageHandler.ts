@@ -1,4 +1,4 @@
-import { Message } from "./Message";
+import { Message } from './Message';
 import WebSocket from 'ws';
 
 export type MessageHandler<MessageType extends Message> = (

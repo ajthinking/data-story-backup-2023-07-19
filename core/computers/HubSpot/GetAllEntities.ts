@@ -1,6 +1,5 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ComputerConfig } from '../../types/ComputerConfig';
-import { DefaultParams } from '../../Param';
 import { json, number, string } from '../../ParamBuilder';
 import { hubspot } from './hubspot';
 import { CrmEntity } from './CrmEntity';
@@ -25,7 +24,6 @@ export const GetAllEntities: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'GetAll',
   outputs: ['all', 'errors'],
   params: {
-    ...DefaultParams,
     entity: string('entity').value('companies').get(),
     properties: json('properties').value('["name"]').get(),
     limit: number('limit').value(1000).get(),

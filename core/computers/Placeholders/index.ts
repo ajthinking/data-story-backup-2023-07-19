@@ -1,5 +1,5 @@
-import { deriveFrom } from "../../deriveFrom";
-import { Request } from "../Request";
+import { deriveFrom } from '../../deriveFrom';
+import { Request } from '../Request';
 
 export const Todos = deriveFrom(Request, {
   name: 'Todos',
