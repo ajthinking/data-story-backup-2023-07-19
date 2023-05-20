@@ -13,7 +13,7 @@ export class DiagramBuilder {
     this.diagram = new Diagram([], [])
   }
 
-  add(addable: ComputerConfigFactory | Computer) {
+  add(addable: ComputerConfigFactory | Computer, params?: Record<string, any>) {
     const config = typeof addable === 'function' ? addable() : addable
     const computer = ComputerFactory.fromComputerConfig(config)
 
@@ -28,7 +28,10 @@ export class DiagramBuilder {
       outputs: (computer.outputs ?? []).map(output => {
         return { id: `${nodeId}.${output.name}`, name: output.name }
       }),
-      params: (computer.params)
+      params: {
+        ...computer.params,
+        ...params
+      }
     }
 
     this.diagram.nodes.push(node)
