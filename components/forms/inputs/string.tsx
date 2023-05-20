@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form"
+import { UseFormRegister } from 'react-hook-form'
 
 export const String_ = ({ register, label, id }: {
   register: UseFormRegister<Record<string, any>>

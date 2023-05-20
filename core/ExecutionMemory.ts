@@ -1,8 +1,8 @@
-import { NodeStatus } from "./Executor"
-import { ItemValue } from "./types/ItemValue"
-import { LinkId } from "./types/Link"
-import { NodeId } from "./types/Node"
-import { InputDeviceInterface } from "./types/InputDeviceInterface"
+import { NodeStatus } from './Executor'
+import { ItemValue } from './types/ItemValue'
+import { LinkId } from './types/Link'
+import { NodeId } from './types/Node'
+import { InputDeviceInterface } from './types/InputDeviceInterface'
 
 type MemoryValues = {
   nodeStatuses?: Map<NodeId, NodeStatus>,

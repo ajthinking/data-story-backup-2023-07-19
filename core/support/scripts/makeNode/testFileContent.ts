@@ -1,5 +1,5 @@
-export const testFileContent = (name: string) => `import { when } from "../../support/computerTester/ComputerTester";
-import { ${name} } from "./${name}";
+export const testFileContent = (name: string) => `import { when } from '../../support/computerTester/ComputerTester';
+import { ${name} } from './${name}';
 
 it.todo('does something', async () => {
   await when(${name})

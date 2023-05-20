@@ -1,8 +1,8 @@
 Come up with a new computer with name __NAME__. Use the examples below for inspiration. Reply with NOTHING but the code. No backticks or explanation or anything. Trim initial whitespace.
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
 
 export const Pass: ComputerFactory = (): Computer => ({
   name: 'Pass',
@@ -23,10 +23,10 @@ export const Pass: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import axios from "axios";
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
-import { json, select, string } from "../../ParamBuilder";
+import axios from 'axios';
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
+import { json, select, string } from '../../ParamBuilder';
 
 export const Request: ComputerFactory = (): Computer => ({
   name: 'Request',
@@ -56,8 +56,8 @@ export const Request: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
 
 export const Log: ComputerFactory = (): Computer => ({
   name: 'Log',
@@ -80,11 +80,11 @@ export const Log: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { ItemWithParams } from "../../ItemWithParams";
-import { DefaultParams } from "../../Param";
-import { string } from "../../ParamBuilder";
-import { ObjectItemValue } from "../../ItemValue";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { ItemWithParams } from '../../ItemWithParams';
+import { DefaultParams } from '../../Param';
+import { string } from '../../ParamBuilder';
+import { ObjectItemValue } from '../../ItemValue';
 
 export const CreateAttribute: ComputerFactory = (): Computer => ({
   name: 'CreateAttribute',
@@ -110,9 +110,9 @@ export const CreateAttribute: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
-import { json } from "../../ParamBuilder";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
+import { json } from '../../ParamBuilder';
 
 export const CreateJson: ComputerFactory = (): Computer => ({
   name: 'CreateJson',  
@@ -136,8 +136,8 @@ export const CreateJson: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
 
 export const DumpJson: ComputerFactory = (): Computer => ({
   name: 'DumpJson',
@@ -159,8 +159,8 @@ export const DumpJson: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
 
 export const Ignore: ComputerFactory = (): Computer => ({
   name: 'Ignore',
@@ -178,10 +178,10 @@ export const Ignore: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { ObjectItemValue } from "../../ItemValue";
-import { DefaultParams } from "../../Param";
-import { string } from "../../ParamBuilder";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { ObjectItemValue } from '../../ItemValue';
+import { DefaultParams } from '../../Param';
+import { string } from '../../ParamBuilder';
 
 export const Merge: ComputerFactory = (): Computer => ({
   name: 'Merge',
@@ -242,10 +242,10 @@ export const Merge: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
-import { number } from "../../ParamBuilder";
-import { sleep } from "../../utils/sleep";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
+import { number } from '../../ParamBuilder';
+import { sleep } from '../../utils/sleep';
 
 export const Signal: ComputerFactory = (): Computer => ({
   name: 'Signal',
@@ -275,10 +275,10 @@ export const Signal: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
-import { number } from "../../ParamBuilder";
-import { sleep } from "../../utils/sleep";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
+import { number } from '../../ParamBuilder';
+import { sleep } from '../../utils/sleep';
 
 export const Sleep: ComputerFactory = (): Computer => ({
   name: 'Sleep',
@@ -301,9 +301,9 @@ export const Sleep: ComputerFactory = (): Computer => ({
 });
 
 ### Example
-import { Computer, ComputerFactory, RunArgs } from "../../Computer";
-import { DefaultParams } from "../../Param";
-import { sleep } from "../../utils/sleep";
+import { Computer, ComputerFactory, RunArgs } from '../../Computer';
+import { DefaultParams } from '../../Param';
+import { sleep } from '../../utils/sleep';
 
 export const Throw: ComputerFactory = (): Computer => ({
   name: 'Throw',

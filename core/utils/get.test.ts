@@ -1,4 +1,4 @@
-import { get } from "./get"
+import { get } from './get'
 
 it('can return a value from a string', () => {
   const value = 'hey'

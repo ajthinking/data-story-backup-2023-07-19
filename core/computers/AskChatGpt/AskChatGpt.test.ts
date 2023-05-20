@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { AskChatGpt } from "./AskChatGpt";
+import { when } from '../../support/computerTester/ComputerTester';
+import { AskChatGpt } from './AskChatGpt';
 
 it.todo('does something', async () => {
   await when(AskChatGpt)

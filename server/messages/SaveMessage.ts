@@ -1,4 +1,4 @@
-import { SerializedReactFlow } from "../../components/Workbench/SerializedReactFlow"
+import { SerializedReactFlow } from '../../components/Workbench/SerializedReactFlow'
 
 export type SaveMessage = {
   type: "save"

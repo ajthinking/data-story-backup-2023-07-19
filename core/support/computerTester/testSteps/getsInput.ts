@@ -1,6 +1,6 @@
-import { ItemValue } from "../../../types/ItemValue";
-import { ComputerTester } from "../ComputerTester";
-import { TestStep } from "../TestStep";
+import { ItemValue } from '../../../types/ItemValue';
+import { ComputerTester } from '../ComputerTester';
+import { TestStep } from '../TestStep';
 
 export const getsInput: TestStep = {
   async handle(tester: ComputerTester, itemsAtInputPort: ItemValue[]) {

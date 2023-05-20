@@ -1,5 +1,5 @@
-import { Node } from "reactflow";
-import { Param } from "../../core/Param";
+import { Node } from 'reactflow';
+import { Param } from '../../core/Param';
 
 export type DataStoryNodeData = {
   params: Record<string, Param>,

@@ -1,7 +1,7 @@
-import { shallow } from "zustand/shallow";
-import { Modal } from "../modal"
+import { shallow } from 'zustand/shallow';
+import { Modal } from '../modal'
 import { StoreSchema, useStore } from '../store';
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export const RunModal = ({ setShowModal }: {
   setShowModal: (show: boolean) => void

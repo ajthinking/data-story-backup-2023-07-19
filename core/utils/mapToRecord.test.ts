@@ -1,4 +1,4 @@
-import { mapToRecord } from "./mapToRecord";
+import { mapToRecord } from './mapToRecord';
 
 it('converts a map to a record', () => {
   const map = new Map<string, number>()

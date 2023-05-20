@@ -1,9 +1,9 @@
-import { LinkId } from "./types/Link"
-import { ItemValue } from "./types/ItemValue"
-import { PortId } from "./types/Port"
-import { PortName } from "./types/Computer"
-import { ExecutionMemory } from "./ExecutionMemory"
-import { ItemWithParams } from "./ItemWithParams"
+import { LinkId } from './types/Link'
+import { ItemValue } from './types/ItemValue'
+import { PortId } from './types/Port'
+import { PortName } from './types/Computer'
+import { ExecutionMemory } from './ExecutionMemory'
+import { ItemWithParams } from './ItemWithParams'
 
 type LinkItems = Record<LinkId, ItemValue[]>
 

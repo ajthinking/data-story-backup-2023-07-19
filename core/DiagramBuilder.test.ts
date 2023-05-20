@@ -1,6 +1,6 @@
-import { Ignore, CreateJson, Pass } from "./computers";
-import { Diagram } from "./Diagram";
-import { DiagramBuilder } from "./DiagramBuilder";
+import { Ignore, CreateJson, Pass } from './computers';
+import { Diagram } from './Diagram';
+import { DiagramBuilder } from './DiagramBuilder';
 
 
 describe('get', () => {

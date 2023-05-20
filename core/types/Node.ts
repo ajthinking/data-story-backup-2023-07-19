@@ -1,5 +1,5 @@
-import { Param } from "../Param"
-import { Port } from "../types/Port"
+import { Param } from '../Param'
+import { Port } from '../types/Port'
 
 export type NodeId = string
 

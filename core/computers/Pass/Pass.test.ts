@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Pass } from "./Pass";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Pass } from './Pass';
 
 it('outputs the input ontouched', async () => {
   await when(Pass)

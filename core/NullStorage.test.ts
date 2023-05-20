@@ -1,4 +1,4 @@
-import { NullStorage } from "./NullStorage"
+import { NullStorage } from './NullStorage'
 
 describe('init', () => {
   it('can run', async () => {

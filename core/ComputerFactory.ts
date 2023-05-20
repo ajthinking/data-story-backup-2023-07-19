@@ -1,7 +1,7 @@
-import { Computer, PortName } from "./types/Computer";
-import { ComputerConfig } from "./types/ComputerConfig";
-import { DefaultParams } from "./Param";
-import { PortWithSchema } from "./types/PortWithSchema";
+import { Computer, PortName } from './types/Computer';
+import { ComputerConfig } from './types/ComputerConfig';
+import { DefaultParams } from './Param';
+import { PortWithSchema } from './types/PortWithSchema';
 
 /**
  * Ensure all inputs/outputs are PortWithSchema

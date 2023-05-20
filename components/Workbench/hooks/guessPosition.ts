@@ -1,5 +1,5 @@
-import { NodeDescription } from "../../../server/NodeDescription";
-import { DataStoryNode } from "../../Node/DataStoryNode";
+import { NodeDescription } from '../../../server/NodeDescription';
+import { DataStoryNode } from '../../Node/DataStoryNode';
 
 export const guessPosition = (existingNodes: DataStoryNode[], nodeDescription: NodeDescription) => {
   // Defines starting position for new nodes

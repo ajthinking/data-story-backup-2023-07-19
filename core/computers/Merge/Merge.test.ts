@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Merge } from "./Merge";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Merge } from './Merge';
 
 it('merges objects when selected properties match', async () => {
   await when(Merge)

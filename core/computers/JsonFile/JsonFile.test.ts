@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { JsonFile } from "./JsonFile";
+import { when } from '../../support/computerTester/ComputerTester';
+import { JsonFile } from './JsonFile';
 import { promises as fs } from 'fs'
 
 it('parses the json and outputs it', async () => {

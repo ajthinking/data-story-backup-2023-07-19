@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { ListFiles } from "./ListFiles";
+import { when } from '../../support/computerTester/ComputerTester';
+import { ListFiles } from './ListFiles';
 import { Dirent, promises as fs } from 'fs';
 
 vi.mock('fs')

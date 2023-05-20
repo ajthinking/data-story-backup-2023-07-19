@@ -1,13 +1,13 @@
-import { Computer, ComputerConfigFactory } from "../../types/Computer";
-import { Diagram } from "../../Diagram";
-import { NodeStatus } from "../../Executor";
-import { PortLinkMap } from "../../types/PortLinkMap";
-import { ItemValue } from "../../types/ItemValue";
-import { Node, NodeId } from "../../types/Node";
-import { OutputDevice } from "../../OutputDevice";
-import { ParamsDevice } from "../../types/ParamsDevice";
-import { Port } from "../../types/Port";
-import { TestStep } from "./TestStep";
+import { Computer, ComputerConfigFactory } from '../../types/Computer';
+import { Diagram } from '../../Diagram';
+import { NodeStatus } from '../../Executor';
+import { PortLinkMap } from '../../types/PortLinkMap';
+import { ItemValue } from '../../types/ItemValue';
+import { Node, NodeId } from '../../types/Node';
+import { OutputDevice } from '../../OutputDevice';
+import { ParamsDevice } from '../../types/ParamsDevice';
+import { Port } from '../../types/Port';
+import { TestStep } from './TestStep';
 
 import {
   doRun,
@@ -20,14 +20,14 @@ import {
   getsInputs,
 } from "./testSteps";
 
-import { expectDone } from "./testSteps/expectDone";
-import { ExecutionMemory } from "../../ExecutionMemory";
-import { NullStorage } from "../../NullStorage";
-import { InputDeviceInterface } from "../../types/InputDeviceInterface";
-import { InputDevice } from "../../InputDevice";
-import { ComputerConfig } from "../../types/ComputerConfig";
-import { ComputerFactory } from "../../ComputerFactory";
-import { LinkId } from "../../types/Link";
+import { expectDone } from './testSteps/expectDone';
+import { ExecutionMemory } from '../../ExecutionMemory';
+import { NullStorage } from '../../NullStorage';
+import { InputDeviceInterface } from '../../types/InputDeviceInterface';
+import { InputDevice } from '../../InputDevice';
+import { ComputerConfig } from '../../types/ComputerConfig';
+import { ComputerFactory } from '../../ComputerFactory';
+import { LinkId } from '../../types/Link';
 
 export const when = (factory: ComputerConfigFactory) => {
   return new ComputerTester(factory())

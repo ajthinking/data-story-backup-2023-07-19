@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Sleep } from "./Sleep";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Sleep } from './Sleep';
 
 it('outputs items incrementally', async () => {
   await when(Sleep)

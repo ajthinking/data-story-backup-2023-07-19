@@ -1,9 +1,9 @@
-import { Computer, ComputerConfigFactory } from "./types/Computer";
-import { ComputerFactory } from "./ComputerFactory";
-import { Diagram } from "./Diagram";
-import { Node } from "./types/Node";
-import { Port } from "./types/Port";
-import { Link } from "./types/Link";
+import { Computer, ComputerConfigFactory } from './types/Computer';
+import { ComputerFactory } from './ComputerFactory';
+import { Diagram } from './Diagram';
+import { Node } from './types/Node';
+import { Port } from './types/Port';
+import { Link } from './types/Link';
 
 export class DiagramBuilder {
   diagram: Diagram

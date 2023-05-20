@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Throw } from "./Throw";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Throw } from './Throw';
 
 it('throws with a default message', async () => {
   await when(Throw)

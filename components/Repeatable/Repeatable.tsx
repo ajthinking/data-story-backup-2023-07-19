@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 export function Repeatable({ data }: { data: any }) {
   const [rows, setRows] = React.useState(data.rows);
 

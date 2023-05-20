@@ -1,4 +1,4 @@
-import { PortId } from "../types/Port";
+import { PortId } from '../types/Port';
 
 export type LinkId = string
 

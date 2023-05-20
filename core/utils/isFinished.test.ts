@@ -1,5 +1,5 @@
-import { isFinished } from "./isFinished";
-import { sleep } from "./sleep";
+import { isFinished } from './isFinished';
+import { sleep } from './sleep';
 
 it('returns true when promise is resolved', async () => {
   const fastPromise = Promise.resolve('fast');

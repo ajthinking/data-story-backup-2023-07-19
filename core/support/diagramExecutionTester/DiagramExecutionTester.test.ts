@@ -1,7 +1,7 @@
-import { it } from "vitest"
-import { CreateJson } from "../../computers"
-import { DiagramBuilder } from "../../DiagramBuilder"
-import { whenRunning } from "./DiagramExecutionTester"
+import { it } from 'vitest'
+import { CreateJson } from '../../computers'
+import { DiagramBuilder } from '../../DiagramBuilder'
+import { whenRunning } from './DiagramExecutionTester'
 
 it('can test diagram executions like this', async () => {
   const diagram = new DiagramBuilder()

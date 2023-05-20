@@ -1,13 +1,13 @@
-import { Controls, ControlButton } from "reactflow";
+import { Controls, ControlButton } from 'reactflow';
 import { useRouter } from 'next/router';
 
-import React from "react";
-import { RunIcon } from "./icons/runIcon";
-import { AddNodeIcon } from "./icons/addNodeIcon";
-import { SaveIcon } from "./icons/saveIcon";
-import { StoreSchema, useStore } from "./store";
-import { shallow } from "zustand/shallow";
-import { OpenIcon } from "./icons/openIcon";
+import React from 'react';
+import { RunIcon } from './icons/runIcon';
+import { AddNodeIcon } from './icons/addNodeIcon';
+import { SaveIcon } from './icons/saveIcon';
+import { StoreSchema, useStore } from './store';
+import { shallow } from 'zustand/shallow';
+import { OpenIcon } from './icons/openIcon';
 
 export function DataStoryControls({
   // setShowConfigModal,

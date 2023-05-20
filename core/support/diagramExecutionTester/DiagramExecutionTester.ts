@@ -1,10 +1,10 @@
-import { expect } from "vitest";
-import { Diagram } from "../../Diagram";
-import { ExecutionUpdate } from "../../types/ExecutionUpdate";
-import { Executor } from "../../Executor";
+import { expect } from 'vitest';
+import { Diagram } from '../../Diagram';
+import { ExecutionUpdate } from '../../types/ExecutionUpdate';
+import { Executor } from '../../Executor';
 
-import { NullStorage } from "../../NullStorage";
-import { ComputerRegistry } from "../../../server/computerRegistry";
+import { NullStorage } from '../../NullStorage';
+import { ComputerRegistry } from '../../../server/computerRegistry';
 
 export const whenRunning = (diagram: Diagram) => {
   return new DiagramExecutionTester(diagram)

@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Filter } from "./Filter";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Filter } from './Filter';
 
 it.todo('does something', async () => {
   await when(Filter)

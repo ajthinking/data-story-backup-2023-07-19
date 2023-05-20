@@ -1,4 +1,4 @@
-import { pascalToSentenceCase } from "./pascalToSentenceCase"
+import { pascalToSentenceCase } from './pascalToSentenceCase'
 
 it('works for InputDevice', () => {
   const output = pascalToSentenceCase('InputDevice')

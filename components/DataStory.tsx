@@ -1,10 +1,10 @@
-import Head from "next/head";
-import React, { useEffect, useState } from "react";
-import { Editor } from "./Editor";
-import { Header } from "./Header";
-import Workbench from "./Workbench";
-import { StoreSchema, useStore } from "./Workbench/store";
-import { shallow } from "zustand/shallow";
+import Head from 'next/head';
+import React, { useEffect, useState } from 'react';
+import { Editor } from './Editor';
+import { Header } from './Header';
+import Workbench from './Workbench';
+import { StoreSchema, useStore } from './Workbench/store';
+import { shallow } from 'zustand/shallow';
 export function DataStory({
   defaultFlowName,
   flow,

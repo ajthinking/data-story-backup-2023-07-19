@@ -1,4 +1,4 @@
-import { DataStoryNode } from "../../Node/DataStoryNode";
+import { DataStoryNode } from '../../Node/DataStoryNode';
 
 export const guessConnection = (existingNodes: DataStoryNode[], node: DataStoryNode) => {
   const previousNode = existingNodes.at(-1)

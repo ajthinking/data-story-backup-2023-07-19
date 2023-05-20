@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { useEscapeKey } from "./hooks/useEscapeKey";
+import React, { ReactNode } from 'react';
+import { useEscapeKey } from './hooks/useEscapeKey';
 export function Modal({
   setShowModal,
   title,

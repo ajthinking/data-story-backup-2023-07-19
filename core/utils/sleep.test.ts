@@ -1,4 +1,4 @@
-import { sleep } from "./sleep";
+import { sleep } from './sleep';
 
 it('should resolve after specified time', async () => {
   vi.useFakeTimers();

@@ -1,7 +1,7 @@
-import { Diagram } from "./Diagram"
-import { ExecutionMemory } from "./ExecutionMemory"
-import { InputDevice } from "./InputDevice"
-import { Node } from "./types/Node"
+import { Diagram } from './Diagram'
+import { ExecutionMemory } from './ExecutionMemory'
+import { InputDevice } from './InputDevice'
+import { Node } from './types/Node'
 
 describe('pull', () => {
   it('returns items at port named "input" wrapped as ItemWithParams', () => {

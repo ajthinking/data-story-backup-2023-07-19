@@ -1,4 +1,4 @@
-import { ReactFlowInstance } from "reactflow";
+import { ReactFlowInstance } from 'reactflow';
 
 export const toJson = (rfInstance: ReactFlowInstance) => {
   if (rfInstance) {

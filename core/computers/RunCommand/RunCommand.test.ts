@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { RunCommand } from "./RunCommand";
+import { when } from '../../support/computerTester/ComputerTester';
+import { RunCommand } from './RunCommand';
 
 it.todo('does something', async () => {
   await when(RunCommand)

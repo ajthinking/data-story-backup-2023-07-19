@@ -1,8 +1,8 @@
-import { Connection } from "reactflow";
-import { NodeDescription } from "../../../server/NodeDescription";
-import { DataStoryNode } from "../../Node/DataStoryNode";
-import { guessConnection } from "./guessConnection";
-import { guessPosition } from "./guessPosition";
+import { Connection } from 'reactflow';
+import { NodeDescription } from '../../../server/NodeDescription';
+import { DataStoryNode } from '../../Node/DataStoryNode';
+import { guessConnection } from './guessConnection';
+import { guessPosition } from './guessPosition';
 
 export const makeNodeAndConnection = (
   existingNodes: DataStoryNode[],

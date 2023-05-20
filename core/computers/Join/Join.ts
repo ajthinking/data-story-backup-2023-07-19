@@ -1,8 +1,8 @@
-import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
-import { ItemWithParams } from "../../ItemWithParams";
-import { DefaultParams } from "../../Param";
-import { string } from "../../ParamBuilder";
-import { ComputerConfig } from "../../types/ComputerConfig";
+import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
+import { ItemWithParams } from '../../ItemWithParams';
+import { DefaultParams } from '../../Param';
+import { string } from '../../ParamBuilder';
+import { ComputerConfig } from '../../types/ComputerConfig';
 
 export const Join: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Join',

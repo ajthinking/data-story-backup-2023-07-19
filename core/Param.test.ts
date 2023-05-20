@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { DefaultParams } from "./Param"
+import { describe, expect, it } from 'vitest'
+import { DefaultParams } from './Param'
 
 describe('name', () => {
   it('should have name and label', () => {

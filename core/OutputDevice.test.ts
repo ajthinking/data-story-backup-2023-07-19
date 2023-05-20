@@ -1,5 +1,5 @@
-import { OutputDevice } from "./OutputDevice";
-import { ExecutionMemory } from "./ExecutionMemory";
+import { OutputDevice } from './OutputDevice';
+import { ExecutionMemory } from './ExecutionMemory';
 
 describe('push', () => {
   it('pushes items to all links connected to port "output"', async () => {

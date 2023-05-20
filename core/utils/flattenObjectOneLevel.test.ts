@@ -1,4 +1,4 @@
-import { flattenObjectOneLevel } from "./flattenObjectOneLevel"
+import { flattenObjectOneLevel } from './flattenObjectOneLevel'
 
 it('removes first layer of keys', () => {
   const input = {

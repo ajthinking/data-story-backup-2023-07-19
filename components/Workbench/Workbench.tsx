@@ -1,8 +1,8 @@
-import "reactflow/dist/style.css";
+import 'reactflow/dist/style.css';
 import { DataStoryControls } from './dataStoryControls';
-import { useEffect, useState } from "react";
-import ReactFlow, { Background, BackgroundVariant } from "reactflow";
-import DataStoryNodeComponent from "../Node/DataStoryNodeComponent";
+import { useEffect, useState } from 'react';
+import ReactFlow, { Background, BackgroundVariant } from 'reactflow';
+import DataStoryNodeComponent from '../Node/DataStoryNodeComponent';
 import { RunModal } from './modals/runModal';
 import { AddNodeModal } from './modals/addNodeModal';
 import { StoreSchema, useStore } from './store';

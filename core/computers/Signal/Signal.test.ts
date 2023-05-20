@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Signal } from "./Signal";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Signal } from './Signal';
 it('outputs items incrementaly', async () => {
   await when(Signal)
     .hasParams({ period: 1, count: 3 })

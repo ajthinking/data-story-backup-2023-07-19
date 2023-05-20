@@ -1,5 +1,5 @@
-import { Computer } from "../core/types/Computer";
-import { NodeDescription } from "./NodeDescription";
+import { Computer } from '../core/types/Computer';
+import { NodeDescription } from './NodeDescription';
 
 export const NodeDescriptionFactory = {
   fromComputer: (computer: Computer): NodeDescription => {

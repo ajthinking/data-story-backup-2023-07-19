@@ -1,4 +1,4 @@
-import { Param } from "../Param";
+import { Param } from '../Param';
 
 type ParamId = string
 

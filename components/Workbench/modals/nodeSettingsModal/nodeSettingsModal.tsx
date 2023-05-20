@@ -1,11 +1,11 @@
 import { Params, InputSchemas, OutputSchemas, Config, Code } from './tabs';
-import { shallow } from "zustand/shallow";
+import { shallow } from 'zustand/shallow';
 import { StoreSchema, useStore } from '../../store';
-import { useForm } from "react-hook-form";
-import { Param, ParamValue } from "../../../../core/Param";
-import { DataStoryNode } from "../../../Node/DataStoryNode";
-import { useEscapeKey } from "../../hooks/useEscapeKey";
-import { useState } from "react";
+import { useForm } from 'react-hook-form';
+import { Param, ParamValue } from '../../../../core/Param';
+import { DataStoryNode } from '../../../Node/DataStoryNode';
+import { useEscapeKey } from '../../hooks/useEscapeKey';
+import { useState } from 'react';
 import { pascalToSentenceCase } from '../../../../core/utils/pascalToSentenceCase';
 
 type TabKey = 'Params' | 'InputSchemas' | 'OutputSchemas' | 'Code' | 'Config';

@@ -1,9 +1,9 @@
-import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
-import { DiagramFactory } from "../../DiagramFactory";
-import { DefaultParams } from "../../Param";
-import { string } from "../../ParamBuilder";
+import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
+import { DiagramFactory } from '../../DiagramFactory';
+import { DefaultParams } from '../../Param';
+import { string } from '../../ParamBuilder';
 import { promises as fs } from 'fs'
-import { ComputerConfig } from "../../types/ComputerConfig";
+import { ComputerConfig } from '../../types/ComputerConfig';
 
 export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'RunDiagram',

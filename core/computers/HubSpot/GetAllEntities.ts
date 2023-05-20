@@ -1,9 +1,9 @@
-import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
-import { ComputerConfig } from "../../types/ComputerConfig";
-import { DefaultParams } from "../../Param";
-import { json, number, string } from "../../ParamBuilder";
-import { hubspot } from "./hubspot";
-import { CrmEntity } from "./CrmEntity";
+import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
+import { ComputerConfig } from '../../types/ComputerConfig';
+import { DefaultParams } from '../../Param';
+import { json, number, string } from '../../ParamBuilder';
+import { hubspot } from './hubspot';
+import { CrmEntity } from './CrmEntity';
 
 type EntityPage = {
   results: {

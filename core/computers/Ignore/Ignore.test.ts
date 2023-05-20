@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Ignore } from "./Ignore";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Ignore } from './Ignore';
 
 it('does nothing', async () => {
   await when(Ignore)

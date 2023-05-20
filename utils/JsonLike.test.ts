@@ -1,4 +1,4 @@
-import { JsonLike } from "./JsonLike";
+import { JsonLike } from './JsonLike';
 
 describe('parse', () => {
   it('should parse regular JSON', () => {

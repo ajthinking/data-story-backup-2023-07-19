@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { CreateJson } from "./CreateJson";
+import { when } from '../../support/computerTester/ComputerTester';
+import { CreateJson } from './CreateJson';
 
 it('outputs array json as array', async () => {
   await when(CreateJson)

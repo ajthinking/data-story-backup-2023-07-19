@@ -1,8 +1,8 @@
-import { Computer } from "../core/types/Computer"
-import { ComputerConfig } from "../core/types/ComputerConfig"
-import { ComputerFactory } from "../core/ComputerFactory"
-import { DefaultParams } from "../core/Param"
-import { NodeDescriptionFactory } from "./NodeDescriptionFactory"
+import { Computer } from '../core/types/Computer'
+import { ComputerConfig } from '../core/types/ComputerConfig'
+import { ComputerFactory } from '../core/ComputerFactory'
+import { DefaultParams } from '../core/Param'
+import { NodeDescriptionFactory } from './NodeDescriptionFactory'
 
 describe('fromComputer', () => {
   it('returns a NodeDescription', () => {

@@ -1,7 +1,7 @@
-import { expect, it } from "vitest"
-import { NodeDescription } from "../../../server/NodeDescription"
-import { DataStoryNode } from "../../Node/DataStoryNode"
-import { guessPosition } from "./guessPosition"
+import { expect, it } from 'vitest'
+import { NodeDescription } from '../../../server/NodeDescription'
+import { DataStoryNode } from '../../Node/DataStoryNode'
+import { guessPosition } from './guessPosition'
 
 it('places first nodes at 75, 50', () => {
   const nodes: DataStoryNode[] = []

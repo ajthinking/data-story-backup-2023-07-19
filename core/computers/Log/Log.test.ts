@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { Log } from "./Log";
+import { when } from '../../support/computerTester/ComputerTester';
+import { Log } from './Log';
 
 it('logs on the server', async () => {
   const log = vi.spyOn(console, "log").mockImplementation(() => {});

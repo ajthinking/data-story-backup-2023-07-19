@@ -1,5 +1,5 @@
-import { ItemValue } from "./types/ItemValue";
-import { Storage } from "./types/Storage";
+import { ItemValue } from './types/ItemValue';
+import { Storage } from './types/Storage';
 
 export class NullStorage implements Storage {
   currentExecutionId = '1'

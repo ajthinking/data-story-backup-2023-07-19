@@ -1,5 +1,5 @@
-import React from "react";
-import { DataStoryNode } from "../../../../Node/DataStoryNode";
+import React from 'react';
+import { DataStoryNode } from '../../../../Node/DataStoryNode';
 
 export function Code({
   node

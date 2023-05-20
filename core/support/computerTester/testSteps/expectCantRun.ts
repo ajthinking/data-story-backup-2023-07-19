@@ -1,6 +1,6 @@
-import { expect } from "vitest";
-import { ComputerTester } from "../ComputerTester";
-import { TestStep } from "../TestStep";
+import { expect } from 'vitest';
+import { ComputerTester } from '../ComputerTester';
+import { TestStep } from '../TestStep';
 
 export const expectCantRun: TestStep = {
   async handle(tester: ComputerTester) {

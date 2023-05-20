@@ -1,8 +1,8 @@
-import { SerializedReactFlow } from "../components/Workbench/SerializedReactFlow"
-import { Diagram } from "./Diagram"
-import { Node } from "./types/Node"
-import { Port } from "./types/Port"
-import { Link } from "./types/Link"
+import { SerializedReactFlow } from '../components/Workbench/SerializedReactFlow'
+import { Diagram } from './Diagram'
+import { Node } from './types/Node'
+import { Port } from './types/Port'
+import { Link } from './types/Link'
 
 export const DiagramFactory = {
   fromReactFlow(flow: SerializedReactFlow): Diagram {    

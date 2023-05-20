@@ -1,7 +1,7 @@
-import { Diagram } from "./Diagram";
-import { Port } from "./types/Port";
-import { Link } from "./types/Link";
-import { Node } from "./types/Node";
+import { Diagram } from './Diagram';
+import { Port } from './types/Port';
+import { Link } from './types/Link';
+import { Node } from './types/Node';
 
 describe('linksConnectedToPortId', () => {
   it('returns links connected to port', () => {

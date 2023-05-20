@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { ExecutionResult } from "./ExecutionResult"
+import { describe, expect, it } from 'vitest'
+import { ExecutionResult } from './ExecutionResult'
 
 describe('stringify', () => {
   it('should stringify', () => {

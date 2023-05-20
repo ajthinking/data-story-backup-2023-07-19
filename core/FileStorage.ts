@@ -1,5 +1,5 @@
-import { ItemValue } from "./types/ItemValue";
-import { Storage } from "./types/Storage";
+import { ItemValue } from './types/ItemValue';
+import { Storage } from './types/Storage';
 import { promises as fs } from 'fs';
 
 export class FileStorage implements Storage {

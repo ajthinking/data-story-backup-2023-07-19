@@ -1,20 +1,20 @@
-import { Node, NodeId } from "./types/Node";
-import { Diagram } from "./Diagram";
-import { PortLinkMap } from "./types/PortLinkMap";
-import { OutputDevice } from "./OutputDevice";
-import { PortId } from "./types/Port";
-import { Computer } from "./types/Computer";
-import { ItemValue } from "./types/ItemValue";
-import { LinkId } from "./types/Link";
-import { ExecutionUpdate } from "./types/ExecutionUpdate";
-import { isFinished } from "./utils/isFinished";
-import { ParamsDevice } from "./types/ParamsDevice";
-import { Storage } from "./types/Storage";
-import { ExecutionMemory } from "./ExecutionMemory";
-import { ExecutorInterface } from "./types/ExecutorInterface";
-import { InputDevice } from "./InputDevice";
-import { mapToRecord } from "./utils/mapToRecord";
-import { Hook } from "./types/Hook";
+import { Node, NodeId } from './types/Node';
+import { Diagram } from './Diagram';
+import { PortLinkMap } from './types/PortLinkMap';
+import { OutputDevice } from './OutputDevice';
+import { PortId } from './types/Port';
+import { Computer } from './types/Computer';
+import { ItemValue } from './types/ItemValue';
+import { LinkId } from './types/Link';
+import { ExecutionUpdate } from './types/ExecutionUpdate';
+import { isFinished } from './utils/isFinished';
+import { ParamsDevice } from './types/ParamsDevice';
+import { Storage } from './types/Storage';
+import { ExecutionMemory } from './ExecutionMemory';
+import { ExecutorInterface } from './types/ExecutorInterface';
+import { InputDevice } from './InputDevice';
+import { mapToRecord } from './utils/mapToRecord';
+import { Hook } from './types/Hook';
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 

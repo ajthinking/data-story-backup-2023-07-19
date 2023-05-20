@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs'
-import { FileStorage } from "./FileStorage";
+import { FileStorage } from './FileStorage';
 
 describe('init', async () => {
   it('creates the root and executions directories', async () => {

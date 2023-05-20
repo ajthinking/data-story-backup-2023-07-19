@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
-import { string, number, json, select, ParamBuilder } from "./ParamBuilder"
+import { describe, expect, it } from 'vitest'
+import { string, number, json, select, ParamBuilder } from './ParamBuilder'
 
 describe("string", () => {
   it("should result in a typed Param", () => {

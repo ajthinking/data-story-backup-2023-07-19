@@ -1,8 +1,8 @@
-import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
-import { ObjectItemValue } from "../../types/ItemValue";
-import { DefaultParams } from "../../Param";
-import { string } from "../../ParamBuilder";
-import { ComputerConfig } from "../../types/ComputerConfig";
+import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
+import { ObjectItemValue } from '../../types/ItemValue';
+import { DefaultParams } from '../../Param';
+import { string } from '../../ParamBuilder';
+import { ComputerConfig } from '../../types/ComputerConfig';
 
 export const Filter: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'Filter',

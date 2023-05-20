@@ -1,6 +1,6 @@
 import WebSocket from 'ws';
-import { DiagramFactory } from "../../core/DiagramFactory"
-import { Executor } from "../../core/Executor"
+import { DiagramFactory } from '../../core/DiagramFactory'
+import { Executor } from '../../core/Executor'
 import { RunMessage } from '../messages/RunMessage';
 import { FileStorage } from '../../core/FileStorage';
 import { ExecutionResult } from '../../core/ExecutionResult';

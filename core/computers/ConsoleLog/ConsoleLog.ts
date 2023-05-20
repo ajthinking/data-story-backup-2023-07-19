@@ -1,9 +1,9 @@
-import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
-import { ItemWithParams } from "../../ItemWithParams";
-import { DefaultParams } from "../../Param";
-import { string, text } from "../../ParamBuilder";
-import { ObjectItemValue } from "../../types/ItemValue";
-import { ComputerConfig } from "../../types/ComputerConfig";
+import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
+import { ItemWithParams } from '../../ItemWithParams';
+import { DefaultParams } from '../../Param';
+import { string, text } from '../../ParamBuilder';
+import { ObjectItemValue } from '../../types/ItemValue';
+import { ComputerConfig } from '../../types/ComputerConfig';
 
 export const ConsoleLog: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'ConsoleLog',

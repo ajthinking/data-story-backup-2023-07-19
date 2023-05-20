@@ -1,10 +1,10 @@
-import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
-import { ObjectItemValue } from "../../types/ItemValue";
-import { DefaultParams } from "../../Param";
-import { json, string } from "../../ParamBuilder";
-import { hubspot } from "./hubspot";
-import { ComputerConfig } from "../../types/ComputerConfig";
-import { CrmEntity } from "./CrmEntity";
+import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
+import { ObjectItemValue } from '../../types/ItemValue';
+import { DefaultParams } from '../../Param';
+import { json, string } from '../../ParamBuilder';
+import { hubspot } from './hubspot';
+import { ComputerConfig } from '../../types/ComputerConfig';
+import { CrmEntity } from './CrmEntity';
 
 export const UpdateEntity: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'UpdateEntity',

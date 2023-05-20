@@ -1,5 +1,5 @@
-import { SerializedReactFlow } from "../components/Workbench/SerializedReactFlow"
-import { DiagramFactory } from "./DiagramFactory"
+import { SerializedReactFlow } from '../components/Workbench/SerializedReactFlow'
+import { DiagramFactory } from './DiagramFactory'
 
 describe('fromReactFlow', () => {
   it('returns a diagram', () => {

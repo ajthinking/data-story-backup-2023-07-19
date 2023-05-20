@@ -1,5 +1,5 @@
-import { ComputerFactory } from "./ComputerFactory"
-import { ComputerConfig } from "./types/ComputerConfig"
+import { ComputerFactory } from './ComputerFactory'
+import { ComputerConfig } from './types/ComputerConfig'
 
 describe('fromComputerConfig', () => {
   it('creates a computer from a sparse config', () => {

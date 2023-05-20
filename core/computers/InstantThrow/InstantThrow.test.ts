@@ -1,5 +1,5 @@
-import { when } from "../../support/computerTester/ComputerTester";
-import { InstantThrow } from "./InstantThrow";
+import { when } from '../../support/computerTester/ComputerTester';
+import { InstantThrow } from './InstantThrow';
 
 it('throws immediately', async () => {
   await when(InstantThrow)

@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest"
-import { ItemWithParams } from "./ItemWithParams"
-import { Param } from "./Param"
+import { describe, expect, it } from 'vitest'
+import { ItemWithParams } from './ItemWithParams'
+import { Param } from './Param'
 
 describe('value', () => {
   it('can be accessed when no params is supplied', () => {

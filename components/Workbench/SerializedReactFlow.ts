@@ -1,4 +1,4 @@
-import { Param } from "../../core/Param"
+import { Param } from '../../core/Param'
 
 export type SerializedReactFlow = {
   nodes: SerializedReactFlowNode[],

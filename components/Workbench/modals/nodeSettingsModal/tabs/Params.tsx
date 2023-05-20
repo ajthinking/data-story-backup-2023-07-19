@@ -1,11 +1,11 @@
-import React from "react";
-import { DataStoryNode } from "../../../../Node/DataStoryNode";
-import { Number } from "../../../../forms/inputs/number";
-import { Text } from "../../../../forms/inputs/text";
-import { Select } from "../../../../forms/inputs/select";
-import { InterPolatableTextArea } from "../../../../forms/inputs/interpolatable/InterpolatableTextarea";
-import { UseFormReturn } from "react-hook-form";
-import { flattenObjectOneLevel } from "../../../../../core/utils/flattenObjectOneLevel";
+import React from 'react';
+import { DataStoryNode } from '../../../../Node/DataStoryNode';
+import { Number } from '../../../../forms/inputs/number';
+import { Text } from '../../../../forms/inputs/text';
+import { Select } from '../../../../forms/inputs/select';
+import { InterPolatableTextArea } from '../../../../forms/inputs/interpolatable/InterpolatableTextarea';
+import { UseFormReturn } from 'react-hook-form';
+import { flattenObjectOneLevel } from '../../../../../core/utils/flattenObjectOneLevel';
 
 export function Params({
   node,

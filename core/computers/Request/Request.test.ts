@@ -1,6 +1,6 @@
-import axios from "axios";
-import { when } from "../../support/computerTester/ComputerTester";
-import { Request } from "./Request";
+import axios from 'axios';
+import { when } from '../../support/computerTester/ComputerTester';
+import { Request } from './Request';
 vi.mock('axios')
 
 it('outputs items at data by default when using GET', async () => {

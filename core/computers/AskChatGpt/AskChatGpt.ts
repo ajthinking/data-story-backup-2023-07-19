@@ -1,8 +1,8 @@
-import { Configuration, OpenAIApi } from "openai";
-import { ComputerConfigFactory, RunArgs } from "../../types/Computer";
-import { ComputerConfig } from "../../types/ComputerConfig";
-import { DefaultParams } from "../../Param";
-import { string } from "../../ParamBuilder";
+import { Configuration, OpenAIApi } from 'openai';
+import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
+import { ComputerConfig } from '../../types/ComputerConfig';
+import { DefaultParams } from '../../Param';
+import { string } from '../../ParamBuilder';
 
 export const AskChatGpt: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'AskChatGpt',

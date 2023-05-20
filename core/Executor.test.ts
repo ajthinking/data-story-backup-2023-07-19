@@ -1,13 +1,13 @@
-import { Diagram } from "./Diagram";
-import { Executor } from "./Executor";
-import { Computer, RunArgs } from "./types/Computer";
-import { DiagramBuilder } from "./DiagramBuilder";
-import { CreateJson, Throw } from "./computers";
-import { ItemValue } from "./types/ItemValue";
-import { NullStorage } from "./NullStorage";
-import { whenRunning } from "./support/diagramExecutionTester/DiagramExecutionTester";
-import { Link } from "./types/Link";
-import { Node } from "./types/Node";
+import { Diagram } from './Diagram';
+import { Executor } from './Executor';
+import { Computer, RunArgs } from './types/Computer';
+import { DiagramBuilder } from './DiagramBuilder';
+import { CreateJson, Throw } from './computers';
+import { ItemValue } from './types/ItemValue';
+import { NullStorage } from './NullStorage';
+import { whenRunning } from './support/diagramExecutionTester/DiagramExecutionTester';
+import { Link } from './types/Link';
+import { Node } from './types/Node';
 
 describe('execute', () => {
   it('can execute an empty diagram and return an execution update', async () => {
