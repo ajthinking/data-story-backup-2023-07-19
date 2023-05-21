@@ -20,8 +20,8 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
   },
   
   async *run({ input, output, params, storage }) {
-    // const data = JSON.parse(await fs.readFile(params.path, 'utf8'))
-    // const diagram = DiagramFactory.fromReactFlow(data)
+    // // const data = JSON.parse(await fs.readFile(params.path, 'utf8'))
+    // // const diagram = DiagramFactory.fromReactFlow(data)
 
     // const diagram = new DiagramBuilder()
     //   .add(Signal, { period: 1000, count: 10 })
@@ -30,7 +30,7 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
 
     // const executor = new Executor(
     //   diagram,
-    //   // ComputerRegistry.all(), // CIRCULAR DEPENDENCY!
+    //   ComputerRegistry.all(), // CIRCULAR DEPENDENCY!
     //   storage!
     // )
 
