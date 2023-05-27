@@ -4,6 +4,7 @@ import { Diagram } from './Diagram';
 import { Node } from './types/Node';
 import { Port } from './types/Port';
 import { Link } from './types/Link';
+import { PositionGuesser } from './builders/PositionGuesser';
 
 export class DiagramBuilder {
   diagram: Diagram
@@ -31,8 +32,12 @@ export class DiagramBuilder {
       params: {
         ...computer.params,
         ...params
-      }
+      },
     }
+
+    node.position = new PositionGuesser(
+      this.diagram.nodes
+    ).guess(node)
 
     this.diagram.nodes.push(node)
     

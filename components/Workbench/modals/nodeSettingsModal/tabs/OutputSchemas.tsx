@@ -17,7 +17,7 @@ export function OutputSchemas({
       <textarea
         placeholder={`{ "someProperty": "string"}`}
         className="w-full h-48 text-xs px-2 py-1 border rounded border-blue-200"
-        defaultValue={JSON.stringify(node.data.outputSchemas, null, 2)}
+        defaultValue={JSON.stringify(node.data.outputs, null, 2)}
       ></textarea>
     </div>
   </div>;

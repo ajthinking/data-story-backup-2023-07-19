@@ -93,16 +93,11 @@ describe('fromReactFlow', () => {
             "inputs": [
               {
                 "id": "Ignore.1.input",
-                "name": "input"
+                "name": "input",
+                "schema": undefined,
               }
             ],
             "outputs": [],
-            "inputSchemas": {
-              "input": {
-                "id": "any"
-              }
-            },
-            "outputSchemas": {}
           },
           "selected": false,
           "type": "dataStoryNodeComponent",
