@@ -9,4 +9,8 @@ export type Node = {
   inputs: Port[]
   outputs: Port[]
   params: Record<string, Param>
+  position?: {
+    x: number,
+    y: number,
+  }
 }
