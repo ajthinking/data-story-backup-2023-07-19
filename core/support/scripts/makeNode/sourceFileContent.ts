@@ -2,7 +2,10 @@ export const sourceFileContent = (name: string) => `import { Computer, ComputerC
 
 export const ${name}: ComputerConfigFactory = (): Computer => ({
   name: '${name}',
-  inputs: ['input'],
+  inputs: [{
+    name: 'input',
+    schema: 'any',
+  }],
   outputs: ['output'],
 
   async *run({ input, output, params }) {
