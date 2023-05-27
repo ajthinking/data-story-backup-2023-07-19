@@ -3,39 +3,18 @@ import { CreateAttribute, Signal } from "./core/computers";
 
 export {}
 
+const x: any = {};
+
 (async () => {
-  const diagram = new DiagramBuilder()
-    .add(Signal, { period: 1000, count: 10 })
-    .add(CreateAttribute, { key: 'name', value: 'John' })
-    .get()
 
-  console.log(diagram)
+  x.tell.me.to.do.something
+  .with.a.bunch.of.parameters
+  .then
+  .do.something.else
+  .then
+  
+
+
+
+
 })();
-
-/*
-Diagram {
-  nodes: [
-    {
-      id: 'Signal.1',
-      type: 'Signal',
-      inputs: [],
-      outputs: [Array],
-      params: [Object]
-    },
-    {
-      id: 'CreateAttribute.1',
-      type: 'CreateAttribute',
-      inputs: [Array],
-      outputs: [Array],
-      params: [Object]
-    }
-  ],
-  links: [
-    {
-      id: 'Signal.1.output--->CreateAttribute.1.input',
-      sourcePortId: 'Signal.1.output',
-      targetPortId: 'CreateAttribute.1.input'
-    }
-  ]
-}
-*/

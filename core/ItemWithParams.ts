@@ -1,5 +1,6 @@
 import { ItemValue, ObjectItemValue } from './types/ItemValue';
 import { ParamValue } from './Param';
+import { evalMath } from './utils/evalMath';
 
 export class ItemWithParams<T = ItemValue> {
   type = 'ItemWithParams' as const
@@ -26,8 +27,16 @@ export class ItemWithParams<T = ItemValue> {
         * Becomes: { greeting: "Hi Bob!"}
         * When the item value is { name: "Bob" }
         */
-        const value = paramValue.replace(/\${(\w+)}/g, (_: string, name: string) => {
+        let value = paramValue.replace(/\${(\w+)}/g, (_: string, name: string) => {
           return (this.value as ObjectItemValue)[name];
+        });
+
+        /** Replaces function calls */
+        value = value.replace(/@(\w+)\((.*)\)/g, (_: string, fn: string, expression: string) => {
+          if(fn === 'evalMath') return String(evalMath(expression));
+
+          // If we don't know the function, just return the expression
+          return expression
         });
 
         return value;
