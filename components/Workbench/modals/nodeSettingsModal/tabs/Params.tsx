@@ -24,8 +24,8 @@ export function Params({
   return <div className="max-h-128 overflow-y-scroll relative pb-6 pt-4 px-6 flex-auto space-y-1">
     {nonDefaultParams.map(param => {
       const inputSchema = param.inputSchemaFromPort
-        ? node.data.inputSchemas[param.inputSchemaFromPort]
-        : flattenObjectOneLevel(node.data.inputSchemas);
+        ? node.data.inputs.find(i => i.name === param.inputSchemaFromPort)?.schema
+        : flattenObjectOneLevel(node.data.inputs)?.schema;
 
       return <div className="flex flex-col" key={param.name}>
         {/* {param.type === 'string' && <String_ register={form.register} label={param.name} id={param.name} />} */}

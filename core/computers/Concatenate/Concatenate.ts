@@ -23,8 +23,6 @@ export const Concatenate: ComputerConfigFactory = (): ComputerConfig => ({
     
     const incoming = input.pull()
 
-    console.log('incoming', incoming, params)
-    
     output.push([{
       [params.concatenated_property]: incoming
         .map((item: any) => item.value[params.property])

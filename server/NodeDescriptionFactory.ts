@@ -7,18 +7,10 @@ export const NodeDescriptionFactory = {
       name: computer.name,
       label: computer.label,
       category: computer.category,
-      inputs: computer.inputs.map(input => input.name),
-      outputs: computer.outputs.map(output => output.name),
+      inputs: computer.inputs,
+      outputs: computer.outputs,
       params: computer.params,
       tags: computer.tags,
-      inputSchemas: computer.inputs.reduce((acc, inputSchema) => {
-        acc[inputSchema.name] = inputSchema.schema;
-        return acc;
-      }, {} as any),
-      outputSchemas: computer.outputs.reduce((acc, outputSchema) => {
-        acc[outputSchema.name] = outputSchema.schema;
-        return acc;
-      }, {} as any),
     }
   }
 }

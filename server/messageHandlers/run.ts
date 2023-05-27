@@ -13,6 +13,9 @@ export const run: MessageHandler<RunMessage> = async (ws: WebSocket, data: RunMe
     data.reactFlow
   )
 
+  console.log("RESULTING DIAGRAM ****************************")
+  console.log(JSON.stringify(diagram, null, 2))
+
   const storage = new FileStorage('.datastory')
   await storage.init()
   await storage.createExecution()

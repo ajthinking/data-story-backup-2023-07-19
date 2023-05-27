@@ -16,7 +16,7 @@ export const Signal: ComputerConfigFactory = (): ComputerConfig => ({
 
   params: {
     period: number('period').value(50).get(),
-    count: number('count').value(500).get(),
+    count: number('count').value(300).get(),
   },
 
   async *run({

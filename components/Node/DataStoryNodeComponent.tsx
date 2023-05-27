@@ -28,10 +28,7 @@ const DataStoryNodeComponent = ({ id, data, selected }: {
           { data.label }
         </div>
         <div className="flex flex-col mx-2">
-          {data.inputs.map((input: {
-            id: string,
-            name: string
-          }) => (<div
+          {data.inputs.map((input: any) => (<div
             className="flex border border-gray-300 rounded px-2 py-1 bg-gray-50"
             key={input.id}
           >
@@ -39,10 +36,7 @@ const DataStoryNodeComponent = ({ id, data, selected }: {
             <div className="ml-2 w-full">{input.name}</div>
           </div>))}
         
-          {data.outputs.map((output: {
-            id: string,
-            name: string
-          }) => (<div
+          {data.outputs.map((output: any) => (<div
             className="flex pl-3 border border-gray-300 rounded px-2 py-1 bg-gray-50"
             key={output.id}
           >

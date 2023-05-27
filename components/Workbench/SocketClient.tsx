@@ -50,6 +50,7 @@ export class SocketClient implements ServerClient {
 
       if (parsed.type === "DescribeResponse") {
         this.setAvailableNodes(parsed.availableNodes)
+
         return;
       }
 
@@ -105,7 +106,9 @@ export class SocketClient implements ServerClient {
     const message = JSON.stringify({
       type: "run",
       reactFlow,
-    })
+    }, null, 2)
+
+    console.log("Will send", message)
 
     this.socket!.send(message);
   }

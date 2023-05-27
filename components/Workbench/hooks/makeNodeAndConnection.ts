@@ -3,6 +3,7 @@ import { NodeDescription } from '../../../server/NodeDescription';
 import { DataStoryNode } from '../../Node/DataStoryNode';
 import { guessConnection } from './guessConnection';
 import { guessPosition } from './guessPosition';
+import { PortWithSchema } from '../../../core/types/PortWithSchema';
 
 export const makeNodeAndConnection = (
   existingNodes: DataStoryNode[],
@@ -20,9 +21,7 @@ export const makeNodeAndConnection = (
   }
 
   const counter = scopedId(nodeDescription.name)
-  const id = `${nodeDescription.name}.${counter}`;
-
-  
+  const id = `${nodeDescription.name}.${counter}`;  
 
   const node = {
     id,
@@ -32,20 +31,18 @@ export const makeNodeAndConnection = (
       params: structuredClone(nodeDescription.params),
       computer: nodeDescription.name,
       label: nodeDescription.label ?? nodeDescription.name,
-      inputs: nodeDescription.inputs.map((input: string) => {
+      inputs: nodeDescription.inputs.map((input: PortWithSchema) => {
         return {
-          id: `${id}.${input}`,
-          name: input
+          id: `${id}.${input.name}`,
+          ...input
         }
       }),
-      outputs: nodeDescription.outputs.map((input: string) => {
+      outputs: nodeDescription.outputs.map((output: PortWithSchema) => {
         return {
-          id: `${id}.${input}`,
-          name: input
+          id: `${id}.${output.name}`,
+          ...output
         }
       }),
-      inputSchemas: nodeDescription.inputSchemas ?? {},
-      outputSchemas: nodeDescription.outputSchemas ?? {},
     },
     selected: true,
     type: nodeDescription.name === 'Comment'
@@ -57,3 +54,11 @@ export const makeNodeAndConnection = (
 
   return [node, connection]
 }
+
+// const connection: {
+//   id: string;
+//   sourceHandle: string | undefined;
+//   targetHandle: string | undefined;
+//   source: string;
+//   target: string;
+// } | null

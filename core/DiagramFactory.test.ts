@@ -51,15 +51,10 @@ describe('fromReactFlow', () => {
             "outputs": [
               {
                 "id": "Signal.1.output",
-                "name": "output"
+                "name": "output",
+                "schema": undefined,
               }
             ],
-            "inputSchemas": {},
-            "outputSchemas": {
-              "output": {
-                "id": "any"
-              }
-            }
           },
           "selected": false,
           "type": "dataStoryNodeComponent",

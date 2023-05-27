@@ -319,11 +319,14 @@ export const useStore = create<StoreSchema>((set, get) => ({
       const targetPortName = node.data.inputs.find(input => input.id === link.targetHandle)?.name
       if(!sourcePortName || !targetPortName) return;
 
-      inputSchemas[targetPortName] = sourceNode.data.outputSchemas[sourcePortName] ?? {}
+      const outputSchema = sourceNode.data.outputs.find(output => output.id === link.sourceHandle)?.schema
+
+      const inputPort = node.data.inputs.find(input => input.id === link.targetHandle)!
+      inputPort.schema = outputSchema ?? {}
     })
 
-    node.data.inputSchemas = inputSchemas
+    // node.data.inputSchemas = inputSchemas
 
-    get().updateNode(node)
+    // get().updateNode(node)
   },
 }));

@@ -21,7 +21,10 @@ describe('fromComputer', () => {
     expect(nodeDescription).toMatchObject({
       name: 'test',
       label: 'test',
-      inputs: ['input1'],
+      inputs: [{
+        name: 'input1',
+        schema: {},
+      }],
       outputs: [],
       params: {
         ...DefaultParams

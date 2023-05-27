@@ -1,0 +1,286 @@
+{
+  "nodes": [
+    {
+      "width": 128,
+      "height": 52,
+      "id": "CreateJson.1",
+      "position": {
+        "x": 75,
+        "y": 50
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "CreateJson"
+          },
+          "json": {
+            "id": "json",
+            "name": "json",
+            "type": "json",
+            "value": "[{ \"path\": \"/Users/anders/Code/data-story/core/computers\"}]"
+          }
+        },
+        "computer": "CreateJson",
+        "label": "CreateJson",
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "CreateJson.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 75,
+        "y": 50
+      }
+    },
+    {
+      "width": 128,
+      "height": 78,
+      "id": "ListFiles.1",
+      "position": {
+        "x": 275,
+        "y": 50
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "ListFiles"
+          },
+          "path": {
+            "id": "path",
+            "name": "path",
+            "type": "string",
+            "value": "/${path}"
+          }
+        },
+        "computer": "ListFiles",
+        "label": "ListFiles",
+        "inputs": [
+          {
+            "id": "ListFiles.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "ListFiles.1.output",
+            "name": "output"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 275,
+        "y": 50
+      }
+    },
+    {
+      "width": 128,
+      "height": 104,
+      "id": "Filter.1",
+      "position": {
+        "x": 475,
+        "y": 50
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "Filter"
+          },
+          "left": {
+            "id": "left",
+            "name": "left",
+            "type": "string",
+            "value": "${name}"
+          },
+          "right": {
+            "id": "right",
+            "name": "right",
+            "type": "string",
+            "value": "index.ts"
+          }
+        },
+        "computer": "Filter",
+        "label": "Filter",
+        "inputs": [
+          {
+            "id": "Filter.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Filter.1.passed",
+            "name": "passed"
+          },
+          {
+            "id": "Filter.1.failed",
+            "name": "failed"
+          }
+        ]
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 475,
+        "y": 50
+      }
+    },
+    {
+      "width": 128,
+      "height": 52,
+      "id": "Log.1",
+      "position": {
+        "x": 675,
+        "y": 50
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": ""
+          }
+        },
+        "computer": "Log",
+        "label": "Log",
+        "inputs": [
+          {
+            "id": "Log.1.input",
+            "name": "input"
+          }
+        ],
+        "outputs": []
+      },
+      "type": "dataStoryNodeComponent",
+      "positionAbsolute": {
+        "x": 675,
+        "y": 50
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "width": 128,
+      "height": 52,
+      "id": "Log.2",
+      "position": {
+        "x": 677.575849463985,
+        "y": 137.5152688164864
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": ""
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": ""
+          }
+        },
+        "computer": "Log",
+        "label": "Log",
+        "inputs": [
+          {
+            "id": "Log.2.input",
+            "name": "input"
+          }
+        ],
+        "outputs": []
+      },
+      "type": "dataStoryNodeComponent",
+      "selected": false,
+      "positionAbsolute": {
+        "x": 677.575849463985,
+        "y": 137.5152688164864
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "id": "CreateJson.1.output--->ListFiles.1.input",
+      "sourceHandle": "CreateJson.1.output",
+      "targetHandle": "ListFiles.1.input",
+      "source": "CreateJson.1",
+      "target": "ListFiles.1",
+      "selected": false
+    },
+    {
+      "id": "ListFiles.1.output--->Filter.1.input",
+      "sourceHandle": "ListFiles.1.output",
+      "targetHandle": "Filter.1.input",
+      "source": "ListFiles.1",
+      "target": "Filter.1",
+      "selected": false
+    },
+    {
+      "id": "Filter.1.passed--->Log.1.input",
+      "sourceHandle": "Filter.1.passed",
+      "targetHandle": "Log.1.input",
+      "source": "Filter.1",
+      "target": "Log.1",
+      "selected": false
+    },
+    {
+      "source": "Filter.1",
+      "sourceHandle": "Filter.1.failed",
+      "target": "Log.2",
+      "targetHandle": "Log.2.input",
+      "id": "Filter.1.failed--->Log.2.input",
+      "selected": false
+    }
+  ],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

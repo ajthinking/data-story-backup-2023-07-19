@@ -24,14 +24,14 @@ export type SerializedReactFlowNode = {
     inputs: {
       id: string,
       name: string,
+      schema: any,
     }[],
     outputs: {
       id: string,
       name: string,
+      schema: any,      
     }[],
     params: Record<string, Param>,
-    inputSchemas: Record<string, any>,
-    outputSchemas: Record<string, any>,
   },
   selected?: boolean,
   type?: string,

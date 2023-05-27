@@ -26,8 +26,6 @@ export const Filter: ComputerConfigFactory = (): ComputerConfig => ({
         output.pushTo('failed', [item])
       })
 
-      console.log('Filter run done!')
-
       yield;
     }
   },

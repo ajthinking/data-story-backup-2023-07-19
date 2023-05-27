@@ -6,17 +6,27 @@ import { Link } from './types/Link'
 
 export const DiagramFactory = {
   fromReactFlow(flow: SerializedReactFlow): Diagram {    
+
+    console.log("INCOMING FLOW ****************************")
+    console.log(JSON.stringify(flow, null, 2))
+
     const nodes = flow.nodes.map(flowNode => {
       return {
         id: flowNode.id,
         type: flowNode.data.computer,
         inputs: flowNode.data.inputs.map(input => {
           // This should be passed in a property
-          return { id: input.id, name: input.id.split(".").pop()!}
+          return {
+            id: input.id,
+            name: input.id.split(".").pop()!
+          }
         }),
         outputs: flowNode.data.outputs.map(output => {
           // This should be passed in a property
-          return { id: output.id, name: output.id.split(".").pop()!}
+          return {
+            id: output.id,
+            name: output.id.split(".").pop()!
+          }
         }),
         // continue with PARAMS here!
         params: flowNode.data.params || {},   
