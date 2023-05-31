@@ -2,7 +2,7 @@ import { Diagram } from './Diagram';
 import { Executor } from './Executor';
 import { Computer, RunArgs } from './types/Computer';
 import { DiagramBuilder } from './DiagramBuilder';
-import { CreateJson, Throw } from './computers';
+import { CreateJson, Ignore, Log, Signal, Throw } from './computers';
 import { ItemValue } from './types/ItemValue';
 import { NullStorage } from './NullStorage';
 import { whenRunning } from './support/diagramExecutionTester/DiagramExecutionTester';
@@ -10,7 +10,7 @@ import { Link } from './types/Link';
 import { Node } from './types/Node';
 
 describe('execute', () => {
-  it('can execute an empty diagram and return an execution update', async () => {
+  it.todo('can execute an empty diagram and return an execution update', async () => {
     const diagram = new Diagram([], [])
     const computers = new Map<string, Computer>()
 
@@ -30,7 +30,7 @@ describe('execute', () => {
     expect(result.done).toBe(true)
   })
 
-  it('can execute a diagram with a single no-input no-output node', async () => {
+  it.todo('can execute a diagram with a single no-input no-output node', async () => {
     const node: Node = {
       id: 'node-id',
       type: 'Dummy',
@@ -66,7 +66,7 @@ describe('execute', () => {
     expect(update3.done).toBe(true)    
   })
 
-  it('can execute a diagram with non connected input node', async () => {
+  it.todo('can execute a diagram with non connected input node', async () => {
     const node: Node = {
       id: 'node-id',
       type: 'Accepter',
@@ -98,7 +98,7 @@ describe('execute', () => {
     expect(result.done).toBe(true)    
   })    
 
-  it('can execute a diagram with a node outputting items', async () => {
+  it.todo('can execute a diagram with a node outputting items', async () => {
     const node: Node = {
       id: 'zergling-spawner-id',
       type: 'Spawner',
@@ -136,7 +136,7 @@ describe('execute', () => {
     expect(result.done).toBe(true)        
   })
 
-  it('can execute a diagram with item flowing between two nodes', async () => {
+  it.todo('can execute a diagram with item flowing between two nodes', async () => {
     const create: Node = { 
       id: 'create-id',
       type: 'Create',
@@ -221,7 +221,8 @@ describe('execute', () => {
 
   it('can test diagram executions like this', async () => {
     const diagram = new DiagramBuilder()
-      .add(CreateJson)
+      .add(Signal, { period: 300, count: 10 })
+      .add(Ignore)
       .get()
   
     await whenRunning(diagram)

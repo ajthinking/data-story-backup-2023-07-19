@@ -17,7 +17,8 @@ export type RunArgs = {
   output: OutputDeviceInterface,
   params: ParamsDevice,
   storage?: Storage,
-  hooks: HooksDevice
+  hooks: HooksDevice,
+  executorFactory?: (diagram: any) => any
 }
 
 export interface Computer {

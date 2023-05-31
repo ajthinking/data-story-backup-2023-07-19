@@ -1,6 +1,6 @@
 import { Computer, ComputerConfigFactory } from '../../types/Computer';
 import { Diagram } from '../../Diagram';
-import { NodeStatus } from '../../Executor';
+import { Executor, NodeStatus } from '../../Executor';
 import { PortLinkMap } from '../../types/PortLinkMap';
 import { ItemValue } from '../../types/ItemValue';
 import { Node, NodeId } from '../../types/Node';
@@ -28,6 +28,7 @@ import { InputDevice } from '../../InputDevice';
 import { ComputerConfig } from '../../types/ComputerConfig';
 import { ComputerFactory } from '../../ComputerFactory';
 import { LinkId } from '../../types/Link';
+import { ComputerRegistry } from '../../../server/computerRegistry';
 
 export const when = (factory: ComputerConfigFactory) => {
   return new ComputerTester(factory())
@@ -88,7 +89,14 @@ export class ComputerTester {
           output: this.outputDevice,
           params: this.makeParamsDevice(),
           storage: new NullStorage(),
-          hooks: { register() {} }
+          hooks: { register() {} },
+          executorFactory: (diagram: any) => {
+            return new Executor(
+              diagram,
+              ComputerRegistry.all(),
+              new NullStorage()
+            )
+          }
         })
     )
 

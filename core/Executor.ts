@@ -162,8 +162,11 @@ export class Executor implements ExecutorInterface {
             register: (hook: Hook) => {
               this.memory.pushHooks([hook])
             }
-          }
-        })
+          },
+          executorFactory: (diagram: any) => {
+            return new Executor(diagram, this.computers, this.storage)
+          },
+        }),
       )
     }
 

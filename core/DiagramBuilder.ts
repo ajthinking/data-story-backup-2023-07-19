@@ -14,7 +14,10 @@ export class DiagramBuilder {
     this.diagram = new Diagram([], [])
   }
 
-  add(addable: ComputerConfigFactory | Computer, params?: Record<string, any>) {
+  add(
+    addable: ComputerConfigFactory | Computer,
+    params: Record<string, any> = {}
+  ) {
     const config = typeof addable === 'function' ? addable() : addable
     const computer = ComputerFactory.fromComputerConfig(config)
 
@@ -29,10 +32,13 @@ export class DiagramBuilder {
       outputs: (computer.outputs ?? []).map(output => {
         return { id: `${nodeId}.${output.name}`, name: output.name }
       }),
-      params: {
-        ...computer.params,
-        ...params
-      },
+      // default params
+      params: computer.params,
+    }
+
+    // set explicit params
+    for(const [key, value] of Object.entries(params)) {
+      node.params[key].value = value
     }
 
     node.position = new PositionGuesser(

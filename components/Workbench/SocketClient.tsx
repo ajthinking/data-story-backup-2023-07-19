@@ -108,8 +108,6 @@ export class SocketClient implements ServerClient {
       reactFlow,
     }, null, 2)
 
-    console.log("Will send", message)
-
     this.socket!.send(message);
   }
 

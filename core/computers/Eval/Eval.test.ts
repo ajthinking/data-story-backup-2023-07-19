@@ -2,7 +2,7 @@ import { when } from '../../support/computerTester/ComputerTester';
 import { Eval } from './Eval';
 
 it('can pass js to be evaluated', async () => {
-  process.env.USE_UNSAFE_EVAL = 'true'
+  process.env.USE_UNSAFE_EVAL = 'any value will do'
 
   await when(Eval)
     .hasParams({
@@ -16,7 +16,9 @@ it('can pass js to be evaluated', async () => {
   process.env.USE_UNSAFE_EVAL = undefined
 })
 
-it('will throw if USE_UNSAFE_EVAL is not set', async () => {
+it('will throw if USE_UNSAFE_EVAL is set to false', async () => {
+  vi.stubEnv('USE_UNSAFE_EVAL', 'false')
+
   await when(Eval)
   .hasParams({
     js: "evil code!"

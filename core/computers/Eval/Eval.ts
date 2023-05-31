@@ -17,7 +17,10 @@ export const Eval: ComputerConfigFactory = (): ComputerConfig => ({
   },
 
   async *run({ input, output }) {
-    if(!process.env.USE_UNSAFE_EVAL) throw new Error(
+    if(
+      process.env.USE_UNSAFE_EVAL === undefined
+      || process.env.USE_UNSAFE_EVAL === 'false'
+    ) throw new Error(
       'Unsafe eval is disabled. If you really want to do this, set USE_UNSAFE_EVAL=true in your .env file.'
     )
 

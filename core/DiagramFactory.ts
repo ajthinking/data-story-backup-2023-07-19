@@ -5,11 +5,7 @@ import { Port } from './types/Port'
 import { Link } from './types/Link'
 
 export const DiagramFactory = {
-  fromReactFlow(flow: SerializedReactFlow): Diagram {    
-
-    console.log("INCOMING FLOW ****************************")
-    console.log(JSON.stringify(flow, null, 2))
-
+  fromReactFlow(flow: SerializedReactFlow): Diagram {
     const nodes = flow.nodes.map(flowNode => {
       return {
         id: flowNode.id,
