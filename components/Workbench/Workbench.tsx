@@ -9,10 +9,13 @@ import { StoreSchema, useStore } from './store';
 import { shallow } from 'zustand/shallow'
 import { NodeSettingsModal } from './modals/nodeSettingsModal/nodeSettingsModal';
 import DataStoryCommentNodeComponent from '../Node/DataStoryCommentNodeComponent';
+import DataStoryInputNodeComponent from '../Node/DataStoryInputNodeComponent';
 
 const nodeTypes = {
   dataStoryNodeComponent: DataStoryNodeComponent,
   dataStoryCommentNodeComponent: DataStoryCommentNodeComponent,
+  dataStoryInputNodeComponent: DataStoryInputNodeComponent,
+  // dataStoryOutputNodeComponent: DataStoryNodeComponent,
 };
 
 export default function Workbench() {

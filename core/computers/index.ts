@@ -13,6 +13,7 @@ export { Ignore } from './Ignore'
 export { InstantThrow } from './InstantThrow';
 export { Join } from './Join';
 export { JsonFile } from './JsonFile';
+export { Input } from './Input';
 export { ListFiles } from './ListFiles';
 export { Log } from './Log';
 export { Merge } from './Merge';
