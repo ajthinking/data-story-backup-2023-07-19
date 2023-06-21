@@ -26,10 +26,13 @@ export class Executor implements ExecutorInterface {
     public computers: Map<string, Computer>,
     public storage: Storage
   ) {
+    console.log("Making memory!")
     this.memory = this.makeExecutionMemory();
+    console.log("Done Making memory!")
   }
 
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
+    console.log("Starting execution!")
     this.memory.pushHistoryMessage('Starting execution 🚀')
 
     let pendingPromises: Promise<void>[] = []
@@ -209,6 +212,7 @@ export class Executor implements ExecutorInterface {
 
   // TODO: this should be renamed to SHOULD_RUN_NODE_DEFAULT ?!
   protected canRunNodeDefault(node: Node) {
+    console.log("In can run default START", node.id)
     // Get the nodes input device
     const input = this.memory.getInputDevice(node.id)!
 
@@ -224,6 +228,7 @@ export class Executor implements ExecutorInterface {
       return false;
 
     // All passed
+    console.log("In can run default END", node.id)
     return true
   }
 

@@ -4,8 +4,8 @@ import { ServerClient } from './ServerClient';
 
 export class SocketClient implements ServerClient {
   private socket?: WebSocket;
-  private maxReconnectTries = 10;
-  private reconnectTimeout = 2000;
+  private maxReconnectTries = 100;
+  private reconnectTimeout = 1000;
   private reconnectTries = 0;
 
   constructor(

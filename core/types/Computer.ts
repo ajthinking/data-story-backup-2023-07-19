@@ -11,6 +11,8 @@ import { Param } from '../Param'
 import { ParamsDevice } from './ParamsDevice'
 import { PortWithSchema } from './PortWithSchema'
 import { Storage } from './Storage'
+import { Diagram } from '../Diagram'
+import { Executor } from '../Executor'
 
 export type RunArgs = {
   input: InputDeviceInterface,
@@ -18,7 +20,7 @@ export type RunArgs = {
   params: ParamsDevice,
   storage?: Storage,
   hooks: HooksDevice,
-  executorFactory?: (diagram: any) => any
+  executorFactory?: (diagram: Diagram) => Executor,
 }
 
 export interface Computer {

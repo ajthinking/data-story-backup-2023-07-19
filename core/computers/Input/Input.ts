@@ -6,9 +6,16 @@ export const Input: ComputerConfigFactory = (): ComputerConfig => ({
   outputs: ['output'],
   
   async *run({ input, output }) {
+    console.log("Im in Input (Deep)!")
+    console.log(input) // IT HAS WRONG NODE REFERENCE???
+
     while(true) {
-      const incoming = input!.pull()
+      console.log("About to pull deep!")
+      const incoming = input.pull()
+      console.log("Pulled deep!")
+      console.log("About to push deep!")
       output.push(incoming)
+      console.log("Pushed deep!")
 
       yield;
     }

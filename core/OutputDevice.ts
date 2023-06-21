@@ -28,6 +28,7 @@ export class OutputDevice implements OutputDeviceInterface {
   }
 
   pushTo(name: PortName, itemable: (ItemValue | ItemWithParams)[]) {
+    console.log("pushTo", name, itemable)
     const connectedLinks = this.portLinkMap[name]
 
     // When outputting we should not be in a params infused ItemWithParams
