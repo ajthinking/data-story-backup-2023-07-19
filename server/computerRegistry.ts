@@ -19,6 +19,8 @@ const computers = (() => {
   return map
 })()
 
+const savedFlows: string[] = ['DoItNow']
+
 /**
  * The public registry of all computers
  */
@@ -28,8 +30,14 @@ export const ComputerRegistry = {
   },
 
   descriptions() {
-    return Array.from(computers.values()).map(computer => {
+    const primitives = Array.from(computers.values()).map(computer => {
       return NodeDescriptionFactory.fromComputer(computer)
     })
+
+    const saved = savedFlows.map(flow => {
+      return NodeDescriptionFactory.fromSavedFlow(flow)
+    })
+
+    return [...primitives, ...saved]
   }
 }

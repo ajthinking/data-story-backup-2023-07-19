@@ -1,0 +1,173 @@
+{
+  "nodes": [
+    {
+      "width": 128,
+      "height": 52,
+      "id": "Input.1",
+      "position": {
+        "x": 75,
+        "y": 50
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": "",
+            "rows": 1
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "",
+            "rows": 1
+          }
+        },
+        "computer": "Input",
+        "label": "Input",
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Input.1.output",
+            "name": "output",
+            "schema": {}
+          }
+        ]
+      },
+      "selected": false,
+      "type": "dataStoryNodeComponent",
+      "positionAbsolute": {
+        "x": 75,
+        "y": 50
+      }
+    },
+    {
+      "width": 131,
+      "height": 78,
+      "id": "CreateAttribute.1",
+      "position": {
+        "x": 275,
+        "y": 50
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": "",
+            "rows": 1
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "",
+            "rows": 1
+          },
+          "key": {
+            "id": "key",
+            "name": "key",
+            "type": "string",
+            "rows": 1
+          },
+          "value": {
+            "id": "value",
+            "name": "value",
+            "type": "string",
+            "rows": 1
+          }
+        },
+        "computer": "CreateAttribute",
+        "label": "CreateAttribute",
+        "inputs": [
+          {
+            "id": "CreateAttribute.1.input",
+            "name": "input",
+            "schema": {}
+          }
+        ],
+        "outputs": [
+          {
+            "id": "CreateAttribute.1.output",
+            "name": "output",
+            "schema": {}
+          }
+        ]
+      },
+      "selected": false,
+      "type": "dataStoryNodeComponent",
+      "positionAbsolute": {
+        "x": 275,
+        "y": 50
+      }
+    },
+    {
+      "width": 128,
+      "height": 52,
+      "id": "Output.1",
+      "position": {
+        "x": 482,
+        "y": 73
+      },
+      "data": {
+        "params": {
+          "name": {
+            "id": "name",
+            "name": "name",
+            "type": "string",
+            "value": "",
+            "rows": 1
+          },
+          "label": {
+            "id": "label",
+            "name": "label",
+            "type": "string",
+            "value": "",
+            "rows": 1
+          }
+        },
+        "computer": "Output",
+        "label": "Output",
+        "inputs": [
+          {
+            "id": "Output.1.input",
+            "name": "input",
+            "schema": {}
+          }
+        ],
+        "outputs": []
+      },
+      "selected": true,
+      "type": "dataStoryNodeComponent",
+      "positionAbsolute": {
+        "x": 482,
+        "y": 73
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "sourceHandle": "Input.1.output",
+      "targetHandle": "CreateAttribute.1.input",
+      "source": "Input.1",
+      "target": "CreateAttribute.1",
+      "id": "Input.1.output--->CreateAttribute.1.input"
+    },
+    {
+      "sourceHandle": "CreateAttribute.1.output",
+      "targetHandle": "Output.1.input",
+      "source": "CreateAttribute.1",
+      "target": "Output.1",
+      "id": "CreateAttribute.1.output--->Output.1.input"
+    }
+  ],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

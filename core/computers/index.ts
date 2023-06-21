@@ -25,3 +25,4 @@ export { RunDiagram } from './RunDiagram';
 export { Signal } from './Signal'
 export { Sleep } from './Sleep'
 export { Throw } from './Throw';
+export { Output } from './Output';

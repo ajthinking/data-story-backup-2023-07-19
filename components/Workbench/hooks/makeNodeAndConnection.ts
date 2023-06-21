@@ -47,8 +47,8 @@ export const makeNodeAndConnection = (
     selected: true,
     type: {
       Comment: "dataStoryCommentNodeComponent",
-      Input: "dataStoryInputNodeComponent",
-      Output: "dataStoryOutputNodeComponent",
+      //Input: "dataStoryInputNodeComponent",
+      //Output: "dataStoryOutputNodeComponent",
     }[nodeDescription.name] ?? "dataStoryNodeComponent",
   }
 
