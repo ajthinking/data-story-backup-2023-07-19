@@ -44,3 +44,5 @@ next-env.d.ts
 .datastory/local*.*
 
 notes
+notes.json
+notes.js

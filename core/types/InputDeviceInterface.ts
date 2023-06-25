@@ -9,7 +9,6 @@ export interface InputDeviceInterface {
   haveAllItemsAtInput(name: string): boolean;
   haveAllItemsAtAllInputs(): boolean;
   haveItemsAtAnyInput(): boolean;
-  haveItemCountAtInput(name: string): number;
 
   /**
    * @visibleForTesting

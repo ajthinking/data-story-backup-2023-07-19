@@ -87,18 +87,6 @@ export class InputDevice implements InputDeviceInterface {
     return true
   }
 
-  haveItemCountAtInput(name: string): number {
-    const port = this.node.inputs.find(input => input.name === name)!
-    const links = this.diagram.linksConnectedToPortId(port.id)
-
-    let count = 0
-    for(const link of links) {
-      count += this.memory.getLinkItems(link.id)!.length
-    }
-
-    return count
-  }
-
   haveItemsAtAnyInput(): boolean {
     for(const input of this.node.inputs) {
       if(this.haveItemsAtInput(input.name)) return true

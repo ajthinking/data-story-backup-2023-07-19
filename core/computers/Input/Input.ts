@@ -7,7 +7,13 @@ export const Input: ComputerConfigFactory = (): ComputerConfig => ({
   
   async *run({ input, output }) {
     console.log("Im in Input (Deep)!")
-    console.log(input) // IT HAS WRONG NODE REFERENCE???
+    console.log("2: ENSURE SUB DIAGRAM HAS CORRECT INPUT DEVICE FOR NODE INPUT!")
+    console.log({
+      node: (input as any).node.id,
+      diagram: (input as any).diagram.nodes.map((node: any) => node.id),
+    })
+
+    // throw new Error("STOPPING HERE")
 
     while(true) {
       console.log("About to pull deep!")
