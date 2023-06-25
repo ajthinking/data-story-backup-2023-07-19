@@ -33,14 +33,9 @@ export class InputDevice implements InputDeviceInterface {
    * Removes and return items at edges connected to input with name 
    */
   pullFrom(name: string, count: number = Infinity): ItemWithParams[] {
-    console.log(`Pulling ${count} items from ${name}`)
     let remaining = count
     const pulled: ItemValue[] = []
-    console.log("Pulled", pulled)
-    console.log("HERE", this.node, name)
-    console.log("Diagram", this.diagram)
     const links = this.diagram.linksAtInput(this.node, name)
-    console.log("Links at input", links)
 
     for(const link of links) {
       const batch = this.memory.pullLinkItems(link.id, remaining)

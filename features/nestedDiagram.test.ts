@@ -5,19 +5,19 @@ import { CreateJson, Ignore, RunDiagram } from "../core/computers"
 import { ComputerRegistry } from "../server/computerRegistry"
 
 it('can execute nested diagrams', async () => {
-  // const diagram = new DiagramBuilder()
-  //   .add(CreateJson)
-  //   .add(RunDiagram)
-  //   .add(Ignore)
-  //   .get()
+  const diagram = new DiagramBuilder()
+    .add(CreateJson)
+    .add(RunDiagram)
+    .add(Ignore)
+    .get()
   
-  // const executor = new Executor(
-  //   diagram,
-  //   ComputerRegistry.all(),
-  //   new NullStorage()
-  // )
+  const executor = new Executor(
+    diagram,
+    ComputerRegistry.all(),
+    new NullStorage()
+  )
 
-  // const execution = executor.execute()
+  const execution = executor.execute()
 
-  // for await (const update of execution);
+  for await (const update of execution);
 })

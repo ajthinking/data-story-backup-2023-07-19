@@ -19,18 +19,22 @@ import { Hook } from './types/Hook';
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
 export class Executor implements ExecutorInterface {
-  memory: ExecutionMemory;
+  memory: ExecutionMemory = new ExecutionMemory({
+    nodeStatuses: new Map<NodeId, NodeStatus>(),
+    nodeRunners: new Map<NodeId, AsyncGenerator<undefined, void, void>>(),
+    linkItems: new Map<LinkId, ItemValue[]>(),
+    linkCounts: new Map<LinkId, number>(),
+    inputDevices: new Map<NodeId, InputDevice>(),
+  })
 
   constructor(
     public diagram: Diagram,
     public computers: Map<string, Computer>,
     public storage: Storage
-  ) {
-    console.log("Making memory!")
-    this.memory = this.makeExecutionMemory();
-  }
+  ) {}
 
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
+    this.boot()
     console.log("Starting execution!")
     this.memory.pushHistoryMessage('Starting execution 🚀')
 
@@ -43,6 +47,9 @@ export class Executor implements ExecutorInterface {
 
       // Start execution of all nodes that can run
       const runnables = this.getRunnableNodes()
+
+      console.log("Runnables", runnables.map(n => n.id))
+      console.log("Not runnables", this.diagram.nodes.filter(n => !runnables.includes(n)).map(n => n.id))
 
       const promises = runnables.map(node => {
         // Put node in busy state
@@ -119,45 +126,33 @@ export class Executor implements ExecutorInterface {
     }
   }
 
-  protected makeExecutionMemory() {
-    // Maps
-    const nodeStatuses = new Map<NodeId, NodeStatus>();
-    const linkItems = new Map<LinkId, ItemValue[]>();
-    const linkCounts = new Map<LinkId, number>();
-    const nodeRunners = new Map<NodeId, AsyncGenerator<undefined, void, void>>();
-    const inputDevices = new Map<PortId, InputDevice>();
-
-    // The memory object
-    const memory = new ExecutionMemory({
-      nodeStatuses,
-      nodeRunners,
-      linkItems,
-      linkCounts,
-      inputDevices,
-    })
-
+  protected boot() {
     // Configure the memory's initial state
     for(const link of this.diagram.links) {
       // Set all links to be empty
-      linkItems.set(link.id, [])
-      linkCounts.set(link.id, 0)
+      this.memory.setLinkItems(link.id, [])
+      this.memory.setLinkCount(link.id, 0)
     }
-    
+
     for(const node of this.diagram.nodes) {
       // Set all nodes to available
-      nodeStatuses.set(node.id, 'AVAILABLE')
+      this.memory.setNodeStatus(node.id, 'AVAILABLE')
 
       // Register input devices
-      const inputDevice = this.makeInputDevice(node, memory)
-      inputDevices.set(node.id, inputDevice)
+      // Potentially, if configured, reuse already present input device
+      // (e.g. if the node is a sub diagram)
+      const inputDevice = this.memory.inputDevices.get(node.id)
+        || this.makeInputDevice(node, this.memory)
 
-      // // Initialize runner generators
+      this.memory.setInputDevice(node.id, inputDevice)
+
+      // Initialize runner generators
       const computer = this.computers.get(node.type)!
-      nodeRunners.set(
+      this.memory.setNodeRunner(
         node.id,
         computer.run({
           input: inputDevice,
-          output: this.makeOutputDevice(node, memory),
+          output: this.makeOutputDevice(node, this.memory),
           params: this.makeParamsDevice(computer, node),
           storage: this.storage,
           hooks: {
@@ -171,8 +166,6 @@ export class Executor implements ExecutorInterface {
         }),
       )
     }
-
-    return memory
   }
 
   protected isComplete(): boolean {
@@ -275,6 +268,9 @@ export class Executor implements ExecutorInterface {
     for(const ancestor of ancestors) {
       if(this.memory.getNodeStatus(ancestor.id) !== 'COMPLETE') return;
     }
+
+    // Node must not be a sub diagram TODO: this is a hack
+    // if(node.type === 'RunDiagram') return;
     
     // Passed all checks, so mark as complete
     this.memory.setNodeStatus(node.id, 'COMPLETE')

@@ -48,9 +48,6 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
     const nestedInputDevice = new NestedInputDevice(input)
     
     executor.memory.inputDevices.set(inputNode.id, nestedInputDevice)
-    const inputDevice = (executor.memory.getInputDevice(inputNode.id)! as any)
-
-    
 
     const execution = executor.execute()
 

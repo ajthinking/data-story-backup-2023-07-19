@@ -16,6 +16,7 @@ export const CreateAttribute: ComputerConfigFactory = (): ComputerConfig => ({
   async *run({ input, output, params }) {
     while(true) {
       const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
+      console.log("Creating attribute!")
       output.push(incoming.map(item => {
         item.value[item.params.key] = item.params.value
         return item
