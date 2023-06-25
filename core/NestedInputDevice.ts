@@ -8,34 +8,34 @@ import { InputDeviceInterface } from "./types/InputDeviceInterface";
  */
 export class NestedInputDevice implements InputDeviceInterface {
   constructor(
-    private inputDevice: InputDevice,
-    private name: string,
+    private inputDevice: InputDeviceInterface,
   ) {}
 
   pull(count?: number) {
-    return this.inputDevice.pullFrom(this.name, count)
+    return this.inputDevice.pull(count)
   }
 
   pullFrom(name: string, count?: number) {
-    return this.inputDevice.pullFrom(`${this.name}.${name}`, count)
+    return this.inputDevice.pullFrom(name, count)
   }
 
   haveItemsAtInput(name: string) {
-    return this.inputDevice.haveItemsAtInput(`${this.name}.${name}`)
+    return this.inputDevice.haveItemsAtInput(name)
   }
 
   haveAllItemsAtAllInputs(): boolean {
-    return true
+    return this.inputDevice.haveAllItemsAtAllInputs()
   }
 
   haveAllItemsAtInput(name: string): boolean {
-    return true
+    return this.haveAllItemsAtInput(name)
   }
 
   haveItemsAtAnyInput(): boolean {
-    return true
+    return this.haveItemsAtAnyInput()
   }
 
   setItemsAt(linkId: string, items: any[]) {
+    this.inputDevice.setItemsAt(linkId, items)
   }
 }
