@@ -24,17 +24,29 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
     path: string('path').get(),
   },
   
-  async *run({ input, output, executorFactory }) {
-    // First time, we need to load the diagram from disk
-    // (PRETEND THIS IS FROM THE PARAMS)
-    const diagram = new DiagramBuilder()
-      .add(Input)
-      .add(CreateAttribute, {
-        key: 'stamp',
-        value: '2021-01-01',
-      })
-      .add(Log)
-      .get()
+  async *run({ params, input, output, executorFactory }) {
+
+    const path = `${__dirname}/../../../.datastory/${params.path}`
+
+    if(!Boolean(params.path)) {
+      console.log("HERE", params.path)
+    }
+
+    const diagram = !Boolean(params.path)
+      ? await (async () => {
+          return DiagramFactory.fromReactFlow(
+            JSON.parse(((await fs.readFile(path)).toString()))
+          )
+        })()
+      // Default to a dummy diagram
+      : new DiagramBuilder()
+        .add(Input)
+        .add(CreateAttribute, {
+          key: 'stamp',
+          value: '2021-01-01',
+        })
+        .add(Log)
+        .get()
     
     // Setup the execution
     const executor = executorFactory!(diagram)

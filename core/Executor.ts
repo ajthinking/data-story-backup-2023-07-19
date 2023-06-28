@@ -128,6 +128,12 @@ export class Executor implements ExecutorInterface {
       // Add this batch of promises to the pending list
       pendingPromises.push(...promises)
 
+      // Attempt cleanup of not runnables (TODO: EXPENSIVE?)
+      const notRunnables = this.diagram.nodes.filter(node => !runnables.includes(node))
+      for(const notRunnable of notRunnables) {
+        this.attemptToMarkNodeComplete(notRunnable);
+      }
+
       // If no promises, then we might be stuck
       if(pendingPromises.length === 0) {
         this.memory.pushHistoryMessage('No pending promises.')
@@ -265,9 +271,6 @@ export class Executor implements ExecutorInterface {
     for(const ancestor of ancestors) {
       if(this.memory.getNodeStatus(ancestor.id) !== 'COMPLETE') return;
     }
-
-    // Node must not be a sub diagram TODO: this is a hack
-    // if(node.type === 'RunDiagram') return;
     
     // Passed all checks, so mark as complete
     this.memory.setNodeStatus(node.id, 'COMPLETE')

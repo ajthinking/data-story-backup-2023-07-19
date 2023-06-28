@@ -20,13 +20,6 @@ export const Merge: ComputerConfigFactory = (): ComputerConfig => ({
   },
 
   canRun({ isAvailable, input }) {
-    console.log({
-      type: 'Can Merge run?',
-      isAvailable: isAvailable(),
-      requestors: input.haveItemsAtInput('requestors'),
-      suppliers: input.haveAllItemsAtInput('suppliers')
-    })
-
     return [
       isAvailable(),
       input.haveItemsAtInput('requestors'),
@@ -35,12 +28,12 @@ export const Merge: ComputerConfigFactory = (): ComputerConfig => ({
   },
 
   async *run({ input, output, params }) {
-    while(true) {
-      // For now use default heuristics which awaits all ports to be complete
+    // The suppliers are potentially referenced multiple times,
+    // therefore we keep them outside the loop
+    const suppliers = input.pullFrom('suppliers').map(i => i.value) as ObjectItemValue[]
 
-      // No interpolation - extract underlying item form ItemWithParams
+    while(true) {
       const requestors = input.pullFrom('requestors').map(i => i.value) as ObjectItemValue[]
-      const suppliers = input.pullFrom('suppliers').map(i => i.value) as ObjectItemValue[]
 
       for(const requestor of requestors) {
         const requestorKey = params.requestor_merge_property
