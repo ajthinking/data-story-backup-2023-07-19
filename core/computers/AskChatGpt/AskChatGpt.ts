@@ -32,11 +32,6 @@ export const AskChatGpt: ComputerConfigFactory = (): ComputerConfig => ({
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
       });
-
-      console.log({
-        completion,
-        usage: completion.data.usage,
-      })
       
       output.pushTo('completions', completion.data.choices)
 

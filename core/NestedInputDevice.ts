@@ -28,11 +28,11 @@ export class NestedInputDevice implements InputDeviceInterface {
   }
 
   haveAllItemsAtInput(name: string): boolean {
-    return this.haveAllItemsAtInput(name)
+    return this.inputDevice.haveAllItemsAtInput(name)
   }
 
   haveItemsAtAnyInput(): boolean {
-    return this.haveItemsAtAnyInput()
+    return this.inputDevice.haveItemsAtAnyInput()
   }
 
   setItemsAt(linkId: string, items: any[]) {

@@ -25,8 +25,6 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
   },
   
   async *run({ input, output, executorFactory }) {
-    console.log("SETTING UP RUN DIAGRAM **************!")
-
     // First time, we need to load the diagram from disk
     // (PRETEND THIS IS FROM THE PARAMS)
     const diagram = new DiagramBuilder()
@@ -51,11 +49,14 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
 
     const execution = executor.execute()
 
+    // Note we still have not pulled!
+    // This is because the sub diagram will do all the pulling
     while(true) {
-      for await(const update of execution) {
-        console.log("Ok, we are in RunDiagram loop!")
-        yield;
-      };
+      // IS THIS EVEN RECIEVING SOMETHING? OR JUST SITTING AND WAITING
+      // BECAUSE IT IS NOT KNOWING OF THE STATUS OF INPUTS FROM THE PARENT?
+      for await(const update of execution) {};
+      
+      yield; // TODO we could optimize to enable yielding inside the for loop 
     }
   },
 });

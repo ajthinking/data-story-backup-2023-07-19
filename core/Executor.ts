@@ -33,9 +33,50 @@ export class Executor implements ExecutorInterface {
     public storage: Storage
   ) {}
 
+  protected boot() {
+    // Configure the memory's initial state
+    for(const link of this.diagram.links) {
+      // Set all links to be empty
+      this.memory.setLinkItems(link.id, [])
+      this.memory.setLinkCount(link.id, 0)
+    }
+
+    for(const node of this.diagram.nodes) {
+      // Set all nodes to available
+      this.memory.setNodeStatus(node.id, 'AVAILABLE')
+
+      // Register input devices
+      // Potentially, if configured, reuse already present input device
+      // (e.g. if the node is a sub diagram)
+      const inputDevice = this.memory.inputDevices.get(node.id)
+        || this.makeInputDevice(node, this.memory)
+
+      this.memory.setInputDevice(node.id, inputDevice)
+
+      // Initialize runner generators
+      const computer = this.computers.get(node.type)!
+      this.memory.setNodeRunner(
+        node.id,
+        computer.run({
+          input: inputDevice,
+          output: this.makeOutputDevice(node, this.memory),
+          params: this.makeParamsDevice(computer, node),
+          storage: this.storage,
+          hooks: {
+            register: (hook: Hook) => {
+              this.memory.pushHooks([hook])
+            }
+          },
+          executorFactory: (diagram: any) => {
+            return new Executor(diagram, this.computers, this.storage)
+          },
+        }),
+      )
+    }
+  }  
+
   async *execute(): AsyncGenerator<ExecutionUpdate, void, void> {
     this.boot()
-    console.log("Starting execution!")
     this.memory.pushHistoryMessage('Starting execution 🚀')
 
     let pendingPromises: Promise<void>[] = []
@@ -47,9 +88,6 @@ export class Executor implements ExecutorInterface {
 
       // Start execution of all nodes that can run
       const runnables = this.getRunnableNodes()
-
-      console.log("Runnables", runnables.map(n => n.id))
-      console.log("Not runnables", this.diagram.nodes.filter(n => !runnables.includes(n)).map(n => n.id))
 
       const promises = runnables.map(node => {
         // Put node in busy state
@@ -123,48 +161,6 @@ export class Executor implements ExecutorInterface {
       type: 'ExecutionUpdate',
       counts: mapToRecord(this.memory.getLinkCounts()),
       hooks: this.memory.pullHooks(),
-    }
-  }
-
-  protected boot() {
-    // Configure the memory's initial state
-    for(const link of this.diagram.links) {
-      // Set all links to be empty
-      this.memory.setLinkItems(link.id, [])
-      this.memory.setLinkCount(link.id, 0)
-    }
-
-    for(const node of this.diagram.nodes) {
-      // Set all nodes to available
-      this.memory.setNodeStatus(node.id, 'AVAILABLE')
-
-      // Register input devices
-      // Potentially, if configured, reuse already present input device
-      // (e.g. if the node is a sub diagram)
-      const inputDevice = this.memory.inputDevices.get(node.id)
-        || this.makeInputDevice(node, this.memory)
-
-      this.memory.setInputDevice(node.id, inputDevice)
-
-      // Initialize runner generators
-      const computer = this.computers.get(node.type)!
-      this.memory.setNodeRunner(
-        node.id,
-        computer.run({
-          input: inputDevice,
-          output: this.makeOutputDevice(node, this.memory),
-          params: this.makeParamsDevice(computer, node),
-          storage: this.storage,
-          hooks: {
-            register: (hook: Hook) => {
-              this.memory.pushHooks([hook])
-            }
-          },
-          executorFactory: (diagram: any) => {
-            return new Executor(diagram, this.computers, this.storage)
-          },
-        }),
-      )
     }
   }
 
@@ -265,6 +261,7 @@ export class Executor implements ExecutorInterface {
 
     // Node must have no incomplete ancestors
     const ancestors = this.diagram.directAncestor(node)
+
     for(const ancestor of ancestors) {
       if(this.memory.getNodeStatus(ancestor.id) !== 'COMPLETE') return;
     }
