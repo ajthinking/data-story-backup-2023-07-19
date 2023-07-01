@@ -1,6 +1,7 @@
 import { PortId } from './types/Port'
 import { Link } from './types/Link'
 import { Node } from './types/Node'
+import { SerializedReactFlow } from '../components/Workbench/SerializedReactFlow'
 
 export class Diagram {
   constructor(

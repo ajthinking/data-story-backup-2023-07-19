@@ -135,16 +135,6 @@ export const useStore = create<StoreSchema>((set, get) => ({
     type ServerType = 'worker' | 'socket'
     let type = 'socket' as ServerType
 
-    // if(type === 'worker') {
-    //   const server = new WorkerClient(
-    //     get().setAvailableNodes,
-    //     get().updateEdgeCounts,
-    //   )
-  
-    //   set({ server })
-    //   server.init()
-    // }
-
     if(type === 'socket') {
       const server = new SocketClient(
         get().setAvailableNodes,

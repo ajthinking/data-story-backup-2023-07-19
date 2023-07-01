@@ -23,6 +23,7 @@ const savedFlows: string[] = ['DoItNow']
 
 /**
  * The public registry of all computers
+ * TODO Move to core!!!
  */
 export const ComputerRegistry = {
   all() {
