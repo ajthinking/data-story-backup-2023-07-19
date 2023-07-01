@@ -1,5 +1,5 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
-import { ObjectItemValue } from '../../types/ItemValue';
+import { ItemValue } from '../../types/ItemValue';
 import { string } from '../../ParamBuilder';
 import { ComputerConfig } from '../../types/ComputerConfig';
 
@@ -15,7 +15,7 @@ export const Filter: ComputerConfigFactory = (): ComputerConfig => ({
   
   async *run({ input, output }) {
     while(true) {
-      const incoming = input!.pull() as ObjectItemValue[]
+      const incoming = input!.pull() as ItemValue[]
 
       
       incoming.forEach(item => {

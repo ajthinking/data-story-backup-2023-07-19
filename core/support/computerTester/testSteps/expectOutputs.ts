@@ -9,7 +9,7 @@ export const expectOutputs: TestStep = {
     const actual = Object.keys(expectedOutputs).reduce((acc, key) => {
       acc[key] = tester.outputDevice!.itemsOutputtedThrough(key);
       return acc
-    }, {} as { [key: string]: ItemValue[] });
+    }, {} as { [key: string]: ItemValue });
 
     expect(actual).toMatchObject(expectedOutputs)
   }

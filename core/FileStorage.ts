@@ -44,7 +44,7 @@ export class FileStorage implements Storage {
   /**
    * Store items as pretty JSON 
    */
-  async putExecutionItems(key: string, items: ItemValue[]): Promise<void> {
+  async putExecutionItems(key: string, items: ItemValue): Promise<void> {
     // TODO fix this
     const path = `${this.root}/executions/${this.currentExecutionId}/dumps/${key}.json`
     const content = JSON.stringify(items, null, 2)
@@ -56,7 +56,7 @@ export class FileStorage implements Storage {
     root: string,
     currentExecutionId: string | null,
     items: {
-      [key: string]: ItemValue[],
+      [key: string]: ItemValue,
     }
   }> {
     const execution = `${this.root}/executions/${this.currentExecutionId}`
@@ -67,7 +67,7 @@ export class FileStorage implements Storage {
       .filter(path => path.isFile())
       .map(path => path.name)
 
-    const items: { [key: string]: ItemValue[] } = {}
+    const items: { [key: string]: ItemValue } = {}
 
     for(const file of files) {
       const path = `${this.root}/executions/${this.currentExecutionId}/${file}`

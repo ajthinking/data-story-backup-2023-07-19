@@ -11,7 +11,6 @@ export { Eval } from './Eval';
 export { Filter } from './Filter';
 export { Ignore } from './Ignore'
 export { InstantThrow } from './InstantThrow';
-export { Join } from './Join';
 export { JsonFile } from './JsonFile';
 export { Input } from './Input';
 export { ListFiles } from './ListFiles';

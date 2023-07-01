@@ -216,8 +216,8 @@ export const Merge: ComputerFactory = (): Computer => ({
       // For now use default heuristics which awaits all ports to be complete
 
       // No interpolation - extract underlying item form ItemWithParams
-      const requestors = input.pullFrom('requestors').map(i => i.value) as ObjectItemValue[]
-      const suppliers = input.pullFrom('suppliers').map(i => i.value) as ObjectItemValue[]
+      const requestors = input.pullFrom('requestors').map(i => i.value) as ObjectItemValue
+      const suppliers = input.pullFrom('suppliers').map(i => i.value) as ObjectItemValue
 
       for(const requestor of requestors) {
         const requestorKey = params.requestor_merge_property

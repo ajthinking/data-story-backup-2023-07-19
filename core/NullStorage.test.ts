@@ -20,6 +20,6 @@ describe('putExecutionItems', () => {
   it('can run', async () => {
     const storage = new NullStorage()
 
-    await storage.putExecutionItems('dummy', [1,2,3])
+    await storage.putExecutionItems('dummy', [{i: 1}, {i: 2}, {i: 3}])
   })
 })

@@ -1,6 +1,6 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ComputerConfig } from '../../types/ComputerConfig';
-import { ObjectItemValue } from '../../types/ItemValue';
+import { ItemValue } from '../../types/ItemValue';
 import { string } from '../../ParamBuilder';
 
 export const Merge: ComputerConfigFactory = (): ComputerConfig => ({
@@ -30,10 +30,10 @@ export const Merge: ComputerConfigFactory = (): ComputerConfig => ({
   async *run({ input, output, params }) {
     // The suppliers are potentially referenced multiple times,
     // therefore we keep them outside the loop
-    const suppliers = input.pullFrom('suppliers').map(i => i.value) as ObjectItemValue[]
+    const suppliers = input.pullFrom('suppliers').map(i => i.value) as ItemValue[]
 
     while(true) {
-      const requestors = input.pullFrom('requestors').map(i => i.value) as ObjectItemValue[]
+      const requestors = input.pullFrom('requestors').map(i => i.value) as ItemValue[]
 
       for(const requestor of requestors) {
         const requestorKey = params.requestor_merge_property

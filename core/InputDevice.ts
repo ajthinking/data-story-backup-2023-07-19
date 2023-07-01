@@ -1,5 +1,4 @@
 import { LinkId } from './types/Link'
-import { ItemValue } from './types/ItemValue'
 import { ExecutionMemory } from './ExecutionMemory'
 import { PortName } from './types/Computer'
 import { ItemWithParams } from './ItemWithParams'
@@ -7,6 +6,7 @@ import { ParamValue } from './Param'
 import { Diagram } from './Diagram'
 import { Node } from './types/Node'
 import { InputDeviceInterface } from './types/InputDeviceInterface'
+import { ItemValue } from './types/ItemValue'
 
 export type PortLinkMap = Record<PortName, LinkId[]>
 

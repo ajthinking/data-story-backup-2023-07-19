@@ -4,7 +4,7 @@ import { RunDiagram } from './RunDiagram';
 it.todo('does something', async () => {
   await when(RunDiagram)
     .hasDefaultParams()
-    .getsInput([1])
+    .getsInput([{i: 1}])
     .doRun()
     .ok()
 })

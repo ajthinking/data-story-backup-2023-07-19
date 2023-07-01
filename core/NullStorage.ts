@@ -6,5 +6,5 @@ export class NullStorage implements Storage {
   
   async init() {}
   async createExecution() {}
-  async putExecutionItems(key: string, items: ItemValue[]) {}
+  async putExecutionItems(key: string, items: ItemValue) {}
 }

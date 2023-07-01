@@ -4,14 +4,14 @@ import { promises as fs } from 'fs'
 
 it('parses the json and outputs it', async () => {
   const readFile = vi.spyOn(fs, 'readFile')
-    .mockResolvedValue('[1337]');
+    .mockResolvedValue(JSON.stringify([{ "n": 1337 }]));
 
   await when(JsonFile)
     .hasParams({
       path: 'test.json',
     })
     .doRun()
-    .expectOutputs({ items: [1337]})
+    .expectOutputs({ items: [{ n: 1337 }] })
     .ok()
 });
 
@@ -41,7 +41,9 @@ it('outputs the error message if we cant parse the json', async () => {
     .doRun()
     .expectOutputs({
       items: [],
-      error: ['Unexpected token T in JSON at position 0'],
+      error: [{
+        error: 'Unexpected token T in JSON at position 0'
+      }],
     })
     .ok()
 });
@@ -57,7 +59,9 @@ it('outputs error message if we cant find the file', async () => {
     .doRun()
     .expectOutputs({
       items: [],
-      error: ['File not found'],
+      error: [{
+        error: 'File not found'
+      }],
     })
     .ok()
 });

@@ -22,17 +22,17 @@ describe('pull', () => {
 
     const memory = new ExecutionMemory({
       linkItems: new Map()
-        .set('link-1', [1, 2])
-        .set('link-2', [3, 4])      
+        .set('link-1', [{i: 1}, {i: 2}])
+        .set('link-2', [{i: 3}, {i: 4}])      
     })
 
     const input = new InputDevice(node, diagram, memory, {})
 
     expect(input.pull()).toMatchObject([
-      { value: 1 },
-      { value: 2 },
-      { value: 3 },
-      { value: 4 },
+      { value: {i: 1} },
+      { value: {i: 2} },
+      { value: {i: 3} },
+      { value: {i: 4} },
     ])
   })
 
@@ -74,8 +74,8 @@ describe('pull', () => {
 
     const memory = new ExecutionMemory({
       linkItems: new Map()
-        .set('link-1', [1, 2])
-        .set('link-2', [3, 4])      
+        .set('link-1', [{i: 1}, {i: 2}])
+        .set('link-2', [{i: 3}, {i: 4}])      
     })
 
     const input = new InputDevice(node, diagram, memory, {})
@@ -107,15 +107,15 @@ describe('pull', () => {
 
     const memory = new ExecutionMemory({
       linkItems: new Map()
-        .set('link-1', [1, 2])
-        .set('link-2', [3, 4])      
+        .set('link-1', [{i: 1}, {i: 2}])
+        .set('link-2', [{i: 3}, {i: 4}])      
     })
 
     const input = new InputDevice(node, diagram, memory, {})
 
-    expect(input.pull(1)).toMatchObject([{ value: 1 }])
-    expect(input.pull(2)).toMatchObject([{ value: 2 }, { value: 3 }])
-    expect(input.pull(3)).toMatchObject([{ value: 4 }])
+    expect(input.pull(1)).toMatchObject([{ value: {i: 1} }])
+    expect(input.pull(2)).toMatchObject([{ value: {i: 2} }, { value: {i: 3} }])
+    expect(input.pull(3)).toMatchObject([{ value: {i: 4} }])
   })  
 })
 
@@ -138,17 +138,17 @@ describe('pullFrom', () => {
 
     const memory = new ExecutionMemory({
       linkItems: new Map()
-        .set('link-1', [1, 2])
-        .set('link-2', [3, 4])      
+        .set('link-1', [{i: 1}, {i: 2}])
+        .set('link-2', [{i: 3}, {i: 4}])      
     })
 
     const input = new InputDevice(node, diagram, memory, {})
 
     expect(input.pullFrom('numbers')).toMatchObject([
-      { value: 1 },
-      { value: 2 },
-      { value: 3 },
-      { value: 4 },
+      { value: {i: 1} },
+      { value: {i: 2} },
+      { value: {i: 3} },
+      { value: {i: 4} },
     ])
   })
 
@@ -170,8 +170,8 @@ describe('pullFrom', () => {
 
     const memory = new ExecutionMemory({
       linkItems: new Map()
-        .set('link-1', [1, 2])
-        .set('link-2', [3, 4])      
+        .set('link-1', [{i: 1}, {i: 2}])
+        .set('link-2', [{i: 3}, {i: 4}])      
     })
 
     const input = new InputDevice(node, diagram, memory, {})

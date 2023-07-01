@@ -1,5 +1,5 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
-import { ObjectItemValue } from '../../types/ItemValue';
+import { ItemValue } from '../../types/ItemValue';
 import { json, string } from '../../ParamBuilder';
 import { hubspot } from './hubspot';
 import { ComputerConfig } from '../../types/ComputerConfig';
@@ -21,7 +21,7 @@ export const UpdateEntity: ComputerConfigFactory = (): ComputerConfig => ({
     const properties = JSON.parse(params.properties)
     
     while(true) {
-      const incoming = input.pull() as ObjectItemValue[]
+      const incoming = input.pull() as ItemValue[]
 
       for(const item of incoming) {
         try {

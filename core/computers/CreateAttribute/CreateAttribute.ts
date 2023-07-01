@@ -1,7 +1,7 @@
 import { ComputerConfigFactory, RunArgs } from '../../types/Computer';
 import { ItemWithParams } from '../../ItemWithParams';
 import { string, text } from '../../ParamBuilder';
-import { ObjectItemValue } from '../../types/ItemValue';
+import { ItemValue } from '../../types/ItemValue';
 import { ComputerConfig } from '../../types/ComputerConfig';
 
 export const CreateAttribute: ComputerConfigFactory = (): ComputerConfig => ({
@@ -15,7 +15,7 @@ export const CreateAttribute: ComputerConfigFactory = (): ComputerConfig => ({
 
   async *run({ input, output, params }) {
     while(true) {
-      const incoming = input.pull() as ItemWithParams<ObjectItemValue>[]
+      const incoming = input.pull() as ItemWithParams[]
       output.push(incoming.map(item => {
         item.value[item.params.key] = item.params.value
         return item

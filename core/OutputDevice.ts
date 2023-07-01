@@ -5,16 +5,16 @@ import { PortName } from './types/Computer'
 import { ExecutionMemory } from './ExecutionMemory'
 import { ItemWithParams } from './ItemWithParams'
 
-type LinkItems = Record<LinkId, ItemValue[]>
+type LinkItems = Record<LinkId, ItemValue>
 
 export type OutputTree = Record<PortId, LinkItems>
 
 export type PortLinkMap = Record<PortName, LinkId[]>
 
 export interface OutputDeviceInterface {
-  push(items: ItemValue[]): void
-  pushTo(name: string, items: ItemValue[]): void
-  itemsAt?(name: string): ItemValue[]
+  push(items: ItemValue): void
+  pushTo(name: string, items: ItemValue): void
+  itemsAt?(name: string): ItemValue
 }
 
 export class OutputDevice implements OutputDeviceInterface {
@@ -28,6 +28,9 @@ export class OutputDevice implements OutputDeviceInterface {
   }
 
   pushTo(name: PortName, itemable: (ItemValue | ItemWithParams)[]) {
+    console.log(`Pushing to ${name}`)
+    console.log(this.portLinkMap)
+
     const connectedLinks = this.portLinkMap[name]
 
     // When outputting we should not be in a params infused ItemWithParams
@@ -47,7 +50,7 @@ export class OutputDevice implements OutputDeviceInterface {
    * 
    * (Test) Utility to get items have been outputted through a port
    */
-  itemsOutputtedThrough(name: PortName): ItemValue[] {
+  itemsOutputtedThrough(name: PortName): ItemValue {
     const [connectedLink] = this.portLinkMap[name]
 
     return this.memory.getLinkItems(connectedLink) ?? []

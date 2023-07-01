@@ -4,7 +4,7 @@ import { Ignore } from './Ignore';
 it('does nothing', async () => {
   await when(Ignore)
     .hasDefaultParams()
-    .getsInput([1, 2, 3])
+    .getsInput([{i: 1}, {i: 2}, {i: 3}])
     .doRun()
     .ok()
 })

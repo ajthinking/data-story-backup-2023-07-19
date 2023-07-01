@@ -13,5 +13,5 @@ export interface InputDeviceInterface {
   /**
    * @visibleForTesting
    */
-  setItemsAt(linkId: LinkId, items: ItemValue[]) : void;
+  setItemsAt(linkId: LinkId, items: ItemValue) : void;
 }

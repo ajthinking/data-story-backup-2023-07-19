@@ -128,7 +128,7 @@ export class ComputerTester {
   // TODO getsFinalInput
   // TODO getsFinalInputs
 
-  getsInput(input: ItemValue[]) {
+  getsInput(input: ItemValue) {
     this.steps.push([getsInput, [input]])
 
     return this
@@ -166,7 +166,7 @@ export class ComputerTester {
     return this
   }
 
-  expectOutput(output: ItemValue[]) {
+  expectOutput(output: ItemValue) {
     this.steps.push([expectOutput, [output]])
 
     return this

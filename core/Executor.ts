@@ -3,8 +3,7 @@ import { Diagram } from './Diagram';
 import { PortLinkMap } from './types/PortLinkMap';
 import { OutputDevice } from './OutputDevice';
 import { PortId } from './types/Port';
-import { Computer } from './types/Computer';
-import { ItemValue } from './types/ItemValue';
+import { Computer } from './types/Computer';;
 import { LinkId } from './types/Link';
 import { ExecutionUpdate } from './types/ExecutionUpdate';
 import { isFinished } from './utils/isFinished';
@@ -15,6 +14,7 @@ import { ExecutorInterface } from './types/ExecutorInterface';
 import { InputDevice } from './InputDevice';
 import { mapToRecord } from './utils/mapToRecord';
 import { Hook } from './types/Hook';
+import { ItemValue } from './types/ItemValue';
 
 export type NodeStatus = 'AVAILABLE' | 'BUSY' | 'COMPLETE';
 
@@ -25,6 +25,7 @@ export class Executor implements ExecutorInterface {
     linkItems: new Map<LinkId, ItemValue[]>(),
     linkCounts: new Map<LinkId, number>(),
     inputDevices: new Map<NodeId, InputDevice>(),
+    outputDevices: new Map<NodeId, OutputDevice>(),
   })
 
   constructor(
@@ -51,7 +52,14 @@ export class Executor implements ExecutorInterface {
       const inputDevice = this.memory.inputDevices.get(node.id)
         || this.makeInputDevice(node, this.memory)
 
-      this.memory.setInputDevice(node.id, inputDevice)
+      // Register output devices
+      // Potentially, if configured, reuse already present output device
+      // (e.g. if the node is a sub diagram)
+      const outputDevice = this.memory.outputDevices.get(node.id)
+        || this.makeOutputDevice(node, this.memory)
+
+      this.memory.inputDevices.set(node.id, inputDevice)
+      this.memory.outputDevices.set(node.id, outputDevice)
 
       // Initialize runner generators
       const computer = this.computers.get(node.type)!
@@ -59,7 +67,7 @@ export class Executor implements ExecutorInterface {
         node.id,
         computer.run({
           input: inputDevice,
-          output: this.makeOutputDevice(node, this.memory),
+          output: outputDevice,
           params: this.makeParamsDevice(computer, node),
           storage: this.storage,
           hooks: {
@@ -240,6 +248,9 @@ export class Executor implements ExecutorInterface {
       const connectedLinks = this.diagram.linksConnectedToPortId(output.id)
       map[output.name] = connectedLinks.map(link => link.id);
     }
+
+    console.log("Making an output device for" + node.id)
+    console.log(map)
 
     return new OutputDevice(map, memory)
   }

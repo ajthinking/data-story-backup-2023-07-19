@@ -2,12 +2,12 @@ import { Diagram } from './Diagram';
 import { Executor } from './Executor';
 import { Computer, RunArgs } from './types/Computer';
 import { DiagramBuilder } from './DiagramBuilder';
-import { CreateJson, Ignore, Log, Signal, Throw } from './computers';
-import { ItemValue } from './types/ItemValue';
+import { CreateJson, Ignore, Log, Signal, Throw } from './computers';;
 import { NullStorage } from './NullStorage';
 import { whenRunning } from './support/diagramExecutionTester/DiagramExecutionTester';
 import { Link } from './types/Link';
 import { Node } from './types/Node';
+import { ItemValue } from './types/ItemValue';
 
 describe('execute', () => {
   it('can execute an empty diagram and return an execution update', async () => {
@@ -174,7 +174,7 @@ describe('execute', () => {
       name: 'Create',
       async *run({ output }: RunArgs) {
         order.push('running create')
-        output.push([1])
+        output.push([{i: 1}])
       },
     } as Computer
 

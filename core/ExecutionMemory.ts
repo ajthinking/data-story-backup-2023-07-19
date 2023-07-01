@@ -1,8 +1,9 @@
 import { NodeStatus } from './Executor'
-import { ItemValue } from './types/ItemValue'
 import { LinkId } from './types/Link'
 import { NodeId } from './types/Node'
 import { InputDeviceInterface } from './types/InputDeviceInterface'
+import { OutputDeviceInterface } from './OutputDevice'
+import { ItemValue } from './types/ItemValue'
 
 type MemoryValues = {
   nodeStatuses?: Map<NodeId, NodeStatus>,
@@ -10,6 +11,7 @@ type MemoryValues = {
   linkItems?: Map<LinkId, ItemValue[]>,
   linkCounts?: Map<LinkId, number>
   inputDevices?: Map<NodeId, InputDeviceInterface>,
+  outputDevices?: Map<NodeId, OutputDeviceInterface>,
   hooks?: any[],
 }
 
@@ -19,6 +21,7 @@ export class ExecutionMemory {
   linkItems: Map<LinkId, ItemValue[]>
   linkCounts: Map<LinkId, number>
   inputDevices: Map<NodeId, InputDeviceInterface>
+  outputDevices: Map<NodeId, OutputDeviceInterface>
   hooks: any[]
   
   history: string[] = []
@@ -29,6 +32,7 @@ export class ExecutionMemory {
     this.linkItems = values.linkItems || new Map()
     this.linkCounts = values.linkCounts || new Map()
     this.inputDevices = values.inputDevices || new Map()
+    this.outputDevices = values.outputDevices || new Map()
     this.hooks = values.hooks || []
   }
 

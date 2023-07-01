@@ -1,13 +1,13 @@
-import { ItemValue, ObjectItemValue } from './types/ItemValue';
+import { ItemValue } from './types/ItemValue';
 import { ParamValue } from './Param';
 import { evalMath } from './utils/evalMath';
 
-export class ItemWithParams<T = ItemValue> {
+export class ItemWithParams {
   type = 'ItemWithParams' as const
-  value: T;
+  value: ItemValue;
   params: Record<string, ParamValue>;
 
-  constructor(value: T, params: Record<string, ParamValue>) {
+  constructor(value: ItemValue, params: Record<string, ParamValue>) {
     this.value = value;
     this.params = new Proxy({}, {
       get: (_, prop: string) => {
@@ -28,7 +28,7 @@ export class ItemWithParams<T = ItemValue> {
         * When the item value is { name: "Bob" }
         */
         let value = paramValue.replace(/\${(\w+)}/g, (_: string, name: string) => {
-          return (this.value as ObjectItemValue)[name];
+          return this.value[name];
         });
 
         /** Replaces function calls */
@@ -44,3 +44,5 @@ export class ItemWithParams<T = ItemValue> {
     });
   }
 }
+
+const i1 = { i: 1 }

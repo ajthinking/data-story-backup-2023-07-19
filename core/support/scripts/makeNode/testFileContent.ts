@@ -4,12 +4,12 @@ import { ${name} } from './${name}';
 it.todo('does something', async () => {
   await when(${name})
     .hasDefaultParams()
-    .getsInput([1, 2])
+    .getsInput([{i: 1}, {i: 2}])
     .doRun()
-    .expectOutput([1, 2])
-    .getsInput([3, 4])
+    .expectOutput([{i: 1}, {i: 2}])
+    .getsInput([{i: 3}, {i: 4}])
     .doRun()
-    .expectOutput([1, 2, 3, 4])
+    .expectOutput([{i: 1}, {i: 2}, {i: 3}, , {i: 4}])
     .ok()
 })
 `;

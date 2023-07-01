@@ -19,7 +19,9 @@ export const JsonFile: ComputerConfigFactory = (): ComputerConfig => ({
       
       output.pushTo('items', items)
     } catch(error) {
-      output.pushTo('error', [(error as Error).message])
+      output.pushTo('error', [{
+        error: (error as Error).message
+      }])
     }
 
     yield;

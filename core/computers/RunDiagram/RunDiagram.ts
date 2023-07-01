@@ -15,6 +15,7 @@ import { Output } from '../Output';
 import { CreateAttribute } from '../CreateAttribute';
 import { InputDevice } from '../../InputDevice';
 import { NestedInputDevice } from '../../NestedInputDevice';
+import { NestedOutputDevice } from '../../NestedOutputDevice';
 
 export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
   name: 'RunDiagram',
@@ -32,20 +33,13 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
       console.log("HERE", params.path)
     }
 
-    const diagram = !Boolean(params.path)
-      ? await (async () => {
-          return DiagramFactory.fromReactFlow(
-            JSON.parse(((await fs.readFile(path)).toString()))
-          )
-        })()
-      // Default to a dummy diagram
-      : new DiagramBuilder()
+    const diagram = new DiagramBuilder()
         .add(Input)
         .add(CreateAttribute, {
           key: 'stamp',
           value: '2021-01-01',
         })
-        .add(Log)
+        .add(Output)
         .get()
     
     // Setup the execution
@@ -54,10 +48,19 @@ export const RunDiagram: ComputerConfigFactory = (): ComputerConfig => ({
     // Bind "this" input device to the sub diagram input device
     // For now, assume only one input, named 'input'
     // Furthermore, assume no custom canRun rules
-    const inputNode = diagram.nodes.find(node => node.type === 'Input')!
-    const nestedInputDevice = new NestedInputDevice(input)
-    
-    executor.memory.inputDevices.set(inputNode.id, nestedInputDevice)
+    const inputNode = diagram.nodes.find(node => node.type === 'Input')
+    if(inputNode) {
+      const nestedInputDevice = new NestedInputDevice(input)
+      executor.memory.inputDevices.set(inputNode.id, nestedInputDevice)
+    }
+
+    // Bind "this" output device to the sub diagram output device
+    // For now, assume only one output, named 'output'
+    const outputNode = diagram.nodes.find(node => node.type === 'Output')
+    if(outputNode) {
+      const nestedOutputDevice = new NestedOutputDevice(output)
+      executor.memory.outputDevices.set(outputNode.id, nestedOutputDevice)
+    }
 
     const execution = executor.execute()
 
