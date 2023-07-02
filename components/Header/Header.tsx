@@ -2,6 +2,7 @@ import React from 'react';
 import { StoreSchema, useStore } from '../Workbench/store';
 import { shallow } from 'zustand/shallow';
 import { useRouter } from 'next/router';
+// import { Hey } from '@data-story/ui';
 
 export function Header({ flowName }: { flowName?: string }) {
   const router = useRouter();
@@ -31,6 +32,8 @@ export function Header({ flowName }: { flowName?: string }) {
       </span>}
     </span>
     <div className="space-x-2 select-none ml-4 text-xs tracking-widest text-gray-100">
+      {/* testing to import a component from my own lib */}
+      {/* <Hey /> */}
       {/* <a target={"_blank"} href={"https://github.com/ajthinking/data-story#readme"}>docs</a>
       <span className="">|</span> */}
       <a target={"_blank"} href={"https://github.com/ajthinking/data-story#readme"}>github</a>

@@ -4,13 +4,20 @@ import { NullStorage } from "./core/NullStorage";
 import { ConsoleLog, CreateAttribute, CreateJson, RunDiagram, Signal } from "./core/computers";
 import { ComputerRegistry } from "./core/computerRegistry";
 import { promises as fs } from 'fs'
+import { get } from '@data-story/core'
 
 export {}
 
 (async () => {
-  const path = __dirname + "/.datastory/flows"
+  const obj = {
+    user: {
+      name: {
+        first: 'Anders'
+      }
+    }
+  }
 
-  const flows = await fs.readdir(path)
-
-  console.log(flows)
+  console.log(
+    get(obj, 'user.name.first')
+  )
 })();
