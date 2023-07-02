@@ -18,7 +18,7 @@ export default function Workbench({
 export async function getStaticProps({ params }: any) {
   const flow = params.flowName === 'untitled'
     ? '{"nodes": [], "edges": []}'
-    : fs.readFileSync(__dirname + '/../../../../.datastory/' + params.flowName, 'utf8')
+    : fs.readFileSync(__dirname + '/../../../../.datastory/flows/' + params.flowName, 'utf8')
 
   const flowName = params.flowName === 'untitled'
     ? ''
@@ -35,7 +35,7 @@ export async function getStaticProps({ params }: any) {
 export async function getStaticPaths() {
   // This is temporary - a datastory server should return the available flows
   // might be via socket or other protocoll. For demo purposes it is now here
-  const flowNames = fs.readdirSync(__dirname + '/../../../../.datastory')
+  const flowNames = fs.readdirSync(__dirname + '/../../../../.datastory/flows')
     .filter(fn => fn.endsWith('.json'));
 
 

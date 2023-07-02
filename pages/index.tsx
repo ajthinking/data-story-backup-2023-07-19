@@ -5,13 +5,31 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import fs from 'fs';
 import { signalsFlow } from '../core/flows/signalsFlow';
+import { useEffect, useState } from 'react';
+import { SerializedReactFlow } from '../components/Workbench/SerializedReactFlow';
 
-export default function Workbench({
-  flows,
-}: {
-  flows: string[];
-}) {
+export default function Workbench() {
+  const [flows, setFlows] = useState<{
+    name: string;
+    flow: SerializedReactFlow
+  }[]>([])
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/flows');
+        if (!response.ok) {
+          throw new Error("Error fetching flows");
+        }
+        const data = await response.json();
+        setFlows(data);
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const goToNewUntitled = () => {
     router.push('/workbench/untitled')
@@ -39,12 +57,12 @@ export default function Workbench({
               </thead>
               <tbody className="font-mono">
                 {flows.map((flow) => (<tr
-                  key={flow}
-                  onClick={() => router.push(`/workbench/${flow}`)}
+                  key={flow.name}
+                  onClick={() => router.push(`/workbench/${flow.name}`)}
                   className="cursor-pointer dark:bg-gray-800 hover:bg-blue-800 bg-white border-b  dark:border-gray-700"
                 >
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {flow.replace('.json', '')}
+                    {flow.name.replace('.json', '')}
                   </th>
                 </tr>))}
                 <tr
@@ -62,29 +80,4 @@ export default function Workbench({
       </div>
     </>
   );
-}
-
-// This function gets called at build time
-  // This is temporary - a datastory server should return the available flows
-  // might be via socket or other protocoll. For demo purposes it is now here
-export async function getStaticProps() {
-  // Put magic flows
-  // Magic flows are demo flows auto updating
-  const magicFlows = [
-    ['signals', signalsFlow]
-  ]
-
-  magicFlows.forEach(([name, flow]) => {
-    fs.writeFileSync(__dirname + '/../../../.datastory/' + name + '.json',
-    JSON.stringify(flow, null, 2))
-  })
-
-  const flows = fs.readdirSync(__dirname + '/../../../.datastory')
-    .filter(fn => fn.endsWith('.json'));
-
-  return {
-    props: {
-      flows,
-    },
-  }
 }
