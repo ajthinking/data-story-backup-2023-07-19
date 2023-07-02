@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Connection } from 'reactflow';
 import { shallow } from 'zustand/shallow';
-import { NodeDescription } from '../../../server/NodeDescription';
+import { NodeDescription } from '../../../core/NodeDescription';
 import { DataStoryNode } from '../../Node/DataStoryNode';
 import { makeNodeAndConnection } from '../hooks/makeNodeAndConnection';
 import { Modal } from '../modal'

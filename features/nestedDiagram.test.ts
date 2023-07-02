@@ -3,7 +3,7 @@ import { DiagramBuilder } from "../core/DiagramBuilder"
 import { Executor } from "../core/Executor"
 import { NullStorage } from "../core/NullStorage"
 import { CreateJson, Ignore, RunDiagram } from "../core/computers"
-import { ComputerRegistry } from "../server/computerRegistry"
+import { ComputerRegistry } from "../core/computerRegistry"
 import { sleep } from "../core/utils/sleep"
 
 it('can execute nested diagrams', async () => {

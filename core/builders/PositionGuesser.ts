@@ -7,8 +7,8 @@ export class PositionGuesser {
 
   guess(node: Node): {x: number, y: number} {
     return {
-      x: 0,
-      y: 0,
+      x: Math.random() * 300,
+      y: Math.random() * 300
     }
   }
 }

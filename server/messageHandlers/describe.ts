@@ -1,8 +1,8 @@
 import * as computers from '../../core/computers';
 import { Message } from '../Message';
 import { MessageHandler } from '../MessageHandler';
-import { NodeDescription } from '../NodeDescription';
-import { ComputerRegistry } from '../computerRegistry';
+import { NodeDescription } from '../../core/NodeDescription';
+import { ComputerRegistry } from '../../core/computerRegistry';
 import { DescribeMessage } from '../messages/DescribeMessage';
 import WebSocket from 'ws';
 

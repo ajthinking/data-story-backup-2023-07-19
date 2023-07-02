@@ -4,7 +4,7 @@ import { ExecutionUpdate } from '../../types/ExecutionUpdate';
 import { Executor } from '../../Executor';
 
 import { NullStorage } from '../../NullStorage';
-import { ComputerRegistry } from '../../../server/computerRegistry';
+import { ComputerRegistry } from '../../computerRegistry';
 
 export const whenRunning = (diagram: Diagram) => {
   return new DiagramExecutionTester(diagram)

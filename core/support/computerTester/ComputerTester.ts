@@ -28,7 +28,7 @@ import { InputDevice } from '../../InputDevice';
 import { ComputerConfig } from '../../types/ComputerConfig';
 import { ComputerFactory } from '../../ComputerFactory';
 import { LinkId } from '../../types/Link';
-import { ComputerRegistry } from '../../../server/computerRegistry';
+import { ComputerRegistry } from '../../computerRegistry';
 
 export const when = (factory: ComputerConfigFactory) => {
   return new ComputerTester(factory())

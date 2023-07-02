@@ -9,7 +9,7 @@ export const DiagramFactory = {
   fromReactFlow(flow: SerializedReactFlow): Diagram {
     const nodes = flow.nodes.map(flowNode => {
       return {
-        id: flowNode.id,
+        id: flowNode.id,        
         type: flowNode.data.computer,
         inputs: flowNode.data.inputs.map(input => {
           // This should be passed in a property

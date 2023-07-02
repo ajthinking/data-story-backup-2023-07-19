@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { NodeDescription } from '../../../server/NodeDescription'
+import { NodeDescription } from '../../../core/NodeDescription'
 import { DataStoryNode } from '../../Node/DataStoryNode'
 import { guessPosition } from './guessPosition'
 import { PortWithSchema } from '../../../core/types/PortWithSchema'

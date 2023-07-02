@@ -1,4 +1,4 @@
-import { NodeDescription } from '../../server/NodeDescription';
+import { NodeDescription } from '../../core/NodeDescription';
 import { SerializedReactFlow } from './SerializedReactFlow';
 import { ServerClient } from './ServerClient';
 

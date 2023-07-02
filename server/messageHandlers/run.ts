@@ -4,7 +4,7 @@ import { Executor } from '../../core/Executor'
 import { RunMessage } from '../messages/RunMessage';
 import { FileStorage } from '../../core/FileStorage';
 import { ExecutionResult } from '../../core/ExecutionResult';
-import { ComputerRegistry } from '../computerRegistry';
+import { ComputerRegistry } from '../../core/computerRegistry';
 import { ExecutionFailure } from '../../core/types/ExecutionFailure';
 import { MessageHandler } from '../MessageHandler';
 

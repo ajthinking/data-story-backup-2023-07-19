@@ -1,4 +1,4 @@
-import { Computer } from '../core/types/Computer';
+import { Computer } from './types/Computer';
 import { NodeDescription } from './NodeDescription';
 
 export const NodeDescriptionFactory = {

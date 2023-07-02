@@ -3,7 +3,7 @@ import { DiagramFactory } from '../../DiagramFactory';
 import { string } from '../../ParamBuilder';
 import { promises as fs } from 'fs'
 import { ComputerConfig } from '../../types/ComputerConfig';
-import { ComputerRegistry } from '../../../server/computerRegistry';
+import { ComputerRegistry } from '../../computerRegistry';
 import { Executor } from '../../Executor';
 import { DiagramBuilder } from '../../DiagramBuilder';
 import { CreateJson } from '../CreateJson';

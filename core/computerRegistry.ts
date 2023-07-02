@@ -1,6 +1,6 @@
-import * as computerConfigFactories from '../core/computers'
-import { Computer } from '../core/types/Computer';
-import { ComputerFactory } from '../core/ComputerFactory';
+import * as computerConfigFactories from './computers'
+import { Computer } from './types/Computer';
+import { ComputerFactory } from './ComputerFactory';
 import { NodeDescriptionFactory } from './NodeDescriptionFactory';
 
 /**
@@ -23,7 +23,6 @@ const savedFlows: string[] = ['DoItNow']
 
 /**
  * The public registry of all computers
- * TODO Move to core!!!
  */
 export const ComputerRegistry = {
   all() {

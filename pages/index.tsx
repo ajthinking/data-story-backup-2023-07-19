@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import fs from 'fs';
+import { signalsFlow } from '../core/flows/signalsFlow';
 
 export default function Workbench({
   flows,
@@ -64,10 +65,20 @@ export default function Workbench({
 }
 
 // This function gets called at build time
-export async function getStaticProps() {
-
   // This is temporary - a datastory server should return the available flows
   // might be via socket or other protocoll. For demo purposes it is now here
+export async function getStaticProps() {
+  // Put magic flows
+  // Magic flows are demo flows auto updating
+  const magicFlows = [
+    ['signals', signalsFlow]
+  ]
+
+  magicFlows.forEach(([name, flow]) => {
+    fs.writeFileSync(__dirname + '/../../../.datastory/' + name + '.json',
+    JSON.stringify(flow, null, 2))
+  })
+
   const flows = fs.readdirSync(__dirname + '/../../../.datastory')
     .filter(fn => fn.endsWith('.json'));
 
