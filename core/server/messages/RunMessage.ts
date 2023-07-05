@@ -1,4 +1,4 @@
-import { SerializedReactFlow } from '../../components/DataStory/SerializedReactFlow'
+import { SerializedReactFlow } from "../../types/SerializedReactFlow"
 
 export type RunMessage = {
   type: "run"
