@@ -1,6 +1,6 @@
 import WebSocket from 'ws';
 import { SaveMessage } from '../messages/SaveMessage';
-import { FileStorage } from '../../core/FileStorage';
+import { FileStorage } from '../../FileStorage';
 import { MessageHandler } from '../MessageHandler';
 
 export const save: MessageHandler<SaveMessage> = async (

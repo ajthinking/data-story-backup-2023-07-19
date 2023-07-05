@@ -23,7 +23,7 @@ cd data-story
 yarn
 
 # Start the server
-nodemon server/socket.ts
+nodemon core/server/socket.ts
 
 # Start the client (in a new tab)
 yarn dev

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Handle, Position } from 'reactflow';
-import { PortIcon } from '../Workbench/icons/portIcon';
+import { PortIcon } from '../DataStory/icons/portIcon';
 
 const CustomHandle = ({ id, isConnectable, isInput }: {
   id: string,

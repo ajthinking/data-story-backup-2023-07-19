@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { DataStory } from '../components/DataStory';
+import { DataStoryApp } from '../components/DataStoryApp';
 import { Header } from '../components/Header';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import fs from 'fs';
 import { signalsFlow } from '../core/flows/signalsFlow';
 import { useEffect, useState } from 'react';
-import { SerializedReactFlow } from '../components/Workbench/SerializedReactFlow';
+import { SerializedReactFlow } from '../core/types/SerializedReactFlow';
 
 export default function Workbench() {
   const [flows, setFlows] = useState<{
@@ -32,7 +32,7 @@ export default function Workbench() {
   }, []);
 
   const goToNewUntitled = () => {
-    router.push('/workbench/untitled')
+    router.push('/DataStory/untitled')
   }
 
   return (
@@ -58,7 +58,7 @@ export default function Workbench() {
               <tbody className="font-mono">
                 {flows.map((flow) => (<tr
                   key={flow.name}
-                  onClick={() => router.push(`/workbench/${flow.name}`)}
+                  onClick={() => router.push(`/DataStory/${flow.name}`)}
                   className="cursor-pointer dark:bg-gray-800 hover:bg-blue-800 bg-white border-b  dark:border-gray-700"
                 >
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

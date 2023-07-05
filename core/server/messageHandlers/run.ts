@@ -1,11 +1,11 @@
 import WebSocket from 'ws';
-import { DiagramFactory } from '../../core/DiagramFactory'
-import { Executor } from '../../core/Executor'
+import { DiagramFactory } from '../../DiagramFactory'
+import { Executor } from '../../Executor'
 import { RunMessage } from '../messages/RunMessage';
-import { FileStorage } from '../../core/FileStorage';
-import { ExecutionResult } from '../../core/ExecutionResult';
-import { ComputerRegistry } from '../../core/computerRegistry';
-import { ExecutionFailure } from '../../core/types/ExecutionFailure';
+import { FileStorage } from '../../FileStorage';
+import { ExecutionResult } from '../../ExecutionResult';
+import { ComputerRegistry } from '../../computerRegistry';
+import { ExecutionFailure } from '../../types/ExecutionFailure';
 import { MessageHandler } from '../MessageHandler';
 
 export const run: MessageHandler<RunMessage> = async (ws: WebSocket, data: RunMessage) => {

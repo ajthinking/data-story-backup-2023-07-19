@@ -1,4 +1,4 @@
-import { SerializedReactFlow } from "../components/Workbench/SerializedReactFlow"
+import { SerializedReactFlow } from "./types/SerializedReactFlow"
 import { Diagram } from "./Diagram"
 import { ComputerRegistry } from "./computerRegistry"
 

@@ -18,7 +18,7 @@ const nodeTypes = {
   // dataStoryOutputNodeComponent: DataStoryNodeComponent,
 };
 
-export default function Workbench() {
+export default function DataStory() {
   const selector = (state: StoreSchema) => ({
     nodes: state.nodes,
     edges: state.edges,

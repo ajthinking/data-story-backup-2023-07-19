@@ -1,4 +1,4 @@
-import { SerializedReactFlow } from './SerializedReactFlow';
+import { SerializedReactFlow } from '../../core/types/SerializedReactFlow';
 
 export interface ServerClient {
   init: () => void;

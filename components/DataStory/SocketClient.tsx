@@ -1,5 +1,5 @@
 import { NodeDescription } from '../../core/NodeDescription';
-import { SerializedReactFlow } from './SerializedReactFlow';
+import { SerializedReactFlow } from '../../core/types/SerializedReactFlow';
 import { ServerClient } from './ServerClient';
 
 export class SocketClient implements ServerClient {

@@ -1,11 +1,10 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import { Editor } from './Editor';
 import { Header } from './Header';
-import Workbench from './Workbench';
-import { StoreSchema, useStore } from './Workbench/store';
+import DataStory from './DataStory';
+import { StoreSchema, useStore } from './DataStory/store';
 import { shallow } from 'zustand/shallow';
-export function DataStory({
+export function DataStoryApp({
   defaultFlowName,
   flow,
 }: {
@@ -35,7 +34,7 @@ export function DataStory({
       <div className="w-full h-screen bg-vsCodeWarmGray-900">
         <Header flowName={flowName} />
         <div className="w-full h-5/6">
-          {<Workbench />}
+          {<DataStory />}
         </div>
       </div>
     </>;

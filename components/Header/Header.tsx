@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoreSchema, useStore } from '../Workbench/store';
+import { StoreSchema, useStore } from '../DataStory/store';
 import { shallow } from 'zustand/shallow';
 import { useRouter } from 'next/router';
 // import { Hey } from '@data-story/ui';

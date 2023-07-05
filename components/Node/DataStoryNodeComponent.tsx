@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { StoreSchema, useStore } from '../Workbench/store';
+import { StoreSchema, useStore } from '../DataStory/store';
 import { shallow } from 'zustand/shallow';
 import CustomHandle from './CustomHandle';
 import { DataStoryNodeData } from './DataStoryNode';

@@ -1,10 +1,10 @@
 import React, { memo } from "react";
-import { StoreSchema, useStore } from "../Workbench/store";
+import { StoreSchema, useStore } from "../DataStory/store";
 import { shallow } from "zustand/shallow";
 import CustomHandle from "./CustomHandle";
 import { DataStoryNodeData } from "./DataStoryNode";
 import { Handle, Position } from "reactflow";
-import { PortIcon } from "../Workbench/icons/portIcon";
+import { PortIcon } from "../DataStory/icons/portIcon";
 
 const DataStoryInputNodeComponent = ({ id, data, selected }: { id: string; data: DataStoryNodeData; selected: boolean }) => {
   const selector = (state: StoreSchema) => ({

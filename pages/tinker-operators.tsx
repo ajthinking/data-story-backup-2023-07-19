@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DataStory } from '../components/DataStory';
+import { DataStoryApp } from '../components/DataStoryApp';
 
 export default function Home() {
   const [format, setFormat] = useState('string')

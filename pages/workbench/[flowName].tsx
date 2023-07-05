@@ -1,6 +1,6 @@
-import { DataStory } from '../../components/DataStory';
+import { DataStoryApp } from '../../components/DataStoryApp';
 import fs from 'fs';
-import { StoreSchema, useStore } from '../../components/Workbench/store';
+import { StoreSchema, useStore } from '../../components/DataStory/store';
 import { shallow } from 'zustand/shallow';
 
 export default function Workbench({
@@ -10,7 +10,7 @@ export default function Workbench({
   const flowData = JSON.parse(flow)
 
   return (
-    <DataStory defaultFlowName={flowName} flow={flowData} />
+    <DataStoryApp defaultFlowName={flowName} flow={flowData} />
   )
 }
 
