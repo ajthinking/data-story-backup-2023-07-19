@@ -32,7 +32,7 @@ export default function Workbench() {
   }, []);
 
   const goToNewUntitled = () => {
-    router.push('/DataStory/untitled')
+    router.push('/workbench/untitled')
   }
 
   return (
