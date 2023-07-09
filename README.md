@@ -34,9 +34,6 @@ Until organized into npm packages, *everything* lives in a NextJs app. Later, we
 
 ### Commands
 ```bash
-# Add a custom node
-yarn make:node YourNewNode
-
 # Run tests
 yarn test
 ```
